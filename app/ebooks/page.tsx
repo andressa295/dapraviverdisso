@@ -90,7 +90,7 @@ export default function EbooksPage() {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Para feedback do botão
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [isConnectionVisible, setIsConnectionVisible] = useState(false);
   const connectionSectionRef = useRef<HTMLElement | null>(null);
@@ -122,11 +122,13 @@ export default function EbooksPage() {
 
   const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true); // Inicia o estado de envio
+    setIsSubmitting(true);
     const formData = {
       email: email,
       _subject: "Nova inscrição na lista de E-books Phandco!",
     };
+
+    const submitButton = e.currentTarget.querySelector('button[type="submit"]') as HTMLButtonElement | null;
 
     try {
       const response = await fetch('https://formspree.io/f/movwvwrk', {
@@ -141,17 +143,44 @@ export default function EbooksPage() {
       if (response.ok) {
         setIsSubmitted(true);
         setEmail('');
-        setTimeout(() => setIsSubmitted(false), 4000);
+        if (submitButton) submitButton.textContent = 'Inscrito!';
+        setTimeout(() => {
+            setIsSubmitted(false);
+            // Restaura o botão após a mensagem de sucesso sumir, apenas se não estiver enviando outra vez
+            if (submitButton && !isSubmitting) { // Adicionado !isSubmitting aqui
+                 submitButton.textContent = 'Quero Receber!';
+                 submitButton.disabled = false;
+            }
+        }, 4000);
       } else {
         const responseData = await response.json();
         console.error('Erro ao enviar para o Formspree:', responseData);
         alert('Houve um problema ao enviar seu e-mail. Por favor, tente novamente.');
+         if (submitButton) {
+            submitButton.textContent = 'Quero Receber!';
+            submitButton.disabled = false;
+        }
       }
     } catch (error) {
       console.error('Erro de rede ao enviar para o Formspree:', error);
       alert('Erro de rede. Verifique sua conexão e tente novamente.');
+      if (submitButton) {
+        submitButton.textContent = 'Quero Receber!';
+        submitButton.disabled = false;
+      }
     } finally {
-      setIsSubmitting(false); // Finaliza o estado de envio
+      // Se não foi submetido com sucesso (ex: erro antes do response.ok) e não está mais submetendo
+      if (!isSubmitted && !isSubmitting && submitButton) {
+         submitButton.disabled = false;
+         submitButton.textContent = 'Quero Receber!';
+      } else if (!isSubmitting && isSubmitted && submitButton) {
+        // Se foi submetido com sucesso, mas o timeout do setIsSubmitted já passou
+        // e o botão ainda está como "Inscrito!", reabilita-o após o timeout de isSubmitted
+        // Essa parte da lógica do finally pode ser complexa com os timeouts, 
+        // O mais importante é garantir que o botão volte ao normal.
+        // A lógica de restaurar o botão após o timeout de isSubmitted já está no bloco if (response.ok)
+      }
+       if (!isSubmitted) setIsSubmitting(false); // Garante que isSubmitting seja false se não houve sucesso
     }
   };
 
@@ -184,7 +213,7 @@ export default function EbooksPage() {
         <section aria-label="Lista de ebooks em carrossel" className="ebook-carousel-section">
           <button
             aria-label="Scroll para esquerda"
-            onClick={() => scrollBy(-190)} // Ajustado para nova largura do card + gap
+            onClick={() => scrollBy(-190)} // (180px card width + 1rem/16px gap)
             className="carousel-arrow left-arrow"
           >
             ❮
@@ -211,14 +240,14 @@ export default function EbooksPage() {
           </div>
           <button
             aria-label="Scroll para direita"
-            onClick={() => scrollBy(190)} // Ajustado para nova largura do card + gap
+            onClick={() => scrollBy(190)}
             className="carousel-arrow right-arrow"
           >
             ❯
           </button>
         </section>
 
-        {/* Restante do conteúdo da página ... (seções bônus, conexão, etc.) */}
+        {/* Outras seções ... */}
         <section aria-label="Bônus exclusivos do combo" className="bonus-section">
           <h2 className="section-title bonus-title">E AINDA TEM MAIS: BÔNUS EXCLUSIVOS!</h2>
           <ul className="bonus-list">
@@ -273,13 +302,13 @@ export default function EbooksPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="email-input"
-              disabled={isSubmitting || isSubmitted}
+              disabled={isSubmitting || (isSubmitted && !isSubmitting)} // Desabilita se enviando ou se já inscrito (até resetar)
             />
-            <button type="submit" className="email-submit-button" disabled={isSubmitting || isSubmitted}>
+            <button type="submit" className="email-submit-button" disabled={isSubmitting || (isSubmitted && !isSubmitting)}>
               {isSubmitting ? 'Enviando...' : (isSubmitted ? 'Inscrito!' : 'Quero Receber!')}
             </button>
           </form>
-          {isSubmitted && !isSubmitting && ( // Mostra feedback apenas se submetido e não enviando
+          {isSubmitted && !isSubmitting && (
             <p className="submission-feedback success">
               Obrigado por se inscrever! Fique de olho no seu e-mail.
             </p>
@@ -319,7 +348,6 @@ export default function EbooksPage() {
         <footer className="page-footer">
           <h3 className="footer-title">Phand E-books ✨</h3>
           <div className="footer-links">
-            {/* Links do footer como estavam no seu último código */}
           </div>
           <p className="copyright-text">
             © {new Date().getFullYear()} PhandCo. Todos os direitos reservados.
@@ -332,7 +360,7 @@ export default function EbooksPage() {
 
       <style jsx>{`
         /* Estilos gerais e de outras seções ... */
-        .ebooks-page-main { background-color: #141414; color: #fff; min-height: 100vh; padding: 0 0 2rem; /* Removido padding lateral aqui, controlado por seções */ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 100vw; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
+        .ebooks-page-main { background-color: #141414; color: #fff; min-height: 100vh; padding: 0 0 2rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 100vw; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
         .section-title { color: #E50914; text-transform: uppercase; text-align: center; font-weight: 500; letter-spacing: 0.05em; }
         .page-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 15px; width: 100%; max-width: 1200px; margin: 0 auto 2rem; box-sizing: border-box; border-bottom: 1px solid #222; }
         .logo-area-ebooks { cursor: pointer; display: flex; align-items: center; border-radius: 4px; }
@@ -341,7 +369,7 @@ export default function EbooksPage() {
         .logo-area-ebooks:hover :global(.logo-svg text),
         .logo-area-ebooks:focus-visible :global(.logo-svg text) { fill: #ff3352; }
         .logo-placeholder-text { font-size: 1.5rem; font-weight: bold; color: #E50914; }
-        .title-area-ebooks { flex-grow: 1; text-align: center; padding: 0 10px; /* Para não colar no logo em mobile */ }
+        .title-area-ebooks { flex-grow: 1; text-align: center; padding: 0 10px; }
         .main-title { font-weight: 500; font-size: 2rem; margin-bottom: 0.25rem; color: #E50914; letter-spacing: 0.08em; text-transform: uppercase; }
         .subtitle { color: #bbb; font-size: 0.9rem; max-width: 550px; margin: 0 auto; line-height: 1.5; }
 
@@ -349,66 +377,78 @@ export default function EbooksPage() {
         .ebook-carousel-section {
           position: relative;
           width: 100%;
-          max-width: 1200px; 
+          max-width: 1200px;
           margin: 2rem auto 3rem;
-          padding: 0 40px; /* Espaço para as setas em desktop */
+          padding: 0 35px; /* Espaço para setas em desktop ficarem um pouco para fora do container de scroll */
           box-sizing: border-box;
         }
         .ebook-carousel-container {
           display: flex;
-          gap: 1rem; 
+          gap: 1rem;
           overflow-x: auto;
           scroll-snap-type: x mandatory;
-          padding-top: 0.5rem; 
-          padding-bottom: 1rem; /* Mais espaço para sombra */
-          margin: 0; /* Removida margem negativa */
+          padding-top: 0.5rem;
+          padding-bottom: 1rem;
+          margin: 0;
           scrollbar-width: none;
           -ms-overflow-style: none;
         }
         .ebook-carousel-container::-webkit-scrollbar { display: none; }
 
         .ebook-card {
-          min-width: 180px; /* Ebook mais 'fino' */
+          min-width: 180px;
           max-width: 190px;
-          flex: 0 0 auto; 
+          flex: 0 0 auto;
           scroll-snap-align: start;
-          background-color: #222; /* Tom um pouco diferente */
-          border-radius: 6px; /* Menos arredondado */
+          background-color: #222;
+          border-radius: 6px;
           box-shadow: 0 3px 10px rgba(0,0,0,0.4);
           overflow: hidden;
           transition: transform 0.25s ease, box-shadow 0.25s ease;
-          display: flex; 
+          display: flex;
           flex-direction: column;
         }
         .ebook-card:hover {
-          transform: translateY(-5px) scale(1.03); /* Efeito de elevação */
+          transform: translateY(-5px) scale(1.03);
           box-shadow: 0 6px 20px rgba(229, 9, 20, 0.3);
         }
         .ebook-cover {
           width: 100%;
-          height: 270px; /* Proporção ~2:3 (largura 180px) */
-          object-fit: cover; 
+          height: 270px; /* Desktop: 180px * 1.5 = 270px (proporção 2:3) */
+          object-fit: cover;
           background-color: #111;
-          /* border-bottom: 2px solid #E50914; Removida borda para visual mais limpo da capa */
         }
         .ebook-info {
-          padding: 0.75rem; 
-          flex-grow: 1; 
+          padding: 0.7rem; /* Reduzido um pouco */
+          flex-grow: 1;
           display: flex;
           flex-direction: column;
-          justify-content: flex-start; /* Começa o texto de cima */
+          justify-content: space-between;
         }
         .ebook-title {
-          font-size: 0.85rem; 
-          color: #f0f0f0; /* Mais claro */
-          margin-bottom: 0.3rem; 
-          line-height: 1.3;
-          font-weight: 600; 
+          font-size: 0.8rem; /* Reduzido para caber melhor */
+          color: #f0f0f0;
+          margin-bottom: 0.25rem;
+          line-height: 1.25;
+          font-weight: 600;
+          /* min-height para 2 linhas */
+          min-height: 2.0em; 
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2; 
+          -webkit-box-orient: vertical;
         }
         .ebook-description {
-          font-size: 0.7rem; 
-          color: #999; /* Mais suave */
-          line-height: 1.4;
+          font-size: 0.68rem; /* Reduzido bastante */
+          color: #999;
+          line-height: 1.3;
+           /* Limita descrição a 3 linhas */
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
         }
 
         /* Setas do Carrossel */
@@ -416,32 +456,30 @@ export default function EbooksPage() {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          z-index: 20; 
-          background: rgba(18, 18, 18, 0.7); /* Fundo mais escuro e sutil */
+          z-index: 20;
+          background: rgba(20, 20, 20, 0.7);
           border: none;
-          color: #b0b0b0; /* Cor da seta mais suave */
-          font-size: 1.8rem; 
+          color: #e0e0e0;
+          font-size: 1.6rem; /* Tamanho do ícone da seta */
           cursor: pointer;
-          padding: 1rem 0.3rem; /* Estreito horizontalmente, alto verticalmente */
-          line-height: 0; /* Ajuda a centralizar o caractere da seta */
-          transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+          padding: 0.8rem 0.3rem; /* Estreito horizontalmente */
+          line-height: 1;
+          transition: background 0.2s ease, color 0.2s ease;
           border-radius: 4px;
-          opacity: 0.8; /* Levemente transparente por padrão */
         }
         .carousel-arrow:hover {
           background: #E50914;
           color: #fff;
-          opacity: 1;
         }
-        .left-arrow { 
-          left: 5px; /* Dentro do padding da seção */
-        } 
-        .right-arrow { 
-          right: 5px; /* Dentro do padding da seção */
+        .left-arrow {
+          left: 0px; /* Fica no limite do padding da .ebook-carousel-section */
+        }
+        .right-arrow {
+          right: 0px; /* Fica no limite do padding da .ebook-carousel-section */
         }
         /* === FIM DOS AJUSTES CARROSSEL === */
 
-        /* Outras seções (estilos base como antes) */
+        /* Outras seções ... */
         .bonus-section { margin-top: 4rem; background-color: #1a1a1a; padding: 2rem; border-radius: 10px; width: 100%; max-width: 750px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
         .bonus-title { font-size: 1.6rem; margin-bottom: 1.5rem; }
         .bonus-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem;  grid-template-columns: repeat(2, 1fr);  }
@@ -499,27 +537,27 @@ export default function EbooksPage() {
           .subtitle { display: none; }
 
           .ebook-carousel-section {
-            padding: 0; /* Setas coladas nas bordas da tela */
+            padding: 0; /* Setas nas bordas da tela */
           }
           .carousel-arrow {
-            font-size: 1.2rem; 
-            padding: 0.6rem 0.15rem; /* Muito estreito horizontalmente */
-            background: rgba(20, 20, 20, 0.8); /* Mais opaco para visibilidade */
-            box-shadow: none;
-            line-height: 1; /* Tenta centralizar o ícone melhor */
+            font-size: 1.3rem; 
+            padding: 0.8rem 0.2rem; /* Estreito horizontalmente, alto para toque */
+            background: rgba(25, 25, 25, 0.75); /* Mais opaco para contraste */
+            box-shadow: none; 
+            line-height: 1;
           }
-          .left-arrow { left: 3px; } 
-          .right-arrow { right: 3px; }
+          .left-arrow { left: 2px; } 
+          .right-arrow { right: 2px; }
           
           .ebook-card {
             min-width: 140px; 
             max-width: 150px;
           }
           .ebook-cover {
-            height: 210px; /* Proporção 2:3 para 140px de largura */
+            height: 210px; 
           }
-          .ebook-title { font-size: 0.8rem; min-height: auto; margin-bottom: 0.25rem; }
-          .ebook-description { font-size: 0.7rem; line-height: 1.3; }
+          .ebook-title { font-size: 0.75rem; line-height: 1.2; min-height: 2.4em; }
+          .ebook-description { font-size: 0.65rem; line-height: 1.3; -webkit-line-clamp: 2; }
           
           .bonus-section, .connection-section, .email-capture-section, .guarantee-section, .final-cta-section { padding: 1.5rem; margin-top: 3rem; }
           .bonus-title, .connection-title, .testimonials-main-title, .email-capture-title, .guarantee-main-title { font-size: 1.4rem; }
@@ -564,24 +602,24 @@ export default function EbooksPage() {
           .subtitle { display: block; font-size: 0.75rem; } 
           
           .ebook-carousel-section {
-             padding: 0 20px; /* Aumenta um pouco o padding para as setas não sumirem na borda */
+             padding: 0 20px; /* Espaço para as setas não sumirem na borda */
           }
           .carousel-arrow {
             font-size: 1rem; 
-            padding: 0.4rem 0.1rem; /* Padding vertical para toque, quase nada horizontal */
-            background: rgba(20, 20, 20, 0.65);
+            padding: 0.5rem 0.1rem; /* Quase sem padding horizontal */
+            background: rgba(20, 20, 20, 0.7);
           }
-          .left-arrow { left: 0px; } /* Coladas no padding da seção */
+          .left-arrow { left: 0px; } 
           .right-arrow { right: 0px; }
           
           .ebook-card {
-            min-width: 100px; /* Card ainda menor */
+            min-width: 100px; 
             max-width: 110px;
           }
           .ebook-cover {
             height: 150px; /* Proporção 2:3 para 100px de largura */
           }
-          .ebook-title { font-size: 0.65rem; font-weight: 500; }
+          .ebook-title { font-size: 0.7rem; font-weight: 500; min-height: 1.8em; -webkit-line-clamp: 2; }
           .ebook-description { display: none; } 
 
           .bonus-title, .connection-title, .testimonials-main-title, .email-capture-title, .guarantee-main-title { font-size: 1.1rem; }
