@@ -7,14 +7,13 @@ import { useRouter } from 'next/navigation'
 function LogoPhandcoSvg() {
   return (
     <svg
-      width="150" // Levemente ajustado para responsividade
-      height="45" // Levemente ajustado
+      width="160"
+      height="50"
       viewBox="0 0 160 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="Logo Phandco"
-      className="logo-svg" // Adicionada classe para estilização via styled-jsx
     >
       <text
         x="0"
@@ -24,9 +23,7 @@ function LogoPhandcoSvg() {
         fontWeight="700"
         fontSize="40"
         letterSpacing="-2"
-        // O filtro drop-shadow via CSS pode ser mais controlável com media queries se necessário,
-        // mas mantido aqui por simplicidade, já que é um estilo do próprio SVG.
-        style={{ filter: 'drop-shadow(0 1px 1px rgba(230, 0, 35, 0.4))' }}
+        style={{ filter: 'drop-shadow(0 2px 2px rgba(230, 0, 35, 0.5))' }}
       >
         Phandco
       </text>
@@ -39,366 +36,188 @@ export default function Home() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    let intervalId = setInterval(() => { // Renomeado para intervalId para clareza
+    let interval = setInterval(() => {
       setProgress((old) => {
         if (old >= 70) {
-          clearInterval(intervalId)
+          clearInterval(interval)
           return 70
         }
         return old + 1
       })
     }, 30)
 
-    return () => clearInterval(intervalId)
+    return () => clearInterval(interval)
   }, [])
 
   return (
-    <>
-      <main className="home-main">
-        <header className="page-header">
-          <div 
-            onClick={() => router.push('/')} 
-            className="logo-container"
-            role="button" // Adicionado role para indicar que é clicável
-            tabIndex={0} // Adicionado para ser focável
-            onKeyPress={(e) => e.key === 'Enter' && router.push('/')} // Para acessibilidade de teclado
-            aria-label="Voltar para Home"
+    <main
+      style={{
+        minHeight: '100vh',
+        background: '#000000',
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      }}
+    >
+      {/* Cabeçalho */}
+      <header
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '1.5rem 2.5rem',
+          borderBottom: '1px solid #333',
+          backgroundColor: '#121212',
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+        }}
+      >
+        <div onClick={() => router.push('/')} aria-label="Voltar para Home" style={{ cursor: 'pointer' }}>
+          <LogoPhandcoSvg />
+        </div>
+
+        {/* Widget progresso mental */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            width: '180px',
+            fontSize: '0.9rem',
+            color: '#e50914',
+            userSelect: 'none',
+            gap: '0.4rem',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <span style={{ fontWeight: '600' }}>Seu progresso mental</span>
+          <div
+            style={{
+              width: '100%',
+              height: '8px',
+              backgroundColor: '#333',
+              borderRadius: '9999px',
+              overflow: 'hidden',
+              boxShadow: '0 0 5px #e50914',
+            }}
           >
-            <LogoPhandcoSvg />
+            <div
+              style={{
+                width: `${progress}%`,
+                height: '100%',
+                backgroundColor: '#e50914',
+                borderRadius: '9999px',
+                transition: 'width 0.3s ease',
+              }}
+            />
           </div>
+        </div>
+      </header>
 
-          <div className="progress-widget">
-            <span className="progress-widget-label">Seu progresso mental</span>
-            <div 
-              className="progress-bar-container"
-              role="progressbar"
-              aria-valuenow={progress}
-              aria-valuemin={0}
-              aria-valuemax={100} // Mesmo parando em 70, o max conceitual pode ser 100
-              aria-label={`Progresso mental atual: ${progress}%`}
-            >
-              <div
-                className="progress-bar-fill"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-          </div>
-        </header>
+      {/* Hero */}
+      <section
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '2rem',
+          textAlign: 'center',
+          maxWidth: '720px',
+          margin: 'auto',
+          gap: '1.2rem',
+        }}
+      >
+        <h2
+          style={{
+            fontSize: '1.5rem',
+            fontWeight: '600',
+            lineHeight: 1.4,
+            color: '#ddd',
+            maxWidth: '620px',
+            margin: '0 auto 1.2rem',
+            letterSpacing: '0.02em',
+            textAlign: 'center',
+          }}
+        >
+          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
+        </h2>
+        <p
+          style={{
+            fontSize: '1rem',
+            color: '#bbb',
+            lineHeight: 1.6,
+            maxWidth: '600px',
+            margin: '0 auto 1.5rem',
+            textAlign: 'center',
+          }}
+        >
+          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO. TOTALMENTE GRÁTIS.
+        </p>
+        <button
+          onClick={() => router.push('/quiz')}
+          style={{
+            backgroundColor: '#e50914',
+            color: 'white',
+            padding: '1rem 3rem',
+            borderRadius: '9999px',
+            fontWeight: '700',
+            fontSize: '1.2rem',
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: '0 0 20px rgba(229, 9, 20, 0.9)',
+            transition: 'background-color 0.3s ease',
+            userSelect: 'none',
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#b00611')}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#e50914')}
+        >
+          Quero começar agora 🚀
+        </button>
+      </section>
 
-        <section className="hero-section">
-          <h2 className="hero-title">
-            🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
-          </h2>
-          <p className="hero-subtitle">
-            RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO. TOTALMENTE GRÁTIS.
-          </p>
-          <button
-            onClick={() => router.push('/quiz')}
-            className="cta-button"
-          >
-            Quero começar agora 🚀
-          </button>
-        </section>
+      {/* Depoimentos */}
+      <section
+        style={{
+          backgroundColor: '#121212',
+          padding: '3rem 1.5rem',
+          maxWidth: '720px',
+          margin: '2rem auto',
+          borderRadius: '8px',
+          boxShadow: '0 0 15px rgba(229, 9, 20, 0.4)',
+          color: 'white',
+          textAlign: 'center',
+        }}
+      >
+        <h3
+          style={{
+            fontSize: '1.6rem',
+            marginBottom: '1.5rem',
+            color: '#e50914',
+            fontWeight: '700',
+          }}
+        >
+          O que dizem por aí
+        </h3>
 
-        <section className="testimonials-section">
-          <h3 className="testimonials-title">
-            O que dizem por aí
-          </h3>
-          <div className="testimonials-grid">
-            <div className="testimonial-card">
-              <blockquote className="testimonial-quote">
-                "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
-              </blockquote>
-              <p className="testimonial-author">— João S.</p>
-            </div>
-            <div className="testimonial-card">
-              <blockquote className="testimonial-quote">
-                "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
-              </blockquote>
-              <p className="testimonial-author">— Maria P.</p>
-            </div>
-            <div className="testimonial-card">
-              <blockquote className="testimonial-quote">
-                "Conteúdo top, visual show e a experiência no site foi muito agradável."
-              </blockquote>
-              <p className="testimonial-author">— Rafael L.</p>
-            </div>
-          </div>
-        </section>
-      </main>
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
+        </blockquote>
+        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>— João S.</p>
 
-      <style jsx>{`
-        .home-main {
-          min-height: 100vh;
-          background: #0a0a0a; /* Um preto um pouco menos absoluto que #000 */
-          color: white;
-          display: flex;
-          flex-direction: column;
-          font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Stack de fontes mais moderno */
-        }
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
+        </blockquote>
+        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>— Maria P.</p>
 
-        /* Header */
-        .page-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 1.5rem; /* Padding ajustado */
-          border-bottom: 1px solid #222; /* Borda mais sutil */
-          background-color: #121212;
-          position: sticky;
-          top: 0;
-          z-index: 1000; /* Z-index alto para garantir que fique por cima */
-        }
-
-        .logo-container {
-          cursor: pointer;
-          padding: 0.5rem 0; /* Área de clique um pouco maior */
-          border-radius: 4px; /* Para feedback visual do foco */
-        }
-        .logo-container :global(.logo-svg text) { /* Estilizando o texto dentro do SVG via classe global */
-            transition: fill 0.2s ease-in-out;
-        }
-        .logo-container:hover :global(.logo-svg text),
-        .logo-container:focus-visible :global(.logo-svg text) {
-            fill: #ff3352; /* Cor de hover/foco um pouco mais clara */
-        }
-         .logo-container:focus-visible {
-            outline: 2px solid #E60023;
-            outline-offset: 2px;
-        }
-
-
-        .progress-widget {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          width: clamp(120px, 25vw, 180px); /* Largura responsiva com clamp */
-          font-size: 0.8rem; /* Reduzido */
-          color: #e50914;
-          user-select: none;
-          gap: 0.3rem; /* Espaço entre label e barra */
-          white-space: nowrap;
-        }
-        .progress-widget-label {
-          font-weight: 600;
-          color: #aaa; /* Cor mais suave para o label */
-        }
-        .progress-bar-container {
-          width: 100%;
-          height: 6px; /* Mais fina */
-          background-color: #333;
-          border-radius: 3px; /* Ajustado */
-          overflow: hidden;
-          box-shadow: inset 0 1px 2px rgba(0,0,0,0.2), 0 0 3px rgba(229, 9, 20, 0.5); /* Sombra interna e externa sutil */
-        }
-        .progress-bar-fill {
-          width: 0%; /* Começa em 0, atualizado por style prop */
-          height: 100%;
-          background-color: #e50914;
-          border-radius: 3px;
-          transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1); /* Transição mais suave */
-        }
-
-        /* Hero Section */
-        .hero-section {
-          flex: 1; /* Ocupa o espaço restante */
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          padding: 2rem 1.5rem; /* Padding lateral */
-          text-align: center;
-          max-width: 700px; /* Max-width ajustado */
-          margin: auto; /* Centraliza */
-          gap: 1rem; /* Espaço entre elementos */
-        }
-        .hero-title {
-          font-size: 1.4rem; /* Ajustado */
-          font-weight: 700; /* Mais forte */
-          line-height: 1.3;
-          color: #f0f0f0; /* Cor mais clara */
-          max-width: 600px; /* Ajustado */
-          margin: 0 auto 0.8rem; /* Margem inferior */
-          letter-spacing: 0.01em; /* Suave */
-        }
-        .hero-subtitle {
-          font-size: 0.95rem; /* Ajustado */
-          color: #b0b0b0; /* Cor ajustada */
-          line-height: 1.6;
-          max-width: 580px; /* Ajustado */
-          margin: 0 auto 1.2rem; /* Margem inferior */
-        }
-        .cta-button {
-          background-color: #e50914;
-          color: white;
-          padding: 0.9rem 2.5rem; /* Padding ajustado */
-          border-radius: 50px; /* Pill shape */
-          font-weight: 700;
-          font-size: 1.1rem; /* Ajustado */
-          border: none;
-          cursor: pointer;
-          box-shadow: 0 4px 12px rgba(229, 9, 20, 0.35); /* Sombra suavizada */
-          transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
-          user-select: none;
-          text-transform: uppercase; /* Para dar mais impacto */
-          letter-spacing: 0.03em;
-        }
-        .cta-button:hover {
-          background-color: #ff1a3c; /* Cor mais viva no hover */
-          box-shadow: 0 6px 18px rgba(229, 9, 20, 0.5);
-          transform: translateY(-1px);
-        }
-        .cta-button:active {
-          transform: translateY(0px) scale(0.98);
-          box-shadow: 0 2px 8px rgba(229, 9, 20, 0.3);
-        }
-        .cta-button:focus-visible {
-            outline: 2px solid #ff7089; /* Cor de foco mais clara */
-            outline-offset: 2px;
-        }
-
-
-        /* Testimonials Section */
-        .testimonials-section {
-          background-color: #121212; /* Mesmo fundo do header para consistência */
-          padding: 2.5rem 1.5rem; /* Padding ajustado */
-          max-width: 720px; /* Mantido */
-          margin: 2rem auto 3rem; /* Adicionado margin-bottom */
-          border-radius: 10px; /* Borda um pouco maior */
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra mais escura e sutil */
-          color: white;
-          text-align: center;
-        }
-        .testimonials-title {
-          font-size: 1.5rem; /* Ajustado */
-          margin-bottom: 2rem; /* Mais espaço */
-          color: #e50914;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-        .testimonials-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem; /* Espaço entre cards */
-        }
-        .testimonial-card {
-          background-color: #1f1f1f; /* Fundo do card sutilmente diferente */
-          padding: 1.5rem;
-          border-radius: 8px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Sombra sutil para cada card */
-          text-align: left; /* Alinhamento para melhor leitura */
-          border-left: 4px solid #e50914; /* Detalhe visual */
-        }
-        .testimonial-quote {
-          font-style: italic;
-          margin-bottom: 0.8rem;
-          color: #ccc; /* Cor mais clara */
-          font-size: 0.95rem; /* Ajustado */
-          line-height: 1.6;
-        }
-        .testimonial-quote::before { /* Adiciona aspas estilizadas */
-            content: '“';
-            font-size: 1.5em;
-            color: #e50914;
-            margin-right: 0.1em;
-            line-height: 0;
-        }
-        .testimonial-quote::after {
-            content: '”';
-            font-size: 1.5em;
-            color: #e50914;
-            margin-left: 0.1em;
-            line-height: 0;
-        }
-        .testimonial-author {
-          font-weight: 600; /* Menos peso que o título da seção */
-          color: #e50914;
-          font-size: 0.9rem; /* Ajustado */
-          text-align: right; /* Alinha autor à direita */
-        }
-
-        /* Media Queries */
-        @media (max-width: 768px) {
-          .page-header {
-            padding: 0.8rem 1rem;
-          }
-          .logo-container :global(.logo-svg) { /* Ajustando o SVG diretamente */
-            width: 120px;
-            height: 36px;
-          }
-          .progress-widget {
-             width: clamp(100px, 22vw, 150px);
-             font-size: 0.75rem;
-          }
-          .hero-section {
-            padding: 1.5rem 1rem;
-            gap: 0.8rem;
-          }
-          .hero-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.6rem;
-          }
-          .hero-subtitle {
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-          }
-          .cta-button {
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-          }
-          .testimonials-section {
-            padding: 2rem 1rem;
-            margin: 1.5rem auto 2.5rem;
-          }
-          .testimonials-title {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-          }
-          .testimonial-card {
-            padding: 1.2rem;
-          }
-          .testimonial-quote {
-            font-size: 0.9rem;
-          }
-           .testimonial-quote::before, .testimonial-quote::after {
-            font-size: 1.3em;
-           }
-          .testimonial-author {
-            font-size: 0.85rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .page-header {
-            flex-direction: column; /* Empilha logo e progresso */
-            gap: 0.8rem;
-            padding-bottom: 1rem;
-          }
-          .progress-widget {
-             width: clamp(150px, 50vw, 200px); /* Mais largo quando empilhado */
-             align-items: center; /* Centraliza quando empilhado */
-          }
-          .progress-widget-label {
-            font-size: 0.8rem;
-          }
-          .hero-title {
-            font-size: 1.1rem;
-          }
-          .hero-subtitle {
-            font-size: 0.8rem;
-          }
-          .cta-button {
-            width: 100%; /* Ocupa largura total no mobile bem pequeno */
-            max-width: 300px;
-            padding: 0.9rem 1.5rem;
-            font-size: 0.95rem;
-          }
-           .testimonials-title {
-            font-size: 1.2rem;
-          }
-        }
-      `}</style>
-    </>
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Conteúdo top, visual show e a experiência no site foi muito agradável."
+        </blockquote>
+        <p style={{ fontWeight: '700', color: '#e50914' }}>— Rafael L.</p>
+      </section>
+    </main>
   )
 }
