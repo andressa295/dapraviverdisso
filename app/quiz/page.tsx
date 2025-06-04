@@ -48,7 +48,7 @@ const perguntas = [
     opcoes: [
       { texto: 'NÃO, SÓ SIGO O FLUXO E TENTO SOBREVIVER', valor: 1 },
       { texto: 'JÁ PENSEI NISSO, MAS NÃO SEI POR ONDE COMEÇAR', valor: 2 },
-      { texto: 'SSIM, E ESTOU PRONTO(A) PARA PLANTAR NOVAS SEMENTES', valor: 3 },
+      { texto: 'SIM, E ESTOU PRONTO(A) PARA PLANTAR NOVAS SEMENTES', valor: 3 },
     ],
   },
   {
