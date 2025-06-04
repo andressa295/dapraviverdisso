@@ -118,15 +118,10 @@ export default function Home() {
       >
         <h2
   style={{
-    fontSize: '1.5rem',            // tamanho médio, confortável pra leitura
-    fontWeight: '600',             // negrito suave, elegante
-    lineHeight: 1.4,               // espaçamento respirável entre linhas
-    color: '#ddd',                 // cinza claro, menos agressivo que branco puro
-    maxWidth: '620px',             // largura controlada pra facilitar leitura
-    margin: '0 auto 1.2rem',      // centraliza e dá espaço abaixo
-    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-    letterSpacing: '0.02em',       // um toque de espaçamento fino pra sofisticação
-    textAlign: 'center',           // alinhamento central, porque foco é a frase
+    fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
+    fontWeight: 600,
+    lineHeight: 1.4,
+    color: '#fff',
   }}
 >
   🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
