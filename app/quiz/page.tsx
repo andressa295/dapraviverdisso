@@ -87,17 +87,21 @@ export default function QuizPage() {
 
   // Estilo padrão para botões oval
   const btnStyle: React.CSSProperties = {
-    backgroundColor: '#E50914',
-    border: 'none',
-    borderRadius: '30px',
-    color: '#fff',
-    padding: '0.8rem 2rem',
-    cursor: 'pointer',
-    fontWeight: '700',
-    fontSize: '1.1rem',
-    transition: 'background-color 0.3s ease',
-  };
-
+  backgroundColor: '#E50914',
+  border: 'none',
+  borderRadius: '30px',
+  color: '#fff',
+  padding: '0.8rem 2rem',
+  cursor: 'pointer',
+  fontWeight: '700',
+  fontSize: '1.1rem',
+  transition: 'background-color 0.3s ease',
+  width: '100%',      // botão vai preencher todo o container pai
+  maxWidth: '450px',  // mas nunca vai ultrapassar isso (ajuste se quiser)
+  minWidth: '300px',  // largura mínima fixa para uniformidade
+  textAlign: 'center',
+  boxSizing: 'border-box',
+};
   // Função para mudar cor no hover
   const hoverColor = '#b00610';
 
@@ -212,7 +216,7 @@ export default function QuizPage() {
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = hoverColor)}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E50914')}
           >
-            Quero transformar minha mentalidade
+            QUERO TRANSFORMAR MINHA MENTALIDADE
           </button>
         </>
       )}

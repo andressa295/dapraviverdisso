@@ -25,7 +25,7 @@ export function LogoPhandco() {
         letterSpacing="-2"
         style={{ filter: 'drop-shadow(0 2px 2px rgba(230, 0, 35, 0.5))' }}
       >
-        Phandco
+       Phandco
       </text>
     </svg>
   );
