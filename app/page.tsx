@@ -1,15 +1,32 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
   const router = useRouter()
+  const [progress, setProgress] = useState(0)
+
+  // Simula progresso animado
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setProgress(old => {
+        if (old >= 70) {
+          clearInterval(interval)
+          return 70
+        }
+        return old + 1
+      })
+    }, 30)
+
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <main
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #000000 0%, #1a1a2e 100%)',
+        background: '#000000',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
@@ -32,35 +49,56 @@ export default function Home() {
       >
         <h1
           style={{
-            fontSize: '1.8rem',
+            fontSize: '1.4rem',
             fontWeight: 700,
             cursor: 'pointer',
-            color: '#e50914', // Vermelho Netflix
+            color: '#e50914',
             userSelect: 'none',
+          
+            paddingBottom: '0.2rem',
+            letterSpacing: '1px',
           }}
           onClick={() => router.push('/')}
         >
           DapraViverDisso
         </h1>
-        <button
-          onClick={() => router.push('/quiz')}
+
+        {/* Widget progresso mental */}
+        <div
           style={{
-            backgroundColor: '#e50914',
-            color: 'white',
-            padding: '0.8rem 2.4rem',
-            borderRadius: '9999px',
-            fontWeight: '700',
-            fontSize: '1rem',
-            border: 'none',
-            cursor: 'pointer',
-            boxShadow: '0 0 15px rgba(229, 9, 20, 0.7)',
-            transition: 'background-color 0.3s ease',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            width: '180px',
+            fontSize: '0.9rem',
+            color: '#e50914',
+            userSelect: 'none',
           }}
-          onMouseOver={e => (e.currentTarget.style.backgroundColor = '#b00611')}
-          onMouseOut={e => (e.currentTarget.style.backgroundColor = '#e50914')}
         >
-          Começar Quiz
-        </button>
+          <span style={{ marginBottom: '0.3rem', fontWeight: '600' }}>
+            Seu progresso mental
+          </span>
+          <div
+            style={{
+              width: '100%',
+              height: '8px',
+              backgroundColor: '#333',
+              borderRadius: '9999px',
+              overflow: 'hidden',
+              boxShadow: '0 0 5px #e50914',
+            }}
+          >
+            <div
+              style={{
+                width: `${progress}%`,
+                height: '100%',
+                backgroundColor: '#e50914',
+                borderRadius: '9999px',
+                transition: 'width 0.3s ease',
+              }}
+            />
+          </div>
+        </div>
       </header>
 
       {/* Hero */}
@@ -79,23 +117,33 @@ export default function Home() {
         }}
       >
         <h2
-          style={{
-            fontSize: '1.8rem',
-            fontWeight: 700,
-            lineHeight: 1.3,
-            color: '#fff',
-          }}
-        >
-          🎯 Descubra onde sua mente está agora e desbloqueie o caminho para a sua verdadeira evolução.
-        </h2>
+  style={{
+    fontSize: '1.5rem',            // tamanho médio, confortável pra leitura
+    fontWeight: '600',             // negrito suave, elegante
+    lineHeight: 1.4,               // espaçamento respirável entre linhas
+    color: '#ddd',                 // cinza claro, menos agressivo que branco puro
+    maxWidth: '620px',             // largura controlada pra facilitar leitura
+    margin: '0 auto 1.2rem',      // centraliza e dá espaço abaixo
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    letterSpacing: '0.02em',       // um toque de espaçamento fino pra sofisticação
+    textAlign: 'center',           // alinhamento central, porque foco é a frase
+  }}
+>
+  🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
+</h2>
         <p
-          style={{
-            fontSize: '1.1rem',
-            color: '#b3b3b3',
-            lineHeight: 1.5,
-          }}
-        >
-          Responda 7 perguntas rápidas e receba um plano de ação + ebook ideal pro seu momento. Totalmente grátis.
+  style={{
+    fontSize: '1rem',               // tamanho confortável, nada exagerado
+    color: '#bbb',                 // cinza médio, suave para não competir com o título
+    lineHeight: 1.6,               // espaçamento para leitura tranquila
+    maxWidth: '600px',             // controlar largura para não ficar esticado demais
+    margin: '0 auto 1.5rem',      // centraliza com espaçamento embaixo
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    textAlign: 'center',           // manter alinhamento central, foco na mensagem
+  }}
+>
+          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO.
+          TOTALMENTE GRÁTIS.
         </p>
         <button
           onClick={() => router.push('/quiz')}
@@ -119,6 +167,71 @@ export default function Home() {
         </button>
       </section>
 
+      {/* Depoimentos */}
+<section
+  style={{
+    backgroundColor: '#121212',
+    padding: '3rem 1.5rem',
+    maxWidth: '720px',
+    margin: '2rem auto',
+    borderRadius: '8px',
+    boxShadow: '0 0 15px rgba(229, 9, 20, 0.4)',
+    color: 'white',
+    textAlign: 'center',
+  }}
+>
+  <h3
+    style={{
+      fontSize: '1.6rem',
+      marginBottom: '1.5rem',
+      color: '#e50914',
+      fontWeight: '700',
+    }}
+  >
+    O que dizem por aí
+  </h3>
+
+  <blockquote
+    style={{
+      fontStyle: 'italic',
+      marginBottom: '1rem',
+      color: '#ddd',
+    }}
+  >
+    "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
+  </blockquote>
+  <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
+    — João S.
+  </p>
+
+  <blockquote
+    style={{
+      fontStyle: 'italic',
+      marginBottom: '1rem',
+      color: '#ddd',
+    }}
+  >
+    "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
+  </blockquote>
+  <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
+    — Maria P.
+  </p>
+
+  <blockquote
+    style={{
+      fontStyle: 'italic',
+      marginBottom: '1rem',
+      color: '#ddd',
+    }}
+  >
+    "Conteúdo top, visual show e a experiência no site foi muito agradável."
+  </blockquote>
+  <p style={{ fontWeight: '700', color: '#e50914' }}>
+    — Lucas M.
+  </p>
+</section>
+
+
       {/* Rodapé */}
       <footer
         style={{
@@ -126,11 +239,11 @@ export default function Home() {
           padding: '1rem',
           textAlign: 'center',
           fontSize: '0.9rem',
-          color: '#666',
+          color: '#666666',
           userSelect: 'none',
         }}
       >
-        © {new Date().getFullYear()} DapraViverDisso — Sua mente no comando da sua vida
+        © {new Date().getFullYear()} PhandCo. — Sua mente no comando da sua vida
       </footer>
     </main>
   )
