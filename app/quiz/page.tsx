@@ -4,59 +4,59 @@ import React, { useState } from 'react';
 
 const perguntas = [
   {
-    pergunta: 'Como você descreveria seu estado mental atual?',
+    pergunta: 'COMO VOCÊ DESCREVERIA SEU ESTADO MENTAL ATUAL?',
     opcoes: [
-      { texto: 'Sempre preocupado(a), correndo atrás do tempo e apagando incêndios', valor: 1 },
-      { texto: 'Às vezes consigo focar no futuro, mas quase sempre no automático', valor: 2 },
-      { texto: 'Tenho clareza dos meus objetivos e sinto que crio meu próprio caminho', valor: 3 },
+      { texto: 'SEMPRE PREOCUPADO(A), CORRENDO ATRÁS DO TEMPO E APAGANDO INCÊNDIOS', valor: 1 },
+      { texto: 'ÀS VEZES CONSIGO FOCAR NO FUTURO, MAS QUASE SEMPRE NO AUTOMÁTICO', valor: 2 },
+      { texto: 'TENHO CLAREZA DOS MEUS OBJETIVOS E SINTO QUE CRIO MEU PRÓPRIO CAMINHO', valor: 3 },
     ],
   },
   {
-    pergunta: 'Você sente que suas crenças limitantes te impedem de avançar?',
+    pergunta: 'VOCÊ SENTE QUE SUAS CRENÇAS LIMITANTES TE IMPEDEM DE AVANÇAR?',
     opcoes: [
-      { texto: 'Sim, frequentemente me pego pensando que “não sou bom o bastante”', valor: 1 },
-      { texto: 'Às vezes, mas tento não deixar isso me dominar', valor: 2 },
-      { texto: 'Não, já comecei a reprogramar minha mente para o sucesso', valor: 3 },
+      { texto: 'SIM, FREQUENTEMENTE ME PEGO PENSANDO QUE “NÃO SOU BOM O BASTANTE”', valor: 1 },
+      { texto: 'ÀS VEZES, MAS TENTO NÃO DEIXAR ISSO ME DOMINAR', valor: 2 },
+      { texto: 'NÃO, JÁ COMECEI A REPROGRAMAR MINHA MENTE PARA O SUCESSO', valor: 3 },
     ],
   },
   {
-    pergunta: 'Quando pensa no seu futuro, o que sente?',
+    pergunta: 'QUANDO PENSA NO SEU FUTURO, O QUE SENTE?',
     opcoes: [
-      { texto: 'Medo e insegurança', valor: 1 },
-      { texto: 'Dúvidas, mas também uma vontade de mudar', valor: 2 },
-      { texto: 'Confiança e entusiasmo', valor: 3 },
+      { texto: 'MEDO E INSEGURANÇA', valor: 1 },
+      { texto: 'DÚVIDAS, MAS TAMBÉM UMA VONTADE DE MUDAR', valor: 2 },
+      { texto: 'CONFIANÇA E ENTUSIASMO', valor: 3 },
     ],
   },
   {
-    pergunta: 'Você acha que sua mente está mais focada em sobreviver ou em criar?',
+    pergunta: 'VOCÊ ACHA QUE SUA MENTE ESTÁ MAIS FOCADA EM SOBREVIVER OU EM CRIAR?',
     opcoes: [
-      { texto: 'Sobreviver — estou sempre apagando incêndios', valor: 1 },
-      { texto: 'Às vezes sobrevivo, às vezes crio', valor: 2 },
-      { texto: 'Criar — estou construindo meu caminho com propósito', valor: 3 },
+      { texto: 'SOBREVIVER — ESTOU SEMPRE APAGANDO INCÊNDIOS', valor: 1 },
+      { texto: 'ÀS VEZES SOBREVIVO, ÀS VEZES CRIO', valor: 2 },
+      { texto: 'CRIAR — ESTOU CONSTRUINDO MEU CAMINHO COM PROPÓSITO', valor: 3 },
     ],
   },
   {
-    pergunta: 'Qual dessas frases mais ressoa com você?',
+    pergunta: 'QUAL DESSAS FRASES MAIS RESSOA COM VOCÊ?',
     opcoes: [
-      { texto: '“Dinheiro não dá em árvore”', valor: 1 },
-      { texto: '“Não sou tão sortudo(a) quanto os outros”', valor: 2 },
-      { texto: '“Eu posso escolher pensar e agir diferente para mudar minha vida”', valor: 3 },
+      { texto: '“DINHEIRO NÃO DÁ EM ÁRVORE”', valor: 1 },
+      { texto: '“NÃO SOU TÃO SORTUDO(A) QUANTO OS OUTROS”', valor: 2 },
+      { texto: '“EU POSSO ESCOLHER PENSAR E AGIR DIFERENTE PARA MUDAR MINHA VIDA”', valor: 3 },
     ],
   },
   {
-    pergunta: 'Você já parou pra se perguntar se o que vive hoje é o que você realmente quer?',
+    pergunta: 'VOCÊ JÁ PAROU PRA SE PERGUNTAR SE O QUE VIVE HOJE É OQUE VOCÊ REALMENTE QUER?',
     opcoes: [
-      { texto: 'Não, só sigo o fluxo e tento sobreviver', valor: 1 },
-      { texto: 'Já pensei nisso, mas não sei por onde começar', valor: 2 },
-      { texto: 'Sim, e estou pronto(a) para plantar novas sementes', valor: 3 },
+      { texto: 'NÃO, SÓ SIGO O FLUXO E TENTO SOBREVIVER', valor: 1 },
+      { texto: 'JÁ PENSEI NISSO, MAS NÃO SEI POR ONDE COMEÇAR', valor: 2 },
+      { texto: 'SSIM, E ESTOU PRONTO(A) PARA PLANTAR NOVAS SEMENTES', valor: 3 },
     ],
   },
   {
-    pergunta: 'Você está disposto(a) a mudar sua forma de pensar para transformar sua realidade?',
+    pergunta: 'VOCÊ ESTÁ DISPOSTO(A) A MUDAR SUA FORMA DE PENSAR PARA TRANSFORMAR SUA REALIDADE?',
     opcoes: [
-      { texto: 'Ainda tenho medo, não sei se consigo', valor: 1 },
-      { texto: 'Quero, mas não sei como fazer isso sozinho(a)', valor: 2 },
-      { texto: 'Sim, quero um passo a passo pra fazer acontecer', valor: 3 },
+      { texto: 'AINDA TENHO MEDO, NÃO SEI SE CONSIGO', valor: 1 },
+      { texto: 'QUERO, MAS NÃO SEI COMO FAZER ISSO SOZINHO (A)', valor: 2 },
+      { texto: 'SIM, QUERO UM PASSO A PASSO PRA FAZER ACONTECER', valor: 3 },
     ],
   },
 ];
@@ -84,6 +84,22 @@ export default function QuizPage() {
       return 'Parabéns! Sua mente criativa está no comando e você está construindo seu futuro com propósito!';
     }
   };
+
+  // Estilo padrão para botões oval
+  const btnStyle: React.CSSProperties = {
+    backgroundColor: '#E50914',
+    border: 'none',
+    borderRadius: '30px',
+    color: '#fff',
+    padding: '0.8rem 2rem',
+    cursor: 'pointer',
+    fontWeight: '700',
+    fontSize: '1.1rem',
+    transition: 'background-color 0.3s ease',
+  };
+
+  // Função para mudar cor no hover
+  const hoverColor = '#b00610';
 
   return (
     <main
@@ -140,23 +156,10 @@ export default function QuizPage() {
               <button
                 key={texto}
                 onClick={() => escolherOpcao(valor)}
-                style={{
-                  backgroundColor: '#E50914',
-                  border: 'none',
-                  borderRadius: '25px',
-                  color: '#fff',
-                  padding: '0.7rem 1.5rem',
-                  cursor: 'pointer',
-                  fontWeight: '600',
-                  fontSize: '1rem',
-                  transition: 'background-color 0.3s ease',
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = '#b00610')
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = '#E50914')
-                }
+                style={btnStyle}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = hoverColor)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E50914')}
+                aria-label={`Opção: ${texto}`}
               >
                 {texto}
               </button>
@@ -205,19 +208,8 @@ export default function QuizPage() {
             onClick={() => {
               window.location.href = '/ebooks'; // muda para sua URL real
             }}
-            style={{
-              marginTop: '2rem',
-              backgroundColor: '#E50914',
-              color: '#fff',
-              padding: '0.8rem 2.5rem',
-              border: 'none',
-              borderRadius: '30px',
-              fontWeight: '700',
-              fontSize: '1.1rem',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#b00610')}
+            style={btnStyle}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = hoverColor)}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E50914')}
           >
             Quero transformar minha mentalidade

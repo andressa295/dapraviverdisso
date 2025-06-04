@@ -1,7 +1,37 @@
 'use client'
 
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+
+
+export function LogoPhandco() {
+  return (
+    <svg
+      width="160"
+      height="50"
+      viewBox="0 0 160 50"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Logo Phandco"
+    >
+      <text
+        x="0"
+        y="38"
+        fill="#E60023" // Vermelho intenso tipo "vermelho Phandco"
+        fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        fontWeight="700"
+        fontSize="40"
+        letterSpacing="-2"
+        style={{ filter: 'drop-shadow(0 2px 2px rgba(230, 0, 35, 0.5))' }}
+      >
+        Phandco
+      </text>
+    </svg>
+  );
+}
+
+
 
 export default function Home() {
   const router = useRouter()
@@ -10,7 +40,7 @@ export default function Home() {
   // Simula progresso animado
   useEffect(() => {
     let interval = setInterval(() => {
-      setProgress(old => {
+      setProgress((old) => {
         if (old >= 70) {
           clearInterval(interval)
           return 70
@@ -47,20 +77,9 @@ export default function Home() {
           zIndex: 100,
         }}
       >
-        <h1
-          style={{
-            fontSize: '1.4rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            color: '#e50914',
-            userSelect: 'none',
-            paddingBottom: '0.2rem',
-            letterSpacing: '1px',
-          }}
-          onClick={() => router.push('/')}
-        >
-          DapraViverDisso
-        </h1>
+        <div onClick={() => router.push('/')} aria-label="Voltar para Home">
+          <LogoPhandco />
+        </div>
 
         {/* Widget progresso mental */}
         <div
@@ -76,9 +95,7 @@ export default function Home() {
             whiteSpace: 'nowrap', // impede quebra de linha no texto
           }}
         >
-          <span style={{ fontWeight: '600' }}>
-            Seu progresso mental
-          </span>
+          <span style={{ fontWeight: '600' }}>Seu progresso mental</span>
           <div
             style={{
               width: '100%',
@@ -130,7 +147,8 @@ export default function Home() {
             textAlign: 'center',
           }}
         >
-          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
+          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA
+          EVOLUÇÃO.
         </h2>
         <p
           style={{
@@ -143,8 +161,8 @@ export default function Home() {
             textAlign: 'center',
           }}
         >
-          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO.
-          TOTALMENTE GRÁTIS.
+          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU
+          MOMENTO. TOTALMENTE GRÁTIS.
         </p>
         <button
           onClick={() => router.push('/quiz')}
@@ -161,8 +179,8 @@ export default function Home() {
             transition: 'background-color 0.3s ease',
             userSelect: 'none',
           }}
-          onMouseOver={e => (e.currentTarget.style.backgroundColor = '#b00611')}
-          onMouseOut={e => (e.currentTarget.style.backgroundColor = '#e50914')}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#b00611')}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#e50914')}
         >
           Quero começar agora 🚀
         </button>
@@ -199,7 +217,8 @@ export default function Home() {
             color: '#ddd',
           }}
         >
-          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
+          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super
+          eficaz!"
         </blockquote>
         <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
           — João S.
@@ -212,7 +231,8 @@ export default function Home() {
             color: '#ddd',
           }}
         >
-          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
+          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo
+          demais!"
         </blockquote>
         <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
           — Maria P.
@@ -227,9 +247,7 @@ export default function Home() {
         >
           "Conteúdo top, visual show e a experiência no site foi muito agradável."
         </blockquote>
-        <p style={{ fontWeight: '700', color: '#e50914' }}>
-          — Lucas M.
-        </p>
+        <p style={{ fontWeight: '700', color: '#e50914' }}>— Lucas M.</p>
       </section>
 
       {/* Rodapé */}
