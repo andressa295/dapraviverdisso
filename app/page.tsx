@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-
-export function LogoPhandco() {
+// Componente separado da logo
+function LogoPhandcoSvg() {
   return (
     <svg
       width="160"
@@ -18,26 +18,23 @@ export function LogoPhandco() {
       <text
         x="0"
         y="38"
-        fill="#E60023" // Vermelho intenso tipo "vermelho Phandco"
+        fill="#E60023"
         fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
         fontWeight="700"
         fontSize="40"
         letterSpacing="-2"
         style={{ filter: 'drop-shadow(0 2px 2px rgba(230, 0, 35, 0.5))' }}
       >
-       Phandco
+        Phandco
       </text>
     </svg>
-  );
+  )
 }
-
-
 
 export default function Home() {
   const router = useRouter()
   const [progress, setProgress] = useState(0)
 
-  // Simula progresso animado
   useEffect(() => {
     let interval = setInterval(() => {
       setProgress((old) => {
@@ -77,8 +74,8 @@ export default function Home() {
           zIndex: 100,
         }}
       >
-        <div onClick={() => router.push('/')} aria-label="Voltar para Home">
-          <LogoPhandco />
+        <div onClick={() => router.push('/')} aria-label="Voltar para Home" style={{ cursor: 'pointer' }}>
+          <LogoPhandcoSvg />
         </div>
 
         {/* Widget progresso mental */}
@@ -91,8 +88,8 @@ export default function Home() {
             fontSize: '0.9rem',
             color: '#e50914',
             userSelect: 'none',
-            gap: '0.4rem', // espaçamento entre título e barra
-            whiteSpace: 'nowrap', // impede quebra de linha no texto
+            gap: '0.4rem',
+            whiteSpace: 'nowrap',
           }}
         >
           <span style={{ fontWeight: '600' }}>Seu progresso mental</span>
@@ -142,13 +139,11 @@ export default function Home() {
             color: '#ddd',
             maxWidth: '620px',
             margin: '0 auto 1.2rem',
-            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
             letterSpacing: '0.02em',
             textAlign: 'center',
           }}
         >
-          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA
-          EVOLUÇÃO.
+          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
         </h2>
         <p
           style={{
@@ -157,12 +152,10 @@ export default function Home() {
             lineHeight: 1.6,
             maxWidth: '600px',
             margin: '0 auto 1.5rem',
-            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
             textAlign: 'center',
           }}
         >
-          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU
-          MOMENTO. TOTALMENTE GRÁTIS.
+          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO. TOTALMENTE GRÁTIS.
         </p>
         <button
           onClick={() => router.push('/quiz')}
@@ -210,59 +203,21 @@ export default function Home() {
           O que dizem por aí
         </h3>
 
-        <blockquote
-          style={{
-            fontStyle: 'italic',
-            marginBottom: '1rem',
-            color: '#ddd',
-          }}
-        >
-          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super
-          eficaz!"
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
         </blockquote>
-        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
-          — João S.
-        </p>
+        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>— João S.</p>
 
-        <blockquote
-          style={{
-            fontStyle: 'italic',
-            marginBottom: '1rem',
-            color: '#ddd',
-          }}
-        >
-          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo
-          demais!"
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
         </blockquote>
-        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
-          — Maria P.
-        </p>
+        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>— Maria P.</p>
 
-        <blockquote
-          style={{
-            fontStyle: 'italic',
-            marginBottom: '1rem',
-            color: '#ddd',
-          }}
-        >
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
           "Conteúdo top, visual show e a experiência no site foi muito agradável."
         </blockquote>
-        <p style={{ fontWeight: '700', color: '#e50914' }}>— Lucas M.</p>
+        <p style={{ fontWeight: '700', color: '#e50914' }}>— Rafael L.</p>
       </section>
-
-      {/* Rodapé */}
-      <footer
-        style={{
-          backgroundColor: '#121212',
-          padding: '1rem',
-          textAlign: 'center',
-          fontSize: '0.9rem',
-          color: '#666666',
-          userSelect: 'none',
-        }}
-      >
-        © {new Date().getFullYear()} PhandCo. — Sua mente no comando da sua vida
-      </footer>
     </main>
   )
 }
