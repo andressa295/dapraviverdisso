@@ -6,21 +6,6 @@ import { useEffect, useState } from 'react'
 export default function Home() {
   const router = useRouter()
   const [progress, setProgress] = useState(0)
-  const [isSmallScreen, setIsSmallScreen] = useState(false) // Estado que queríamos
-
-  // Detecta se a tela é pequena
-  useEffect(() => {
-    function handleResize() {
-      setIsSmallScreen(window.innerWidth < 768) // breakpoint clássico mobile/tablet
-    }
-
-    handleResize() // executa uma vez ao montar, já deixa o estado correto
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
 
   // Simula progresso animado
   useEffect(() => {
@@ -83,13 +68,15 @@ export default function Home() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-end',
-            width: isSmallScreen ? '120px' : '180px', // ajuste responsivo usando o estado
+            width: '180px',
             fontSize: '0.9rem',
             color: '#e50914',
             userSelect: 'none',
+            gap: '0.4rem', // espaçamento entre título e barra
+            whiteSpace: 'nowrap', // impede quebra de linha no texto
           }}
         >
-          <span style={{ marginBottom: '0.3rem', fontWeight: '600' }}>
+          <span style={{ fontWeight: '600' }}>
             Seu progresso mental
           </span>
           <div
@@ -143,8 +130,7 @@ export default function Home() {
             textAlign: 'center',
           }}
         >
-          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA
-          EVOLUÇÃO.
+          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
         </h2>
         <p
           style={{
@@ -157,8 +143,8 @@ export default function Home() {
             textAlign: 'center',
           }}
         >
-          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU
-          MOMENTO. TOTALMENTE GRÁTIS.
+          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO.
+          TOTALMENTE GRÁTIS.
         </p>
         <button
           onClick={() => router.push('/quiz')}
@@ -213,8 +199,7 @@ export default function Home() {
             color: '#ddd',
           }}
         >
-          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e
-          super eficaz!"
+          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
         </blockquote>
         <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
           — João S.
@@ -227,8 +212,7 @@ export default function Home() {
             color: '#ddd',
           }}
         >
-          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo
-          demais!"
+          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
         </blockquote>
         <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
           — Maria P.
@@ -243,7 +227,9 @@ export default function Home() {
         >
           "Conteúdo top, visual show e a experiência no site foi muito agradável."
         </blockquote>
-        <p style={{ fontWeight: '700', color: '#e50914' }}>— Lucas M.</p>
+        <p style={{ fontWeight: '700', color: '#e50914' }}>
+          — Lucas M.
+        </p>
       </section>
 
       {/* Rodapé */}
