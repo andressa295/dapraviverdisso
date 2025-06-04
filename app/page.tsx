@@ -7,10 +7,9 @@ export default function Home() {
   const router = useRouter()
   const [progress, setProgress] = useState(0)
 
-  // Simula progresso animado
   useEffect(() => {
     let interval = setInterval(() => {
-      setProgress(old => {
+      setProgress((old) => {
         if (old >= 70) {
           clearInterval(interval)
           return 70
@@ -18,63 +17,113 @@ export default function Home() {
         return old + 1
       })
     }, 30)
-
     return () => clearInterval(interval)
   }, [])
+
+  // Estilos responsivos
+  const responsive = {
+    header: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: '1rem 1.5rem',
+      borderBottom: '1px solid #333',
+      backgroundColor: '#121212',
+      position: 'sticky',
+      top: 0,
+      zIndex: 100,
+      flexWrap: 'wrap',
+    },
+    logo: {
+      fontSize: 'clamp(1rem, 2.5vw, 1.4rem)',
+      fontWeight: 700,
+      color: '#e50914',
+      cursor: 'pointer',
+      letterSpacing: '1px',
+      userSelect: 'none',
+    },
+    progressWrap: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+      width: 'clamp(140px, 40vw, 180px)',
+      fontSize: '0.85rem',
+      color: '#e50914',
+      userSelect: 'none',
+      marginTop: '1rem',
+    },
+    hero: {
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '2rem 1rem',
+      textAlign: 'center',
+      maxWidth: '720px',
+      margin: 'auto',
+      gap: '1.2rem',
+    },
+    title: {
+      fontSize: 'clamp(1.2rem, 4vw, 1.6rem)',
+      fontWeight: 600,
+      color: '#ddd',
+      lineHeight: 1.4,
+      margin: '0 auto 1rem',
+      letterSpacing: '0.02em',
+    },
+    desc: {
+      fontSize: 'clamp(0.9rem, 3vw, 1rem)',
+      color: '#bbb',
+      lineHeight: 1.6,
+      margin: '0 auto 1.5rem',
+    },
+    button: {
+      backgroundColor: '#e50914',
+      color: 'white',
+      padding: 'clamp(0.8rem, 2vw, 1rem) clamp(2rem, 5vw, 3rem)',
+      borderRadius: '9999px',
+      fontWeight: 700,
+      fontSize: 'clamp(1rem, 3.5vw, 1.2rem)',
+      border: 'none',
+      cursor: 'pointer',
+      boxShadow: '0 0 20px rgba(229, 9, 20, 0.9)',
+      userSelect: 'none',
+    },
+    testimonials: {
+      backgroundColor: '#121212',
+      padding: '2rem 1rem',
+      maxWidth: '720px',
+      margin: '2rem auto',
+      borderRadius: '8px',
+      boxShadow: '0 0 15px rgba(229, 9, 20, 0.4)',
+      color: 'white',
+      textAlign: 'center',
+    },
+    h3: {
+      fontSize: 'clamp(1.2rem, 4vw, 1.6rem)',
+      marginBottom: '1.5rem',
+      color: '#e50914',
+      fontWeight: '700',
+    },
+  }
 
   return (
     <main
       style={{
         minHeight: '100vh',
-        background: '#000000',
+        background: '#000',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
-      {/* Cabeçalho */}
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '1.5rem 2.5rem',
-          borderBottom: '1px solid #333',
-          backgroundColor: '#121212',
-          position: 'sticky',
-          top: 0,
-          zIndex: 100,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '1.4rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            color: '#e50914',
-            userSelect: 'none',
-          
-            paddingBottom: '0.2rem',
-            letterSpacing: '1px',
-          }}
-          onClick={() => router.push('/')}
-        >
+      <header style={responsive.header}>
+        <h1 style={responsive.logo} onClick={() => router.push('/')}>
           DapraViverDisso
         </h1>
-
-        {/* Widget progresso mental */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            width: '180px',
-            fontSize: '0.9rem',
-            color: '#e50914',
-            userSelect: 'none',
-          }}
-        >
+        <div style={responsive.progressWrap}>
           <span style={{ marginBottom: '0.3rem', fontWeight: '600' }}>
             Seu progresso mental
           </span>
@@ -101,144 +150,51 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero */}
-      <section
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '2rem',
-          textAlign: 'center',
-          maxWidth: '720px',
-          margin: 'auto',
-          gap: '1.2rem',
-        }}
-      >
-        <h2
-  style={{
-    fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
-    fontWeight: 600,
-    lineHeight: 1.4,
-    color: '#fff',
-  }}
->
-  🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
-</h2>
-        <p
-  style={{
-    fontSize: '1rem',               // tamanho confortável, nada exagerado
-    color: '#bbb',                 // cinza médio, suave para não competir com o título
-    lineHeight: 1.6,               // espaçamento para leitura tranquila
-    maxWidth: '600px',             // controlar largura para não ficar esticado demais
-    margin: '0 auto 1.5rem',      // centraliza com espaçamento embaixo
-    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-    textAlign: 'center',           // manter alinhamento central, foco na mensagem
-  }}
->
-          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO.
-          TOTALMENTE GRÁTIS.
+      <section style={responsive.hero}>
+        <h2 style={responsive.title}>
+          🎯 DESCUBRA ONDE SUA MENTE ESTÁ AGORA E DESBLOQUEIE O CAMINHO PARA A SUA EVOLUÇÃO.
+        </h2>
+        <p style={responsive.desc}>
+          RESPONDA 7 PERGUNTAS RÁPIDAS E RECEBA UM PLANO DE AÇÃO IDEAL PRO SEU MOMENTO. TOTALMENTE GRÁTIS.
         </p>
         <button
           onClick={() => router.push('/quiz')}
-          style={{
-            backgroundColor: '#e50914',
-            color: 'white',
-            padding: '1rem 3rem',
-            borderRadius: '9999px',
-            fontWeight: '700',
-            fontSize: '1.2rem',
-            border: 'none',
-            cursor: 'pointer',
-            boxShadow: '0 0 20px rgba(229, 9, 20, 0.9)',
-            transition: 'background-color 0.3s ease',
-            userSelect: 'none',
-          }}
-          onMouseOver={e => (e.currentTarget.style.backgroundColor = '#b00611')}
-          onMouseOut={e => (e.currentTarget.style.backgroundColor = '#e50914')}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#b00611')}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#e50914')}
+          style={responsive.button}
         >
           Quero começar agora 🚀
         </button>
       </section>
 
-      {/* Depoimentos */}
-<section
-  style={{
-    backgroundColor: '#121212',
-    padding: '3rem 1.5rem',
-    maxWidth: '720px',
-    margin: '2rem auto',
-    borderRadius: '8px',
-    boxShadow: '0 0 15px rgba(229, 9, 20, 0.4)',
-    color: 'white',
-    textAlign: 'center',
-  }}
->
-  <h3
-    style={{
-      fontSize: '1.6rem',
-      marginBottom: '1.5rem',
-      color: '#e50914',
-      fontWeight: '700',
-    }}
-  >
-    O que dizem por aí
-  </h3>
+      <section style={responsive.testimonials}>
+        <h3 style={responsive.h3}>O que dizem por aí</h3>
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
+        </blockquote>
+        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>— João S.</p>
 
-  <blockquote
-    style={{
-      fontStyle: 'italic',
-      marginBottom: '1rem',
-      color: '#ddd',
-    }}
-  >
-    "Esse quiz mudou a forma como eu encaro meus desafios. Simples, direto e super eficaz!"
-  </blockquote>
-  <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
-    — João S.
-  </p>
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
+        </blockquote>
+        <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>— Maria P.</p>
 
-  <blockquote
-    style={{
-      fontStyle: 'italic',
-      marginBottom: '1rem',
-      color: '#ddd',
-    }}
-  >
-    "Adorei receber um plano de ação personalizado junto com o ebook. Recomendo demais!"
-  </blockquote>
-  <p style={{ fontWeight: '700', marginBottom: '2rem', color: '#e50914' }}>
-    — Maria P.
-  </p>
+        <blockquote style={{ fontStyle: 'italic', marginBottom: '1rem', color: '#ddd' }}>
+          "Conteúdo top, visual show e a experiência no site foi muito agradável."
+        </blockquote>
+        <p style={{ fontWeight: '700', color: '#e50914' }}>— Lucas M.</p>
+      </section>
 
-  <blockquote
-    style={{
-      fontStyle: 'italic',
-      marginBottom: '1rem',
-      color: '#ddd',
-    }}
-  >
-    "Conteúdo top, visual show e a experiência no site foi muito agradável."
-  </blockquote>
-  <p style={{ fontWeight: '700', color: '#e50914' }}>
-    — Lucas M.
-  </p>
-</section>
-
-
-      {/* Rodapé */}
       <footer
         style={{
+          padding: '2rem 1rem',
           backgroundColor: '#121212',
-          padding: '1rem',
           textAlign: 'center',
-          fontSize: '0.9rem',
-          color: '#666666',
-          userSelect: 'none',
+          fontSize: '0.8rem',
+          color: '#888',
         }}
       >
-        © {new Date().getFullYear()} PhandCo. — Sua mente no comando da sua vida
+        © {new Date().getFullYear()} PhandCo. Todos os direitos reservados.
       </footer>
     </main>
   )
