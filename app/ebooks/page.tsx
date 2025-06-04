@@ -1,7 +1,16 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react' // Adicionado useEffect
+import React, { useRef, useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation' // Importado para o link do logo
 
+// const ebooks = [...] // Seu array de ebooks (mantido como estava)
+// const bonus = [...] // Seu array de bonus (mantido como estava)
+// const originalTestimonials = [...] // Seus depoimentos (mantidos como estavam)
+// const complementaryTestimonials = [...] // Seus depoimentos (mantidos como estavam)
+// const allTestimonials = [...] // Seus depoimentos (mantidos como estavam)
+
+// COPIEI SEUS DADOS PARA CÁ PARA O EXEMPLO FUNCIONAR ISOLADAMENTE
+// NO SEU CÓDIGO REAL, MANTENHA COMO ESTAVA SE ESTIVEREM CORRETOS.
 const ebooks = [
   {
     title: 'Tudo começa na mente',
@@ -77,39 +86,32 @@ const complementaryTestimonials = [
     avatar: 'SL',
   },
 ]
-
 const allTestimonials = [...originalTestimonials, ...complementaryTestimonials];
+// FIM DOS DADOS COPIADOS
 
 
 export default function EbooksPage() {
+  const router = useRouter(); // Hook do router
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Para a animação da seção de conexão
   const [isConnectionVisible, setIsConnectionVisible] = useState(false);
   const connectionSectionRef = useRef<HTMLElement | null>(null);
-
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsConnectionVisible(true);
-          observer.unobserve(entry.target); // Para a animação ocorrer apenas uma vez
+          observer.unobserve(entry.target);
         }
       },
-      {
-        root: null, // Observa em relação ao viewport
-        rootMargin: '0px',
-        threshold: 0.1 // Pelo menos 10% da seção visível
-      }
+      { root: null, rootMargin: '0px', threshold: 0.1 }
     );
-
     if (connectionSectionRef.current) {
       observer.observe(connectionSectionRef.current);
     }
-
     return () => {
       if (connectionSectionRef.current) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -117,7 +119,6 @@ export default function EbooksPage() {
       }
     };
   }, []);
-
 
   const scrollBy = (offset: number) => {
     scrollContainerRef.current?.scrollBy({ left: offset, behavior: 'smooth' })
@@ -136,13 +137,28 @@ export default function EbooksPage() {
   return (
     <>
       <main className="ebooks-page-main">
+        {/* Header modificado para incluir logo */}
         <header className="page-header">
-          <h1 className="main-title">COMBO E-BOOKS</h1>
-          <p className="subtitle">
-            Tudo o que você precisa para desbloquear sua mente e transformar sua realidade, passo a passo, com clareza e direção.
-          </p>
+          <div 
+            className="logo-area-ebooks"
+            onClick={() => router.push('/')}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push('/')}}
+            aria-label="Ir para a página inicial Phandco"
+          >
+            
+            <span className="logo-placeholder-text">Phandco</span>
+          </div>
+          <div className="title-area-ebooks">
+            <h1 className="main-title">COMBO E-BOOKS</h1>
+            <p className="subtitle">
+              Tudo o que você precisa para desbloquear sua mente e transformar sua realidade, passo a passo, com clareza e direção.
+            </p>
+          </div>
         </header>
 
+        {/* Restante do conteúdo da página (mantido como estava, com as classes) */}
         <section aria-label="Lista de ebooks em carrossel" className="ebook-carousel-section">
           <button
             aria-label="Scroll para esquerda"
@@ -161,26 +177,6 @@ export default function EbooksPage() {
               }
             }}
           >
-            {/* RECOMENDAÇÃO DE PERFORMANCE (next/image):
-              Se as imagens de capa estiverem na pasta /public do seu projeto Next.js, 
-              considere usar o componente <Image> do Next.js para otimização automática,
-              lazy loading e melhor performance. Você precisaria importar o Image from 'next/image'.
-              Exemplo de uso (ajuste width, height e layout conforme necessário):
-
-              <Image 
-                src={cover} 
-                alt={`Capa do ebook ${title}`} 
-                width={220} // Largura da imagem (baseada no min-width do .ebook-card)
-                height={300} // Altura da imagem (baseada na altura do .ebook-cover)
-                layout="responsive" // Ou "intrinsic", "fixed". "Responsive" se adapta ao container.
-                className="ebook-cover" 
-                objectFit="cover" // Pode ser necessário para manter o aspecto como na tag img
-              />
-              
-              Para layout="responsive" ou "intrinsic", width e height definem a proporção.
-              Para layout="fill", o elemento pai precisa ter position: relative.
-              Verifique a documentação do Next.js para <Image> para mais detalhes.
-            */}
             {ebooks.map(({ title, description, cover }) => (
               <div key={title} className="ebook-card">
                 <img src={cover} alt={`Capa do ebook ${title}`} className="ebook-cover" />
@@ -315,7 +311,7 @@ export default function EbooksPage() {
           background-color: #141414;
           color: #fff;
           min-height: 100vh;
-          padding: 2rem 15px;
+          padding: 0 15px 2rem; /* Removido padding-top para o header controlar */
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           max-width: 100vw;
           overflow-x: hidden;
@@ -333,27 +329,50 @@ export default function EbooksPage() {
           letter-spacing: 0.05em;
         }
         
+        /* Header da Página de Ebooks Modificado */
         .page-header {
-          margin-bottom: 3rem;
-          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: space-between; /* Logo à esquerda, título à direita/centro */
+          padding: 1rem 15px; /* Padding do header */
           width: 100%;
+          max-width: 1200px; /* Alinha com o conteúdo principal */
+          margin: 0 auto 2rem; /* Centraliza e adiciona margem inferior */
+          box-sizing: border-box;
+          border-bottom: 1px solid #222; /* Opcional: linha divisória sutil */
         }
-        .main-title {
+        .logo-area-ebooks {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+        }
+        .logo-placeholder-text { /* Estilo para o placeholder do logo */
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #E50914;
+            /* Substitua isso pelo seu componente LogoPhandcoSvg */
+        }
+        .title-area-ebooks {
+          flex-grow: 1; /* Ocupa o espaço restante */
+          text-align: center; /* Centraliza o título e subtítulo */
+        }
+        .main-title { /* Estilos do título principal da página */
           font-weight: 500;
-          font-size: 2.25rem;
-          margin-bottom: 0.5rem;
+          font-size: 2rem; /* Ajustado */
+          margin-bottom: 0.25rem; /* Ajustado */
           color: #E50914;
           letter-spacing: 0.08em;
           text-transform: uppercase;
         }
         .subtitle {
           color: #bbb;
-          font-size: 1rem;
+          font-size: 0.9rem; /* Ajustado */
           max-width: 550px;
           margin: 0 auto;
-          line-height: 1.6;
+          line-height: 1.5;
         }
 
+        /* Ebook Carousel Section - Ajustes nas flechas */
         .ebook-carousel-section {
           position: relative;
           width: 100%;
@@ -366,22 +385,25 @@ export default function EbooksPage() {
           top: 50%;
           transform: translateY(-50%);
           z-index: 10;
-          background: rgba(20, 20, 20, 0.7);
+          background: rgba(20, 20, 20, 0.6); /* Levemente mais transparente */
           border: none;
           color: #fff;
           font-size: 1.8rem;
           cursor: pointer;
           padding: 0.4rem 0.8rem;
-          transition: background 0.3s ease, color 0.3s ease;
+          transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
           border-radius: 8px;
         }
         .carousel-arrow:hover {
           background: #E50914;
           color: #fff;
+          transform: translateY(-50%) scale(1.1); /* Efeito de hover */
         }
-        .left-arrow { left: 5px; border-radius: 0 8px 8px 0;}
-        .right-arrow { right: 5px; border-radius: 8px 0 0 8px;}
+        /* Ajustes Mobile para as Flechas */
+        .left-arrow { left: 10px; border-radius: 0 8px 8px 0;} /* Afastado da borda */
+        .right-arrow { right: 10px; border-radius: 8px 0 0 8px;} /* Afastado da borda */
 
+        /* ... (restante do seu CSS para .ebook-carousel-container, .ebook-card, etc. continua aqui) ... */
         .ebook-carousel-container {
           display: flex;
           gap: 1.25rem;
@@ -449,8 +471,8 @@ export default function EbooksPage() {
           padding: 0;
           margin: 0;
           display: grid;
-          gap: 1rem; /* Aumentado um pouco o gap para o grid 2x2 */
-          grid-template-columns: repeat(2, 1fr); /* Alterado para 2 colunas em desktop */
+          gap: 1rem; 
+          grid-template-columns: repeat(2, 1fr); 
         }
         .bonus-item {
           background-color: #272727;
@@ -473,7 +495,6 @@ export default function EbooksPage() {
           font-size: 1.3rem;
         }
 
-        /* Connection Section with Animation */
         .connection-section {
           margin-top: 4rem;
           text-align: center;
@@ -483,8 +504,8 @@ export default function EbooksPage() {
           background-color: #1a1a1a;
           border-radius: 10px;
           box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-          opacity: 0; /* Inicialmente invisível para animação */
-          transform: translateY(30px); /* Inicialmente um pouco abaixo para animação */
+          opacity: 0; 
+          transform: translateY(30px); 
           transition: opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
         .connection-section.is-visible {
@@ -675,40 +696,39 @@ export default function EbooksPage() {
           line-height: 1.7;
           max-width: 580px;
         }
-
-        /* Final CTA Section - Melhorias */
+        
         .final-cta-section {
           margin-top: 4rem;
-          padding: 3rem; /* Aumentado padding para mais respiro */
+          padding: 3rem; 
           background-color: #E50914;
-          border-radius: 12px; /* Um pouco mais arredondado */
+          border-radius: 12px; 
           width: 100%;
           max-width: 800px;
-          box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4); /* Sombra mais pronunciada */
+          box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4); 
           text-align: center;
         }
         .final-cta-title {
-          font-size: 2rem; /* Aumentado em desktop */
+          font-size: 2rem; 
           color: #fff;
-          margin-bottom: 1rem; /* Aumentado margin bottom */
-          font-weight: 700; /* Mais peso */
+          margin-bottom: 1rem; 
+          font-weight: 700; 
           line-height: 1.3;
         }
         .final-cta-subtitle {
           font-size: 1.1rem;
           color: #ffe0e3;
           line-height: 1.7;
-          margin: 0 auto 2rem auto; /* Aumentado margin bottom */
+          margin: 0 auto 2rem auto; 
           max-width: 650px;
         }
         .final-cta-button {
-          padding: 0.9rem 2.2rem; /* Aumentado padding */
-          border-radius: 8px; /* Mais arredondado */
+          padding: 0.9rem 2.2rem; 
+          border-radius: 8px; 
           border: 2px solid #fff;
           background-color: #fff;
           color: #E50914;
-          font-size: 1.15rem; /* Um pouco maior */
-          font-weight: 700; /* Mais peso */
+          font-size: 1.15rem; 
+          font-weight: 700; 
           cursor: pointer;
           text-transform: uppercase;
           letter-spacing: 0.03em;
@@ -716,7 +736,7 @@ export default function EbooksPage() {
           box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .final-cta-button:hover {
-          background-color: #101010; /* Um preto um pouco mais suave */
+          background-color: #101010; 
           color: #fff;
           box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
@@ -766,25 +786,37 @@ export default function EbooksPage() {
           margin-top: 0.3rem;
         }
 
+        /* Media Queries */
         @media (max-width: ${mobileBreakpoint}) {
           .ebooks-page-main {
-            padding: 1.5rem 10px;
+            padding: 0 10px 1.5rem; /* Padding mobile */
+          }
+          .page-header {
+            padding: 1rem 10px; /* Padding do header mobile */
+            margin-bottom: 1.5rem;
+            flex-direction: column; /* Empilha logo e título em mobile */
+            gap: 0.5rem;
+          }
+          .logo-area-ebooks {
+            /* O placeholder do logo já tem um tamanho, ajuste se usar o SVG real */
+          }
+          .title-area-ebooks {
+            text-align: center; /* Garante centralização do título no mobile */
           }
           .main-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* Título principal mobile */
             letter-spacing: 0.06em;
           }
           .subtitle {
-            font-size: 0.9rem;
-            max-width: 90%;
+            font-size: 0.85rem; /* Subtítulo mobile */
+            max-width: 100%;
           }
 
           .carousel-arrow {
-            font-size: 1.5rem;
-            padding: 0.3rem 0.6rem;
+            font-size: 1.4rem; /* Flecha mobile menor */
+            padding: 0.25rem 0.5rem; /* Padding da flecha mobile menor */
           }
-          .left-arrow { left: 2px; }
-          .right-arrow { right: 2px; }
+          /* As posições left/right já foram ajustadas para 10px */
           
           .ebook-card {
             min-width: 180px;
@@ -804,7 +836,7 @@ export default function EbooksPage() {
             padding: 1.5rem;
             margin-top: 3rem;
           }
-          .bonus-title, .connection-title, .testimonials-main-title, .email-capture-title, .guarantee-main-title { /* .final-cta-title tratado abaixo */
+          .bonus-title, .connection-title, .testimonials-main-title, .email-capture-title, .guarantee-main-title {
             font-size: 1.4rem;
           }
            .section-title {
@@ -862,19 +894,19 @@ export default function EbooksPage() {
           }
 
           .final-cta-section {
-            padding: 2rem 1.5rem; /* Padding mobile ajustado */
+            padding: 2rem 1.5rem;
           }
           .final-cta-title {
-            font-size: 1.6rem; /* Ajustado para mobile */
+            font-size: 1.6rem;
             margin-bottom: 0.8rem;
           }
           .final-cta-subtitle {
-            font-size: 0.95rem; /* Ajustado para mobile */
+            font-size: 0.95rem;
             margin-bottom: 1.5rem;
           }
           .final-cta-button {
-            font-size: 1rem; /* Ajustado para mobile */
-            padding: 0.8rem 1.8rem; /* Ajustado para mobile */
+            font-size: 1rem;
+            padding: 0.8rem 1.8rem;
           }
 
           .footer-title {
@@ -895,30 +927,42 @@ export default function EbooksPage() {
         }
         
         @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.6rem;
-            }
-            .subtitle {
-                font-size: 0.85rem;
-            }
-            .ebook-card {
-                min-width: 160px; 
-            }
-            .ebook-cover {
-                height: 220px;
-            }
-             .bonus-title, .connection-title, .testimonials-main-title, .email-capture-title, .guarantee-main-title {
-                font-size: 1.25rem; 
-            }
-            .connection-text, .guarantee-text, .testimonial-card {
-                font-size: 0.85rem;
-            }
-            .final-cta-title {
-              font-size: 1.4rem;
-            }
-            .final-cta-subtitle {
-              font-size: 0.9rem;
-            }
+          .page-header { /* Ajustes mais finos para header em telas bem pequenas */
+             padding: 0.8rem 10px;
+          }
+          .main-title { /* Título da página de ebooks */
+            font-size: 1.4rem; /* Mais reduzido */
+          }
+          .subtitle {
+            font-size: 0.8rem;
+          }
+          .logo-placeholder-text { /* Ajuste do placeholder do logo */
+            font-size: 1.3rem;
+          }
+          .carousel-arrow {
+            font-size: 1.2rem; /* Flechas ainda menores */
+            padding: 0.2rem 0.4rem;
+            left: 5px; /* Mais próximas da borda do carrossel do que da tela */
+            right: 5px;
+          }
+          .ebook-card {
+            min-width: 150px; /* Card do ebook ainda menor */
+          }
+          .ebook-cover {
+            height: 200px; /* Capa do ebook menor */
+          }
+          .bonus-title, .connection-title, .testimonials-main-title, .email-capture-title, .guarantee-main-title {
+            font-size: 1.2rem; 
+          }
+          .connection-text, .guarantee-text, .testimonial-card {
+            font-size: 0.85rem;
+          }
+          .final-cta-title {
+            font-size: 1.4rem;
+          }
+          .final-cta-subtitle {
+            font-size: 0.9rem;
+          }
         }
       `}</style>
     </>
