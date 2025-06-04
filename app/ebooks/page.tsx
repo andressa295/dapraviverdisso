@@ -210,7 +210,7 @@ export default function EbooksPage() {
           textAlign: 'center',
         }}
       >
-        <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: '#E50914' }}>DEPOIMENTOS</h2>
+        <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: '#E50914' }}>DEPOIMENTOS:</h2>
         <div
           style={{
             display: 'grid',
