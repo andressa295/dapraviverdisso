@@ -85,7 +85,7 @@ export default function Home() {
 
                 <section className="portal-section">
                     <h2 className="portal-title">
-                        <span className="highlight-text">Descubra</span> o Conteúdo que Vai Acelerar Sua Evolução!
+                        <span className="highlight-text">Descubra</span> o conteúdo que vai acelerar sua evolução!
                     </h2>
                     <p className="portal-subtitle">
                         Mergulhe em nossos recursos exclusivos e desbloqueie seu potencial máximo.
