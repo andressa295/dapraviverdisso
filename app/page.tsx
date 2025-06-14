@@ -160,9 +160,8 @@ export default function Home() {
                 <footer className="site-footer">
                     <p>© 2025 Phandco. Todos os direitos reservados.</p>
                     <div className="footer-links">
-                        <a href="/privacidade">Política de Privacidade</a>
-                        <a href="/termos">Termos de Uso</a>
-                        <a href="/ajuda">Ajuda</a>
+                        <a href="/privacidade">Desenvolvido por PhandCo.</a>
+                        
                     </div>
                 </footer>
             </main>
