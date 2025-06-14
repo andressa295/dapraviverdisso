@@ -118,14 +118,14 @@ export default function Home() {
                             onClick={() => router.push('/vendas/mais-esperto-que-o-diabo')}
                             className="portal-link-button secondary-button"
                         >
-                            <span role="img" aria-label="Diabo">😈</span> Mais esperto que o diabo - Napoleon Hill
+                            <span role="img" aria-label="Diabo">😈</span> Mais esperto que o diabo - N. Hill
                         </button>
 
                         <button
                             onClick={() => router.push('/vendas/manual-persuasao-fbi')}
                             className="portal-link-button secondary-button"
                         >
-                            <span role="img" aria-label="Agente">🕵️‍♂️</span> Manual de persuasão do FBI - Jack Schafer
+                            <span role="img" aria-label="Agente">🕵️‍♂️</span> Manual de persuasão do FBI - J. Schafer
                         </button>
                     </div>
                 </section>
@@ -286,7 +286,7 @@ export default function Home() {
                     padding: 1.2rem 2rem;
                     border-radius: 50px;
                     width: 100%;
-                    max-width: 550px; /* Aumentado o max-width dos botões para acomodar nomes completos */
+                    max-width: 500px; /* Aumentado o max-width dos botões para acomodar nomes completos */
                     height: 60px; /* Altura fixa para todos os botões */
 
                     font-weight: 400;
@@ -459,7 +459,7 @@ export default function Home() {
                          max-width: 480px; /* Ajuste para telas menores */
                     }
                     .portal-link-button {
-                        max-width: 460px; /* Ajuste para telas menores */
+                        max-width: 450px; /* Ajuste para telas menores */
                         font-size: 0.95rem;
                     }
                 }
