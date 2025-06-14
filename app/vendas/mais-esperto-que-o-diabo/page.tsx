@@ -32,18 +32,18 @@ function LogoPhandcoSvg() {
     )
 }
 
-export default function As48LeisDoPoder() {
+export default function MaisEspertoQueODiabo() {
     const router = useRouter()
     const [progress, setProgress] = useState(0) // Mantido para consistência, se não usar pode remover
 
     // Sinopse do livro com trechos impactantes
     const synopsis = [
-        "Desvende as táticas milenares de poder que moldaram a história.",
-        "Aprenda a observar e a manipular, dominar e seduzir.",
-        "Cada lei é uma ferramenta para aqueles que buscam ascender na hierarquia social e política.",
-        "Este não é um livro sobre moralidade, mas sobre a realidade nua e crua do poder.",
-        "Prepare-se para ver o mundo através de uma nova lente, onde a vulnerabilidade é um perigo e a dissimulação, uma arte.",
-        "Um guia essencial para quem deseja proteger-se e prosperar em qualquer cenário de competição."
+        "Desvende os segredos que aprisionam a mente humana e a impedem de prosperar.",
+        "Descubra as táticas do medo, da indecisão e da procrastinação, e aprenda a combatê-las.",
+        "Este livro revela a filosofia por trás do sucesso, ensinando a identificar e dominar o 'Diabo' interno que sabota seus objetivos.",
+        "Uma leitura fundamental para quem busca libertar seu potencial e alcançar a maestria sobre a própria vida.",
+        "Através de uma narrativa envolvente, Napoleon Hill expõe os métodos para transformar adversidades em oportunidades e pensamentos limitantes em ações poderosas.",
+        "Liberte-se das correntes invisíveis e tome as rédeas do seu destino com sabedoria e estratégia."
     ]
 
     // Trecho do useEffect da Home, mantido caso queira usar a barra de progresso.
@@ -65,8 +65,8 @@ export default function As48LeisDoPoder() {
     // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
         // *** IMPORTANTE: SUBSTITUA 'SEU_LINK_DE_PAGAMENTO_AQUI' PELO LINK REAL DO SEU CHECKOUT ***
-        // Exemplo: window.location.href = 'https://seusite.com/checkout/as-48-leis-do-poder';
-        // Ou se for um link de afiliado: window.open('https://hotmart.com/produto/as-48-leis-do-poder', '_blank');
+        // Exemplo: window.location.href = 'https://seusite.com/checkout/mais-esperto-que-o-diabo';
+        // Ou se for um link de afiliado: window.open('https://hotmart.com/produto/mais-esperto-que-o-diabo', '_blank');
         alert('Redirecionando para o checkout! (Este é um placeholder)') // Apenas para testar
         // window.location.href = 'SEU_LINK_DE_PAGAMENTO_AQUI'; // Descomente e substitua quando tiver o link real
     }
@@ -105,16 +105,16 @@ export default function As48LeisDoPoder() {
                         <div className="product-image-area">
                             {/* IMAGEM DO E-BOOK - Substitua 'SEU_LINK_DA_IMAGEM_AQUI.jpg' pelo caminho real da sua imagem */}
                             <img
-                                src="/images/as-48-leis-do-poder.png" // Exemplo: Certifique-se que a imagem está em /public/images
-                                alt="Capa do e-book As 48 Leis do Poder"
+                                src="/images/mais-esperto-que-o-diabo.png" // Exemplo: Certifique-se que a imagem está em /public/images
+                                alt="Capa do e-book Mais Esperto que o Diabo"
                                 className="ebook-cover"
                             />
-                            <h1 className="product-title">AS 48 LEIS DO PODER</h1>
-                            <p className="product-author">Robert Greene</p>
+                            <h1 className="product-title">+ ESPERTO QUE O DIABO</h1>
+                            <p className="product-author">Napoleon Hill</p>
                         </div>
 
                         <div className="product-description-area">
-                            <h2 className="description-heading highlight-text">Domine a Arte da Estratégia e Influência</h2>
+                            <h2 className="description-heading highlight-text">Liberte Sua Mente: O Confronto Final com o Medo</h2>
                             {synopsis.map((paragraph, index) => (
                                 <p key={index} className="description-paragraph">
                                     {paragraph}
@@ -216,7 +216,7 @@ export default function As48LeisDoPoder() {
                     gap: 0.5rem;
                     color: #e50914; /* Cor do ícone e texto */
                     font-size: 1rem;
-                    font-weight: 600; /* Mantido negrito para o botão de voltar */
+                    font-weight: 600;
                     cursor: pointer;
                     transition: color 0.2s ease;
                     padding: 0.5rem 1rem;
@@ -242,18 +242,18 @@ export default function As48LeisDoPoder() {
                     flex-direction: column;
                     align-items: center;
                     padding: 3rem 2rem;
-                    max-width: 1000px;
+                    max-width: 1000px; /* Largura máxima para a seção de detalhes */
                     margin: auto;
                     gap: 2rem;
-                    text-align: center;
+                    text-align: center; /* Centraliza o conteúdo por padrão */
                 }
 
                 .product-content-wrapper {
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: column; /* Padrão mobile */
                     gap: 3rem;
                     width: 100%;
-                    align-items: center;
+                    align-items: center; /* Centraliza items em mobile */
                 }
 
                 .product-image-area {
@@ -265,7 +265,7 @@ export default function As48LeisDoPoder() {
 
                 .ebook-cover {
                     width: 100%;
-                    max-width: 300px;
+                    max-width: 300px; /* Tamanho da imagem do e-book */
                     border-radius: 8px;
                     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -276,8 +276,8 @@ export default function As48LeisDoPoder() {
                 }
 
                 .product-title {
-                    font-size: 2.4rem;
-                    font-weight: 500; /* Mantido negrito para o título do livro */
+                    font-size: 2.2rem;
+                    font-weight: 500;
                     color: #fff;
                     margin-top: 1.5rem;
                     line-height: 1.2;
@@ -291,26 +291,26 @@ export default function As48LeisDoPoder() {
                 }
 
                 .product-description-area {
-                    text-align: left;
+                    text-align: left; /* Alinha o texto da descrição à esquerda */
                     max-width: 600px;
                 }
                 .description-heading {
                     font-size: 2rem;
-                    font-weight: 700; /* Mantido negrito para o título da descrição */
+                    font-weight: 700;
                     margin-bottom: 1.5rem;
                     color: #fff;
-                    text-align: center;
+                    text-align: center; /* Centraliza o título da descrição */
                 }
                 .highlight-text {
                     color: #e50914;
                 }
                 .description-paragraph {
                     font-size: 1.1rem;
-                    font-weight: 400; /* REMOVIDO NEGITO */
-                    line-height: 1.6; /* AJUSTADO: era 1.8, agora 1.6 para diminuir o espaçamento */
+                    font-weight: 400; /* Removido negrito */
+                    line-height: 1.6; /* Ajustado para diminuir o espaçamento */
                     color: #ccc;
                     margin-bottom: 1rem;
-                    text-align: justify;
+                    text-align: justify; /* Justifica o texto para melhor leitura */
                 }
                 .description-paragraph:last-child {
                     margin-bottom: 0;
@@ -323,7 +323,7 @@ export default function As48LeisDoPoder() {
                     gap: 1.5rem;
                     margin-top: 3rem;
                     width: 100%;
-                    max-width: 400px;
+                    max-width: 400px; /* Limita a largura do botão de compra */
                     margin-left: auto;
                     margin-right: auto;
                 }
@@ -343,6 +343,7 @@ export default function As48LeisDoPoder() {
                 }
 
                 .buy-button {
+                    /* Estilos do botão oval e proporcional, semelhantes aos da Home */
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -351,7 +352,7 @@ export default function As48LeisDoPoder() {
                     border-radius: 50px;
                     width: 100%;
                     height: 60px;
-                    font-weight: 600; /* Mantido um pouco de destaque para o botão de compra */
+                    font-weight: 600; /* Mantido um pouco de destaque aqui */
                     font-size: 1.1rem;
                     text-transform: none;
                     white-space: nowrap;
@@ -361,7 +362,7 @@ export default function As48LeisDoPoder() {
                     cursor: pointer;
                     transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
                     user-select: none;
-                    background-color: #e50914;
+                    background-color: #e50914; /* Cor primária de destaque */
                     color: white;
                     box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
                 }
@@ -379,7 +380,7 @@ export default function As48LeisDoPoder() {
                     outline-offset: 2px;
                 }
 
-                /* Seção de depoimentos - Mantida do Home */
+                /* Seção de depoimentos (mantido do Home, pode remover se não quiser aqui) */
                 .testimonials-section {
                     background-color: #000;
                     padding: 3rem 2rem;
@@ -475,24 +476,24 @@ export default function As48LeisDoPoder() {
                 /* Media Queries */
                 @media (min-width: 769px) {
                     .product-content-wrapper {
-                        flex-direction: row;
+                        flex-direction: row; /* Layout em linha para telas maiores */
                         text-align: left;
-                        align-items: flex-start;
+                        align-items: flex-start; /* Alinha no topo quando em linha */
                     }
                     .product-image-area {
-                        flex: 0 0 auto;
-                        margin-right: 3rem;
-                        align-items: flex-start;
+                        flex: 0 0 auto; /* Não cresce nem encolhe */
+                        margin-right: 3rem; /* Espaço entre imagem e texto */
+                        align-items: flex-start; /* Alinha o título e autor da imagem à esquerda */
                         text-align: left;
                     }
                     .product-description-area {
-                        flex: 1;
+                        flex: 1; /* Ocupa o restante do espaço */
                     }
                     .description-heading {
-                        text-align: left;
+                        text-align: left; /* Alinha o título da descrição à esquerda */
                     }
                     .call-to-action {
-                        margin-left: 0;
+                        margin-left: 0; /* Desfaz centralização automática para alinhamento à esquerda */
                         margin-right: auto;
                     }
                 }
@@ -529,7 +530,7 @@ export default function As48LeisDoPoder() {
                 @media (max-width: 768px) {
                     .page-header {
                         padding: 1rem 1.5rem;
-                        flex-direction: row;
+                        flex-direction: row; /* Mantém em linha */
                         justify-content: space-between;
                     }
                     .back-button-container {
@@ -591,13 +592,13 @@ export default function As48LeisDoPoder() {
 
                 @media (max-width: 480px) {
                     .page-header {
-                        flex-direction: column;
+                        flex-direction: column; /* Volta a empilhar em telas muito pequenas */
                         gap: 0.8rem;
                         padding-bottom: 1rem;
                     }
                     .back-button-container {
-                        align-self: flex-start;
-                        margin-left: 1.5rem;
+                        align-self: flex-start; /* Alinha o botão de voltar à esquerda */
+                        margin-left: 1.5rem; /* Ajuste para não ficar colado */
                     }
                     .product-detail-section {
                         padding: 1.5rem 1rem;
