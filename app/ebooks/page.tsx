@@ -2,11 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-// IMPORTANTE: Quando o componente LogoPhandcoSvg estiver em app/components/LogoPhandcoSvg.tsx
-// Descomente a linha abaixo e ajuste o caminho se necessário:
-// import LogoPhandcoSvg from '../components/LogoPhandcoSvg';
 
-// Dados (ebooks, bonus, allTestimonials)
 const ebooks = [
   {
     title: 'Tudo começa na mente',
@@ -95,7 +91,6 @@ export default function EbooksPage() {
   const [isConnectionVisible, setIsConnectionVisible] = useState(false);
   const connectionSectionRef = useRef<HTMLElement | null>(null);
 
-  // Efeito para o IntersectionObserver da seção de conexão
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -147,17 +142,17 @@ export default function EbooksPage() {
         setEmail('');
         if (submitButton) submitButton.textContent = 'Inscrito!';
         setTimeout(() => {
-            setIsSubmitted(false);
-            if (submitButton && !isSubmitting) {
-                 submitButton.textContent = 'Quero Receber!';
-                 submitButton.disabled = false;
-            }
-        }, 4000);
-      } else {
-         alert('Houve um problema ao enviar seu e-mail. Por favor, tente novamente.');
-         if (submitButton) {
+          setIsSubmitted(false);
+          if (submitButton && !isSubmitting) {
             submitButton.textContent = 'Quero Receber!';
             submitButton.disabled = false;
+          }
+        }, 4000);
+      } else {
+        alert('Houve um problema ao enviar seu e-mail. Por favor, tente novamente.');
+        if (submitButton) {
+          submitButton.textContent = 'Quero Receber!';
+          submitButton.disabled = false;
         }
       }
     } catch (error) {
@@ -187,11 +182,11 @@ export default function EbooksPage() {
     };
 
     const handleScroll = debounce(() => {
-      if(!container) return;
+      if (!container) return;
       const gap = 16; // 1rem
       const cardWidth = (container.children[0]?.clientWidth || 0) + gap;
       if (cardWidth === gap) return;
-      
+
       const scrollLeft = container.scrollLeft;
       const newActiveDot = Math.round(scrollLeft / cardWidth);
       setActiveDot(newActiveDot);
@@ -199,7 +194,7 @@ export default function EbooksPage() {
 
     container.addEventListener('scroll', handleScroll, { passive: true });
     return () => container.removeEventListener('scroll', handleScroll);
-  }, []); 
+  }, []);
 
   const scrollToCard = (index: number) => {
     const container = scrollContainerRef.current;
@@ -220,16 +215,19 @@ export default function EbooksPage() {
     <>
       <main className="ebooks-page-main">
         <header className="page-header">
+          {/* BOTÃO DE VOLTAR NO LUGAR DA LOGO */}
           <div
-            className="logo-area-ebooks"
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/')} // Botão de voltar para a Home
+            className="back-button-container"
             role="button"
             tabIndex={0}
-            onKeyPress={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push('/')}}
-            aria-label="Ir para a página inicial Phandco"
+            onKeyPress={(e) => e.key === 'Enter' && router.push('/')}
+            aria-label="Voltar para a página inicial"
           >
-            {/* <LogoPhandcoSvg /> */}
-            <span className="logo-placeholder-text">Phandco</span>
+            <svg className="back-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span className="back-text">Voltar</span>
           </div>
           <div className="title-area-ebooks">
             <h1 className="main-title">COMBO E-BOOKS</h1>
@@ -240,6 +238,7 @@ export default function EbooksPage() {
         </header>
 
         <section aria-label="Lista de ebooks em carrossel" className="ebook-carousel-section">
+          {/* Setas laterais para Desktop */}
           <button
             aria-label="Scroll para esquerda"
             onClick={() => scrollBy(-(180 + 16))}
@@ -302,14 +301,14 @@ export default function EbooksPage() {
 
         {/* --- NOVA CHAMADA DE AÇÃO (VERDE) --- */}
         <section className="mid-cta-section">
-            <button
-              className="cta-button-green"
-              onClick={() => {
-                window.location.href = 'https://pay.kiwify.com.br/rKUTm2V';
-              }}
-            >
-              GARANTIR MEU ACESSO AGORA!
-            </button>
+          <button
+            className="cta-button-green"
+            onClick={() => {
+              window.location.href = 'https://pay.kiwify.com.br/rKUTm2V';
+            }}
+          >
+            GARANTIR MEU ACESSO AGORA!
+          </button>
         </section>
 
         <section
@@ -420,12 +419,36 @@ export default function EbooksPage() {
         .ebooks-page-main { background-color: #141414; color: #fff; min-height: 100vh; padding: 0 0 2rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 100vw; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
         .section-title { color: #E50914; text-transform: uppercase; text-align: center; font-weight: 500; letter-spacing: 0.05em; }
         .page-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 15px; width: 100%; max-width: 1200px; margin: 0 auto 2rem; box-sizing: border-box; border-bottom: 1px solid #222; }
-        .logo-area-ebooks { cursor: pointer; display: flex; align-items: center; border-radius: 4px; }
-        .logo-area-ebooks:focus-visible { outline: 2px solid #E50914; outline-offset: 2px; }
-        .logo-area-ebooks :global(.logo-svg text) { transition: fill 0.2s ease-in-out; }
-        .logo-area-ebooks:hover :global(.logo-svg text),
-        .logo-area-ebooks:focus-visible :global(.logo-svg text) { fill: #ff3352; }
-        .logo-placeholder-text { font-size: 1.5rem; font-weight: bold; color: #E50914; }
+
+        /* Estilo do botão de voltar */
+        .back-button-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #E50914; /* Cor do ícone e texto */
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        .back-button-container:hover {
+            color: #ff3352;
+        }
+        .back-button-container:focus-visible {
+            outline: 2px solid #E50914;
+            outline-offset: 2px;
+        }
+        .back-arrow {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+        }
+        /* Remover a logo na header, pois o botão "Voltar" a substituiu */
+        .logo-area-ebooks { display: none; }
+
+
         .title-area-ebooks { flex-grow: 1; text-align: center; padding: 0 10px; }
         .main-title { font-weight: 500; font-size: 2rem; margin-bottom: 0.25rem; color: #E50914; letter-spacing: 0.08em; text-transform: uppercase; }
         .subtitle { color: #bbb; font-size: 0.9rem; max-width: 550px; margin: 0 auto; line-height: 1.5; }
@@ -471,7 +494,7 @@ export default function EbooksPage() {
         }
         .ebook-cover {
           width: 100%;
-          height: 270px; /* Desktop: 180px * 1.5 = 270px (proporção 2:3) */
+          height: 270px;
           object-fit: cover;
           background-color: #111;
         }
@@ -581,7 +604,7 @@ export default function EbooksPage() {
           transform: scale(1.03);
         }
 
-        /* --- SEÇÃO DE GARANTIA AJUSTADA (REVERTIDA) --- */
+        /* --- SEÇÃO DE GARANTIA AJUSTADA --- */
         .guarantee-section {
           margin-top: 4rem;
           padding: 2rem;
@@ -590,16 +613,17 @@ export default function EbooksPage() {
           width: 100%;
           max-width: 750px;
           box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-          text-align: center;
+          /* Para centralizar os itens dentro da seção */
           display: flex;
           flex-direction: column;
-          align-items: center;
-          gap: 1.2rem;
+          align-items: center; /* Centraliza horizontalmente */
+          text-align: center; /* Centraliza o texto */
         }
         .guarantee-main-title {
           font-size: 1.6rem;
-          margin-bottom: 0.3rem;
-          color: #fff; /* Garante a cor branca */
+          margin-bottom: 0.8rem; /* Aumentado um pouco o espaçamento */
+          color: #fff;
+          font-weight: 700; /* Mantido negrito para o título */
         }
         .guarantee-seal { /* Selo vermelho simples */
           width: 100px;
@@ -616,19 +640,22 @@ export default function EbooksPage() {
           line-height: 1.2;
           border: 3px solid #fff;
           box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
+          margin-bottom: 1.5rem; /* Adicionado margem inferior para separar do subtítulo */
         }
         .guarantee-subtitle {
           font-size: 1.3rem;
           color: #fff;
           font-weight: 500;
+          margin-bottom: 1rem; /* Adicionado margem inferior */
         }
         .guarantee-text {
           font-size: 1rem;
           color: #ccc;
           line-height: 1.7;
           max-width: 580px;
+          text-align: center; /* Garante que o texto dentro do parágrafo esteja centralizado */
         }
-        
+
         /* --- RODAPÉ AJUSTADO --- */
         .page-footer {
           margin-top: 5rem;
@@ -662,9 +689,9 @@ export default function EbooksPage() {
           margin-top: 0.3rem;
         }
         .creator-credit {
-            font-size: 0.75rem;
-            color: #555;
-            margin-top: 1.5rem;
+          font-size: 0.75rem;
+          color: #555;
+          margin-top: 1.5rem;
         }
 
 
@@ -738,7 +765,7 @@ export default function EbooksPage() {
           .cta-button-green { font-size: 1rem; padding: 0.8rem 2rem; }
           .guarantee-main-title { font-size: 1.5rem; }
           .guarantee-seal { width: 120px; height: 120px; }
-          .guarantee-text { font-size: 0.9rem; text-align: center; } /* Revertido para centralizado no mobile */
+          .guarantee-text { font-size: 0.9rem; text-align: center; } 
           
           .bonus-section, .connection-section, .email-capture-section, .guarantee-section, .final-cta-section { padding: 1.5rem; margin-top: 3rem; }
           .bonus-title, .connection-title, .testimonials-main-title, .email-capture-title { font-size: 1.4rem; }
