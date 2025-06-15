@@ -65,7 +65,7 @@ export default function As48LeisDoPoder() {
     // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
        
-        window.location.href = 'https://pay.kiwify.com.br/em6JlfJ'; // Descomente e substitua quando tiver o link real
+        window.location.href = 'https://pay.kiwify.com.br/vJD3T4X'; // Descomente e substitua quando tiver o link real
     }
 
     return (
@@ -106,7 +106,7 @@ export default function As48LeisDoPoder() {
                                 alt="Capa do e-book As 48 Leis do Poder"
                                 className="ebook-cover"
                             />
-                            <h1 className="product-title">AS 48 LEIS DO PODER</h1>
+                            <h1 className="product-title">AS 48 LEIS DO PODER.</h1>
                             <p className="product-author">Robert Greene</p>
                         </div>
 

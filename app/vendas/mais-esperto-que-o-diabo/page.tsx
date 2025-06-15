@@ -65,7 +65,7 @@ export default function MaisEspertoQueODiabo() {
     // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
         
-        window.location.href = 'https://pay.hotmart.com/L100286370C'; // Descomente e substitua quando tiver o link real
+        window.location.href = 'https://pay.hotmart.com/T94045964Q?checkoutMode=0&bid=1750007569873'; // Descomente e substitua quando tiver o link real
     }
 
     return (
