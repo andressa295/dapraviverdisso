@@ -64,11 +64,8 @@ export default function As48LeisDoPoder() {
 
     // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
-        // *** IMPORTANTE: SUBSTITUA 'SEU_LINK_DE_PAGAMENTO_AQUI' PELO LINK REAL DO SEU CHECKOUT ***
-        // Exemplo: window.location.href = 'https://seusite.com/checkout/as-48-leis-do-poder';
-        // Ou se for um link de afiliado: window.open('https://hotmart.com/produto/as-48-leis-do-poder', '_blank');
-        alert('Redirecionando para o checkout! (Este é um placeholder)') // Apenas para testar
-        // window.location.href = 'SEU_LINK_DE_PAGAMENTO_AQUI'; // Descomente e substitua quando tiver o link real
+       
+        window.location.href = 'https://pay.kiwify.com.br/em6JlfJ'; // Descomente e substitua quando tiver o link real
     }
 
     return (

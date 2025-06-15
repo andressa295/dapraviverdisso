@@ -64,11 +64,8 @@ export default function MaisEspertoQueODiabo() {
 
     // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
-        // *** IMPORTANTE: SUBSTITUA 'SEU_LINK_DE_PAGAMENTO_AQUI' PELO LINK REAL DO SEU CHECKOUT ***
-        // Exemplo: window.location.href = 'https://seusite.com/checkout/mais-esperto-que-o-diabo';
-        // Ou se for um link de afiliado: window.open('https://hotmart.com/produto/mais-esperto-que-o-diabo', '_blank');
-        alert('Redirecionando para o checkout! (Este é um placeholder)') // Apenas para testar
-        // window.location.href = 'SEU_LINK_DE_PAGAMENTO_AQUI'; // Descomente e substitua quando tiver o link real
+        
+        window.location.href = 'https://pay.hotmart.com/L100286370C'; // Descomente e substitua quando tiver o link real
     }
 
     return (
