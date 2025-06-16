@@ -65,7 +65,7 @@ export default function As48LeisDoPoder() {
     // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
        
-        window.location.href = 'https://pay.kiwify.com.br/vJD3T4X'; // Descomente e substitua quando tiver o link real
+        window.location.href = 'https://pay.kiwify.com.br/lApgMFf'; // Descomente e substitua quando tiver o link real
     }
 
     return (
