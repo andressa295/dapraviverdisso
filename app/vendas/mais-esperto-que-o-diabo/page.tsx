@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-// Componente separado da logo (mantido do seu Home)
 function LogoPhandcoSvg() {
     return (
         <svg
@@ -34,9 +33,7 @@ function LogoPhandcoSvg() {
 
 export default function MaisEspertoQueODiabo() {
     const router = useRouter()
-    const [progress, setProgress] = useState(0) // Mantido para consistência, se não usar pode remover
-
-    // Sinopse do livro com trechos impactantes
+    const [progress, setProgress] = useState(0) 
     const synopsis = [
         "Desvende os segredos que aprisionam a mente humana e a impedem de prosperar.",
         "Descubra as táticas do medo, da indecisão e da procrastinação, e aprenda a combatê-las.",
@@ -46,8 +43,7 @@ export default function MaisEspertoQueODiabo() {
         "Liberte-se das correntes invisíveis e tome as rédeas do seu destino com sabedoria e estratégia."
     ]
 
-    // Trecho do useEffect da Home, mantido caso queira usar a barra de progresso.
-    // Se não for usar barra de progresso nesta página, pode remover todo o useEffect.
+    
     useEffect(() => {
         let intervalId = setInterval(() => {
             setProgress((old) => {
@@ -62,10 +58,9 @@ export default function MaisEspertoQueODiabo() {
         return () => clearInterval(intervalId)
     }, [])
 
-    // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
         
-        window.location.href = 'https://pay.kiwify.com.br/h0dbP7t'; // Descomente e substitua quando tiver o link real
+        window.location.href = 'https://pay.hotmart.com/T94045964Q?checkoutMode=0&bid=1750201840606';
     }
 
     return (
@@ -73,7 +68,7 @@ export default function MaisEspertoQueODiabo() {
             <main className="product-main">
                 <header className="page-header">
                     <div
-                        onClick={() => router.push('/')} // Botão de voltar para a Home
+                        onClick={() => router.push('/')} 
                         className="back-button-container"
                         role="button"
                         tabIndex={0}
@@ -100,9 +95,8 @@ export default function MaisEspertoQueODiabo() {
                 <section className="product-detail-section">
                     <div className="product-content-wrapper">
                         <div className="product-image-area">
-                            {/* IMAGEM DO E-BOOK - Substitua 'SEU_LINK_DA_IMAGEM_AQUI.jpg' pelo caminho real da sua imagem */}
                             <img
-                                src="/images/mais-esperto-que-o-diabo.png" // Exemplo: Certifique-se que a imagem está em /public/images
+                                src="/images/mais-esperto-que-o-diabo.png"
                                 alt="Capa do e-book Mais Esperto que o Diabo"
                                 className="ebook-cover"
                             />
@@ -131,7 +125,6 @@ export default function MaisEspertoQueODiabo() {
                     </div>
                 </section>
 
-                {/* Seção de depoimentos (mantido do Home, pode remover se não quiser aqui) */}
                 <section className="testimonials-section">
                     <h3 className="testimonials-title">
                         <span className="highlight-text">O que dizem</span> sobre a Phandco

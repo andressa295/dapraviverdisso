@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-// Componente separado da logo (mantido do seu Home)
 function LogoPhandcoSvg() {
     return (
         <svg
@@ -19,7 +18,7 @@ function LogoPhandcoSvg() {
             <text
                 x="0"
                 y="38"
-                fill="#E60023" // Vermelho da Phandco
+                fill="#E60023"
                 fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
                 fontWeight="700"
                 fontSize="40"
@@ -34,9 +33,8 @@ function LogoPhandcoSvg() {
 
 export default function ManualPersuasaoFBI() {
     const router = useRouter()
-    const [progress, setProgress] = useState(0) // Mantido para consistência, se não usar pode remover
+    const [progress, setProgress] = useState(0) 
 
-    // Sinopse do livro com trechos impactantes
     const synopsis = [
         "Aprenda as técnicas de persuasão e influência usadas por agentes do FBI para construir rapport e obter informações cruciais.",
         "Descubra como criar laços de confiança em segundos, lendo pessoas e situações com maestria.",
@@ -46,8 +44,6 @@ export default function ManualPersuasaoFBI() {
         "Domine a arte de fazer as pessoas gostarem de você e confiarem em suas intenções, abrindo portas para o sucesso em todas as áreas da vida."
     ]
 
-    // Trecho do useEffect da Home, mantido caso queira usar a barra de progresso.
-    // Se não for usar barra de progresso nesta página, pode remover todo o useEffect.
     useEffect(() => {
         let intervalId = setInterval(() => {
             setProgress((old) => {
@@ -62,10 +58,9 @@ export default function ManualPersuasaoFBI() {
         return () => clearInterval(intervalId)
     }, [])
 
-    // Função para lidar com a compra - AQUI VOCÊ ADICIONARÁ O LINK DE PAGAMENTO
     const handlePurchase = () => {
         
-        window.location.href = 'https://pay.kiwify.com.br/k8GfsCQ'; // Descomente e substitua quando tiver o link real
+        window.location.href = 'https://pay.hotmart.com/R86247093X?sck=HOTMART_PRODUCT_PAGE&off=39312cej&hotfeature=32&_gl=1*1ewqrwo*_gcl_aw*R0NMLjE3NTAwMDU3MjMuQ2p3S0NBanczcm5DQmhCeEVpd0FyTjBRRTBrNHpDc1hoR1FWODNjZktOOGR6TS0xUXVFb1Bxb29UNTlOd3hfbkQtWUtJMlBTRGY4QVFob0N0dDhRQXZEX0J3RQ..*_gcl_au*MTQ5MjY2NDg0Mi4xNzQ5NjQ2MDU4LjUzNjA3NTQ5Ny4xNzUwMjAxMzg3LjE3NTAyMDE2OTk.*_ga*MTk5NTIwOTgzNy4xNzQ5NjQ2MDU3*_ga_GQH2V1F11Q*czE3NTAyMDEyODkkbzUkZzEkdDE3NTAyMDE3MTAkajM1JGwwJGgw&bid=1750201715355'; // Descomente e substitua quando tiver o link real
     }
 
     return (
@@ -73,7 +68,7 @@ export default function ManualPersuasaoFBI() {
             <main className="product-main">
                 <header className="page-header">
                     <div
-                        onClick={() => router.push('/')} // Botão de voltar para a Home
+                        onClick={() => router.push('/')} 
                         className="back-button-container"
                         role="button"
                         tabIndex={0}
@@ -100,9 +95,8 @@ export default function ManualPersuasaoFBI() {
                 <section className="product-detail-section">
                     <div className="product-content-wrapper">
                         <div className="product-image-area">
-                            {/* IMAGEM DO E-BOOK - Substitua 'SEU_LINK_DA_IMAGEM_AQUI.jpg' pelo caminho real da sua imagem */}
                             <img
-                                src="/images/manual-persuasao-fbi.png" // Exemplo: Certifique-se que a imagem está em /public/images
+                                src="/images/manual-persuasao-fbi.png" 
                                 alt="Capa do e-book Manual de Persuasão do FBI"
                                 className="ebook-cover"
                             />
@@ -121,7 +115,7 @@ export default function ManualPersuasaoFBI() {
                             <div className="call-to-action">
                                 <p className="product-price">Por apenas: <span className="price-value">R$ 9,90</span></p>
                                 <button
-                                    onClick={handlePurchase} // Chamada para a nova função handlePurchase
+                                    onClick={handlePurchase}
                                     className="buy-button primary-button"
                                 >
                                     <span role="img" aria-label="Carrinho de compras">🛒</span> Quero meu exemplar agora!
@@ -131,7 +125,6 @@ export default function ManualPersuasaoFBI() {
                     </div>
                 </section>
 
-                {/* Seção de depoimentos (mantido do Home, pode remover se não quiser aqui) */}
                 <section className="testimonials-section">
                     <h3 className="testimonials-title">
                         <span className="highlight-text">O que dizem</span> sobre a Phandco

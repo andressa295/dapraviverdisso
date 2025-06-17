@@ -117,7 +117,7 @@ export default function As48LeisDoPoder() {
     ];
 
     const handlePurchase = () => {
-        window.location.href = 'https://pay.kiwify.com.br/lApgMFf';
+        window.location.href = 'https://pay.hotmart.com/K95823279N?sck=HOTMART_PRODUCT_PAGE&off=kkq6kiy6&hotfeature=32&_gl=1*p5yl55*_gcl_aw*R0NMLjE3NTAwMDU3MjMuQ2p3S0NBanczcm5DQmhCeEVpd0FyTjBRRTBrNHpDc1hoR1FWODNjZktOOGR6TS0xUXVFb1Bxb29UNTlOd3hfbkQtWUtJMlBTRGY4QVFob0N0dDhRQXZEX0J3RQ..*_gcl_au*MTQ5MjY2NDg0Mi4xNzQ5NjQ2MDU4LjUzNjA3NTQ5Ny4xNzUwMjAxMzg3LjE3NTAyMDE0Mzg.*_ga*MTk5NTIwOTgzNy4xNzQ5NjQ2MDU3*_ga_GQH2V1F11Q*czE3NTAyMDEyODkkbzUkZzEkdDE3NTAyMDE0NTMkajE4JGwwJGgw&bid=1750201458449';
     }
 
     return (
@@ -292,9 +292,9 @@ export default function As48LeisDoPoder() {
                 </section>
 
                 <footer className="site-footer">
-                    <p>© 2025 PHANDCO. TODOS OS DIREITOS RESERVADOS.</p>
+                    <p>© 2025 PhandCo. Todos os direitos reservados.</p>
                     <div className="footer-links">
-                        <a href="/privacidade">DESENVOLVIDO POR PHANDCO.</a>
+                        <a href="/privacidade">Desenvolvido por PhandCo.</a>
                     </div>
                 </footer>
             </main>
