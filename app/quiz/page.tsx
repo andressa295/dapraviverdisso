@@ -193,7 +193,7 @@ const perguntasQuiz: QuizQuestion[] = [
 export default function QuizPage() {
     const router = useRouter();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [scores, setScores] = useState<BookScores>({ // Tipagem explícita aqui
+    const [scores, setScores] = useState<BookScores>({
         [LIVROS.LEIS_DO_PODER]: 0,
         [LIVROS.MANUAL_FBI]: 0,
         [LIVROS.MAIS_ESPERTO]: 0,
@@ -205,13 +205,12 @@ export default function QuizPage() {
     const [quizFinished, setQuizFinished] = useState(false);
     const [animatingOut, setAnimatingOut] = useState(false);
 
-    const handleAnswer = (pointsPerBook: BookScores) => { // Tipagem explícita aqui
+    const handleAnswer = (pointsPerBook: BookScores) => {
         setAnimatingOut(true);
         setTimeout(() => {
             setScores(prevScores => {
                 const newScores = { ...prevScores };
                 for (const bookKey in pointsPerBook) {
-                    // Garante que a chave existe e o valor é number, ou inicializa com 0
                     newScores[bookKey] = (newScores[bookKey] || 0) + (pointsPerBook[bookKey] || 0);
                 }
                 return newScores;
@@ -226,10 +225,10 @@ export default function QuizPage() {
         }, 300);
     };
 
-    const getRecommendedBook = (): BookDetail => { // Tipagem do retorno
+    const getRecommendedBook = (): BookDetail => {
         let maxScore = -1;
-        let recommendedBookKey: string = ''; // Tipagem explícita
-        let tieBooks: string[] = []; // Tipagem explícita
+        let recommendedBookKey: string = '';
+        let tieBooks: string[] = [];
 
         for (const bookKey in scores) {
             if (scores[bookKey] > maxScore) {
@@ -247,7 +246,6 @@ export default function QuizPage() {
             if (tieBooks.includes(LIVROS.LEIS_DO_PODER)) return detalhesLivros[LIVROS.LEIS_DO_PODER];
             if (tieBooks.includes(LIVROS.SUBCONSCIENTE)) return detalhesLivros[LIVROS.SUBCONSCIENTE];
             
-            // Retorna o primeiro livro em caso de empate persistente
             return detalhesLivros[tieBooks[0]];
         }
         
@@ -255,7 +253,6 @@ export default function QuizPage() {
             return detalhesLivros[LIVROS.COMBO_EXCLUSIVOS]; 
         }
 
-        // Correção do erro de digitação: detalhesLivais -> detalhesLivros
         return detalhesLivros[recommendedBookKey];
     };
 
@@ -406,11 +403,13 @@ export default function QuizPage() {
                     max-width: 600px;
                     width: 100%;
                     position: relative;
+                    /* Adicionado padding-top para dar espaço ao botão de voltar */
+                    padding-top: 2rem; /* Este padding vai empurrar o conteúdo para baixo */
                 }
                 .back-to-home-button {
                     position: absolute;
-                    top: -1.5rem;
-                    left: 0;
+                    top: 1rem; /* Ajustado para ficar mais no topo */
+                    left: 1rem; /* Ajustado para um pequeno espaçamento da borda */
                     background-color: transparent;
                     border: 1px solid #e50914;
                     color: #e50914;
@@ -631,7 +630,7 @@ export default function QuizPage() {
                     width: 100%;
                     box-sizing: border-box;
                     line-height: 1.3;
-                    white-space: normal; /* Permite quebra de linha */
+                    white-space: normal;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     display: flex;
@@ -725,12 +724,17 @@ export default function QuizPage() {
                     .results-actions .secondary-button {
                         max-width: 300px;
                     }
+                    /* Ajuste para o botão de voltar no desktop para não "sumir" */
+                    .back-to-home-button {
+                        top: 2rem; /* Mais espaçamento do topo */
+                        left: 2rem; /* Mais espaçamento da lateral */
+                    }
                 }
 
                 @media (max-width: 480px) {
                     .back-to-home-button {
-                        top: 1rem;
-                        left: 1rem;
+                        top: 1rem; /* Ajuste a distância do topo */
+                        left: 1rem; /* Ajuste a distância da esquerda */
                         font-size: 0.75rem;
                         padding: 0.4rem 0.8rem;
                     }
