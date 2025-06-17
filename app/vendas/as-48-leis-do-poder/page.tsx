@@ -135,7 +135,7 @@ export default function As48LeisDoPoder() {
                         <svg className="back-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                        <span className="back-text">Voltar</span>
+                        <span className="back-text">VOLTAR</span> {/* CAIXA ALTA */}
                     </div>
                     <div
                         onClick={() => router.push('/')}
@@ -152,9 +152,9 @@ export default function As48LeisDoPoder() {
                 {/* Banner de Destaque Visual */}
                 <section className="hero-banner">
                     <div className="hero-content">
-                        {/* Títulos em caixa alta, tamanho ajustado no CSS */}
                         <h1 className="product-title">AS 48 LEIS DO PODER: DOMINE O JOGO OCULTO DA VIDA.</h1>
                         <p className="product-subtitle">DESVENDE A ESTRATÉGIA ATEMPORAL PARA CONQUISTAR INFLUÊNCIA, RESPEITO E ASCENSÃO EM QUALQUER CENÁRIO.</p>
+                        {/* Botão no banner principal - Ordem ajustada para mobile */}
                         <button
                             onClick={handlePurchase}
                             className="buy-button-hero primary-button"
@@ -173,7 +173,7 @@ export default function As48LeisDoPoder() {
                                 className="ebook-cover"
                                 loading="lazy"
                             />
-                            <p className="product-author">Por **Robert Greene**</p>
+                            <p className="product-author">POR **ROBERT GREENE**</p>
                         </div>
 
                         <div className="product-description-area">
@@ -205,7 +205,8 @@ export default function As48LeisDoPoder() {
                                 >
                                     <span role="img" aria-label="Carrinho de compras">🛒</span> GARANTA SEU EXEMPLAR AGORA!
                                 </button>
-                                <p className="access-info">ACESSO IMEDIATO AO E-BOOK COMPLETO APÓS A COMPRA.</p>
+                                {/* Acesso imediato: Pequeno e discreto, abaixo do botão */}
+                                <p className="access-info-small">ACESSO IMEDIATO AO E-BOOK COMPLETO APÓS A COMPRA.</p>
                             </div>
                         </div>
                     </div>
@@ -255,24 +256,24 @@ export default function As48LeisDoPoder() {
                             <blockquote className="testimonial-quote">
                                 "As 48 Leis do Poder não é apenas um livro, é um arsenal. Apliquei uma única lei em minha negociação e o resultado foi absolutamente transformador. É chocante ver como as pessoas reagem quando você entende a dinâmica do poder."
                             </blockquote>
-                            <p className="testimonial-author">— Alexandre B., Empresário</p>
+                            <p className="testimonial-author">— ALEXANDRE B., EMPRESÁRIO</p> {/* CAIXA ALTA */}
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
                                 "Sempre me senti à mercê das decisões alheias. Depois de ler este e-book, minha percepção mudou. Comecei a prever movimentos e a agir com mais inteligência. Finalmente, sinto que tenho o controle."
                             </blockquote>
-                            <p className="testimonial-author">— Sofia P., Líder de Equipe</p>
+                            <p className="testimonial-author">— SOFIA P., LÍDER DE EQUIPE</p> {/* CAIXA ALTA */}
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
                                 "Este livro é um divisor de águas. Ele me deu as ferramentas para identificar a inveja, neutralizar adversários e construir uma rede de aliados inabalável. Um manual indispensável para a vida moderna."
                             </blockquote>
-                            <p className="testimonial-author">— Gabriel M., Consultor Estratégico</p>
+                            <p className="testimonial-author">— GABRIEL M., CONSULTOR ESTRATÉGICO</p> {/* CAIXA ALTA */}
                         </div>
                     </div>
                 </section>
 
-                {/* Seção: Final Call to Action - DESIGN REFEITO */}
+                {/* Seção: Final Call to Action */}
                 <section className="final-cta-section">
                     <div className="final-cta-content">
                         <h2 className="final-cta-title">SUA JORNADA AO DOMÍNIO COMEÇA AGORA.</h2>
@@ -392,6 +393,9 @@ export default function As48LeisDoPoder() {
                     max-width: 900px;
                     z-index: 1;
                     position: relative;
+                    display: flex; /* Flexbox para controlar a ordem */
+                    flex-direction: column; /* Coluna no mobile para título, subtítulo, botão */
+                    align-items: center;
                 }
                 .product-title {
                     font-size: 3.2rem;
@@ -413,6 +417,7 @@ export default function As48LeisDoPoder() {
                     margin-right: auto;
                     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
                     text-transform: uppercase;
+                    order: 1; /* Padrão mobile: Título, subtítulo, botão */
                 }
                 .buy-button-hero {
                     margin-top: 2.5rem;
@@ -423,6 +428,8 @@ export default function As48LeisDoPoder() {
                     box-shadow: 0 8px 20px rgba(229, 9, 20, 0.5);
                     animation: pulse 2s infinite ease-in-out;
                     text-transform: uppercase;
+                    order: 2; /* Padrão mobile: Título, subtítulo, botão */
+                    max-width: 350px; /* Reduzir tamanho no mobile */
                 }
                 .buy-button-hero:hover {
                     box-shadow: 0 12px 25px rgba(229, 9, 20, 0.7);
@@ -478,6 +485,7 @@ export default function As48LeisDoPoder() {
                     margin-top: 0.8rem;
                     font-weight: 500;
                     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
                 .product-description-area {
                     text-align: left;
@@ -556,43 +564,47 @@ export default function As48LeisDoPoder() {
                 /* Bloco de Preço e CTA Otimizado */
                 .call-to-action.minimal {
                     background-color: #000;
-                    padding: 1rem; /* Padding reduzido */
+                    padding: 1rem;
                     border-radius: 12px;
                     box-shadow: 0 8px 30px rgba(0,0,0,0.6);
                     border: 2px solid #e50914;
-                    max-width: 380px; /* Largura um pouco menor */
-                    margin-top: 2.5rem; /* Ajuste do espaçamento superior */
-                    gap: 0.8rem; /* Espaçamento entre os itens internos */
+                    max-width: 380px;
+                    margin-top: 2.5rem;
+                    gap: 0.8rem;
+                    display: flex; /* Ajuste para flexbox para alinhamento */
+                    flex-direction: column;
+                    align-items: center; /* Centraliza itens */
                 }
                 .price-and-tag {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 0.2rem;
-                    margin-bottom: 0.5rem; /* Espaçamento antes do botão */
+                    margin-bottom: 0.5rem;
                 }
                 .price-tag {
-                    font-size: 1.1rem; /* Reduzido */
+                    font-size: 1.1rem;
                     color: #f0f0f0;
                     font-weight: 500;
                     text-transform: uppercase;
+                    white-space: nowrap; /* Evita quebra de linha em telas pequenas */
                 }
                 .product-price {
-                    font-size: 2.2rem; /* Reduzido */
+                    font-size: 2.2rem; /* Tamanho base, ajustado por media query */
                     font-weight: 700;
                     color: #fff;
                     display: flex;
                     align-items: baseline;
                     gap: 0.4rem;
-                    margin-bottom: 0; /* Removido margin-bottom para compactar */
+                    margin-bottom: 0;
                 }
                 .currency {
-                    font-size: 1.4rem; /* Reduzido */
+                    font-size: 1.4rem;
                     color: #e50914;
                 }
                 .price-value {
                     color: #e50914;
-                    font-size: 2.8rem; /* Reduzido */
+                    font-size: 2.8rem; /* Tamanho base, ajustado por media query */
                     font-weight: 900;
                     text-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
                 }
@@ -608,12 +620,12 @@ export default function As48LeisDoPoder() {
                     align-items: center;
                     justify-content: center;
                     gap: 0.8rem;
-                    padding: 1rem 2rem; /* Padding ajustado */
+                    padding: 1rem 2rem;
                     border-radius: 50px;
                     width: 100%;
-                    height: 55px; /* Altura ajustada */
+                    height: 55px;
                     font-weight: 700;
-                    font-size: 1.1rem; /* Tamanho da fonte ajustado */
+                    font-size: 1.1rem; /* Tamanho base, ajustado por media query */
                     text-transform: uppercase;
                     border: none;
                     cursor: pointer;
@@ -638,30 +650,34 @@ export default function As48LeisDoPoder() {
 
                 /* Urgency Banner Minimal (dentro do bloco de preço) */
                 .urgency-banner-minimal {
-                    background-color: #333; /* Fundo cinza escuro mais sutil */
-                    color: #e50914; /* Texto vermelho */
+                    background-color: #333;
+                    color: #e50914;
                     padding: 0.6rem 1rem;
                     border-radius: 6px;
-                    font-size: 0.9rem; /* Reduzido */
+                    font-size: 0.9rem;
                     font-weight: 600;
                     display: flex;
                     align-items: center;
                     gap: 0.6rem;
                     justify-content: center;
-                    width: calc(100% - 20px); /* Ajuste para não sair do bloco */
-                    margin-bottom: 0.8rem; /* Espaço antes do botão */
+                    width: calc(100% - 20px);
+                    margin-bottom: 0.8rem;
                     text-transform: uppercase;
-                    border: 1px dashed #e50914; /* Borda tracejada sutil */
+                    border: 1px dashed #e50914;
+                    text-align: center; /* Centraliza texto interno */
                 }
                 .urgency-banner-minimal span {
-                    font-size: 1.2rem; /* Reduzido */
+                    font-size: 1.2rem;
                     vertical-align: middle;
                 }
-                .access-info {
-                    font-size: 0.85rem; /* Reduzido */
+                /* Acesso imediato: Pequeno e discreto, abaixo do botão */
+                .access-info-small {
+                    font-size: 0.75rem; /* MUITO PEQUENO */
                     color: #a0a0a0;
-                    margin-top: 0.5rem; /* Reduzido */
+                    margin-top: 0.5rem;
                     text-transform: uppercase;
+                    text-align: center; /* Garante centralização */
+                    line-height: 1.2;
                 }
 
                 /* Seção: Problema e Solução */
@@ -847,9 +863,10 @@ export default function As48LeisDoPoder() {
                     font-size: 1rem;
                     text-align: right;
                     margin-top: 1rem;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
 
-                /* Seção: Final Call to Action - DESIGN REFEITO */
+                /* Seção: Final Call to Action */
                 .final-cta-section {
                     background: #141414;
                     border: 3px solid #e50914;
@@ -979,12 +996,13 @@ export default function As48LeisDoPoder() {
                     .description-heading {
                         text-align: left;
                     }
+                    /* CTA principal no desktop: alinha à esquerda */
                     .call-to-action.minimal {
                         margin-left: 0;
                         margin-right: auto;
                         align-items: flex-start;
-                        padding: 1.5rem 2rem; /* Mantido menor, mas com mais espaço lateral */
-                        max-width: 450px; /* Um pouco mais largo no desktop */
+                        padding: 1.5rem 2rem;
+                        max-width: 450px;
                     }
                     .product-benefits-list {
                         grid-template-columns: repeat(2, 1fr);
@@ -1014,52 +1032,81 @@ export default function As48LeisDoPoder() {
                     .law-card-title {
                         font-size: 1.45rem;
                     }
-                    .price-tag {
-                        font-size: 1.2rem; /* Ligeiramente maior no desktop */
+                    /* Hero content order for desktop */
+                    .hero-content {
+                        flex-direction: column; /* Still column, but main title first */
+                        align-items: center;
                     }
-                    .product-price {
-                        font-size: 2.5rem; /* Ligeiramente maior no desktop */
-                    }
-                    .currency {
-                        font-size: 1.6rem;
-                    }
-                    .price-value {
-                        font-size: 3.2rem; /* Ligeiramente maior no desktop */
-                    }
-                    .buy-button {
-                        font-size: 1.2rem; /* Ligeiramente maior no desktop */
-                        height: 60px;
-                        padding: 1.2rem 2.5rem;
-                    }
-                    .urgency-banner-minimal {
-                        font-size: 1rem; /* Ligeiramente maior no desktop */
-                    }
-                    .access-info {
-                        font-size: 0.95rem; /* Ligeiramente maior no desktop */
+                    .buy-button-hero {
+                        order: 2; /* Still below subtitle */
+                        max-width: none; /* remove max-width for desktop */
                     }
                 }
 
                 @media (max-width: 768px) {
-                    .product-title { font-size: 2.5rem; }
-                    .product-subtitle { font-size: 1.2rem; }
-                    .description-heading { font-size: 1.8rem; }
-                    .section-title { font-size: 1.8rem; }
-                    .testimonials-title { font-size: 2rem; }
-                    .final-cta-title { font-size: 2.2rem; }
-                    .laws-grid { grid-template-columns: 1fr; } /* Uma coluna em telas menores */
-                    .law-card-title { font-size: 1.2rem; }
-
-                    /* Ajustes específicos para o bloco de preço no mobile */
-                    .call-to-action.minimal {
-                        padding: 1rem; /* Reduzido ainda mais */
-                        max-width: 320px; /* Mais compacto */
-                        margin-left: auto;
-                        margin-right: auto;
-                        align-items: center; /* Centraliza no mobile */
+                    /* Botão Voltar no mobile */
+                    .back-button-container {
+                        font-size: 0.9rem;
+                        padding: 0.4rem 0.8rem;
+                        align-self: flex-start; /* Alinha à esquerda no topo */
+                        margin-left: 1.5rem; /* Garante espaçamento */
                     }
-                    .price-and-tag {
-                        flex-direction: column; /* Garante que fique vertical */
+
+                    /* Hero Content no mobile */
+                    .hero-content {
+                        flex-direction: column;
                         align-items: center;
+                    }
+                    .product-title {
+                        font-size: 2.5rem;
+                        order: 0; /* Garante que o título vem primeiro */
+                    }
+                    .product-subtitle {
+                        font-size: 1.2rem;
+                        order: 1; /* Subtítulo depois do título */
+                    }
+                    .buy-button-hero {
+                        font-size: 1.1rem;
+                        padding: 1rem 2rem;
+                        max-width: 300px; /* Diminuir o tamanho do botão no mobile */
+                        order: 2; /* Botão depois do subtítulo */
+                        margin-top: 1.5rem; /* Ajustar espaçamento */
+                    }
+
+                    .product-detail-section {
+                        padding: 2.5rem 1.5rem;
+                    }
+                    .ebook-cover {
+                        max-width: 280px;
+                    }
+                    .product-author {
+                        font-size: 1.3rem;
+                    }
+                    .description-heading {
+                        font-size: 1.8rem;
+                    }
+                    .intro-paragraph {
+                        font-size: 1.1rem;
+                    }
+                    .description-paragraph {
+                        font-size: 1rem;
+                    }
+                    .product-benefits-list {
+                        gap: 1rem;
+                    }
+                    .benefit-item {
+                        font-size: 1rem;
+                        padding: 0.8rem 1.2rem;
+                    }
+                    .benefit-item :global(.benefit-icon) {
+                        width: 24px;
+                        height: 24px;
+                        min-width: 24px;
+                    }
+                    /* CTA principal no mobile */
+                    .call-to-action.minimal {
+                        padding: 1rem;
+                        max-width: 320px;
                     }
                     .price-tag {
                         font-size: 1rem;
@@ -1077,12 +1124,80 @@ export default function As48LeisDoPoder() {
                         font-size: 1rem;
                         height: 50px;
                         padding: 0.9rem 1.8rem;
+                        width: 100%; /* Garante que o botão preenche o bloco */
                     }
                     .urgency-banner-minimal {
                         font-size: 0.85rem;
+                        padding: 0.5rem 0.8rem;
                     }
-                    .access-info {
+                    .urgency-banner-minimal span {
+                        font-size: 1.2rem;
+                    }
+                    .access-info-small {
                         font-size: 0.8rem;
+                    }
+                    .section-title {
+                        font-size: 1.8rem;
+                        margin-bottom: 2.5rem;
+                    }
+                    .problem-solution-grid {
+                        gap: 1.5rem;
+                    }
+                    .ps-card {
+                        padding: 2rem;
+                    }
+                    .ps-card-title {
+                        font-size: 1.6rem;
+                    }
+                    .ps-card-description {
+                        font-size: 1rem;
+                    }
+                    .laws-grid {
+                        gap: 1.5rem;
+                        grid-template-columns: 1fr; /* Forçar uma coluna no mobile */
+                    }
+                    .law-card-title {
+                        font-size: 1.2rem;
+                    }
+                    .law-card-description {
+                        font-size: 0.9rem;
+                    }
+                    .laws-note {
+                        font-size: 1rem;
+                    }
+                    .testimonials-section {
+                        padding: 2.5rem 1.5rem;
+                        margin: 3rem auto;
+                    }
+                    .testimonials-title {
+                        font-size: 2rem;
+                        margin-bottom: 2.5rem;
+                    }
+                    .testimonial-quote {
+                        font-size: 1rem;
+                    }
+                    .testimonial-quote::before, .testimonial-quote::after {
+                        font-size: 2em;
+                    }
+                    .testimonial-author {
+                        font-size: 0.9rem;
+                    }
+                    .final-cta-section {
+                        padding: 3rem 1.5rem;
+                    }
+                    .final-cta-title {
+                        font-size: 2.2rem;
+                    }
+                    .final-cta-text {
+                        font-size: 1rem;
+                    }
+                    .guarantee-box {
+                        font-size: 0.9rem;
+                        padding: 1rem 1.5rem;
+                    }
+                    .buy-button.final-button {
+                        font-size: 1.2rem;
+                        padding: 1.2rem 2.5rem;
                     }
                 }
 
@@ -1095,8 +1210,14 @@ export default function As48LeisDoPoder() {
                     .final-cta-title { font-size: 1.8rem; }
                     .law-card-title { font-size: 1rem; }
 
+                    .buy-button-hero {
+                        font-size: 0.9rem;
+                        padding: 0.7rem 1.5rem;
+                        max-width: 250px; /* Ainda mais estreito */
+                    }
+
                     .call-to-action.minimal {
-                        max-width: 280px; /* Ainda mais compacto para telas muito pequenas */
+                        max-width: 280px;
                         padding: 0.8rem;
                     }
                     .price-tag {
@@ -1122,8 +1243,8 @@ export default function As48LeisDoPoder() {
                     .urgency-banner-minimal span {
                         font-size: 1rem;
                     }
-                    .access-info {
-                        font-size: 0.75rem;
+                    .access-info-small {
+                        font-size: 0.7rem; /* Ainda menor */
                     }
                 }
             `}</style>
