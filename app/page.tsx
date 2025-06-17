@@ -66,7 +66,7 @@ export default function Home() {
                     </div>
 
                     <div className="progress-widget">
-                        <span className="progress-widget-label">Sua Jornada Phandco</span>
+                        <span className="progress-widget-label">SUA JORNADA PHANDCO</span> {/* CAIXA ALTA */}
                         <div
                             className="progress-bar-container"
                             role="progressbar"
@@ -85,10 +85,10 @@ export default function Home() {
 
                 <section className="portal-section">
                     <h2 className="portal-title">
-                        <span className="highlight-text">Descubra</span> o conteúdo que vai acelerar sua evolução!
+                        <span className="highlight-text">DESCUBRA</span> O CONTEÚDO QUE VAI ACELERAR SUA EVOLUÇÃO! {/* CAIXA ALTA */}
                     </h2>
                     <p className="portal-subtitle">
-                        Mergulhe em nossos recursos exclusivos e desbloqueie seu potencial máximo.
+                        MERGULHE EM NOSSOS RECURSOS EXCLUSIVOS E DESBLOQUEIE SEU POTENCIAL MÁXIMO. {/* CAIXA ALTA */}
                     </p>
 
                     <div className="links-grid">
@@ -96,72 +96,94 @@ export default function Home() {
                             onClick={() => router.push('/quiz')}
                             className="portal-link-button primary-button"
                         >
-                            <span role="img" aria-label="Alvo">🎯</span> Faça nosso quiz e receba seu plano!
+                            <span role="img" aria-label="Alvo">🎯</span> FAÇA NOSSO QUIZ E RECEBA SEU PLANO! {/* CAIXA ALTA */}
                         </button>
 
                         <button
                             onClick={() => router.push('/ebooks')}
                             className="portal-link-button secondary-button"
                         >
-                            <span role="img" aria-label="Livros">📚</span> Baixe nossos e-books exclusivos!
+                            <span role="img" aria-label="Livros">📚</span> BAIXE NOSSOS E-BOOKS EXCLUSIVOS! {/* CAIXA ALTA */}
                         </button>
 
-                        {/* Novos botões de livro com autores e links para páginas de venda */}
+                        {/* Botões de Livro Existentes */}
                         <button
                             onClick={() => router.push('/vendas/as-48-leis-do-poder')}
                             className="portal-link-button secondary-button"
                         >
-                            <span role="img" aria-label="Livro">📖</span> As 48 leis do poder - Robert Greene
+                            <span role="img" aria-label="Livro">📖</span> AS 48 LEIS DO PODER - ROBERT GREENE {/* CAIXA ALTA */}
                         </button>
 
                         <button
                             onClick={() => router.push('/vendas/mais-esperto-que-o-diabo')}
                             className="portal-link-button secondary-button"
                         >
-                            <span role="img" aria-label="Diabo">😈</span> Mais esperto que o diabo - N. Hill
+                            <span role="img" aria-label="Diabo">😈</span> MAIS ESPERTO QUE O DIABO - N. HILL {/* CAIXA ALTA */}
                         </button>
 
                         <button
                             onClick={() => router.push('/vendas/manual-persuasao-fbi')}
                             className="portal-link-button secondary-button"
                         >
-                            <span role="img" aria-label="Agente">🕵️‍♂️</span> Manual de persuasão do FBI - J. Schafer
+                            <span role="img" aria-label="Agente">🕵️‍♂️</span> MANUAL DE PERSUASÃO DO FBI - J. SCHAFER {/* CAIXA ALTA */}
                         </button>
+
+                        {/* Novos botões de livro com autores e links para páginas de venda */}
+                        <button
+                            onClick={() => router.push('/vendas/as-armas-da-persuasao')}
+                            className="portal-link-button secondary-button"
+                        >
+                            <span role="img" aria-label="Armas">🛡️</span> AS ARMAS DA PERSUASÃO 2.0 - R. CIALDINI {/* CAIXA ALTA */}
+                        </button>
+
+                        <button
+                            onClick={() => router.push('/vendas/como-convencer-alguem')}
+                            className="portal-link-button secondary-button"
+                        >
+                            <span role="img" aria-label="Aperto de mão">🤝</span> COMO CONVENCER ALGUÉM EM 90 SEGUNDOS - N. BOOTHMAN {/* CAIXA ALTA */}
+                        </button>
+
+                        <button
+                            onClick={() => router.push('/vendas/liberte-o-poder')}
+                            className="portal-link-button secondary-button"
+                        >
+                            <span role="img" aria-label="Mente">🧠</span> LIBERTE O PODER DO SEU SUBCONSCIENTE - J. MURPHY {/* CAIXA ALTA */}
+                        </button>
+
                     </div>
                 </section>
 
                 {/* Seção de depoimentos - Sem alterações como solicitado */}
                 <section className="testimonials-section">
                     <h3 className="testimonials-title">
-                        <span className="highlight-text">O que dizem</span> sobre a Phandco
+                        <span className="highlight-text">O QUE DIZEM</span> SOBRE A PHANDCO {/* CAIXA ALTA */}
                     </h3>
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
                                 "A Phandco transformou minha forma de aprender. O quiz é viciante e os e-books são ouro puro!"
                             </blockquote>
-                            <p className="testimonial-author">— Ana C.</p>
+                            <p className="testimonial-author">— ANA C.</p> {/* CAIXA ALTA */}
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
                                 "Conteúdo relevante e uma experiência de usuário impecável. Recomendo para todos que buscam evoluir."
                             </blockquote>
-                            <p className="testimonial-author">— Bruno F.</p>
+                            <p className="testimonial-author">— BRUNO F.</p> {/* CAIXA ALTA */}
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
                                 "A agilidade para encontrar o que preciso e a qualidade do material são impressionantes."
                             </blockquote>
-                            <p className="testimonial-author">— Carla M.</p>
+                            <p className="testimonial-author">— CARLA M.</p> {/* CAIXA ALTA */}
                         </div>
                     </div>
                 </section>
 
                 <footer className="site-footer">
-                    <p>© 2025 Phandco. Todos os direitos reservados.</p>
+                    <p>© 2025 PHANDCO. TODOS OS DIREITOS RESERVADOS.</p> {/* CAIXA ALTA */}
                     <div className="footer-links">
-                        <a href="/privacidade">Desenvolvido por PhandCo.</a>
-                        
+                        <a href="/privacidade">DESENVOLVIDO POR PHANDCO.</a> {/* CAIXA ALTA */}
                     </div>
                 </footer>
             </main>
@@ -220,6 +242,7 @@ export default function Home() {
                 .progress-widget-label {
                     font-weight: 600;
                     color: #ccc;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
                 .progress-bar-container {
                     width: 100%;
@@ -257,6 +280,7 @@ export default function Home() {
                     color: #fff;
                     margin-bottom: 0.5rem;
                     letter-spacing: -0.02em;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
                 .highlight-text {
                     color: #e50914;
@@ -267,6 +291,7 @@ export default function Home() {
                     line-height: 1.6;
                     max-width: 700px;
                     margin-bottom: 3rem;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
 
                 .links-grid {
@@ -291,7 +316,7 @@ export default function Home() {
 
                     font-weight: 400;
                     font-size: 1rem;
-                    text-transform: none;
+                    text-transform: uppercase; /* AGORA TUDO EM CAIXA ALTA POR PADRÃO */
                     white-space: nowrap; /* IMPEDE A QUEBRA DE LINHA */
                     overflow: hidden; /* Garante que o texto excedente seja escondido */
                     text-overflow: ellipsis; /* Adiciona "..." ao texto cortado */
@@ -368,6 +393,7 @@ export default function Home() {
                     color: #fff;
                     font-weight: 700;
                     letter-spacing: 0.03em;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
                 .testimonials-grid {
                     display: grid;
@@ -415,6 +441,7 @@ export default function Home() {
                     font-size: 0.95rem;
                     text-align: right;
                     margin-top: 1rem;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
 
                 /* Rodapé estilo Netflix (mantido) */
@@ -425,6 +452,7 @@ export default function Home() {
                     color: #808080;
                     font-size: 0.9rem;
                     border-top: 1px solid #222;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
                 .site-footer p {
                     margin-bottom: 1rem;
@@ -439,6 +467,7 @@ export default function Home() {
                     color: #808080;
                     text-decoration: none;
                     transition: color 0.2s ease;
+                    text-transform: uppercase; /* CAIXA ALTA */
                 }
                 .footer-links a:hover {
                     color: #e50914;
@@ -456,7 +485,7 @@ export default function Home() {
                         font-size: 1.1rem;
                     }
                     .links-grid {
-                         max-width: 480px; /* Ajuste para telas menores */
+                       max-width: 480px; /* Ajuste para telas menores */
                     }
                     .portal-link-button {
                         max-width: 450px; /* Ajuste para telas menores */

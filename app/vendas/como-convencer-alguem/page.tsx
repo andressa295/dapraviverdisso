@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react' // Removido useState e useEffect, pois não há lógica de progresso
+import React from 'react'
 import { useRouter } from 'next/navigation'
 
 // Componente da logo
@@ -33,10 +33,40 @@ function LogoPhandcoSvg() {
 }
 
 // Ícones SVG para os benefícios (novos e mais temáticos para este livro)
-const IconChains = () => (
+const IconHandshake = () => (
     <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-3 3a5 5 0 00-.54 7.54z"></path>
-        <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l3-3a5 5 0 00.54-7.54z"></path>
+        <path d="M11 15L17 21L23 15"></path>
+        <path d="M4 11V17C4 18.1046 4.89543 19 6 19H17"></path>
+        <path d="M17 19L11 13L5 19"></path>
+        <path d="M17 19V5C17 3.89543 16.1046 3 15 3H4"></path>
+    </svg>
+);
+const IconUserCheck = () => (
+    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+        <circle cx="8.5" cy="7" r="4"></circle>
+        <polyline points="17 11 19 13 23 9"></polyline>
+    </svg>
+);
+const IconMic = () => (
+    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"></path>
+        <path d="M19 10v2a7 7 0 01-14 0v-2"></path>
+        <line x1="12" y1="19" x2="12" y2="23"></line>
+        <line x1="8" y1="23" x2="16" y2="23"></line>
+    </svg>
+);
+const IconStar = () => (
+    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+);
+const IconSmile = () => (
+    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+        <line x1="15" y1="9" x2="15.01" y2="9"></line>
     </svg>
 );
 const IconZap = () => (
@@ -44,68 +74,46 @@ const IconZap = () => (
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
     </svg>
 );
-const IconTarget = () => (
-    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"></circle>
-        <circle cx="12" cy="12" r="6"></circle>
-        <circle cx="12" cy="12" r="2"></circle>
-    </svg>
-);
-const IconLightbulb = () => (
-    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-    </svg>
-);
-const IconShield = () => (
-    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-    </svg>
-);
-const IconBookOpen = () => (
-    <svg className="benefit-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path>
-        <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path>
-    </svg>
-);
 
-export default function MaisEspertoQueODiabo() {
+
+export default function ComoConvencerAlguem() {
     const router = useRouter()
     // Removido o progress state e useEffect, pois não são relevantes para esta página.
 
-    const synopsisIntro = "Você sente que algo te impede de alcançar seu verdadeiro potencial? 'Mais Esperto Que o Diabo' é a revelação de Napoleon Hill sobre as barreiras mentais que aprisionam a maioria das pessoas. Descubra os segredos para a liberdade pessoal e o sucesso ilimitado."
+    const synopsisIntro = "Você tem apenas 90 segundos para causar uma primeira impressão inesquecível e estabelecer uma conexão sólida. Nicholas Boothman, especialista em comunicação e ex-instrutor da Dale Carnegie, revela as técnicas que transformam estranhos em aliados em menos de dois minutos."
     const synopsisBenefits = [
-        { icon: <IconChains />, text: "DESVENDAR as táticas do medo, indecisão e procrastinação." },
-        { icon: <IconZap />, text: "LIBERTAR seu potencial de sucesso e prosperidade." },
-        { icon: <IconTarget />, text: "DOMINAR o 'Diabo' interno que sabota seus objetivos." },
-        { icon: <IconLightbulb />, text: "TRANSFORMAR adversidades em oportunidades poderosas." },
-        { icon: <IconShield />, text: "PROTEGER sua mente contra pensamentos limitantes." },
-        { icon: <IconBookOpen />, text: "ASSUMIR O CONTROLE total de seu destino e vida." },
+        { icon: <IconHandshake />, text: "CRIAR RAPPORT instantaneamente com qualquer pessoa, em qualquer ambiente." },
+        { icon: <IconUserCheck />, text: "DOMINAR a linguagem corporal para gerar confiança e simpatia." },
+        { icon: <IconMic />, text: "USAR a voz e o olhar como ferramentas poderosas de conexão." },
+        { icon: <IconStar />, text: "CAUSAR uma PRIMEIRA IMPRESSÃO INESQUECÍVEL e positiva." },
+        { icon: <IconSmile />, text: "SUPERAR a timidez e abordar pessoas com CONFIANÇA." },
+        { icon: <IconZap />, text: "INFLUENCIAR decisões e construir relacionamentos duradouros rapidamente." },
     ]
 
     const problemSolution = [
         {
             type: "problem",
-            title: "O DESAFIO",
-            description: "Você se sente preso em um ciclo de autossabotagem, medo ou procrastinação? A busca pelo sucesso parece um labirinto onde forças invisíveis te puxam para trás, impedindo sua verdadeira ascensão."
+            title: "O DESAFIO: CONEXÃO OU ISOLAMENTO?",
+            description: "Em um mundo cada vez mais conectado digitalmente, a capacidade de se conectar verdadeiramente, pessoalmente e rapidamente é um diferencial raro. Você sente que perde oportunidades porque não consegue gerar empatia ou confiança no primeiro contato?"
         },
         {
             type: "solution",
-            title: "A SOLUÇÃO",
-            description: "Napoleon Hill revela os métodos do 'Diabo' (a negatividade e o medo) e, mais importante, as estratégias para superá-los. Este livro é a sua chave para desvendar as correntes que aprisionam a mente e transformar a autodúvida em ação imparável."
+            title: "A SOLUÇÃO: CONEXÃO EM SEGUNDOS!",
+            description: "Este e-book oferece um método testado e comprovado para você dominar a arte da primeira impressão. Aprenda a decifrar sinais, usar a voz, o olhar e o corpo para criar laços instantâneos e transformar desconhecidos em valiosos contatos, clientes ou amigos."
         }
     ];
 
-    const whatYouWillDiscover = [
-        { title: "A FILOSOFIA DA LIBERDADE PESSOAL", description: "Entenda os princípios que regem o sucesso e o fracasso, e como usá-los a seu favor para construir a vida que você deseja." },
-        { title: "IDENTIFICANDO O DIABO INTERNO", description: "Aprenda a reconhecer as vozes e padrões de pensamento que te limitam, e como neutralizá-los com consciência e propósito." },
-        { title: "O PODER DA DEFINIÇÃO DE PROPÓSITO", description: "Descubra como um objetivo claro e inabalável é a arma mais potente contra a indecisão e a procrastinação." },
-        { title: "APLICANDO A FÉ EM AÇÃO", description: "Transforme a crença em resultados tangíveis, superando o medo e a inércia com uma mentalidade de ação persistente." },
-        { title: "A ARTE DE USAR A ADVERSIDADE", description: "Veja como os maiores sucessos nascem das maiores dificuldades, e aprenda a extrair força e oportunidades de cada revés." },
-        { title: "O CONTROLE DA MENTE SUBCONSCIENTE", description: "Desvende como sua mente mais profunda molda sua realidade, e aprenda a reprogramá-la para o sucesso e a abundância." }
+    const whatYouWillMaster = [
+        { title: "MÓDULO 1: O PODER DOS PRIMEIROS 90 SEGUNDOS", description: "Entenda como a mente humana processa informações e forma opiniões nos primeiros momentos críticos de interação, e como usar isso a seu favor." },
+        { title: "MÓDULO 2: OS SEGREDOS DA LINGUAGEM CORPORAL", description: "Aprenda a ler e a usar gestos, postura e expressões faciais para transmitir confiança, abertura e empatia, mesmo sem dizer uma palavra." },
+        { title: "MÓDULO 3: A MAGIA DA VOZ E DO OLHAR", description: "Descubra como o tom, o volume, a velocidade da fala e o contato visual podem ser ajustados para criar uma conexão profunda e magnética com qualquer pessoa." },
+        { title: "MÓDULO 4: CRIANDO RAPPORT INSTANTÂNEO", description: "Técnicas práticas e infalíveis para construir afinidade e confiança em tempo recorde, mesmo com as personalidades mais difíceis ou em situações de alta pressão." },
+        { title: "MÓDULO 5: O ALFABETO NÃO-VERBAL COMPLETO", description: "Um guia completo sobre os sinais ocultos que as pessoas enviam (consciente ou inconscientemente) e como você pode decodificá-los e usá-los a seu favor em qualquer conversa." },
+        { title: "MÓDULO 6: APLICANDO NA VIDA REAL E PROFISSIONAL", description: "Estratégias claras para usar o método em entrevistas de emprego, reuniões de vendas, encontros sociais, networking, negociações e em todas as suas interações diárias para um impacto imediato." }
     ];
 
     const handlePurchase = () => {
-        window.location.href = 'https://pay.hotmart.com/T94045964Q?checkoutMode=0&bid=1750201840606';
+        window.location.href = 'https://pay.hotmart.com/E95823614G?sck=HOTMART_PRODUCT_PAGE&off=2dy8w0pg&hotfeature=32&bid=1750203656047';
     }
 
     return (
@@ -140,13 +148,13 @@ export default function MaisEspertoQueODiabo() {
                 {/* Banner de Destaque Visual */}
                 <section className="hero-banner">
                     <div className="hero-content">
-                        <h1 className="product-title">+ ESPERTO QUE O DIABO: LIBERTE SUA MENTE E DOMINE SEU DESTINO.</h1>
-                        <p className="product-subtitle">O CLÁSSICO DE NAPOLEON HILL QUE REVELA AS TÁTICAS SECRETAS DA AUTOSSABOTAGEM E COMO SUPERÁ-LAS PARA ALCANÇAR A MAESTRIA SOBRE A VIDA.</p>
+                        <h1 className="product-title">COMO CONVENCER ALGUÉM EM 90 SEGUNDOS: A ARTE DA CONEXÃO INSTANTÂNEA.</h1>
+                        <p className="product-subtitle">DESVENDE OS SEGREDOS PARA CRIAR RAPPORT, CONQUISTAR CONFIANÇA E INFLUENCIAR EM MENOS DE DOIS MINUTOS.</p>
                         <button
                             onClick={handlePurchase}
                             className="buy-button-hero primary-button"
                         >
-                            <span role="img" aria-label="Fogo">🔥</span> CONQUISTE SUA LIBERDADE AGORA!
+                            <span role="img" aria-label="Aperto de mão">🤝</span> DESBLOQUEIE SUA CONEXÃO AGORA!
                         </button>
                     </div>
                 </section>
@@ -155,16 +163,16 @@ export default function MaisEspertoQueODiabo() {
                     <div className="product-content-wrapper">
                         <div className="product-image-area">
                             <img
-                                src="/images/mais-esperto-que-o-diabo.png"
-                                alt="Capa do e-book Mais Esperto que o Diabo"
+                                src="/images/como-convencer-alguem-em-90-segundos.png"
+                                alt="Capa do e-book Como Convencer Alguém em 90 Segundos"
                                 className="ebook-cover"
                                 loading="lazy"
                             />
-                            <p className="product-author">POR NAPOLEON HILL</p>
+                            <p className="product-author">POR NICHOLAS BOOTHMAN</p>
                         </div>
 
                         <div className="product-description-area">
-                            <h2 className="description-heading highlight-text">CHEGA DE MEDO, INDECISÃO E PROCRASTINAÇÃO.</h2>
+                            <h2 className="description-heading highlight-text">A PRIMEIRA IMPRESSÃO NUNCA MAIS SERÁ A MESMA.</h2>
                             <p className="description-paragraph intro-paragraph">{synopsisIntro}</p>
 
                             <ul className="product-benefits-list">
@@ -179,8 +187,8 @@ export default function MaisEspertoQueODiabo() {
                             {/* Bloco de Preço e CTA Otimizado */}
                             <div className="call-to-action minimal">
                                 <div className="price-and-tag">
-                                    <p className="price-tag">DESVENDE OS SEGREDOS POR APENAS:</p>
-                                    <p className="product-price"><span className="currency">R$</span> <span className="price-value">24,90</span></p>
+                                    <p className="price-tag">CRIE CONEXÕES POR APENAS:</p>
+                                    <p className="product-price"><span className="currency">R$</span> <span className="price-value">14,90</span></p>
                                 </div>
                                 <div className="urgency-banner-minimal">
                                     <span role="img" aria-label="Relógio">⏳</span>
@@ -190,7 +198,7 @@ export default function MaisEspertoQueODiabo() {
                                     onClick={handlePurchase}
                                     className="buy-button primary-button pulse-effect"
                                 >
-                                    <span role="img" aria-label="Livro">📖</span> QUERO LIBERTAR MINHA MENTE!
+                                    <span role="img" aria-label="Raio">⚡</span> QUERO MINHA CONEXÃO INSTANTÂNEA!
                                 </button>
                                 <p className="access-info-small">ACESSO IMEDIATO AO E-BOOK COMPLETO APÓS A COMPRA.</p>
                             </div>
@@ -200,7 +208,7 @@ export default function MaisEspertoQueODiabo() {
 
                 {/* Seção: Problema e Solução com Visual */}
                 <section className="problem-solution-section">
-                    <h2 className="section-title">SUAS PRISÕES MENTAIS: ENTENDA E ROMPA.</h2>
+                    <h2 className="section-title">O DESAFIO: CONEXÃO OU ISOLAMENTO?</h2>
                     <div className="problem-solution-grid">
                         {problemSolution.map((item, index) => (
                             <div key={index} className={`ps-card ${item.type}`}>
@@ -218,43 +226,43 @@ export default function MaisEspertoQueODiabo() {
                     </div>
                 </section>
 
-                {/* Nova Seção: O Que Você Irá Desvendar (Conteúdo) */}
+                {/* Nova Seção: O Que Você Irá Dominar (Conteúdo) */}
                 <section className="modules-section">
-                    <h2 className="section-title highlight-text">O QUE VOCÊ IRÁ DESVENDAR NESTE LIVRO:</h2>
+                    <h2 className="section-title highlight-text">O QUE VOCÊ VAI DOMINAR NESTE MANUAL:</h2>
                     <div className="modules-grid">
-                        {whatYouWillDiscover.map((item, index) => (
+                        {whatYouWillMaster.map((item, index) => (
                             <div key={index} className="module-card">
                                 <h3 className="module-card-title">{item.title}</h3>
                                 <p className="module-card-description">{item.description}</p>
                             </div>
                         ))}
                     </div>
-                    <p className="modules-note">CADA CAPÍTULO É UM PASSO PARA SUA LIBERDADE PESSOAL E SUCESSO!</p>
+                    <p className="modules-note">CADA CAPÍTULO É UM PASSO PARA UMA COMUNICAÇÃO IRRESISTÍVEL!</p>
                 </section>
 
                 {/* Seção de depoimentos */}
                 <section className="testimonials-section">
                     <h3 className="testimonials-title">
-                        <span className="highlight-text">MENTES TRANSFORMADAS:</span> O QUE NOSSOS LEITORES COMPARTILHAM.
+                        <span className="highlight-text">CONEXÕES DE SUCESSO:</span> O QUE NOSSOS LEITORES COMPARTILHAM.
                     </h3>
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
-                                "Este livro foi um choque de realidade. Me ajudou a identificar os medos que me paralisavam e me deu a coragem para agir. Mudei minha vida depois de lê-lo!"
+                                "Este livro é um game-changer! Em semanas, minha capacidade de fazer networking e fechar negócios explodiu. A conexão em 90 segundos é real!"
                             </blockquote>
-                            <p className="testimonial-author">— RAFAEL C., EMPREENDEDOR</p>
+                            <p className="testimonial-author">— MARIANA G., EMPREENDEDORA</p>
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
-                                "Sempre procrastinei meus grandes sonhos. 'Mais Esperto Que o Diabo' me deu as ferramentas para quebrar esse ciclo e, finalmente, começar a construir o futuro que eu sempre quis."
+                                "Sempre fui tímido em eventos sociais. Este manual me deu a confiança e as ferramentas para me conectar com qualquer pessoa, em qualquer lugar."
                             </blockquote>
-                            <p className="testimonial-author">— PATRÍCIA M., DESENVOLVEDORA PESSOAL</p>
+                            <p className="testimonial-author">— JOÃO P., DESENVOLVEDOR</p>
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
-                                "Napoleon Hill é um gênio! As revelações deste livro são atemporais e me ensinaram a transformar cada adversidade em um trampolim para o sucesso. Leitura obrigatória!"
+                                "Achei que era impossível, mas o Nicholas Boothman desmistificou a persuasão instantânea. Minhas apresentações nunca mais foram as mesmas."
                             </blockquote>
-                            <p className="testimonial-author">— MARCOS F., INVESTIDOR</p>
+                            <p className="testimonial-author">— ANA R., LÍDER DE PROJETOS</p>
                         </div>
                     </div>
                 </section>
@@ -262,17 +270,17 @@ export default function MaisEspertoQueODiabo() {
                 {/* Seção: Final Call to Action */}
                 <section className="final-cta-section">
                     <div className="final-cta-content">
-                        <h2 className="final-cta-title">ROMPE AS CORRENTES E CRIE SEU DESTINO.</h2>
-                        <p className="final-cta-text">NÃO PERMITA QUE O MEDO E A DÚVIDA CONTROLEM MAIS SUA VIDA. ADQUIRA **MAIS ESPERTO QUE O DIABO** E DESPERTE O GÊNIO QUE EXISTE EM VOCÊ!</p>
+                        <h2 className="final-cta-title">CRIE CONEXÕES FORTES EM SEGUNDOS.</h2>
+                        <p className="final-cta-text">NÃO DEIXE MAIS OPORTUNIDADES ESCAPAREM POR FALTA DE CONEXÃO. ADQUIRA **COMO CONVENCER ALGUÉM EM 90 SEGUNDOS** E TRANSFORME SUAS INTERAÇÕES PARA SEMPRE.</p>
                         <div className="guarantee-box">
                             <span role="img" aria-label="Cadeado Seguro">🔒</span>
-                            <p>COMPRA 100% SEGURA E ACESSO IMEDIATO. SUA TRANSFORMAÇÃO COMEÇA AGORA!</p>
+                            <p>COMPRA 100% SEGURA E ACESSO IMEDIATO. CONEXÕES QUE VALEM OURO!</p>
                         </div>
                         <button
                             onClick={handlePurchase}
                             className="buy-button final-button primary-button pulse-effect"
                         >
-                            <span role="img" aria-label="Mão Apontando">✨</span> SIM, QUERO SER MAIS ESPERTO!
+                            <span role="img" aria-label="Brilho">✨</span> SIM, QUERO MINHA CONEXÃO INSTANTÂNEA!
                         </button>
                     </div>
                 </section>
@@ -309,22 +317,6 @@ export default function MaisEspertoQueODiabo() {
                     z-index: 1000;
                     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
                 }
-                .logo-container {
-                    cursor: pointer;
-                    padding: 0.5rem 0;
-                    border-radius: 4px;
-                }
-                .logo-container :global(.logo-svg text) {
-                    transition: fill 0.2s ease-in-out;
-                }
-                .logo-container:hover :global(.logo-svg text),
-                .logo-container:focus-visible :global(.logo-svg text) {
-                    fill: #ff3352;
-                }
-                .logo-container:focus-visible {
-                    outline: 2px solid #E60023;
-                    outline-offset: 2px;
-                }
                 .back-button-container {
                     display: flex;
                     align-items: center;
@@ -349,10 +341,29 @@ export default function MaisEspertoQueODiabo() {
                     height: 24px;
                     stroke: currentColor;
                 }
+                .back-text {
+                    text-transform: uppercase;
+                }
+                .logo-container {
+                    cursor: pointer;
+                    padding: 0.5rem 0;
+                    border-radius: 4px;
+                }
+                .logo-container :global(.logo-svg text) {
+                    transition: fill 0.2s ease-in-out;
+                }
+                .logo-container:hover :global(.logo-svg text),
+                .logo-container:focus-visible :global(.logo-svg text) {
+                    fill: #ff3352;
+                }
+                .logo-container:focus-visible {
+                    outline: 2px solid #E60023;
+                    outline-offset: 2px;
+                }
 
                 /* Banner de Destaque Visual */
                 .hero-banner {
-                    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/banner-mais-esperto.jpg') center center/cover no-repeat; /* Nova imagem de fundo */
+                    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/banner-convencer-90s.jpg') center center/cover no-repeat; /* Nova imagem de fundo */
                     min-height: 50vh;
                     display: flex;
                     align-items: center;
@@ -734,7 +745,7 @@ export default function MaisEspertoQueODiabo() {
                     line-height: 1.6;
                 }
 
-                /* Nova Seção: O Que Você Irá Desvendar (Conteúdo) */
+                /* Nova Seção: O Que Você Irá Dominar (Conteúdo) */
                 .modules-section {
                     background-color: #1a1a1a;
                     padding: 4rem 2rem;
@@ -876,7 +887,7 @@ export default function MaisEspertoQueODiabo() {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: url('/images/abstract-devil-power.jpg') center center/cover no-repeat; /* Nova imagem de fundo */
+                    background: url('/images/abstract-convencer-90s.jpg') center center/cover no-repeat; /* Nova imagem de fundo */
                     opacity: 0.15;
                     z-index: 0;
                 }
@@ -958,6 +969,7 @@ export default function MaisEspertoQueODiabo() {
                     color: #808080;
                     text-decoration: none;
                     transition: color 0.2s ease;
+                    text-transform: uppercase;
                 }
                 .footer-links a:hover {
                     color: #e50914;
@@ -983,7 +995,6 @@ export default function MaisEspertoQueODiabo() {
                     .description-heading {
                         text-align: left;
                     }
-                    /* CTA principal no desktop: alinha à esquerda */
                     .call-to-action.minimal {
                         margin-left: 0;
                         margin-right: auto;
@@ -1007,7 +1018,7 @@ export default function MaisEspertoQueODiabo() {
                     .section-title {
                         font-size: 3.2rem;
                     }
-                    .modules-section .section-title { /* Específico para esta seção */
+                    .modules-section .section-title {
                         font-size: 2.8rem;
                     }
                     .testimonials-title {
@@ -1045,7 +1056,6 @@ export default function MaisEspertoQueODiabo() {
                     .access-info-small {
                         font-size: 0.95rem;
                     }
-                    /* Hero content order for desktop */
                     .hero-content {
                         flex-direction: column;
                         align-items: center;
@@ -1057,15 +1067,12 @@ export default function MaisEspertoQueODiabo() {
                 }
 
                 @media (max-width: 768px) {
-                    /* Botão Voltar no mobile */
                     .back-button-container {
                         font-size: 0.9rem;
                         padding: 0.4rem 0.8rem;
                         align-self: flex-start;
                         margin-left: 1.5rem;
                     }
-
-                    /* Hero Content no mobile */
                     .hero-content {
                         flex-direction: column;
                         align-items: center;
@@ -1116,7 +1123,6 @@ export default function MaisEspertoQueODiabo() {
                         height: 24px;
                         min-width: 24px;
                     }
-                    /* CTA principal no mobile */
                     .call-to-action.minimal {
                         padding: 1rem;
                         max-width: 320px;
@@ -1215,21 +1221,52 @@ export default function MaisEspertoQueODiabo() {
                 }
 
                 @media (max-width: 480px) {
-                    .product-title { font-size: 1.8rem; }
-                    .product-subtitle { font-size: 1rem; }
-                    .description-heading { font-size: 1.5rem; }
-                    .section-title { font-size: 1.5rem; }
-                    .modules-section .section-title { font-size: 1.5rem; }
-                    .testimonials-title { font-size: 1.6rem; }
-                    .final-cta-title { font-size: 1.8rem; }
-                    .module-card-title { font-size: 1rem; }
-
+                    .back-button-container {
+                        font-size: 0.8rem;
+                        padding: 0.3rem 0.6rem;
+                        margin-left: 1rem;
+                    }
+                    .product-title {
+                        font-size: 1.8rem;
+                    }
+                    .product-subtitle {
+                        font-size: 1rem;
+                    }
                     .buy-button-hero {
                         font-size: 0.9rem;
                         padding: 0.7rem 1.5rem;
                         max-width: 250px;
                     }
-
+                    .product-detail-section {
+                        padding: 1.5rem 1rem;
+                    }
+                    .ebook-cover {
+                        max-width: 200px;
+                    }
+                    .product-author {
+                        font-size: 1.1rem;
+                    }
+                    .description-heading {
+                        font-size: 1.5rem;
+                    }
+                    .intro-paragraph {
+                        font-size: 1rem;
+                    }
+                    .description-paragraph {
+                        font-size: 0.9rem;
+                    }
+                    .product-benefits-list {
+                        gap: 0.8rem;
+                    }
+                    .benefit-item {
+                        font-size: 0.95rem;
+                        padding: 0.8rem 1rem;
+                    }
+                    .benefit-item :global(.benefit-icon) {
+                        width: 22px;
+                        height: 22px;
+                        min-width: 22px;
+                    }
                     .call-to-action.minimal {
                         max-width: 280px;
                         padding: 0.8rem;
@@ -1259,6 +1296,65 @@ export default function MaisEspertoQueODiabo() {
                     }
                     .access-info-small {
                         font-size: 0.7rem;
+                    }
+                    .section-title {
+                        font-size: 1.5rem;
+                    }
+                    .problem-solution-grid {
+                        gap: 1.2rem;
+                    }
+                    .ps-card {
+                        padding: 1.5rem;
+                    }
+                    .ps-card-title {
+                        font-size: 1.3rem;
+                    }
+                    .ps-card-description {
+                        font-size: 0.85rem;
+                    }
+                    .modules-grid {
+                        gap: 1.2rem;
+                    }
+                    .module-card-title {
+                        font-size: 1.1rem;
+                    }
+                    .module-card-description {
+                        font-size: 0.85rem;
+                    }
+                    .modules-note {
+                        font-size: 0.9rem;
+                    }
+                    .testimonials-section {
+                        padding: 1.8rem 1rem;
+                    }
+                    .testimonials-title {
+                        font-size: 1.6rem;
+                    }
+                    .testimonial-quote {
+                        font-size: 0.9rem;
+                    }
+                    .testimonial-quote::before, .testimonial-quote::after {
+                        font-size: 1.8em;
+                    }
+                    .testimonial-author {
+                        font-size: 0.85rem;
+                    }
+                    .final-cta-section {
+                        padding: 2.5rem 1rem;
+                    }
+                    .final-cta-title {
+                        font-size: 1.8rem;
+                    }
+                    .final-cta-text {
+                        font-size: 0.9rem;
+                    }
+                    .guarantee-box {
+                        font-size: 0.8rem;
+                        padding: 0.8rem 1.2rem;
+                    }
+                    .buy-button.final-button {
+                        font-size: 1rem;
+                        padding: 1rem 2rem;
                     }
                 }
             `}</style>

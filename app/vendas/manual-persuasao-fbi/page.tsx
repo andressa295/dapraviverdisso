@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
 
+// Componente da logo
 function LogoPhandcoSvg() {
     return (
         <svg
@@ -18,7 +19,7 @@ function LogoPhandcoSvg() {
             <text
                 x="0"
                 y="38"
-                fill="#E60023"
+                fill="#E60023" // Vermelho da Phandco
                 fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
                 fontWeight="700"
                 fontSize="40"
@@ -31,36 +32,84 @@ function LogoPhandcoSvg() {
     )
 }
 
+// Ícones SVG para os benefícios (Definições movidas para fora da função principal)
+// Estes ícones são mais simples e genéricos, evitando problemas de renderização.
+const IconEye = () => (
+    <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+    </svg>
+);
+const IconTarget = () => (
+    <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="6"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+    </svg>
+);
+const IconShield = () => (
+    <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+    </svg>
+);
+const IconTrendingUp = () => (
+    <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+        <polyline points="17 6 23 6 23 12"></polyline>
+    </svg>
+);
+const IconBrain = () => (
+    <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"></path>
+        <path d="M12 12c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"></path>
+        <path d="M12 12c-2.21 0-4-1.79-4-4s1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"></path>
+        <path d="M12 12c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4z"></path>
+    </svg>
+);
+const IconMessageSquare = () => (
+    <svg className="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path>
+    </svg>
+);
+
+
 export default function ManualPersuasaoFBI() {
     const router = useRouter()
-    const [progress, setProgress] = useState(0) 
 
-    const synopsis = [
-        "Aprenda as técnicas de persuasão e influência usadas por agentes do FBI para construir rapport e obter informações cruciais.",
-        "Descubra como criar laços de confiança em segundos, lendo pessoas e situações com maestria.",
-        "Este guia prático revela os segredos da comunicação não verbal, da escuta ativa e da formulação de perguntas estratégicas.",
-        "Desenvolva sua capacidade de influenciar, seja em negociações, relacionamentos ou no dia a dia, de forma ética e eficaz.",
-        "Jack Schafer, ex-agente do FBI, compartilha métodos comprovados para transformar interações comuns em oportunidades de persuasão.",
-        "Domine a arte de fazer as pessoas gostarem de você e confiarem em suas intenções, abrindo portas para o sucesso em todas as áreas da vida."
+    const synopsisIntro = "Desvende as táticas psicológicas e de comunicação mais eficazes, diretamente da fonte: um ex-agente do FBI. Este e-book é o seu manual definitivo para dominar a arte da influência e construir conexões inabaláveis."
+    const synopsisBenefits = [
+        { icon: <IconTrendingUp />, text: "CONSTRUIR RAPPORT instantaneamente com qualquer pessoa." },
+        { icon: <IconEye />, text: "LER A LINGUAGEM CORPORAL e as emoções ocultas." },
+        { icon: <IconMessageSquare />, text: "DOMINAR A ESCUTA ATIVA e fazer as perguntas certas." },
+        { icon: <IconShield />, text: "PROTEGER-SE de manipulações e influenciar positivamente." },
+        { icon: <IconTarget />, text: "APLICAR TÉCNICAS DE PERSUASÃO em negociações e relacionamentos." },
+        { icon: <IconBrain />, text: "DESBLOQUEAR O POTENCIAL de suas interações diárias." },
     ]
 
-    useEffect(() => {
-        let intervalId = setInterval(() => {
-            setProgress((old) => {
-                if (old >= 70) {
-                    clearInterval(intervalId)
-                    return 70
-                }
-                return old + 1
-            })
-        }, 30)
+    const problemSolution = [
+        {
+            type: "problem",
+            title: "O DESAFIO",
+            description: "No mundo atual, a capacidade de se conectar e influenciar é mais crucial do que nunca. Você se sente incompreendido, suas mensagens não chegam, ou perde oportunidades por falta de uma comunicação eficaz?"
+        },
+        {
+            type: "solution",
+            title: "A SOLUÇÃO",
+            description: "Este manual é seu atalho para o sucesso interpessoal. Ele condensa anos de experiência em inteligência e negociação, oferecendo estratégias simples e comprovadas para você dominar a arte da persuasão e construir relacionamentos poderosos."
+        }
+    ];
 
-        return () => clearInterval(intervalId)
-    }, [])
+    const whatYouWillMaster = [
+        { title: "MÓDULO 1: OS QUATRO PILARES DO RAPPORT", description: "Aprenda a fórmula secreta para criar confiança e afinidade em qualquer interação, essencial para influenciar." },
+        { title: "MÓDULO 2: SINAIS DE CONFORTO E DESCONFORTO", description: "Decodifique a linguagem não verbal para entender o que as pessoas realmente sentem e pensam, além das palavras." },
+        { title: "MÓDULO 3: A ARTE DE FAZER PERGUNTAS E OUVIR ATIVAMENTE", description: "Transforme conversas simples em oportunidades para obter informações valiosas e construir conexões profundas." },
+        { title: "MÓDULO 4: INFLUENCIANDO O COMPORTAMENTO", description: "Técnicas éticas para guiar pessoas a agirem de acordo com seus objetivos, seja em vendas, liderança ou vida pessoal." },
+        { title: "MÓDULO 5: SUPERANDO RESISTÊNCIAS E OBJEÇÕES", description: "Estratégias para lidar com pessoas difíceis, neutralizar conflitos e virar situações desfavoráveis a seu favor." },
+        { title: "MÓDULO 6: APLICANDO NO DIA A DIA", description: "Como usar essas habilidades em entrevistas, encontros, negociações e em todas as suas interações sociais para um impacto imediato." }
+    ];
 
     const handlePurchase = () => {
-        
-        window.location.href = 'https://pay.hotmart.com/R86247093X?sck=HOTMART_PRODUCT_PAGE&off=39312cej&hotfeature=32&_gl=1*1ewqrwo*_gcl_aw*R0NMLjE3NTAwMDU3MjMuQ2p3S0NBanczcm5DQmhCeEVpd0FyTjBRRTBrNHpDc1hoR1FWODNjZktOOGR6TS0xUXVFb1Bxb29UNTlOd3hfbkQtWUtJMlBTRGY4QVFob0N0dDhRQXZEX0J3RQ..*_gcl_au*MTQ5MjY2NDg0Mi4xNzQ5NjQ2MDU4LjUzNjA3NTQ5Ny4xNzUwMjAxMzg3LjE3NTAyMDE2OTk.*_ga*MTk5NTIwOTgzNy4xNzQ5NjQ2MDU3*_ga_GQH2V1F11Q*czE3NTAyMDEyODkkbzUkZzEkdDE3NTAyMDE3MTAkajM1JGwwJGgw&bid=1750201715355'; // Descomente e substitua quando tiver o link real
+        window.location.href = 'https://pay.hotmart.com/R86247093X?sck=HOTMART_PRODUCT_PAGE&off=39312cej&hotfeature=32&_gl=1*1ewqrwo*_gcl_aw*R0NMLjE3NTAwMDU3MjMuQ2p3S0NBanczcm5DQmhCeEVpd0FyTjBRRTBrNHpDc1hoR1FWODNjZktOOGR6TS0xUXVFb1Bxb29UNTlOd3hfbkQtWUtJMlBTRGY4QVFob0N0dDhRQXZEX0J3RQ..*_gcl_au*MTQ5MjY2NDg0Mi4xNzQ5NjQ2MDU4LjUzNjA3NTQ5Ny4xNzUwMjAxMzg3LjE3NTAyMDE2OTk.*_ga*MTk5NTIwOTgzNy4xNzQ5NjQ2MDU3*_ga_GQH2V1F11Q*czE3NTAyMDEyODkkbzUkZzEkdDE3NTAyMDE3MTAkajM1JGwwJGgw&bid=1750201715355';
     }
 
     return (
@@ -68,7 +117,7 @@ export default function ManualPersuasaoFBI() {
             <main className="product-main">
                 <header className="page-header">
                     <div
-                        onClick={() => router.push('/')} 
+                        onClick={() => router.push('/')}
                         className="back-button-container"
                         role="button"
                         tabIndex={0}
@@ -78,7 +127,7 @@ export default function ManualPersuasaoFBI() {
                         <svg className="back-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                        <span className="back-text">Voltar</span>
+                        <span className="back-text">VOLTAR</span>
                     </div>
                     <div
                         onClick={() => router.push('/')}
@@ -92,67 +141,148 @@ export default function ManualPersuasaoFBI() {
                     </div>
                 </header>
 
+                {/* Banner de Destaque Visual */}
+                <section className="hero-banner">
+                    <div className="hero-content">
+                        <h1 className="product-title">MANUAL DE PERSUASÃO DO FBI: CONSTRUA RAPPORT E INFLUENCIE QUALQUER PESSOA.</h1>
+                        <p className="product-subtitle">OS SEGREDOS DA COMUNICAÇÃO USADOS POR AGENTES SECRETOS, AGORA AO SEU ALCANCE PARA DOMINAR QUALQUER INTERAÇÃO SOCIAL.</p>
+                        <button
+                            onClick={handlePurchase}
+                            className="buy-button-hero primary-button"
+                        >
+                            <span role="img" aria-label="Alvo">🎯</span> QUERO MEU MANUAL AGORA!
+                        </button>
+                    </div>
+                </section>
+
                 <section className="product-detail-section">
                     <div className="product-content-wrapper">
                         <div className="product-image-area">
                             <img
-                                src="/images/manual-persuasao-fbi.png" 
+                                src="/images/manual-persuasao-fbi.png"
                                 alt="Capa do e-book Manual de Persuasão do FBI"
                                 className="ebook-cover"
+                                loading="lazy"
                             />
-                            <h1 className="product-title">MANUAL DE PERSUASÃO DO FBI</h1>
-                            <p className="product-author">Jack Schafer</p>
+                            <p className="product-author">POR JACK SCHAFER, EX-AGENTE DO FBI</p>
                         </div>
 
                         <div className="product-description-area">
-                            <h2 className="description-heading highlight-text">Os Segredos da Influência e Conexão Humana</h2>
-                            {synopsis.map((paragraph, index) => (
-                                <p key={index} className="description-paragraph">
-                                    {paragraph}
-                                </p>
-                            ))}
+                            <h2 className="description-heading highlight-text">DESVENDE A MENTE HUMANA E OBTENHA O QUE DESEJA.</h2>
+                            <p className="description-paragraph intro-paragraph">{synopsisIntro}</p>
 
-                            <div className="call-to-action">
-                                <p className="product-price">Por apenas: <span className="price-value">R$ 9,90</span></p>
+                            <ul className="product-benefits-list">
+                                {synopsisBenefits.map((item, index) => (
+                                    <li key={index} className="benefit-item">
+                                        {item.icon}
+                                        <span dangerouslySetInnerHTML={{ __html: item.text }}></span> {/* Mantido dangerouslySetInnerHTML para negrito */}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {/* Bloco de Preço e CTA Otimizado */}
+                            <div className="call-to-action minimal">
+                                <div className="price-and-tag">
+                                    <p className="price-tag">COMECE A INFLUENCIAR POR APENAS:</p>
+                                    <p className="product-price"><span className="currency">R$</span> <span className="price-value">25,00</span></p>
+                                </div>
+                                <div className="urgency-banner-minimal">
+                                    <span role="img" aria-label="Relógio">⏳</span>
+                                    <p>OFERTA EXCLUSIVA POR TEMPO LIMITADO!</p>
+                                </div>
                                 <button
                                     onClick={handlePurchase}
-                                    className="buy-button primary-button"
+                                    className="buy-button primary-button pulse-effect"
                                 >
-                                    <span role="img" aria-label="Carrinho de compras">🛒</span> Quero meu exemplar agora!
+                                    <span role="img" aria-label="Mão Apontando">👉</span> QUERO MEU ACESSO IMEDIATO!
                                 </button>
+                                <p className="access-info-small">ACESSO IMEDIATO AO E-BOOK COMPLETO APÓS A COMPRA.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
+                {/* Seção: Problema e Solução com Visual */}
+                <section className="problem-solution-section">
+                    <h2 className="section-title">O PODER DA COMUNICAÇÃO: ENTENDA E APLIQUE.</h2>
+                    <div className="problem-solution-grid">
+                        {problemSolution.map((item, index) => (
+                            <div key={index} className={`ps-card ${item.type}`}>
+                                <h3 className="ps-card-title">
+                                    {item.type === 'problem' ? (
+                                        <span role="img" aria-label="Ponto de Interrogação">❓</span>
+                                    ) : (
+                                        <span role="img" aria-label="Lâmpada Acesa">💡</span>
+                                    )}
+                                    {item.title}
+                                </h3>
+                                <p className="ps-card-description">{item.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Nova Seção: O Que Você Irá Dominar (Módulos/Conteúdo) */}
+                <section className="modules-section">
+                    <h2 className="section-title highlight-text">O QUE VOCÊ IRÁ DOMINAR NESTE MANUAL:</h2>
+                    <div className="modules-grid">
+                        {whatYouWillMaster.map((moduleItem, index) => (
+                            <div key={index} className="module-card">
+                                <h3 className="module-card-title">{moduleItem.title}</h3>
+                                <p className="module-card-description">{moduleItem.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="modules-note">CADA MÓDULO É UM PASSO PARA SUA MAESTRIA NA PERSUASÃO!</p>
+                </section>
+
+                {/* Seção de depoimentos */}
                 <section className="testimonials-section">
                     <h3 className="testimonials-title">
-                        <span className="highlight-text">O que dizem</span> sobre a Phandco
+                        <span className="highlight-text">CONEXÕES REAIS:</span> O QUE NOSSOS LEITORES COMPARTILHAM.
                     </h3>
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
-                                "A Phandco transformou minha forma de aprender. O quiz é viciante e os e-books são ouro puro!"
+                                "Este livro mudou minhas negociações. As técnicas do FBI são incríveis e funcionam de verdade para criar confiança rapidamente."
                             </blockquote>
-                            <p className="testimonial-author">— Ana C.</p>
+                            <p className="testimonial-author">— CARLOS S., VENDEDOR DE ALTO DESEMPENHO</p>
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
-                                "Conteúdo relevante e uma experiência de usuário impecável. Recomendo para todos que buscam evoluir."
+                                "Sempre tive dificuldade em me comunicar. Com este manual, aprendi a ler as pessoas e a me expressar com muito mais clareza. É um divisor de águas nos relacionamentos."
                             </blockquote>
-                            <p className="testimonial-author">— Bruno F.</p>
+                            <p className="testimonial-author">— JULIANA P., PROFISSIONAL DE RH</p>
                         </div>
                         <div className="testimonial-card">
                             <blockquote className="testimonial-quote">
-                                "A agilidade para encontrar o que preciso e a qualidade do material são impressionantes."
+                                "Aprender a arte do rapport e da influência ética diretamente de um ex-agente do FBI? É um conhecimento valioso que aplico diariamente. Altamente recomendado!"
                             </blockquote>
-                            <p className="testimonial-author">— Carla M.</p>
+                            <p className="testimonial-author">— FERNANDO L., EMPREENDEDOR DIGITAL</p>
                         </div>
                     </div>
                 </section>
 
+                {/* Seção: Final Call to Action */}
+                <section className="final-cta-section">
+                    <div className="final-cta-content">
+                        <h2 className="final-cta-title">DESBLOQUEIE SEU POTENCIAL DE INFLUÊNCIA AGORA.</h2>
+                        <p className="final-cta-text">NÃO DEIXE MAIS O PODER DA COMUNICAÇÃO NAS MÃOS DOS OUTROS. ADQUIRA O **MANUAL DE PERSUASÃO DO FBI** E TRANSFORME SUAS INTERAÇÕES PARA SEMPRE.</p>
+                        <div className="guarantee-box">
+                            <span role="img" aria-label="Cadeado Seguro">🔒</span>
+                            <p>COMPRA 100% SEGURA E ACESSO IMEDIATO. SEM RISCOS, APENAS RESULTADOS COMPROVADOS.</p>
+                        </div>
+                        <button
+                            onClick={handlePurchase}
+                            className="buy-button final-button primary-button pulse-effect"
+                        >
+                            <span role="img" aria-label="Mão Apontando">👉</span> QUERO MEU MANUAL INSTANTÂNEO!
+                        </button>
+                    </div>
+                </section>
+
                 <footer className="site-footer">
-                    <p>© 2025 Phandco. Todos os direitos reservados.</p>
+                    <p>© 2025 PhandCo. Todos os direitos reservados.</p>
                     <div className="footer-links">
                         <a href="/privacidade">Desenvolvido por PhandCo.</a>
                     </div>
@@ -168,9 +298,10 @@ export default function ManualPersuasaoFBI() {
                     flex-direction: column;
                     font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
                     font-weight: 400;
+                    overflow-x: hidden;
                 }
 
-                /* Header (adaptado para a página de produto) */
+                /* Header */
                 .page-header {
                     display: flex;
                     justify-content: space-between;
@@ -198,13 +329,11 @@ export default function ManualPersuasaoFBI() {
                     outline: 2px solid #E60023;
                     outline-offset: 2px;
                 }
-
-                /* Estilo do botão de voltar */
                 .back-button-container {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: #e50914; /* Cor do ícone e texto */
+                    color: #e50914;
                     font-size: 1rem;
                     font-weight: 600;
                     cursor: pointer;
@@ -225,6 +354,78 @@ export default function ManualPersuasaoFBI() {
                     stroke: currentColor;
                 }
 
+                /* Banner de Destaque Visual */
+                .hero-banner {
+                    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/banner-fbi-persuasion.jpg') center center/cover no-repeat;
+                    min-height: 50vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 4rem 2rem;
+                    color: white;
+                    position: relative;
+                    overflow: hidden;
+                    border-bottom: 3px solid #e50914;
+                    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.8);
+                }
+                .hero-banner::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.6);
+                    z-index: 0;
+                }
+                .hero-content {
+                    max-width: 900px;
+                    z-index: 1;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .product-title {
+                    font-size: 3.2rem;
+                    font-weight: 700;
+                    color: #fff;
+                    margin-top: 1rem;
+                    line-height: 1.1;
+                    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+                    text-transform: uppercase;
+                }
+                .product-subtitle {
+                    font-size: 1.5rem;
+                    font-weight: 400;
+                    color: #a0a0a0;
+                    margin-top: 1.5rem;
+                    line-height: 1.4;
+                    max-width: 800px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+                    text-transform: uppercase;
+                    order: 1;
+                }
+                .buy-button-hero {
+                    margin-top: 2.5rem;
+                    padding: 1.5rem 3rem;
+                    font-size: 1.4rem;
+                    height: auto;
+                    border-radius: 50px;
+                    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.5);
+                    animation: pulse 2s infinite ease-in-out;
+                    text-transform: uppercase;
+                    order: 2;
+                    max-width: 350px;
+                }
+                .buy-button-hero:hover {
+                    box-shadow: 0 12px 25px rgba(229, 9, 20, 0.7);
+                    transform: translateY(-3px);
+                }
+
                 /* Seção de Detalhes do Produto */
                 .product-detail-section {
                     flex: 1;
@@ -232,129 +433,196 @@ export default function ManualPersuasaoFBI() {
                     flex-direction: column;
                     align-items: center;
                     padding: 3rem 2rem;
-                    max-width: 1000px; /* Largura máxima para a seção de detalhes */
+                    max-width: 1200px;
                     margin: auto;
-                    gap: 2rem;
-                    text-align: center; /* Centraliza o conteúdo por padrão */
+                    gap: 4rem;
+                    text-align: center;
+                    background-color: #1a1a1a;
+                    border-radius: 8px;
+                    margin-top: -50px;
+                    position: relative;
+                    z-index: 2;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
                 }
-
                 .product-content-wrapper {
                     display: flex;
-                    flex-direction: column; /* Padrão mobile */
+                    flex-direction: column;
                     gap: 3rem;
                     width: 100%;
-                    align-items: center; /* Centraliza items em mobile */
+                    align-items: center;
                 }
-
                 .product-image-area {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 1rem;
                 }
-
                 .ebook-cover {
                     width: 100%;
-                    max-width: 300px; /* Tamanho da imagem do e-book */
-                    border-radius: 8px;
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+                    max-width: 320px;
+                    border-radius: 12px;
+                    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
                 }
                 .ebook-cover:hover {
-                    transform: scale(1.02);
-                    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
-                }
-
-                .product-title {
-                    font-size: 2.0rem;
-                    font-weight: 500;
-                    color: #fff;
-                    margin-top: 1.5rem;
-                    line-height: 1.2;
+                    transform: scale(1.03);
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 1);
                 }
                 .product-author {
-                    font-size: 1.4rem;
-                    color: #a0a0a0;
-                    font-style: italic;
-                    margin-top: 0.5rem;
-                    font-weight: 400; /* Removido negrito para o nome do autor */
+                    font-size: 1.5rem;
+                    color: #e0e0e0;
+                    font-style: normal;
+                    margin-top: 0.8rem;
+                    font-weight: 500;
+                    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+                    text-transform: uppercase;
                 }
-
                 .product-description-area {
-                    text-align: left; /* Alinha o texto da descrição à esquerda */
-                    max-width: 600px;
+                    text-align: left;
+                    max-width: 700px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
                 }
                 .description-heading {
-                    font-size: 2rem;
+                    font-size: 2.2rem;
                     font-weight: 700;
                     margin-bottom: 1.5rem;
                     color: #fff;
-                    text-align: center; /* Centraliza o título da descrição */
+                    text-align: center;
+                    line-height: 1.2;
+                    text-transform: uppercase;
                 }
                 .highlight-text {
                     color: #e50914;
                 }
                 .description-paragraph {
-                    font-size: 1.1rem;
-                    font-weight: 400; /* Removido negrito */
-                    line-height: 1.6; /* Ajustado para diminuir o espaçamento */
+                    font-size: 1.15rem;
+                    font-weight: 400;
+                    line-height: 1.7;
                     color: #ccc;
                     margin-bottom: 1rem;
-                    text-align: justify; /* Justifica o texto para melhor leitura */
+                    text-align: justify;
                 }
-                .description-paragraph:last-child {
-                    margin-bottom: 0;
+                .intro-paragraph {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    color: #f0f0f0;
+                    text-align: center;
+                    margin-bottom: 2rem;
                 }
 
-                .call-to-action {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 1.5rem;
-                    margin-top: 3rem;
-                    width: 100%;
-                    max-width: 400px; /* Limita a largura do botão de compra */
+                /* Lista de Benefícios com Ícones */
+                .product-benefits-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 2rem 0;
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 1.2rem;
+                    max-width: 600px;
                     margin-left: auto;
                     margin-right: auto;
                 }
+                .benefit-item {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1rem;
+                    font-size: 1.1rem;
+                    color: #e0e0e0;
+                    line-height: 1.5;
+                    background-color: #2a2a2a;
+                    padding: 1rem 1.5rem;
+                    border-radius: 6px;
+                    border-left: 4px solid #e50914;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                    font-weight: 500;
+                }
+                .benefit-item:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+                }
+                .benefit-item :global(.benefit-icon) {
+                    width: 28px;
+                    height: 28px;
+                    min-width: 28px;
+                    color: #e50914;
+                    margin-top: 2px;
+                }
 
+                /* Bloco de Preço e CTA Otimizado */
+                .call-to-action.minimal {
+                    background-color: #000;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+                    border: 2px solid #e50914;
+                    max-width: 380px;
+                    margin-top: 2.5rem;
+                    gap: 0.8rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .price-and-tag {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.2rem;
+                    margin-bottom: 0.5rem;
+                }
+                .price-tag {
+                    font-size: 1.1rem;
+                    color: #f0f0f0;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                }
                 .product-price {
-                    font-size: 1.8rem;
-                    font-weight: 600;
+                    font-size: 2.2rem;
+                    font-weight: 700;
                     color: #fff;
                     display: flex;
                     align-items: baseline;
-                    gap: 0.5rem;
+                    gap: 0.4rem;
+                    margin-bottom: 0;
+                }
+                .currency {
+                    font-size: 1.4rem;
+                    color: #e50914;
                 }
                 .price-value {
                     color: #e50914;
-                    font-size: 2.2rem;
-                    font-weight: 700;
+                    font-size: 2.8rem;
+                    font-weight: 900;
+                    text-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
                 }
 
+                /* Efeito de pulsação no botão */
+                @keyframes pulse {
+                    0% { transform: scale(1); box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4); }
+                    50% { transform: scale(1.02); box-shadow: 0 8px 20px rgba(229, 9, 20, 0.6); }
+                    100% { transform: scale(1); box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4); }
+                }
                 .buy-button {
-                    /* Estilos do botão oval e proporcional, semelhantes aos da Home */
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     gap: 0.8rem;
-                    padding: 1.2rem 2rem;
+                    padding: 1rem 2rem;
                     border-radius: 50px;
                     width: 100%;
-                    height: 60px;
-                    font-weight: 600; /* Mantido um pouco de destaque aqui */
+                    height: 55px;
+                    font-weight: 700;
                     font-size: 1.1rem;
-                    text-transform: none;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    text-transform: uppercase;
                     border: none;
                     cursor: pointer;
-                    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
-                    user-select: none;
-                    background-color: #e50914; /* Cor primária de destaque */
+                    background-color: #e50914;
                     color: white;
                     box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+                    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
                 }
                 .buy-button:hover {
                     background-color: #ff1a3c;
@@ -370,28 +638,180 @@ export default function ManualPersuasaoFBI() {
                     outline-offset: 2px;
                 }
 
-                /* Seção de depoimentos (mantido do Home, pode remover se não quiser aqui) */
+                /* Urgency Banner Minimal (dentro do bloco de preço) */
+                .urgency-banner-minimal {
+                    background-color: #333;
+                    color: #e50914;
+                    padding: 0.6rem 1rem;
+                    border-radius: 6px;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.6rem;
+                    justify-content: center;
+                    width: calc(100% - 20px);
+                    margin-bottom: 0.8rem;
+                    text-transform: uppercase;
+                    border: 1px dashed #e50914;
+                    text-align: center;
+                }
+                .urgency-banner-minimal span {
+                    font-size: 1.2rem;
+                    vertical-align: middle;
+                }
+                /* Acesso imediato: Pequeno e discreto, abaixo do botão */
+                .access-info-small {
+                    font-size: 0.75rem;
+                    color: #a0a0a0;
+                    margin-top: 0.5rem;
+                    text-transform: uppercase;
+                    text-align: center;
+                    line-height: 1.2;
+                }
+
+                /* Seção: Problema e Solução */
+                .problem-solution-section {
+                    background-color: #000;
+                    padding: 4rem 2rem;
+                    text-align: center;
+                    margin-top: 4rem;
+                    box-shadow: inset 0 10px 30px rgba(0,0,0,0.6), inset 0 -10px 30px rgba(0,0,0,0.6);
+                }
+                .section-title {
+                    font-size: 2.2rem;
+                    font-weight: 700;
+                    color: #fff;
+                    margin-bottom: 3.5rem;
+                    line-height: 1.2;
+                    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+                    text-transform: uppercase;
+                }
+                .problem-solution-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                    gap: 2.5rem;
+                    max-width: 1000px;
+                    margin: 0 auto;
+                }
+                .ps-card {
+                    background-color: #1a1a1a;
+                    padding: 2.5rem;
+                    border-radius: 12px;
+                    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    border: 1px solid #333;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .ps-card:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+                }
+                .ps-card.problem {
+                    border-left: 5px solid #ffcc00;
+                }
+                .ps-card.solution {
+                    border-left: 5px solid #00bfff;
+                }
+                .ps-card-title {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: #fff;
+                    margin-bottom: 1.2rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+                    justify-content: center;
+                    text-transform: uppercase;
+                }
+                .ps-card-title span {
+                    font-size: 2.2rem;
+                }
+                .ps-card.problem .ps-card-title span { color: #ffcc00; }
+                .ps-card.solution .ps-card-title span { color: #00bfff; }
+                .ps-card-description {
+                    font-size: 1.1rem;
+                    color: #ccc;
+                    line-height: 1.6;
+                }
+
+                /* Nova Seção: O Que Você Irá Dominar (Módulos/Conteúdo) */
+                .modules-section {
+                    background-color: #1a1a1a;
+                    padding: 4rem 2rem;
+                    text-align: center;
+                    margin-top: 4rem;
+                    border-top: 3px solid #e50914;
+                }
+                .modules-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                    gap: 2rem;
+                    max-width: 1100px;
+                    margin: 0 auto 2.5rem auto;
+                }
+                .module-card {
+                    background-color: #2a2a2a;
+                    padding: 1.8rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+                    text-align: left;
+                    border-left: 4px solid #e50914;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                }
+                .module-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+                }
+                .module-card-title {
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    color: #fff;
+                    margin-bottom: 0.8rem;
+                    line-height: 1.3;
+                    text-transform: uppercase;
+                }
+                .module-card-description {
+                    font-size: 0.95rem;
+                    color: #b0b0b0;
+                    line-height: 1.5;
+                }
+                .modules-note {
+                    font-size: 1.1rem;
+                    color: #aaa;
+                    margin-top: 1.5rem;
+                    font-style: italic;
+                    text-transform: uppercase;
+                }
+
+                /* Seção de depoimentos */
                 .testimonials-section {
                     background-color: #000;
                     padding: 3rem 2rem;
-                    max-width: 900px;
-                    margin: 3rem auto;
+                    max-width: 1200px;
+                    margin: 4rem auto;
                     border-radius: 8px;
                     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
                     color: white;
                     text-align: center;
+                    border: 1px solid #222;
                 }
                 .testimonials-title {
-                    font-size: 2rem;
-                    margin-bottom: 2.5rem;
+                    font-size: 2.2rem;
+                    margin-bottom: 2.8rem;
                     color: #fff;
                     font-weight: 700;
                     letter-spacing: 0.03em;
+                    line-height: 1.2;
+                    text-transform: uppercase;
                 }
                 .testimonials-grid {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 1.5rem;
+                    gap: 1.8rem;
                 }
                 .testimonial-card {
                     background-color: #1a1a1a;
@@ -404,18 +824,18 @@ export default function ManualPersuasaoFBI() {
                 }
                 .testimonial-card:hover {
                     transform: translateY(-5px);
-                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
                 }
                 .testimonial-quote {
                     font-style: italic;
                     margin-bottom: 1rem;
                     color: #ccc;
-                    font-size: 1rem;
+                    font-size: 1.05rem;
                     line-height: 1.7;
                 }
                 .testimonial-quote::before, .testimonial-quote::after {
                     content: '“';
-                    font-size: 2em;
+                    font-size: 2.2em;
                     color: #e50914;
                     margin-right: 0.05em;
                     line-height: 0;
@@ -431,12 +851,95 @@ export default function ManualPersuasaoFBI() {
                 .testimonial-author {
                     font-weight: 600;
                     color: #e50914;
-                    font-size: 0.95rem;
+                    font-size: 1rem;
                     text-align: right;
                     margin-top: 1rem;
+                    text-transform: uppercase;
                 }
 
-                /* Rodapé estilo Netflix (mantido) */
+                /* Seção: Final Call to Action */
+                .final-cta-section {
+                    background: #141414;
+                    border: 3px solid #e50914;
+                    box-shadow: 0 0 30px rgba(229,9,20,0.6), inset 0 0 30px rgba(229,9,20,0.4);
+                    padding: 4rem 2rem;
+                    text-align: center;
+                    color: white;
+                    margin-top: 4rem;
+                    border-radius: 12px;
+                    max-width: 900px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    position: relative;
+                    overflow: hidden;
+                }
+                .final-cta-section::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: url('/images/abstract-fbi-power.jpg') center center/cover no-repeat;
+                    opacity: 0.15;
+                    z-index: 0;
+                }
+                .final-cta-content {
+                    max-width: 700px;
+                    margin: 0 auto;
+                    position: relative;
+                    z-index: 1;
+                }
+                .final-cta-title {
+                    font-size: 2.8rem;
+                    font-weight: 800;
+                    margin-bottom: 1.5rem;
+                    line-height: 1.1;
+                    text-shadow: 0 3px 6px rgba(0,0,0,0.4);
+                    text-transform: uppercase;
+                }
+                .final-cta-text {
+                    font-size: 1.2rem;
+                    line-height: 1.6;
+                    margin-bottom: 2.5rem;
+                    font-weight: 400;
+                    color: #f0f0f0;
+                }
+                .guarantee-box {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1rem;
+                    background-color: rgba(0,0,0,0.4);
+                    padding: 1.2rem 2rem;
+                    border-radius: 8px;
+                    margin-bottom: 3rem;
+                    border: 1px solid rgba(255,255,255,0.2);
+                    max-width: 500px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                }
+                .guarantee-box span {
+                    font-size: 1.8rem;
+                }
+                .buy-button.final-button {
+                    background-color: #000;
+                    color: #e50914;
+                    border: 2px solid #e50914;
+                    font-size: 1.5rem;
+                    padding: 1.5rem 3.5rem;
+                    text-transform: uppercase;
+                }
+                .buy-button.final-button:hover {
+                    background-color: #222;
+                    color: #ff3352;
+                    border-color: #ff3352;
+                }
+
+                /* Rodapé */
                 .site-footer {
                     background-color: #000;
                     padding: 2rem 3rem;
@@ -444,6 +947,7 @@ export default function ManualPersuasaoFBI() {
                     color: #808080;
                     font-size: 0.9rem;
                     border-top: 1px solid #222;
+                    text-transform: uppercase;
                 }
                 .site-footer p {
                     margin-bottom: 1rem;
@@ -466,34 +970,131 @@ export default function ManualPersuasaoFBI() {
                 /* Media Queries */
                 @media (min-width: 769px) {
                     .product-content-wrapper {
-                        flex-direction: row; /* Layout em linha para telas maiores */
+                        flex-direction: row;
                         text-align: left;
-                        align-items: flex-start; /* Alinha no topo quando em linha */
+                        align-items: flex-start;
                     }
                     .product-image-area {
-                        flex: 0 0 auto; /* Não cresce nem encolhe */
-                        margin-right: 3rem; /* Espaço entre imagem e texto */
-                        align-items: flex-start; /* Alinha o título e autor da imagem à esquerda */
+                        flex: 0 0 auto;
+                        margin-right: 4rem;
+                        align-items: flex-start;
                         text-align: left;
                     }
                     .product-description-area {
-                        flex: 1; /* Ocupa o restante do espaço */
+                        flex: 1;
+                        max-width: none;
                     }
                     .description-heading {
-                        text-align: left; /* Alinha o título da descrição à esquerda */
+                        text-align: left;
                     }
-                    .call-to-action {
-                        margin-left: 0; /* Desfaz centralização automática para alinhamento à esquerda */
+                    /* CTA principal no desktop: alinha à esquerda */
+                    .call-to-action.minimal {
+                        margin-left: 0;
                         margin-right: auto;
+                        align-items: flex-start;
+                        padding: 1.5rem 2rem;
+                        max-width: 450px;
+                    }
+                    .product-benefits-list {
+                        grid-template-columns: repeat(2, 1fr);
+                        max-width: none;
+                    }
+                    .product-title {
+                        font-size: 4.2rem;
+                    }
+                    .product-subtitle {
+                        font-size: 2rem;
+                    }
+                    .description-heading {
+                        font-size: 2.8rem;
+                    }
+                    .section-title {
+                        font-size: 3.2rem;
+                    }
+                    .modules-section .section-title { /* Específico para esta seção */
+                        font-size: 2.8rem;
+                    }
+                    .testimonials-title {
+                        font-size: 2.8rem;
+                    }
+                    .final-cta-title {
+                        font-size: 3.8rem;
+                    }
+                    .modules-grid {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                    .module-card-title {
+                        font-size: 1.45rem;
+                    }
+                    .price-tag {
+                        font-size: 1.2rem;
+                    }
+                    .product-price {
+                        font-size: 2.5rem;
+                    }
+                    .currency {
+                        font-size: 1.6rem;
+                    }
+                    .price-value {
+                        font-size: 3.2rem;
+                    }
+                    .buy-button {
+                        font-size: 1.2rem;
+                        height: 60px;
+                        padding: 1.2rem 2.5rem;
+                    }
+                    .urgency-banner-minimal {
+                        font-size: 1rem;
+                    }
+                    .access-info-small {
+                        font-size: 0.95rem;
+                    }
+                    /* Hero content order for desktop */
+                    .hero-content {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                    .buy-button-hero {
+                        order: 2;
+                        max-width: none;
                     }
                 }
 
-                @media (max-width: 900px) {
-                    .page-header {
-                        padding: 1.2rem 2rem;
+                @media (max-width: 768px) {
+                    /* Botão Voltar no mobile */
+                    .back-button-container {
+                        font-size: 0.9rem;
+                        padding: 0.4rem 0.8rem;
+                        align-self: flex-start;
+                        margin-left: 1.5rem;
+                    }
+
+                    /* Hero Content no mobile */
+                    .hero-content {
+                        flex-direction: column;
+                        align-items: center;
                     }
                     .product-title {
                         font-size: 2.5rem;
+                        order: 0;
+                    }
+                    .product-subtitle {
+                        font-size: 1.2rem;
+                        order: 1;
+                    }
+                    .buy-button-hero {
+                        font-size: 1.1rem;
+                        padding: 1rem 2rem;
+                        max-width: 300px;
+                        order: 2;
+                        margin-top: 1.5rem;
+                    }
+
+                    .product-detail-section {
+                        padding: 2.5rem 1.5rem;
+                    }
+                    .ebook-cover {
+                        max-width: 250px;
                     }
                     .product-author {
                         font-size: 1.3rem;
@@ -501,123 +1102,167 @@ export default function ManualPersuasaoFBI() {
                     .description-heading {
                         font-size: 1.8rem;
                     }
+                    .intro-paragraph {
+                        font-size: 1.1rem;
+                    }
                     .description-paragraph {
                         font-size: 1rem;
                     }
-                    .product-price {
-                        font-size: 1.6rem;
+                    .product-benefits-list {
+                        gap: 1rem;
                     }
-                    .price-value {
+                    .benefit-item {
+                        font-size: 1rem;
+                        padding: 0.8rem 1.2rem;
+                    }
+                    .benefit-item :global(.benefit-icon) {
+                        width: 24px;
+                        height: 24px;
+                        min-width: 24px;
+                    }
+                    /* CTA principal no mobile */
+                    .call-to-action.minimal {
+                        padding: 1rem;
+                        max-width: 320px;
+                    }
+                    .price-tag {
+                        font-size: 1rem;
+                    }
+                    .product-price {
                         font-size: 2rem;
                     }
-                    .buy-button {
-                        font-size: 1rem;
-                        height: 55px;
-                        max-width: 350px;
-                    }
-                }
-
-                @media (max-width: 768px) {
-                    .page-header {
-                        padding: 1rem 1.5rem;
-                        flex-direction: row; /* Mantém em linha */
-                        justify-content: space-between;
-                    }
-                    .back-button-container {
-                        font-size: 0.9rem;
-                        padding: 0.4rem 0.8rem;
-                    }
-                    .back-arrow {
-                        width: 20px;
-                        height: 20px;
-                    }
-                    .logo-container :global(.logo-svg) {
-                        width: 120px;
-                        height: 36px;
-                    }
-                    .product-detail-section {
-                        padding: 2rem 1.5rem;
-                    }
-                    .product-content-wrapper {
-                        gap: 2rem;
-                    }
-                    .ebook-cover {
-                        max-width: 250px;
-                    }
-                    .product-title {
-                        font-size: 2.2rem;
-                    }
-                    .product-author {
-                        font-size: 1.2rem;
-                    }
-                    .description-heading {
-                        font-size: 1.6rem;
-                    }
-                    .description-paragraph {
-                        font-size: 0.95rem;
-                    }
-                    .product-price {
-                        font-size: 1.5rem;
+                    .currency {
+                        font-size: 1.3rem;
                     }
                     .price-value {
-                        font-size: 1.8rem;
+                        font-size: 2.5rem;
                     }
                     .buy-button {
-                        font-size: 0.95rem;
+                        font-size: 1rem;
                         height: 50px;
-                        max-width: 300px;
+                        padding: 0.9rem 1.8rem;
+                        width: 100%;
+                    }
+                    .urgency-banner-minimal {
+                        font-size: 0.85rem;
+                        padding: 0.5rem 0.8rem;
+                    }
+                    .urgency-banner-minimal span {
+                        font-size: 1.2rem;
+                    }
+                    .access-info-small {
+                        font-size: 0.8rem;
+                    }
+                    .section-title {
+                        font-size: 1.8rem;
+                        margin-bottom: 2.5rem;
+                    }
+                    .problem-solution-grid {
+                        gap: 1.5rem;
+                    }
+                    .ps-card {
+                        padding: 2rem;
+                    }
+                    .ps-card-title {
+                        font-size: 1.6rem;
+                    }
+                    .ps-card-description {
+                        font-size: 1rem;
+                    }
+                    .modules-grid {
+                        gap: 1.5rem;
+                        grid-template-columns: 1fr;
+                    }
+                    .module-card-title {
+                        font-size: 1.2rem;
+                    }
+                    .module-card-description {
+                        font-size: 0.9rem;
+                    }
+                    .modules-note {
+                        font-size: 1rem;
                     }
                     .testimonials-section {
-                        padding: 2rem 1.5rem;
-                        margin: 2rem auto;
+                        padding: 2.5rem 1.5rem;
+                        margin: 3rem auto;
                     }
                     .testimonials-title {
-                        font-size: 1.8rem;
-                        margin-bottom: 2rem;
+                        font-size: 2rem;
+                        margin-bottom: 2.5rem;
                     }
-                    .testimonials-grid {
-                        grid-template-columns: 1fr;
+                    .testimonial-quote {
+                        font-size: 1rem;
+                    }
+                    .testimonial-quote::before, .testimonial-quote::after {
+                        font-size: 2em;
+                    }
+                    .testimonial-author {
+                        font-size: 0.9rem;
+                    }
+                    .final-cta-section {
+                        padding: 3rem 1.5rem;
+                    }
+                    .final-cta-title {
+                        font-size: 2.2rem;
+                    }
+                    .final-cta-text {
+                        font-size: 1rem;
+                    }
+                    .guarantee-box {
+                        font-size: 0.9rem;
+                        padding: 1rem 1.5rem;
+                    }
+                    .buy-button.final-button {
+                        font-size: 1.2rem;
+                        padding: 1.2rem 2.5rem;
                     }
                 }
 
                 @media (max-width: 480px) {
-                    .page-header {
-                        flex-direction: column; /* Volta a empilhar em telas muito pequenas */
-                        gap: 0.8rem;
-                        padding-bottom: 1rem;
+                    .product-title { font-size: 1.8rem; }
+                    .product-subtitle { font-size: 1rem; }
+                    .description-heading { font-size: 1.5rem; }
+                    .section-title { font-size: 1.5rem; }
+                    .modules-section .section-title { font-size: 1.5rem; }
+                    .testimonials-title { font-size: 1.6rem; }
+                    .final-cta-title { font-size: 1.8rem; }
+                    .module-card-title { font-size: 1rem; }
+
+                    .buy-button-hero {
+                        font-size: 0.9rem;
+                        padding: 0.7rem 1.5rem;
+                        max-width: 250px;
                     }
-                    .back-button-container {
-                        align-self: flex-start; /* Alinha o botão de voltar à esquerda */
-                        margin-left: 1.5rem; /* Ajuste para não ficar colado */
+
+                    .call-to-action.minimal {
+                        max-width: 280px;
+                        padding: 0.8rem;
                     }
-                    .product-detail-section {
-                        padding: 1.5rem 1rem;
-                    }
-                    .ebook-cover {
-                        max-width: 200px;
-                    }
-                    .product-title {
-                        font-size: 2rem;
-                    }
-                    .product-author {
-                        font-size: 1.1rem;
-                    }
-                    .description-heading {
-                        font-size: 1.4rem;
-                    }
-                    .description-paragraph {
+                    .price-tag {
                         font-size: 0.9rem;
                     }
                     .product-price {
-                        font-size: 1.4rem;
+                        font-size: 1.6rem;
+                    }
+                    .currency {
+                        font-size: 1.1rem;
                     }
                     .price-value {
-                        font-size: 1.6rem;
+                        font-size: 2rem;
                     }
                     .buy-button {
                         font-size: 0.9rem;
                         height: 45px;
-                        max-width: 280px;
+                        padding: 0.7rem 1.5rem;
+                    }
+                    .urgency-banner-minimal {
+                        font-size: 0.8rem;
+                    }
+                    .urgency-banner-minimal span {
+                        font-size: 1rem;
+                    }
+                    .access-info-small {
+                        font-size: 0.7rem;
                     }
                 }
             `}</style>
