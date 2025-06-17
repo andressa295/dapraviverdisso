@@ -100,9 +100,9 @@ export default function As48LeisDoPoder() {
                 <section className="product-detail-section">
                     <div className="product-content-wrapper">
                         <div className="product-image-area">
-                            {/* IMAGEM DO E-BOOK - Substitua 'SEU_LINK_DA_IMAGEM_AQUI.jpg' pelo caminho real da sua imagem */}
+                            
                             <img
-                                src="/images/as-48-leis-do-poder.png" // Exemplo: Certifique-se que a imagem está em /public/images
+                                src="/images/as-48-leis-do-poder.png" 
                                 alt="Capa do e-book As 48 Leis do Poder"
                                 className="ebook-cover"
                             />
@@ -119,9 +119,9 @@ export default function As48LeisDoPoder() {
                             ))}
 
                             <div className="call-to-action">
-                                <p className="product-price">Por apenas: <span className="price-value">R$ 9,90</span></p>
+                                <p className="product-price">Por apenas: <span className="price-value">R$ 19,90</span></p>
                                 <button
-                                    onClick={handlePurchase} // Chamada para a nova função handlePurchase
+                                    onClick={handlePurchase} 
                                     className="buy-button primary-button"
                                 >
                                     <span role="img" aria-label="Carrinho de compras">🛒</span> Quero meu exemplar agora!
@@ -131,7 +131,6 @@ export default function As48LeisDoPoder() {
                     </div>
                 </section>
 
-                {/* Seção de depoimentos (mantido do Home, pode remover se não quiser aqui) */}
                 <section className="testimonials-section">
                     <h3 className="testimonials-title">
                         <span className="highlight-text">O que dizem</span> sobre a Phandco
