@@ -147,7 +147,7 @@ export default function Home() {
                             onClick={() => router.push('/vendas/liberte-o-poder')}
                             className="portal-link-button secondary-button"
                         >
-                            <span role="img" aria-label="Mente">🧠</span> LIBERTE O PODER DO SEU SUBCONSCIENTE - J. MURPHY
+                            <span role="img" aria-label="Mente">🧠</span> O PODER DO SEU SUBCONSCIENTE - J. MURPHY
                         </button>
 
                     </div>
