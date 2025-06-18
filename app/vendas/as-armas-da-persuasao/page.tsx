@@ -108,7 +108,7 @@ export default function AsArmasDaPersuasao() {
     ];
 
     const handlePurchase = () => {
-        window.location.href = 'https://pay.hotmart.com/I79205438Y?sck=HOTMART_PRODUCT_PAGE&off=gyzl7ij7&hotfeature=32&_gl=1*462wc5*_gcl_aw*R0NMLjE3NTAwMDU3MjMuQ2p3S0NBanczcm5DQmhCeEVpd0FyTjBRRTBrNHpDc1hoR1FWODNjZktOOGR6TS0xUXVFb1Bxb29UNTlOd3hfbkQtWUtJMlBTRGY4QVFob0N0dDhRQXZEX0J3RQ..*_gcl_au*MTQ5MjY2NDg0Mi4xNzQ5NjQ2MDU4LjUzNjA3NTQ5Ny4xNzUwMjAxMzg3LjE3NTAyMDUzMTU.*_ga*MTk5NTIwOTgzNy4xNzQ5NjQ2MDU3*_ga_GQH2V1F11Q*czE3NTAyMDEyODkkbzUkZzEkdDE3NTAyMDUzMjckajQ0JGwwJGgw&bid=1750205330803';
+        window.location.href = 'https://go.hotmart.com/U100347824B';
     }
 
     return (

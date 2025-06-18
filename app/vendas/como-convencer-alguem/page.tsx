@@ -113,7 +113,7 @@ export default function ComoConvencerAlguem() {
     ];
 
     const handlePurchase = () => {
-        window.location.href = 'https://pay.hotmart.com/E95823614G?sck=HOTMART_PRODUCT_PAGE&off=2dy8w0pg&hotfeature=32&bid=1750203656047';
+        window.location.href = 'https://go.hotmart.com/S100303261Y';
     }
 
     return (

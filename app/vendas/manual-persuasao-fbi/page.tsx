@@ -109,7 +109,7 @@ export default function ManualPersuasaoFBI() {
     ];
 
     const handlePurchase = () => {
-        window.location.href = 'https://pay.hotmart.com/R86247093X?sck=HOTMART_PRODUCT_PAGE&off=39312cej&hotfeature=32&_gl=1*1ewqrwo*_gcl_aw*R0NMLjE3NTAwMDU3MjMuQ2p3S0NBanczcm5DQmhCeEVpd0FyTjBRRTBrNHpDc1hoR1FWODNjZktOOGR6TS0xUXVFb1Bxb29UNTlOd3hfbkQtWUtJMlBTRGY4QVFob0N0dDhRQXZEX0J3RQ..*_gcl_au*MTQ5MjY2NDg0Mi4xNzQ5NjQ2MDU4LjUzNjA3NTQ5Ny4xNzUwMjAxMzg3LjE3NTAyMDE2OTk.*_ga*MTk5NTIwOTgzNy4xNzQ5NjQ2MDU3*_ga_GQH2V1F11Q*czE3NTAyMDEyODkkbzUkZzEkdDE3NTAyMDE3MTAkajM1JGwwJGgw&bid=1750201715355';
+        window.location.href = 'https://go.hotmart.com/X100303492O';
     }
 
     return (
