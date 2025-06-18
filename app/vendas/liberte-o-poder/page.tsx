@@ -115,7 +115,7 @@ export default function LiberteOPoderDoSeuSubconsciente() {
     ];
 
     const handlePurchase = () => {
-        window.location.href = 'https://pay.hotmart.com/F69941705E?sck=HOTMART_PRODUCT_PAGE&off=booolh8b&hotfeature=32&_gl=1*182goj*_gcl_aw*R0NMLjE3NTAwMDU3MjMuQ2p3S0NBanczcm5DQmhCeEVpd0FyTjBRRTBrNHpDc1hoR1FWODNjZktOOGR6TS0xUXVFb1Bxb29UNTlOd3hfbkQtWUtJMlBTRGY4QVFob0N0dDhRQXZEX0J3RQ..*_gcl_au*MTQ5MjY2NDg0Mi4xNzQ5NjQ2MDU4LjUzNjA3NTQ5Ny4xNzUwMjAxMzg3LjE3NTAyMDQ2NjI.*_ga*MTk5NTIwOTgzNy4xNzQ5NjQ2MDU3*_ga_GQH2V1F11Q*czE3NTAyMDEyODkkbzUkZzEkdDE3NTAyMDQ2NzckajM3JGwwJGgw&bid=1750204682335';
+        window.location.href = 'https://go.hotmart.com/T100304595H';
     }
 
     return (

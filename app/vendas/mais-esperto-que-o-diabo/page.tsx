@@ -105,7 +105,7 @@ export default function MaisEspertoQueODiabo() {
     ];
 
     const handlePurchase = () => {
-        window.location.href = 'https://pay.hotmart.com/T94045964Q?checkoutMode=0&bid=1750201840606';
+        window.location.href = 'https://go.hotmart.com/P100303365K';
     }
 
     return (
