@@ -198,14 +198,14 @@ export default function ComboPoderMentalPage() {
           flex-direction: column;
           align-items: center;
           /* AJUSTE AQUI: padding-top para compensar a altura do cabeçalho */
-          padding-top: 60px; /* Baseado na altura aproximada do header fixo */
+          /* Tentando um valor um pouco menor, já que o header também teve padding reduzido */
+          padding-top: 55px; /* De 60px para 55px. Testar este valor! */
         }
 
         section {
             width: 100%;
             max-width: 1100px;
-            /* AJUSTE AQUI: Padding vertical e horizontal padrão das seções */
-            padding: 30px 25px; /* Ajustado para 25px nas laterais */
+            padding: 30px 25px; /* Mantido em 30px vertical, 25px horizontal para desktop */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -245,12 +245,14 @@ export default function ComboPoderMentalPage() {
         }
 
         .hero-section {
-            /* AJUSTE AQUI: min-height para preencher a tela, ajustado para o padding-top do main-container */
-            min-height: calc(100vh - 60px); /* Ajuste para o novo padding-top */
+            /* AJUSTE AQUI: min-height para preencher a tela, ajustado para o novo padding-top do main-container */
+            min-height: calc(100vh - 55px); /* Ajuste para o novo padding-top */
             justify-content: center;
-            gap: 15px;
-            padding-top: 0; /* Padding superior já no main-container */
-            padding-bottom: 30px;
+            /* AJUSTE AQUI: Reduzir um pouco mais o gap interno se o conteúdo ainda estiver muito espaçado */
+            gap: 10px; /* Era 15px. Testar este valor! */
+            padding-top: 0;
+            /* AJUSTE AQUI: Reduzir o padding-bottom para o botão não ficar tão isolado */
+            padding-bottom: 20px; /* Era 30px. Testar este valor! */
         }
         .hero-title {
             font-size: 3.2rem;
@@ -259,13 +261,13 @@ export default function ComboPoderMentalPage() {
             color: #fff;
             letter-spacing: -1.5px;
             text-shadow: 0 0 30px rgba(91, 56, 236, 0.5);
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Reduzido de 10px */
         }
         .hero-subtitle {
             font-size: 1.1rem;
             max-width: 600px;
             color: #c0b8e0;
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduzido de 25px */
         }
         .secure-purchase-text {
             font-size: 0.7rem;
@@ -277,7 +279,7 @@ export default function ComboPoderMentalPage() {
             background-color: rgba(255,255,255, 0.03);
             border-top: 1px solid rgba(255,255,255, 0.1);
             border-bottom: 1px solid rgba(255,255,255, 0.1);
-            padding: 30px 25px; /* Ajustado padding lateral */
+            padding: 30px 25px; /* Mantido 30px vertical, 25px horizontal */
         }
         .pain-section h2 {
             font-size: 2.2rem;
@@ -309,7 +311,7 @@ export default function ComboPoderMentalPage() {
             text-align: center;
             align-items: center;
             gap: 15px;
-            padding: 40px 25px; /* Ajustado padding lateral */
+            padding: 40px 25px;
         }
         .solution-image-container {
             display: flex;
@@ -338,7 +340,7 @@ export default function ComboPoderMentalPage() {
         }
 
         .learning-section {
-            padding: 40px 25px; /* Ajustado padding lateral */
+            padding: 40px 25px;
         }
         .learning-grid {
             display: grid;
@@ -372,7 +374,7 @@ export default function ComboPoderMentalPage() {
         }
 
         .benefits-section {
-            padding: 40px 25px; /* Ajustado padding lateral */
+            padding: 40px 25px;
         }
         .benefits-list {
             list-style: none;
@@ -395,7 +397,7 @@ export default function ComboPoderMentalPage() {
 
         .final-cta-section {
             background: #000;
-            padding: 40px 25px; /* Ajustado padding lateral */
+            padding: 40px 25px;
         }
         .offer-title {
             font-size: 2rem;
@@ -450,7 +452,8 @@ export default function ComboPoderMentalPage() {
           transition: all 0.3s ease;
           box-shadow: 0 8px 20px -8px rgba(37, 117, 252, 0.4);
           overflow: hidden;
-          margin-bottom: 8px;
+          /* AJUSTE AQUI: Margem inferior para o botão CTA */
+          margin-bottom: 6px; /* Reduzido de 8px */
         }
         .cta-button:hover {
             transform: translateY(-2px);
@@ -493,7 +496,7 @@ export default function ComboPoderMentalPage() {
             background: #000;
             font-size: 0.75rem;
             color: #A0A0A0;
-            padding: 20px 25px; /* Ajustado padding lateral para 25px */
+            padding: 20px 25px; /* Mantido 20px vertical, 25px horizontal */
             text-align: center;
             line-height: 1.5;
             border-top: 1px solid rgba(255,255,255, 0.1);
@@ -507,22 +510,26 @@ export default function ComboPoderMentalPage() {
         }
 
 
-        /* RESPONSIVIDADE */
+        /* RESPONSIVIDADE - FOCO NOS AJUSTES PARA MOBILE */
         @media (max-width: 768px) {
             .main-container {
-                padding-top: 60px; /* Mantém 60px para cabeçalho mobile */
+                /* AJUSTE AQUI para mobile: padding-top para o cabeçalho.
+                   Experimentar um valor menor que 60px para aproximar mais */
+                padding-top: 55px; /* De 60px para 55px para telas menores */
             }
             section {
-                /* AJUSTE AQUI: Padding horizontal para mobile */
-                padding: 25px 25px; /* Mantido em 25px para dar mais margem */
+                /* AJUSTE AQUI: Padding horizontal para mobile (margens dos lados) */
+                padding: 25px 25px; /* Mantido 25px para dar margem suficiente */
             }
             .section-title, .pain-section h2, .offer-title {
                 font-size: 1.6rem;
                 margin-bottom: 15px;
             }
             .hero-section {
-                min-height: calc(100vh - 60px); /* Ajustado para 60px do header mobile */
-                padding-bottom: 25px;
+                /* AJUSTE AQUI: min-height para mobile, alinhado com o novo padding-top do main-container */
+                min-height: calc(100vh - 55px); /* Ajuste para 55px do header mobile */
+                /* AJUSTE AQUI: Reduzir ainda mais o padding-bottom da hero-section */
+                padding-bottom: 20px; /* De 25px para 20px */
                 gap: 10px;
             }
             .hero-title {
@@ -589,10 +596,9 @@ export default function ComboPoderMentalPage() {
             .cta-button .price-tag { font-size: 0.6rem; }
             .flying-book { font-size: 1rem; }
             
-            /* AJUSTE AQUI FINAL DO RODAPÉ PARA MOBILE */
             .site-footer { 
                 font-size: 0.68rem; 
-                padding: 15px 25px; /* Aumenta padding horizontal para 25px em mobile */
+                padding: 15px 25px; /* Mantido 15px vertical, 25px horizontal */
                 line-height: 1.4; 
             }
             .site-footer p {
@@ -602,18 +608,18 @@ export default function ComboPoderMentalPage() {
 
         @media (max-width: 480px) {
             .main-container {
-                padding-top: 55px; /* Reduzindo um pouco mais para telas muito pequenas (com base no header de 480px) */
+                padding-top: 55px; /* Mantido 55px para telas muito pequenas */
             }
             section {
-                padding: 20px 20px; /* Padding para telas muito pequenas */
+                padding: 20px 20px; /* Mantido 20px vertical, 20px horizontal */
             }
             .hero-section {
-                min-height: calc(100vh - 55px); /* Ajusta min-height */
+                min-height: calc(100vh - 55px);
             }
             .section-title, .pain-section h2, .offer-title { font-size: 1.4rem; }
             .hero-title { font-size: 1.7rem; }
             .hero-subtitle { font-size: 0.85rem; }
-            .cta-button { font-size: 0.75rem; padding: 8px 15px; }
+            .cta-button { padding: 8px 15px; font-size: 0.75rem; } /* Ajuste de padding e font-size */
             .price-to { font-size: 1.5rem; }
             .pain-point { font-size: 0.7rem; }
             .learning-card h3 { font-size: 0.95rem; }
@@ -621,7 +627,7 @@ export default function ComboPoderMentalPage() {
             .benefits-list li { font-size: 0.78rem; }
             
             .site-footer {
-                padding: 12px 15px; /* Mantém 12px 15px para telas minúsculas */
+                padding: 12px 15px; /* Mantido 12px vertical, 15px horizontal */
                 font-size: 0.6rem;
                 line-height: 1.3;
             }
