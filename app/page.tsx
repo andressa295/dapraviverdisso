@@ -59,8 +59,8 @@ export default function ComboPoderMentalPage() {
         {/* EFEITO DE LUZ DE FUNDO */}
         <div className="aurora-light"></div>
         
-        {/* NOVA PRIMEIRA SEÇÃO: APRESENTAÇÃO DA SOLUÇÃO (antes era a seção 3) */}
-        <section className="solution-section first-section"> {/* Adicionado classe 'first-section' */}
+        {/* NOVA PRIMEIRA SEÇÃO: APRESENTAÇÃO DA SOLUÇÃO */}
+        <section className="solution-section"> {/* Removido a classe 'first-section' para simplificar os estilos */ }
             <div className="solution-image-container">
                 <Image 
                   src="/images/ebooks.png" 
@@ -79,7 +79,7 @@ export default function ComboPoderMentalPage() {
             </div>
         </section>
 
-        {/* NOVA SEGUNDA SEÇÃO: HERO - A GRANDE PROMESSA (antes era a seção 1) */}
+        {/* NOVA SEGUNDA SEÇÃO: HERO - A GRANDE PROMESSA */}
         <section className="hero-section">
           <h1 className="hero-title">Sua Mente Cria Sua Realidade.<br/>Aprenda a Comandá-la.</h1>
           <p className="hero-subtitle">
@@ -107,7 +107,7 @@ export default function ComboPoderMentalPage() {
           <p className="pain-solution-text">Isso não é falta de capacidade. É a sua programação mental que precisa de um upgrade.</p>
         </section>
         
-        {/* SEÇÃO 4: O QUE VOCÊ VAI APRENDER (ordem mantida, mas agora é a 4a) */}
+        {/* SEÇÃO 4: O QUE VOCÊ VAI APRENDER */}
         <section className="learning-section">
             <h2 className="section-title">O Que Você Vai Dominar</h2>
             <div className="learning-grid">
@@ -130,7 +130,7 @@ export default function ComboPoderMentalPage() {
             </div>
         </section>
 
-        {/* SEÇÃO 5: VANTAGENS (BENEFÍCIOS) (ordem mantida, mas agora é a 5a) */}
+        {/* SEÇÃO 5: VANTAGENS (BENEFÍCIOS) */}
         <section className="benefits-section">
             <h2 className="section-title">Uma Transformação em Todas as Áreas da Sua Vida</h2>
             <ul className="benefits-list">
@@ -146,7 +146,7 @@ export default function ComboPoderMentalPage() {
             </ul>
         </section>
         
-        {/* SEÇÃO 6: CHAMADA PARA AÇÃO FINAL (OFERTA) (ordem mantida, mas agora é a 6a) */}
+        {/* SEÇÃO 6: CHAMADA PARA AÇÃO FINAL (OFERTA) */}
         <section className="final-cta-section">
             <h2 className="offer-title">Sua jornada de transformação começa agora.</h2>
             <div className="price-box">
@@ -197,13 +197,16 @@ export default function ComboPoderMentalPage() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding-top: 60px; /* Ajuste para a altura do cabeçalho */
+          /* AJUSTE AQUI: padding-top para compensar a altura do cabeçalho */
+          /* Valor ajustado, testar para ver se encaixa perfeitamente */
+          padding-top: 60px; /* Tentando 60px para um ajuste mais preciso */
         }
 
         section {
             width: 100%;
             max-width: 1100px;
-            padding: 30px 25px; /* Padding vertical e horizontal padrão das seções */
+            /* Padding vertical e horizontal padrão das seções */
+            padding: 30px 25px; /* Mantido 30px vertical, 25px horizontal */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -242,32 +245,30 @@ export default function ComboPoderMentalPage() {
             100% { transform: translateX(-50%) translateY(-20%) rotate(360deg); }
         }
 
-        /* AJUSTES PARA A NOVA PRIMEIRA SEÇÃO (solution-section quando é first-section) */
-        .solution-section.first-section {
-            padding-top: 40px; /* Ajuste o padding-top para a primeira seção, um pouco maior que as demais */
-            padding-bottom: 40px; /* Padding bottom similar a outras seções */
-            
-            /* PADRÃO PARA DESKTOP: IMAGEM AO LADO DO TEXTO */
-            flex-direction: row; /* Coloca imagem e texto lado a lado */
-            text-align: left; /* Alinha o texto à esquerda */
-            align-items: center; /* Centraliza itens verticalmente */
-            gap: 50px; /* Espaçamento maior entre imagem e texto no desktop */
+        /* AJUSTES PARA solution-section (agora é a primeira seção) */
+        .solution-section {
+            /* Padrão para Desktop: Imagem ao lado do texto */
+            flex-direction: row; 
+            text-align: left; /* Texto alinhado à esquerda no desktop */
+            align-items: center; 
+            gap: 50px; 
+            padding-top: 40px; /* Padding top específico para a primeira seção */
+            padding-bottom: 40px; 
         }
-        /* Estes estilos agora são o padrão para a solution-section, ajustados para layout lado a lado */
         .solution-image-container {
-            flex: 1; /* Ocupa um espaço flexível */
+            flex: 1; 
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 0; /* Não há margem inferior quando é lado a lado */
+            margin-bottom: 0; /* Sem margem inferior no layout lado a lado */
         }
         .solution-image {
-            max-width: 100%; /* Ocupa 100% do seu container flexível */
+            max-width: 100%; 
             height: auto;
         }
         .solution-text-container {
-            flex: 1.5; /* Ocupa mais espaço que a imagem */
-            width: auto; /* Deixa flex determinar a largura */
+            flex: 1.5; 
+            width: auto; 
         }
         .solution-text-container h2 {
             font-size: 2rem;
@@ -285,8 +286,8 @@ export default function ComboPoderMentalPage() {
             min-height: auto; 
             justify-content: center;
             gap: 15px;
-            padding-top: 30px; /* Agora tem um padding top normal de seção */
-            padding-bottom: 30px; /* Mantém padding bottom */
+            padding-top: 30px; /* Padding top normal de seção */
+            padding-bottom: 30px; 
         }
         .hero-title {
             font-size: 3.2rem;
@@ -513,34 +514,39 @@ export default function ComboPoderMentalPage() {
         /* RESPONSIVIDADE */
         @media (max-width: 768px) {
             .main-container {
-                padding-top: 60px; /* Mantido 60px para cabeçalho mobile */
+                /* AJUSTE AQUI: padding-top para cabeçalho mobile */
+                padding-top: 60px; /* Tentando 60px como um bom valor */
             }
             section {
-                padding: 25px 25px; /* Padding horizontal para mobile */
+                /* AJUSTE AQUI: Padding horizontal para mobile (margens dos lados) */
+                padding: 25px 25px; /* Mantido em 25px para dar margem suficiente */
             }
             .section-title, .pain-section h2, .offer-title {
                 font-size: 1.6rem;
                 margin-bottom: 15px;
             }
-            /* AJUSTES PARA A NOVA PRIMEIRA SEÇÃO MOBILE (solution-section) */
-            .solution-section { /* Sem a classe 'first-section' aqui, pois é geral para solution-section */
-                flex-direction: column; /* IMAGEM ACIMA DO TEXTO NO MOBILE */
-                text-align: center; /* Centraliza o texto */
-                align-items: center; /* Centraliza os itens */
-                gap: 10px; /* Menos espaçamento no mobile */
+
+            /* AJUSTES PARA solution-section NO MOBILE (IMAGEM ACIMA DO TEXTO) */
+            .solution-section {
+                flex-direction: column; /* Força imagem acima do texto no mobile */
+                text-align: center; /* Centraliza o texto no mobile */
+                align-items: center; /* Centraliza a imagem e o container de texto */
+                gap: 10px; /* Espaçamento entre imagem e texto no mobile */
                 padding-top: 30px; /* Padding top normal para mobile */
                 padding-bottom: 30px; /* Padding bottom normal para mobile */
             }
             .solution-image-container {
-                flex: none; /* Remove a flexibilidade */
+                flex: none; /* Remove a flexibilidade definida para desktop */
                 margin-bottom: 10px; /* Margem abaixo da imagem no mobile */
             }
             .solution-image {
                 max-width: 90%; /* A imagem pode ocupar mais largura no mobile */
+                width: auto; /* Deixa a largura ser controlada pelo max-width */
             }
             .solution-text-container {
-                width: 100%; /* Ocupa 100% da largura no mobile */
+                width: 100%; /* Ocupa 100% da largura disponível no mobile */
                 text-align: center; /* Centraliza o texto no mobile */
+                flex: none; /* Remove a flexibilidade definida para desktop */
             }
             .solution-text-container h2 {
                 font-size: 1.6rem;
@@ -550,14 +556,15 @@ export default function ComboPoderMentalPage() {
                 font-size: 0.85rem;
                 margin-bottom: 8px;
             }
-            /* FIM DOS AJUSTES PARA A NOVA PRIMEIRA SEÇÃO MOBILE */
+            /* FIM DOS AJUSTES PARA solution-section NO MOBILE */
 
 
             .hero-section {
-                min-height: auto;
-                padding-top: 25px;
-                padding-bottom: 25px;
+                min-height: auto; 
+                justify-content: center;
                 gap: 10px;
+                padding-top: 25px; 
+                padding-bottom: 25px; 
             }
             .hero-title {
                 font-size: 2rem;
@@ -612,6 +619,9 @@ export default function ComboPoderMentalPage() {
         }
 
         @media (max-width: 480px) {
+            .main-container {
+                padding-top: 55px; /* Mantido 55px para telas muito pequenas */
+            }
             section {
                 padding: 20px 20px;
             }
