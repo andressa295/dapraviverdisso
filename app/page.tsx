@@ -1,16 +1,19 @@
 'use client'
 
-import React, { useState } from 'react'; // Removido useEffect pois o CSS externo será tratado de outra forma
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Script from 'next/script';
-import Head from 'next/head'; // Importa o Head do Next.js para controle do <head>
-import { Poppins } from 'next/font/google'; // Importa a fonte Poppins
+import Head from 'next/head';
+import { Poppins } from 'next/font/google';
+
+// Importa o novo componente Header
+import Header from './components/Header'; // Ajuste o caminho se necessário
 
 // Configura a fonte Poppins
 const poppins = Poppins({
   weight: ['400', '600', '700', '900'],
   subsets: ['latin'],
-  display: 'swap', // 'swap' tenta usar uma fonte fallback rapidamente
+  display: 'swap',
 });
 
 // Componente de Ícone
@@ -42,16 +45,16 @@ export default function ComboPoderMentalPage() {
 
   return (
     <>
-      {/* Usamos Next/Head para inserir o CSS da Hotmart no <head> da página */}
       <Head>
         <link 
           rel="stylesheet" 
           type="text/css" 
           href="https://static.hotmart.com/css/hotmart-fb.min.css" 
-          // Opcional: Adicione um 'key' se você tiver vários links parecidos no <Head>
-          // key="hotmart-css"
         />
       </Head>
+
+      {/* NOVO: Adiciona o componente Header aqui */}
+      <Header />
 
       <main className={`main-container ${poppins.className}`}>
         {/* EFEITO DE LUZ DE FUNDO */}
@@ -89,7 +92,7 @@ export default function ComboPoderMentalPage() {
         <section className="solution-section">
             <div className="solution-image-container">
                 <Image 
-                  src="/images/ebooks.png" 
+                  src="/images/combo-poder-mental.png" 
                   alt="Combo Poder Mental: E-books de Reprogramação Mental, Hábitos e Manifestação" 
                   width={400} 
                   height={400} 
@@ -176,33 +179,29 @@ export default function ComboPoderMentalPage() {
 
       {/* Estilos globais e locais com styled-jsx */}
       <style jsx global>{`
-        /* Importante: A fonte Poppins agora é gerenciada por next/font,
-           então não use @import url() aqui para ela. */
-        
         html, body {
           margin: 0;
           padding: 0;
           background-color: #0c0a15;
           color: #EAEAEA;
           scroll-behavior: smooth;
-          /* A propriedade font-family será aplicada via className do next/font
-             no elemento <main> ou <body> */
         }
       `}</style>
       <style jsx>{`
-        /* SEUS ESTILOS LOCAIS EXISTENTES AQUI */
         .main-container {
           position: relative;
           overflow: hidden;
           display: flex;
           flex-direction: column;
           align-items: center;
+          /* Adiciona um padding-top para compensar o cabeçalho fixo */
+          padding-top: 70px; /* Altura aproximada do cabeçalho */
         }
-        
+
         section {
             width: 100%;
             max-width: 1100px;
-            padding: 80px 20px;
+            padding: 60px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -211,9 +210,9 @@ export default function ComboPoderMentalPage() {
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: #fff;
         }
         .section-title .highlight {
@@ -234,7 +233,7 @@ export default function ComboPoderMentalPage() {
             z-index: 1;
             pointer-events: none;
         }
-        
+
         @keyframes aurora-glow {
             0% { transform: translateX(-50%) translateY(-20%) rotate(0deg); }
             50% { transform: translateX(-40%) translateY(0%) rotate(180deg); }
@@ -242,54 +241,60 @@ export default function ComboPoderMentalPage() {
         }
 
         .hero-section {
-            min-height: 100vh;
+            min-height: calc(100vh - 70px); /* Ajusta para levar em conta o cabeçalho */
             justify-content: center;
             gap: 20px;
+            padding-top: 0; /* O espaçamento já é dado pelo main-container */
+            padding-bottom: 60px; /* Garante que não fique colado no fim da tela */
         }
         .hero-title {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 900;
             line-height: 1.2;
             color: #fff;
-            letter-spacing: -2px;
+            letter-spacing: -1.5px;
             text-shadow: 0 0 30px rgba(91, 56, 236, 0.5);
+            margin-bottom: 15px;
         }
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             max-width: 600px;
             color: #c0b8e0;
+            margin-bottom: 30px;
         }
         .secure-purchase-text {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #9c92c5;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .pain-section {
             background-color: rgba(255,255,255, 0.03);
             border-top: 1px solid rgba(255,255,255, 0.1);
             border-bottom: 1px solid rgba(255,255,255, 0.1);
+            padding: 40px 20px;
         }
         .pain-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
+            font-size: 2rem;
+            margin-bottom: 30px;
         }
         .pain-points-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 15px;
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .pain-point {
             background: rgba(12, 10, 21, 0.5);
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
             border: 1px solid rgba(255,255,255, 0.1);
             font-weight: 600;
+            font-size: 0.9rem;
         }
         .pain-solution-text {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #FDD835;
             font-weight: 600;
         }
@@ -298,7 +303,8 @@ export default function ComboPoderMentalPage() {
             flex-direction: row;
             text-align: left;
             align-items: center;
-            gap: 50px;
+            gap: 30px;
+            padding: 60px 20px;
         }
         .solution-image-container {
             flex: 1;
@@ -316,39 +322,46 @@ export default function ComboPoderMentalPage() {
             flex: 1.5;
         }
         .solution-text-container p {
-            font-size: 1.1rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.6;
             color: #c0b8e0;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+        }
+        .solution-text-container h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
         }
 
         .learning-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            gap: 20px;
             width: 100%;
+            margin-bottom: 20px;
         }
         .learning-card {
             background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
             border: 1px solid rgba(255,255,255, 0.1);
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             text-align: left;
             transition: all 0.3s ease;
         }
         .learning-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .learning-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #FDD835;
             margin-top: 0;
+            margin-bottom: 10px;
         }
         .learning-card p {
             color: #c0b8e0;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
         .benefits-list {
@@ -357,49 +370,51 @@ export default function ComboPoderMentalPage() {
             text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             max-width: 800px;
         }
         .benefits-list li {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             background: rgba(255,255,255, 0.03);
-            padding: 15px 20px;
+            padding: 12px 15px;
             border-radius: 8px;
         }
 
         .final-cta-section {
             background: #000;
+            padding: 60px 20px;
         }
         .offer-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .price-box {
             background: rgba(255,255,255,0.05);
             border: 2px solid #FDD835;
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             max-width: 400px;
             width: 100%;
         }
         .price-from {
             text-decoration: line-through;
             opacity: 0.7;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         .price-to {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: #FDD835;
-            margin: 10px 0;
+            margin: 8px 0;
         }
         .price-info {
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .cta-container {
@@ -413,25 +428,26 @@ export default function ComboPoderMentalPage() {
           display: inline-flex;
           flex-direction: column;
           align-items: center;
-          padding: 20px 40px;
+          padding: 15px 30px;
           border-radius: 50px;
           border: none;
           background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
           color: white;
           font-weight: 700;
-          font-size: 1.2rem;
+          font-size: 1rem;
           text-decoration: none;
           cursor: pointer;
           transition: all 0.3s ease;
           box-shadow: 0 10px 30px -10px rgba(37, 117, 252, 0.5);
           overflow: hidden;
+          margin-bottom: 10px;
         }
         .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -10px rgba(37, 117, 252, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px -10px rgba(37, 117, 252, 0.7);
         }
         .cta-button .price-tag {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 400;
             opacity: 0.9;
         }
@@ -440,7 +456,7 @@ export default function ComboPoderMentalPage() {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          font-size: 2rem;
+          font-size: 1.5rem;
           opacity: 0;
           pointer-events: none;
         }
@@ -462,28 +478,61 @@ export default function ComboPoderMentalPage() {
           100% { opacity: 0; transform: translate(300px, -400px) scale(0) rotate(360deg); }
         }
 
+        /* Ajustes do Rodapé */
         .site-footer {
             background: #000;
-            font-size: 0.8rem;
-            color: #888;
-            padding: 40px 20px;
+            font-size: 0.75rem; /* Aumentado um pouco para legibilidade */
+            color: #A0A0A0; /* Cor um pouco mais clara */
+            padding: 30px 20px; /* Padding ajustado */
+            text-align: center; /* Garante que o texto esteja centralizado */
+            line-height: 1.5; /* Melhora a legibilidade */
+            border-top: 1px solid rgba(255,255,255, 0.1); /* Linha divisória */
         }
-        
+        .site-footer p {
+            margin: 5px 0; /* Ajusta a margem entre parágrafos */
+        }
+
+        /* RESPONSIVIDADE */
         @media (max-width: 768px) {
-            .section-title, .pain-section h2, .offer-title { font-size: 2.2rem; }
-            .hero-title { font-size: 2.8rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-            .solution-section { flex-direction: column; text-align: center; }
-            .learning-grid { grid-template-columns: 1fr; }
-            .learning-card { text-align: center; }
-            .benefits-list li { font-size: 1rem; text-align: left; }
-            .price-to { font-size: 2.5rem; }
-            .cta-button { padding: 15px 30px; font-size: 1rem; }
+            .main-container {
+                padding-top: 70px; /* Ajusta para o cabeçalho móvel */
+            }
+            section {
+                padding: 40px 15px;
+            }
+            .section-title, .pain-section h2, .offer-title { font-size: 1.8rem; margin-bottom: 20px; }
+            .hero-section {
+                min-height: calc(100vh - 70px); /* Ajusta para o cabeçalho móvel */
+                padding-top: 0; /* Não precisa de padding extra aqui, já tem no main-container */
+                padding-bottom: 40px;
+            }
+            .hero-title { font-size: 2.2rem; letter-spacing: -1px; margin-bottom: 10px; }
+            .hero-subtitle { font-size: 1rem; margin-bottom: 20px; }
+            .solution-section { flex-direction: column; text-align: center; gap: 20px; padding: 40px 15px; }
+            .solution-text-container { text-align: left; }
+            .learning-grid { grid-template-columns: 1fr; gap: 15px; margin-bottom: 15px; }
+            .learning-card { text-align: left; padding: 15px; }
+            .learning-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+            .learning-card p { font-size: 0.9rem; }
+            .benefits-list li { font-size: 0.95rem; padding: 10px 12px; gap: 8px; }
+            .price-to { font-size: 2rem; margin: 5px 0; }
+            .cta-button { padding: 12px 25px; font-size: 0.9rem; margin-bottom: 8px; }
+            .flying-book { font-size: 1.2rem; }
+            .site-footer { font-size: 0.7rem; padding: 25px 15px; } /* Ajuste de padding mobile */
+            .pain-points-grid { gap: 10px; margin-bottom: 20px; }
+            .pain-point { font-size: 0.85rem; padding: 12px; }
+            .pain-solution-text { font-size: 0.95rem; }
+            .price-box { padding: 20px; margin-bottom: 20px; }
+            .price-from { font-size: 0.9rem; }
+            .price-info { font-size: 0.8rem; }
         }
 
         @media (max-width: 480px) {
-            .hero-title { font-size: 2.2rem; }
-            .section-title, .pain-section h2, .offer-title { font-size: 1.8rem; }
+            .hero-title { font-size: 2rem; }
+            .section-title, .pain-section h2, .offer-title { font-size: 1.6rem; }
+            .hero-subtitle { font-size: 0.9rem; }
+            .cta-button { font-size: 0.85rem; padding: 10px 20px; }
+            .price-to { font-size: 1.8rem; }
         }
       `}</style>
     </>
