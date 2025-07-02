@@ -1,15 +1,13 @@
 // components/Header.tsx
-'use client'; // Necessário para usar hooks como useState e useEffect
+'use client'; 
 
 import React, { useState, useEffect } from 'react';
 
 const Header = () => {
   // Data final da promoção (Exemplo: 2 dias a partir de agora).
   // AJUSTE ESTA DATA para a sua data final REAL no formato 'YYYY-MM-DDTHH:mm:ss'.
-  // Use um ano futuro para testes, ex: 2025-07-04T23:59:59
   const promotionEndDate = new Date('2025-07-04T23:59:59').getTime(); 
 
-  // Estado para controlar se o componente já foi montado no cliente
   const [hasMounted, setHasMounted] = useState(false); 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -19,7 +17,6 @@ const Header = () => {
   });
 
   useEffect(() => {
-    // Marca o componente como montado no cliente (após a hidratação)
     setHasMounted(true);
 
     const calculateAndUpdateTime = () => {
@@ -34,30 +31,24 @@ const Header = () => {
           seconds: Math.floor((difference % (1000 * 60)) / 1000),
         });
       } else {
-        // Se a promoção acabou, zera o tempo
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
-    // Calcula o tempo imediatamente na montagem
     calculateAndUpdateTime(); 
 
-    // Atualiza a cada segundo
     const timer = setInterval(calculateAndUpdateTime, 1000);
 
-    // Limpa o intervalo quando o componente é desmontado
     return () => clearInterval(timer);
-  }, [promotionEndDate]); // A dependência promotionEndDate é importante aqui
+  }, [promotionEndDate]); 
 
-  const timerComponents: React.ReactNode[] = []; // Use React.ReactNode[] para flexibilidade
+  const timerComponents: React.ReactNode[] = [];
 
-  // Lógica para preencher timerComponents APENAS SE hasMounted for true
   if (hasMounted) {
-    // Se a promoção ainda está ativa, mostra a contagem real
     if (promotionEndDate > new Date().getTime()) {
       Object.keys(timeLeft).forEach((interval) => {
         const value = timeLeft[interval as keyof typeof timeLeft];
-        if (typeof value === 'number' && value >= 0) { // Garantir que é um número não negativo
+        if (typeof value === 'number' && value >= 0) {
           timerComponents.push(
             <span key={interval} className="countdown-item">
               {String(value).padStart(2, '0')} {interval.charAt(0)}
@@ -66,7 +57,6 @@ const Header = () => {
         }
       });
     } else {
-      // Se a promoção já terminou, exibe 00:00:00 no cliente
       timerComponents.push(
         <span key="days" className="countdown-item">00d</span>,
         <span key="hours" className="countdown-item">00h</span>,
@@ -79,13 +69,12 @@ const Header = () => {
   return (
     <header className="main-header">
       <div className="header-content">
-        <div className="logo-placeholder">PHANDCO</div> {/* Pode ser uma imagem de logo */}
+        <div className="logo-placeholder">PHANDCO</div> 
         <div className="countdown-container">
-          {/* RENDERIZAÇÃO CONDICIONAL PARA EVITAR HYDRATION ERROR */}
-          {hasMounted ? ( // Se já montou no cliente, mostra o conteúdo real da contagem
+          {hasMounted ? ( 
             <>
               <span className="countdown-text">A OFERTA TERMINA EM:</span>
-              {timerComponents.length ? ( // Verifica se há componentes de timer para renderizar
+              {timerComponents.length ? ( 
                 <div className="countdown-timer">
                   {timerComponents}
                 </div>
@@ -94,7 +83,6 @@ const Header = () => {
               )}
             </>
           ) : (
-            // NO SERVIDOR OU ANTES DA HIDRATAÇÃO NO CLIENTE, SEMPRE MOSTRA UM PLACEHOLDER FIXO
             <span className="countdown-text placeholder-countdown">
               Carregando oferta...
             </span>
@@ -108,97 +96,140 @@ const Header = () => {
           top: 0;
           left: 0;
           width: 100%;
-          background: rgba(0, 0, 0, 0.8);
-          backdrop-filter: blur(8px);
+          background: rgba(0, 0, 0, 0.9); /* Um pouco menos transparente para melhorar contraste */
+          backdrop-filter: blur(10px); /* Mais desfoque */
           z-index: 1000;
-          padding: 10px 20px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+          padding: 12px 25px; /* Aumenta um pouco o padding para maior "presença" */
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra mais visível */
           display: flex;
           justify-content: center;
           align-items: center;
+          box-sizing: border-box; /* Garante que padding não aumente a largura total */
         }
         .header-content {
           width: 100%;
-          max-width: 1100px;
+          max-width: 1200px; /* Aumenta um pouco o max-width para dar mais espaço */
           display: flex;
-          justify-content: space-between;
+          justify-content: space-between; /* Mantém logo e contagem nas extremidades */
           align-items: center;
+          gap: 20px; /* Adiciona um gap para evitar que se encostem em telas médias */
         }
         .logo-placeholder {
-          font-size: 1.5rem;
+          font-size: 1.6rem; /* Aumenta levemente o logo */
           font-weight: 900;
           color: #FDD835;
           text-transform: uppercase;
+          flex-shrink: 0; /* Evita que o logo encolha demais */
         }
         .countdown-container {
           display: flex;
           align-items: center;
           gap: 10px;
+          flex-shrink: 1; /* Permite que a contagem encolha se necessário */
+          flex-wrap: nowrap; /* Tenta manter a contagem na mesma linha */
         }
         .countdown-text {
-          font-size: 0.9rem;
+          font-size: 0.85rem; /* Levemente maior */
           color: #c0b8e0;
           font-weight: 600;
           text-transform: uppercase;
+          white-space: nowrap; /* Evita que o texto quebre */
         }
         .placeholder-countdown {
-            color: #9c92c5; /* Cor mais suave para o placeholder */
+            color: #9c92c5; 
         }
         .countdown-timer {
           display: flex;
-          gap: 5px;
+          gap: 6px; /* Aumenta um pouco o gap entre os números */
         }
         .countdown-item {
           background-color: #333;
           color: #FDD835;
-          padding: 5px 8px;
+          padding: 6px 9px; /* Aumenta um pouco o padding interno */
           border-radius: 4px;
-          font-size: 1rem;
+          font-size: 1.05rem; /* Levemente maior */
           font-weight: 700;
-          min-width: 35px;
+          min-width: 40px; /* Garante largura mínima para 2 dígitos e 'd', 'h', etc. */
           text-align: center;
+          box-sizing: border-box;
         }
         .promotion-ended {
           color: #ff6347;
           font-weight: 700;
           font-size: 1rem;
+          white-space: nowrap;
         }
 
+        /* Responsividade para o cabeçalho */
         @media (max-width: 768px) {
           .main-header {
-            padding: 8px 15px;
+            padding: 10px 20px; /* Ajusta padding para mobile */
           }
           .header-content {
-            flex-direction: column;
-            gap: 5px;
+            flex-direction: row; /* Mantém em linha até onde for possível */
+            justify-content: space-between;
+            gap: 10px; /* Reduz gap para mobile */
           }
           .logo-placeholder {
-            font-size: 1.2rem;
+            font-size: 1.3rem; /* Ajusta logo para mobile */
+          }
+          .countdown-container {
+            flex-wrap: wrap; /* Permite quebrar linha se não couber */
+            justify-content: flex-end; /* Alinha à direita se quebrar */
+            text-align: right;
           }
           .countdown-text {
-            font-size: 0.75rem;
+            font-size: 0.7rem; /* Reduz texto da contagem */
+            white-space: normal; /* Permite quebrar se necessário */
+            width: 100%; /* Ocupa a linha toda se quebrar */
+            text-align: right;
+          }
+          .countdown-timer {
+            justify-content: flex-end; /* Alinha os itens da contagem à direita */
+            width: 100%; /* Ocupa a linha toda se quebrar */
           }
           .countdown-item {
-            font-size: 0.9rem;
-            padding: 4px 6px;
-            min-width: 30px;
+            font-size: 0.85rem; /* Ajusta tamanho do número */
+            padding: 4px 7px;
+            min-width: 32px;
           }
           .promotion-ended {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
           }
         }
 
         @media (max-width: 480px) {
+            .main-header {
+                padding: 8px 15px; /* Reduz padding para telas muito pequenas */
+            }
+            .logo-placeholder {
+                font-size: 1.1rem;
+            }
+            .countdown-text {
+                font-size: 0.65rem;
+            }
+            .countdown-item {
+                font-size: 0.75rem;
+                padding: 3px 5px;
+                min-width: 28px;
+            }
+            .promotion-ended {
+                font-size: 0.75rem;
+            }
+            /* Se ainda ficar muito apertado, pode forçar flex-direction: column no header-content aqui */
             .header-content {
                 flex-direction: column;
+                justify-content: center;
                 gap: 5px;
-                text-align: center;
             }
             .countdown-container {
                 justify-content: center;
             }
-            .logo-placeholder {
-                font-size: 1rem;
+            .countdown-text {
+                text-align: center;
+            }
+            .countdown-timer {
+                justify-content: center;
             }
         }
       `}</style>
