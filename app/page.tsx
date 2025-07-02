@@ -59,36 +59,8 @@ export default function ComboPoderMentalPage() {
         {/* EFEITO DE LUZ DE FUNDO */}
         <div className="aurora-light"></div>
         
-        {/* SEÇÃO 1: HERO - A GRANDE PROMESSA */}
-        <section className="hero-section">
-          <h1 className="hero-title">Sua Mente Cria Sua Realidade.<br/>Aprenda a Comandá-la.</h1>
-          <p className="hero-subtitle">
-            Desbloqueie prosperidade, foco e uma nova versão de si mesmo com o método definitivo para reprogramar sua mente.
-          </p>
-          <div className="cta-container">
-            <a href={hotmartLink} onClick={handleBuyClick} className={`cta-button ${isAnimating ? 'animating' : ''}`}>
-              <span className="button-text">QUERO TRANSFORMAR MINHA VIDA AGORA</span>
-              <span className="price-tag">DE R$127 POR APENAS R$67</span>
-              <span className="flying-book">🧠</span>
-            </a>
-            <p className="secure-purchase-text">Compra 100% segura. Acesso vitalício.</p>
-          </div>
-        </section>
-
-        {/* SEÇÃO 2: DOR - CONEXÃO COM O CLIENTE */}
-        <section className="pain-section">
-          <h2>Você se identifica com algum destes sinais?</h2>
-          <div className="pain-points-grid">
-            <div className="pain-point">A procrastinação vence você todos os dias.</div>
-            <div className="pain-point">Sente que está preso em um ciclo de autossabotagem.</div>
-            <div className="pain-point">A ansiedade e o cansaço mental dominam sua rotina.</div>
-            <div className="pain-point">Seus sonhos parecem cada vez mais distantes e impossíveis.</div>
-          </div>
-          <p className="pain-solution-text">Isso não é falta de capacidade. É a sua programação mental que precisa de um upgrade.</p>
-        </section>
-        
-        {/* SEÇÃO 3: APRESENTAÇÃO DA SOLUÇÃO */}
-        <section className="solution-section">
+        {/* NOVA PRIMEIRA SEÇÃO: APRESENTAÇÃO DA SOLUÇÃO (antes era a seção 3) */}
+        <section className="solution-section first-section"> {/* Adicionado classe 'first-section' */}
             <div className="solution-image-container">
                 <Image 
                   src="/images/ebooks.png" 
@@ -107,7 +79,35 @@ export default function ComboPoderMentalPage() {
             </div>
         </section>
 
-        {/* SEÇÃO 4: O QUE VOCÊ VAI APRENDER */}
+        {/* NOVA SEGUNDA SEÇÃO: HERO - A GRANDE PROMESSA (antes era a seção 1) */}
+        <section className="hero-section">
+          <h1 className="hero-title">Sua Mente Cria Sua Realidade.<br/>Aprenda a Comandá-la.</h1>
+          <p className="hero-subtitle">
+            Desbloqueie prosperidade, foco e uma nova versão de si mesmo com o método definitivo para reprogramar sua mente.
+          </p>
+          <div className="cta-container">
+            <a href={hotmartLink} onClick={handleBuyClick} className={`cta-button ${isAnimating ? 'animating' : ''}`}>
+              <span className="button-text">QUERO TRANSFORMAR MINHA VIDA AGORA</span>
+              <span className="price-tag">DE R$127 POR APENAS R$67</span>
+              <span className="flying-book">🧠</span>
+            </a>
+            <p className="secure-purchase-text">Compra 100% segura. Acesso vitalício.</p>
+          </div>
+        </section>
+
+        {/* SEÇÃO 2 (agora é a 3a seção): DOR - CONEXÃO COM O CLIENTE */}
+        <section className="pain-section">
+          <h2>Você se identifica com algum destes sinais?</h2>
+          <div className="pain-points-grid">
+            <div className="pain-point">A procrastinação vence você todos os dias.</div>
+            <div className="pain-point">Sente que está preso em um ciclo de autossabotagem.</div>
+            <div className="pain-point">A ansiedade e o cansaço mental dominam sua rotina.</div>
+            <div className="pain-point">Seus sonhos parecem cada vez mais distantes e impossíveis.</div>
+          </div>
+          <p className="pain-solution-text">Isso não é falta de capacidade. É a sua programação mental que precisa de um upgrade.</p>
+        </section>
+        
+        {/* SEÇÃO 4: O QUE VOCÊ VAI APRENDER (ordem mantida, mas agora é a 4a) */}
         <section className="learning-section">
             <h2 className="section-title">O Que Você Vai Dominar</h2>
             <div className="learning-grid">
@@ -130,7 +130,7 @@ export default function ComboPoderMentalPage() {
             </div>
         </section>
 
-        {/* SEÇÃO 5: VANTAGENS (BENEFÍCIOS) */}
+        {/* SEÇÃO 5: VANTAGENS (BENEFÍCIOS) (ordem mantida, mas agora é a 5a) */}
         <section className="benefits-section">
             <h2 className="section-title">Uma Transformação em Todas as Áreas da Sua Vida</h2>
             <ul className="benefits-list">
@@ -146,7 +146,7 @@ export default function ComboPoderMentalPage() {
             </ul>
         </section>
         
-        {/* SEÇÃO 6: CHAMADA PARA AÇÃO FINAL (OFERTA) */}
+        {/* SEÇÃO 6: CHAMADA PARA AÇÃO FINAL (OFERTA) (ordem mantida, mas agora é a 6a) */}
         <section className="final-cta-section">
             <h2 className="offer-title">Sua jornada de transformação começa agora.</h2>
             <div className="price-box">
@@ -197,15 +197,13 @@ export default function ComboPoderMentalPage() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          /* AJUSTE AQUI: padding-top para compensar a altura do cabeçalho */
-          /* Tentando um valor um pouco menor, já que o header também teve padding reduzido */
-          padding-top: 55px; /* De 60px para 55px. Testar este valor! */
+          padding-top: 60px; /* Ajuste para a altura do cabeçalho */
         }
 
         section {
             width: 100%;
             max-width: 1100px;
-            padding: 30px 25px; /* Mantido em 30px vertical, 25px horizontal para desktop */
+            padding: 30px 25px; /* Padding vertical e horizontal padrão das seções */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -244,15 +242,51 @@ export default function ComboPoderMentalPage() {
             100% { transform: translateX(-50%) translateY(-20%) rotate(360deg); }
         }
 
-        .hero-section {
-            /* AJUSTE AQUI: min-height para preencher a tela, ajustado para o novo padding-top do main-container */
-            min-height: calc(100vh - 55px); /* Ajuste para o novo padding-top */
+        /* AJUSTES PARA A NOVA PRIMEIRA SEÇÃO (solution-section quando é first-section) */
+        .solution-section.first-section {
+            padding-top: 40px; /* Ajuste o padding-top para a primeira seção, um pouco maior que as demais */
+            padding-bottom: 40px; /* Padding bottom similar a outras seções */
+            
+            /* PADRÃO PARA DESKTOP: IMAGEM AO LADO DO TEXTO */
+            flex-direction: row; /* Coloca imagem e texto lado a lado */
+            text-align: left; /* Alinha o texto à esquerda */
+            align-items: center; /* Centraliza itens verticalmente */
+            gap: 50px; /* Espaçamento maior entre imagem e texto no desktop */
+        }
+        /* Estes estilos agora são o padrão para a solution-section, ajustados para layout lado a lado */
+        .solution-image-container {
+            flex: 1; /* Ocupa um espaço flexível */
+            display: flex;
             justify-content: center;
-            /* AJUSTE AQUI: Reduzir um pouco mais o gap interno se o conteúdo ainda estiver muito espaçado */
-            gap: 10px; /* Era 15px. Testar este valor! */
-            padding-top: 0;
-            /* AJUSTE AQUI: Reduzir o padding-bottom para o botão não ficar tão isolado */
-            padding-bottom: 20px; /* Era 30px. Testar este valor! */
+            align-items: center;
+            margin-bottom: 0; /* Não há margem inferior quando é lado a lado */
+        }
+        .solution-image {
+            max-width: 100%; /* Ocupa 100% do seu container flexível */
+            height: auto;
+        }
+        .solution-text-container {
+            flex: 1.5; /* Ocupa mais espaço que a imagem */
+            width: auto; /* Deixa flex determinar a largura */
+        }
+        .solution-text-container h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .solution-text-container p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #c0b8e0;
+            margin-bottom: 10px;
+        }
+
+
+        .hero-section {
+            min-height: auto; 
+            justify-content: center;
+            gap: 15px;
+            padding-top: 30px; /* Agora tem um padding top normal de seção */
+            padding-bottom: 30px; /* Mantém padding bottom */
         }
         .hero-title {
             font-size: 3.2rem;
@@ -261,13 +295,13 @@ export default function ComboPoderMentalPage() {
             color: #fff;
             letter-spacing: -1.5px;
             text-shadow: 0 0 30px rgba(91, 56, 236, 0.5);
-            margin-bottom: 8px; /* Reduzido de 10px */
+            margin-bottom: 10px;
         }
         .hero-subtitle {
             font-size: 1.1rem;
             max-width: 600px;
             color: #c0b8e0;
-            margin-bottom: 20px; /* Reduzido de 25px */
+            margin-bottom: 25px;
         }
         .secure-purchase-text {
             font-size: 0.7rem;
@@ -279,7 +313,7 @@ export default function ComboPoderMentalPage() {
             background-color: rgba(255,255,255, 0.03);
             border-top: 1px solid rgba(255,255,255, 0.1);
             border-bottom: 1px solid rgba(255,255,255, 0.1);
-            padding: 30px 25px; /* Mantido 30px vertical, 25px horizontal */
+            padding: 30px 25px;
         }
         .pain-section h2 {
             font-size: 2.2rem;
@@ -306,41 +340,8 @@ export default function ComboPoderMentalPage() {
             font-weight: 600;
         }
 
-        .solution-section {
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            gap: 15px;
-            padding: 40px 25px;
-        }
-        .solution-image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .solution-image {
-            border-radius: 15px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            max-width: 80%;
-            height: auto;
-        }
-        .solution-text-container {
-            width: 100%;
-        }
-        .solution-text-container p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #c0b8e0;
-            margin-bottom: 10px;
-        }
-        .solution-text-container h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
         .learning-section {
-            padding: 40px 25px;
+            padding: 30px 25px;
         }
         .learning-grid {
             display: grid;
@@ -374,7 +375,7 @@ export default function ComboPoderMentalPage() {
         }
 
         .benefits-section {
-            padding: 40px 25px;
+            padding: 30px 25px;
         }
         .benefits-list {
             list-style: none;
@@ -397,7 +398,7 @@ export default function ComboPoderMentalPage() {
 
         .final-cta-section {
             background: #000;
-            padding: 40px 25px;
+            padding: 30px 25px;
         }
         .offer-title {
             font-size: 2rem;
@@ -452,8 +453,7 @@ export default function ComboPoderMentalPage() {
           transition: all 0.3s ease;
           box-shadow: 0 8px 20px -8px rgba(37, 117, 252, 0.4);
           overflow: hidden;
-          /* AJUSTE AQUI: Margem inferior para o botão CTA */
-          margin-bottom: 6px; /* Reduzido de 8px */
+          margin-bottom: 6px;
         }
         .cta-button:hover {
             transform: translateY(-2px);
@@ -496,7 +496,7 @@ export default function ComboPoderMentalPage() {
             background: #000;
             font-size: 0.75rem;
             color: #A0A0A0;
-            padding: 20px 25px; /* Mantido 20px vertical, 25px horizontal */
+            padding: 20px 25px;
             text-align: center;
             line-height: 1.5;
             border-top: 1px solid rgba(255,255,255, 0.1);
@@ -510,26 +510,53 @@ export default function ComboPoderMentalPage() {
         }
 
 
-        /* RESPONSIVIDADE - FOCO NOS AJUSTES PARA MOBILE */
+        /* RESPONSIVIDADE */
         @media (max-width: 768px) {
             .main-container {
-                /* AJUSTE AQUI para mobile: padding-top para o cabeçalho.
-                   Experimentar um valor menor que 60px para aproximar mais */
-                padding-top: 55px; /* De 60px para 55px para telas menores */
+                padding-top: 60px; /* Mantido 60px para cabeçalho mobile */
             }
             section {
-                /* AJUSTE AQUI: Padding horizontal para mobile (margens dos lados) */
-                padding: 25px 25px; /* Mantido 25px para dar margem suficiente */
+                padding: 25px 25px; /* Padding horizontal para mobile */
             }
             .section-title, .pain-section h2, .offer-title {
                 font-size: 1.6rem;
                 margin-bottom: 15px;
             }
+            /* AJUSTES PARA A NOVA PRIMEIRA SEÇÃO MOBILE (solution-section) */
+            .solution-section { /* Sem a classe 'first-section' aqui, pois é geral para solution-section */
+                flex-direction: column; /* IMAGEM ACIMA DO TEXTO NO MOBILE */
+                text-align: center; /* Centraliza o texto */
+                align-items: center; /* Centraliza os itens */
+                gap: 10px; /* Menos espaçamento no mobile */
+                padding-top: 30px; /* Padding top normal para mobile */
+                padding-bottom: 30px; /* Padding bottom normal para mobile */
+            }
+            .solution-image-container {
+                flex: none; /* Remove a flexibilidade */
+                margin-bottom: 10px; /* Margem abaixo da imagem no mobile */
+            }
+            .solution-image {
+                max-width: 90%; /* A imagem pode ocupar mais largura no mobile */
+            }
+            .solution-text-container {
+                width: 100%; /* Ocupa 100% da largura no mobile */
+                text-align: center; /* Centraliza o texto no mobile */
+            }
+            .solution-text-container h2 {
+                font-size: 1.6rem;
+                margin-bottom: 12px;
+            }
+            .solution-text-container p {
+                font-size: 0.85rem;
+                margin-bottom: 8px;
+            }
+            /* FIM DOS AJUSTES PARA A NOVA PRIMEIRA SEÇÃO MOBILE */
+
+
             .hero-section {
-                /* AJUSTE AQUI: min-height para mobile, alinhado com o novo padding-top do main-container */
-                min-height: calc(100vh - 55px); /* Ajuste para 55px do header mobile */
-                /* AJUSTE AQUI: Reduzir ainda mais o padding-bottom da hero-section */
-                padding-bottom: 20px; /* De 25px para 20px */
+                min-height: auto;
+                padding-top: 25px;
+                padding-bottom: 25px;
                 gap: 10px;
             }
             .hero-title {
@@ -547,28 +574,6 @@ export default function ComboPoderMentalPage() {
             .pain-points-grid { min-width: 180px; gap: 8px; margin-bottom: 15px; }
             .pain-point { font-size: 0.8rem; padding: 10px; }
             .pain-solution-text { font-size: 0.9rem; }
-
-            .solution-section {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-                gap: 10px;
-                padding: 30px 25px;
-            }
-            .solution-image-container {
-                margin-bottom: 10px;
-            }
-            .solution-image {
-                max-width: 90%;
-            }
-            .solution-text-container h2 {
-                font-size: 1.6rem;
-                margin-bottom: 12px;
-            }
-            .solution-text-container p {
-                font-size: 0.85rem;
-                margin-bottom: 8px;
-            }
 
             .learning-section { padding: 25px 25px; }
             .learning-grid { gap: 10px; margin-bottom: 10px; }
@@ -598,7 +603,7 @@ export default function ComboPoderMentalPage() {
             
             .site-footer { 
                 font-size: 0.68rem; 
-                padding: 15px 25px; /* Mantido 15px vertical, 25px horizontal */
+                padding: 15px 25px;
                 line-height: 1.4; 
             }
             .site-footer p {
@@ -607,19 +612,16 @@ export default function ComboPoderMentalPage() {
         }
 
         @media (max-width: 480px) {
-            .main-container {
-                padding-top: 55px; /* Mantido 55px para telas muito pequenas */
-            }
             section {
-                padding: 20px 20px; /* Mantido 20px vertical, 20px horizontal */
+                padding: 20px 20px;
             }
             .hero-section {
-                min-height: calc(100vh - 55px);
+                min-height: auto;
             }
             .section-title, .pain-section h2, .offer-title { font-size: 1.4rem; }
             .hero-title { font-size: 1.7rem; }
             .hero-subtitle { font-size: 0.85rem; }
-            .cta-button { padding: 8px 15px; font-size: 0.75rem; } /* Ajuste de padding e font-size */
+            .cta-button { padding: 8px 15px; font-size: 0.75rem; }
             .price-to { font-size: 1.5rem; }
             .pain-point { font-size: 0.7rem; }
             .learning-card h3 { font-size: 0.95rem; }
@@ -627,7 +629,7 @@ export default function ComboPoderMentalPage() {
             .benefits-list li { font-size: 0.78rem; }
             
             .site-footer {
-                padding: 12px 15px; /* Mantido 12px vertical, 15px horizontal */
+                padding: 12px 15px;
                 font-size: 0.6rem;
                 line-height: 1.3;
             }
