@@ -1,74 +1,103 @@
 // components/Header.tsx
-'use client';
+'use client'; // Necessário para usar hooks como useState e useEffect
 
-import React, { useState, useEffect } from 'react'; // <--- Garanta que React está importado aqui
+import React, { useState, useEffect } from 'react';
 
 const Header = () => {
   // Data final da promoção (Exemplo: 2 dias a partir de agora).
-  // Ajuste esta data para a sua data final real no formato 'YYYY-MM-DDTHH:mm:ss'.
-  // Exemplo: '2025-07-04T23:59:59' para 4 de julho de 2025 às 23:59:59
-  const promotionEndDate = new Date('2025-07-04T23:59:59').getTime(); // Data ajustada para um tempo razoável no futuro
+  // AJUSTE ESTA DATA para a sua data final REAL no formato 'YYYY-MM-DDTHH:mm:ss'.
+  // Use um ano futuro para testes, ex: 2025-07-04T23:59:59
+  const promotionEndDate = new Date('2025-07-04T23:59:59').getTime(); 
 
-  const calculateTimeLeft = () => {
-    const now = new Date().getTime();
-    const difference = promotionEndDate - now;
-
-    let timeLeft = {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    };
-
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((difference % (1000 * 60)) / 1000),
-      };
-    }
-    return timeLeft;
-  };
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  // Estado para controlar se o componente já foi montado no cliente
+  const [hasMounted, setHasMounted] = useState(false); 
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    // Marca o componente como montado no cliente (após a hidratação)
+    setHasMounted(true);
 
-    return () => clearTimeout(timer);
-  });
+    const calculateAndUpdateTime = () => {
+      const now = new Date().getTime();
+      const difference = promotionEndDate - now;
 
-  // CORREÇÃO AQUI: Use React.ReactNode[] para ser mais abrangente ou React.JSX.Element[]
-  // O tipo 'React.ReactNode[]' é geralmente mais flexível para arrays de elementos JSX.
-  const timerComponents: React.ReactNode[] = []; 
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      } else {
+        // Se a promoção acabou, zera o tempo
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
 
-  Object.keys(timeLeft).forEach((interval) => {
-    // A remoção dos @ts-ignore pode ser feita com um cast seguro se quiser ser mais rigoroso
-    // Por exemplo: const value = timeLeft[interval as keyof typeof timeLeft];
-    if (typeof timeLeft[interval as keyof typeof timeLeft] === 'number' && timeLeft[interval as keyof typeof timeLeft] >= 0) {
+    // Calcula o tempo imediatamente na montagem
+    calculateAndUpdateTime(); 
+
+    // Atualiza a cada segundo
+    const timer = setInterval(calculateAndUpdateTime, 1000);
+
+    // Limpa o intervalo quando o componente é desmontado
+    return () => clearInterval(timer);
+  }, [promotionEndDate]); // A dependência promotionEndDate é importante aqui
+
+  const timerComponents: React.ReactNode[] = []; // Use React.ReactNode[] para flexibilidade
+
+  // Lógica para preencher timerComponents APENAS SE hasMounted for true
+  if (hasMounted) {
+    // Se a promoção ainda está ativa, mostra a contagem real
+    if (promotionEndDate > new Date().getTime()) {
+      Object.keys(timeLeft).forEach((interval) => {
+        const value = timeLeft[interval as keyof typeof timeLeft];
+        if (typeof value === 'number' && value >= 0) { // Garantir que é um número não negativo
+          timerComponents.push(
+            <span key={interval} className="countdown-item">
+              {String(value).padStart(2, '0')} {interval.charAt(0)}
+            </span>
+          );
+        }
+      });
+    } else {
+      // Se a promoção já terminou, exibe 00:00:00 no cliente
       timerComponents.push(
-        <span key={interval} className="countdown-item">
-          {String(timeLeft[interval as keyof typeof timeLeft]).padStart(2, '0')} {interval.charAt(0)}
-        </span>
+        <span key="days" className="countdown-item">00d</span>,
+        <span key="hours" className="countdown-item">00h</span>,
+        <span key="minutes" className="countdown-item">00m</span>,
+        <span key="seconds" className="countdown-item">00s</span>
       );
     }
-  });
+  }
 
   return (
     <header className="main-header">
       <div className="header-content">
-        <div className="logo-placeholder">PHANDCO</div>
+        <div className="logo-placeholder">PHANDCO</div> {/* Pode ser uma imagem de logo */}
         <div className="countdown-container">
-          <span className="countdown-text">A OFERTA TERMINA EM:</span>
-          {timerComponents.length ? (
-            <div className="countdown-timer">
-              {timerComponents}
-            </div>
+          {/* RENDERIZAÇÃO CONDICIONAL PARA EVITAR HYDRATION ERROR */}
+          {hasMounted ? ( // Se já montou no cliente, mostra o conteúdo real da contagem
+            <>
+              <span className="countdown-text">A OFERTA TERMINA EM:</span>
+              {timerComponents.length ? ( // Verifica se há componentes de timer para renderizar
+                <div className="countdown-timer">
+                  {timerComponents}
+                </div>
+              ) : (
+                <span className="promotion-ended">PROMOÇÃO ENCERRADA!</span>
+              )}
+            </>
           ) : (
-            <span className="promotion-ended">PROMOÇÃO ENCERRADA!</span>
+            // NO SERVIDOR OU ANTES DA HIDRATAÇÃO NO CLIENTE, SEMPRE MOSTRA UM PLACEHOLDER FIXO
+            <span className="countdown-text placeholder-countdown">
+              Carregando oferta...
+            </span>
           )}
         </div>
       </div>
@@ -111,6 +140,9 @@ const Header = () => {
           color: #c0b8e0;
           font-weight: 600;
           text-transform: uppercase;
+        }
+        .placeholder-countdown {
+            color: #9c92c5; /* Cor mais suave para o placeholder */
         }
         .countdown-timer {
           display: flex;
