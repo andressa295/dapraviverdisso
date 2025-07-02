@@ -1,588 +1,491 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'; // Removido useEffect pois o CSS externo será tratado de outra forma
+import Image from 'next/image';
+import Script from 'next/script';
+import Head from 'next/head'; // Importa o Head do Next.js para controle do <head>
+import { Poppins } from 'next/font/google'; // Importa a fonte Poppins
 
-// Componente separado da logo (mantido)
-function LogoPhandcoSvg() {
-    return (
-        <svg
-            width="150"
-            height="45"
-            viewBox="0 0 160 50"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Logo Phandco"
-            className="logo-svg"
-        >
-            <text
-                x="0"
-                y="38"
-                fill="#E60023" // Vermelho da Phandco, próximo ao da Netflix
-                fontFamily="'Helvetica Neue', Helvetica, Arial, sans-serif"
-                fontWeight="700"
-                fontSize="40"
-                letterSpacing="-2"
-                style={{ filter: 'drop-shadow(0 1px 1px rgba(230, 0, 35, 0.4))' }}
-            >
-                Phandco
-            </text>
-        </svg>
-    )
-}
+// Configura a fonte Poppins
+const poppins = Poppins({
+  weight: ['400', '600', '700', '900'],
+  subsets: ['latin'],
+  display: 'swap', // 'swap' tenta usar uma fonte fallback rapidamente
+});
 
-export default function Home() {
-    const router = useRouter()
-    const [progress, setProgress] = useState(0)
+// Componente de Ícone
+const CheckIcon = () => (
+  <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="url(#gold-gradient)"/>
+    <defs><linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style={{stopColor: '#FDD835'}} /><stop offset="100%" style={{stopColor: '#E9B400'}}/></linearGradient></defs>
+  </svg>
+);
 
-    useEffect(() => {
-        let intervalId = setInterval(() => {
-            setProgress((old) => {
-                if (old >= 70) {
-                    clearInterval(intervalId)
-                    return 70
-                }
-                return old + 1
-            })
-        }, 30)
+export default function ComboPoderMentalPage() {
+  const [isAnimating, setIsAnimating] = useState(false);
+  const hotmartLink = "https://pay.hotmart.com/O100603060L?checkoutMode=2";
 
-        return () => clearInterval(intervalId)
-    }, [])
+  const handleBuyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (isAnimating) return;
 
-    return (
-        <>
-            <main className="home-main">
-                <header className="page-header">
-                    <div
-                        onClick={() => router.push('/')}
-                        className="logo-container"
-                        role="button"
-                        tabIndex={0}
-                        onKeyPress={(e) => e.key === 'Enter' && router.push('/')}
-                        aria-label="Voltar para Home"
-                    >
-                        <LogoPhandcoSvg />
-                    </div>
+    setIsAnimating(true);
+    
+    setTimeout(() => {
+      window.location.href = hotmartLink;
+    }, 1500);
+    
+    setTimeout(() => {
+        setIsAnimating(false);
+    }, 2000);
+  };
 
-                    <div className="progress-widget">
-                        <span className="progress-widget-label">SUA JORNADA PHANDCO</span>
-                        <div
-                            className="progress-bar-container"
-                            role="progressbar"
-                            aria-valuenow={progress}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                            aria-label={`Progresso geral da sua jornada: ${progress}%`}
-                        >
-                            <div
-                                className="progress-bar-fill"
-                                style={{ width: `${progress}%` }}
-                            />
-                        </div>
-                    </div>
-                </header>
+  return (
+    <>
+      {/* Usamos Next/Head para inserir o CSS da Hotmart no <head> da página */}
+      <Head>
+        <link 
+          rel="stylesheet" 
+          type="text/css" 
+          href="https://static.hotmart.com/css/hotmart-fb.min.css" 
+          // Opcional: Adicione um 'key' se você tiver vários links parecidos no <Head>
+          // key="hotmart-css"
+        />
+      </Head>
 
-                <section className="portal-section">
-                    <h2 className="portal-title">
-                        <span className="highlight-text">DESCUBRA</span> O CONTEÚDO QUE VAI ACELERAR SUA EVOLUÇÃO!
-                    </h2>
-                    <p className="portal-subtitle">
-                        MERGULHE EM NOSSOS RECURSOS EXCLUSIVOS E DESBLOQUEIE SEU POTENCIAL MÁXIMO.
-                    </p>
+      <main className={`main-container ${poppins.className}`}>
+        {/* EFEITO DE LUZ DE FUNDO */}
+        <div className="aurora-light"></div>
+        
+        {/* SEÇÃO 1: HERO - A GRANDE PROMESSA */}
+        <section className="hero-section">
+          <h1 className="hero-title">Sua Mente Cria Sua Realidade.<br/>Aprenda a Comandá-la.</h1>
+          <p className="hero-subtitle">
+            Desbloqueie prosperidade, foco e uma nova versão de si mesmo com o método definitivo para reprogramar sua mente.
+          </p>
+          <div className="cta-container">
+            <a href={hotmartLink} onClick={handleBuyClick} className={`cta-button ${isAnimating ? 'animating' : ''}`}>
+              <span className="button-text">QUERO TRANSFORMAR MINHA VIDA AGORA</span>
+              <span className="price-tag">DE R$127 POR APENAS R$67</span>
+              <span className="flying-book">🧠</span>
+            </a>
+            <p className="secure-purchase-text">Compra 100% segura. Acesso vitalício.</p>
+          </div>
+        </section>
 
-                    <div className="links-grid">
-                        <button
-                            onClick={() => router.push('/quiz')}
-                            className="portal-link-button primary-button"
-                        >
-                            <span role="img" aria-label="Alvo">🎯</span> FAÇA NOSSO QUIZ E RECEBA SEU PLANO!
-                        </button>
+        {/* SEÇÃO 2: DOR - CONEXÃO COM O CLIENTE */}
+        <section className="pain-section">
+          <h2>Você se identifica com algum destes sinais?</h2>
+          <div className="pain-points-grid">
+            <div className="pain-point">A procrastinação vence você todos os dias.</div>
+            <div className="pain-point">Sente que está preso em um ciclo de autossabotagem.</div>
+            <div className="pain-point">A ansiedade e o cansaço mental dominam sua rotina.</div>
+            <div className="pain-point">Seus sonhos parecem cada vez mais distantes e impossíveis.</div>
+          </div>
+          <p className="pain-solution-text">Isso não é falta de capacidade. É a sua programação mental que precisa de um upgrade.</p>
+        </section>
+        
+        {/* SEÇÃO 3: APRESENTAÇÃO DA SOLUÇÃO */}
+        <section className="solution-section">
+            <div className="solution-image-container">
+                <Image 
+                  src="/images/ebooks.png" 
+                  alt="Combo Poder Mental: E-books de Reprogramação Mental, Hábitos e Manifestação" 
+                  width={400} 
+                  height={400} 
+                  layout="responsive" 
+                  className="solution-image"
+                  priority 
+                />
+            </div>
+            <div className="solution-text-container">
+                <h2 className="section-title">O Mapa Completo Para Sua <span className="highlight">Evolução</span></h2>
+                <p>Este não é mais um curso de "pensamento positivo". O <strong>Combo Poder Mental</strong> é um arsenal de ferramentas práticas, reunindo 3 e-books essenciais que se complementam para criar uma transformação real e duradoura.</p>
+                <p>Você vai aprender a reprogramar seu subconsciente, forjar hábitos de alta performance e usar o poder da manifestação para construir a vida que você realmente deseja.</p>
+            </div>
+        </section>
 
-                        <button
-                            onClick={() => router.push('/ebooks')}
-                            className="portal-link-button secondary-button"
-                        >
-                            <span role="img" aria-label="Livros">📚</span> BAIXE NOSSOS E-BOOKS EXCLUSIVOS!
-                        </button>
+        {/* SEÇÃO 4: O QUE VOCÊ VAI APRENDER */}
+        <section className="learning-section">
+            <h2 className="section-title">O Que Você Vai Dominar</h2>
+            <div className="learning-grid">
+                <div className="learning-card">
+                    <h3>Reprogramação do Subconsciente</h3>
+                    <p>Instale novas crenças de riqueza, saúde e confiança para que sua mente trabalhe por você, 24/7.</p>
+                </div>
+                <div className="learning-card">
+                    <h3>Criação de Hábitos Poderosos</h3>
+                    <p>O passo a passo para criar rotinas de sucesso que funcionam no piloto automático, mesmo com TDAH ou falta de foco.</p>
+                </div>
+                <div className="learning-card">
+                    <h3>A Fórmula da Manifestação</h3>
+                    <p>Alinhe pensamento, emoção e ação para atrair oportunidades e resultados de forma acelerada.</p>
+                </div>
+                <div className="learning-card">
+                    <h3>Técnicas Comprovadas</h3>
+                    <p>Domine afirmações, visualizações, empilhamento de hábitos e a fé prática para vencer qualquer desafio.</p>
+                </div>
+            </div>
+        </section>
 
-                        {/* Botões de Livro Existentes */}
-                        <button
-                            onClick={() => router.push('/vendas/as-48-leis-do-poder')}
-                            className="portal-link-button secondary-button"
-                        >
-                            <span role="img" aria-label="Livro">📖</span> AS 48 LEIS DO PODER - ROBERT GREENE
-                        </button>
+        {/* SEÇÃO 5: VANTAGENS (BENEFÍCIOS) */}
+        <section className="benefits-section">
+            <h2 className="section-title">Uma Transformação em Todas as Áreas da Sua Vida</h2>
+            <ul className="benefits-list">
+                <li><CheckIcon /> <strong>Método 100% Prático:</strong> Chega de teorias. Ferramentas fáceis de aplicar no seu dia a dia.</li>
+                <li><CheckIcon /> <strong>Resultados Reais:</strong> Impacto direto na sua prosperidade, saúde, carreira e autoestima.</li>
+                <li><CheckIcon /> <strong>Desbloqueio Emocional:</strong> Elimine crenças limitantes e padrões negativos que travam sua vida.</li>
+                <li><CheckIcon /> <strong>Você no Controle:</strong> Pare de depender da sorte e aprenda a criar sua própria realidade.</li>
+                <li><CheckIcon /> <strong>Economia Inteligente:</strong> Leve 3 e-books pelo preço de um, com acesso vitalício para consultar sempre.</li>
+            </ul>
+        </section>
+        
+        {/* SEÇÃO 6: CHAMADA PARA AÇÃO FINAL (OFERTA) */}
+        <section className="final-cta-section">
+            <h2 className="offer-title">Sua jornada de transformação começa agora.</h2>
+            <div className="price-box">
+                <p className="price-from">de <span>R$127,00</span></p>
+                <p className="price-to">Por apenas <strong>R$67</strong></p>
+                <p className="price-info">ou em até 9x de R$ 8,60</p>
+            </div>
 
-                        <button
-                            onClick={() => router.push('/vendas/mais-esperto-que-o-diabo')}
-                            className="portal-link-button secondary-button"
-                        >
-                            <span role="img" aria-label="Diabo">😈</span> MAIS ESPERTO QUE O DIABO - N. HILL
-                        </button>
+            <div className="cta-container">
+                <a href={hotmartLink} onClick={handleBuyClick} className={`cta-button ${isAnimating ? 'animating' : ''}`}>
+                  <span className="button-text">QUERO GARANTIR MEU ACESSO COM DESCONTO!</span>
+                  <span className="price-tag">OFERTA POR TEMPO LIMITADO</span>
+                  <span className="flying-book">🧠</span>
+                </a>
+                <p className="secure-purchase-text">Ambiente seguro Hotmart. 7 dias de garantia incondicional.</p>
+            </div>
+        </section>
 
-                        <button
-                            onClick={() => router.push('/vendas/manual-persuasao-fbi')}
-                            className="portal-link-button secondary-button"
-                        >
-                            <span role="img" aria-label="Agente">🕵️‍♂️</span> MANUAL DE PERSUASÃO DO FBI - J. SCHAFER
-                        </button>
+        {/* SEÇÃO 7: FOOTER */}
+        <footer className="site-footer">
+            <p>© 2025 PHANDCO. TODOS OS DIREITOS RESERVADOS.</p>
+            <p>Este produto não garante a obtenção de resultados. Qualquer referência ao desempenho de uma estratégia não deve ser interpretada como uma garantia de resultados.</p>
+        </footer>
 
-                        {/* Novos botões de livro com autores e links para páginas de venda */}
-                        <button
-                            onClick={() => router.push('/vendas/as-armas-da-persuasao')}
-                            className="portal-link-button secondary-button"
-                        >
-                            <span role="img" aria-label="Armas">🛡️</span> AS ARMAS DA PERSUASÃO 2.0 - R. CIALDINI
-                        </button>
+      </main>
 
-                        <button
-                            onClick={() => router.push('/vendas/como-convencer-alguem')}
-                            className="portal-link-button secondary-button"
-                        >
-                            <span role="img" aria-label="Aperto de mão">🤝</span> COMO CONVENCER ALGUÉM EM 90 SEGUNDOS - N. BOOTHMAN
-                        </button>
+      {/* Script da Hotmart carregado de forma otimizada */}
+      <Script
+        id="hotmart-widget-script"
+        src="https://static.hotmart.com/checkout/widget.min.js"
+        strategy="lazyOnload"
+      />
 
-                        <button
-                            onClick={() => router.push('/vendas/liberte-o-poder')}
-                            className="portal-link-button secondary-button"
-                        >
-                            <span role="img" aria-label="Mente">🧠</span> O PODER DO SEU SUBCONSCIENTE - J. MURPHY
-                        </button>
+      {/* Estilos globais e locais com styled-jsx */}
+      <style jsx global>{`
+        /* Importante: A fonte Poppins agora é gerenciada por next/font,
+           então não use @import url() aqui para ela. */
+        
+        html, body {
+          margin: 0;
+          padding: 0;
+          background-color: #0c0a15;
+          color: #EAEAEA;
+          scroll-behavior: smooth;
+          /* A propriedade font-family será aplicada via className do next/font
+             no elemento <main> ou <body> */
+        }
+      `}</style>
+      <style jsx>{`
+        /* SEUS ESTILOS LOCAIS EXISTENTES AQUI */
+        .main-container {
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        section {
+            width: 100%;
+            max-width: 1100px;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
+        }
 
-                    </div>
-                </section>
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+        .section-title .highlight {
+            background: linear-gradient(90deg, #FDD835, #E9B400);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-                {/* Seção de depoimentos - Sem alterações como solicitado */}
-                <section className="testimonials-section">
-                    <h3 className="testimonials-title">
-                        <span className="highlight-text">O QUE DIZEM</span> SOBRE A PHANDCO
-                    </h3>
-                    <div className="testimonials-grid">
-                        <div className="testimonial-card">
-                            <blockquote className="testimonial-quote">
-                                "A Phandco transformou minha forma de aprender. O quiz é viciante e os e-books são ouro puro!"
-                            </blockquote>
-                            <p className="testimonial-author">— ANA C.</p>
-                        </div>
-                        <div className="testimonial-card">
-                            <blockquote className="testimonial-quote">
-                                "Conteúdo relevante e uma experiência de usuário impecável. Recomendo para todos que buscam evoluir."
-                            </blockquote>
-                            <p className="testimonial-author">— BRUNO F.</p>
-                        </div>
-                        <div className="testimonial-card">
-                            <blockquote className="testimonial-quote">
-                                "A agilidade para encontrar o que preciso e a qualidade do material são impressionantes."
-                            </blockquote>
-                            <p className="testimonial-author">— CARLA M.</p>
-                        </div>
-                    </div>
-                </section>
+        .aurora-light {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1200px;
+            height: 1200px;
+            background: radial-gradient(circle, rgba(91, 56, 236, 0.25) 0%, rgba(12, 10, 21, 0) 60%);
+            transform: translateX(-50%);
+            animation: aurora-glow 20s infinite linear;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        @keyframes aurora-glow {
+            0% { transform: translateX(-50%) translateY(-20%) rotate(0deg); }
+            50% { transform: translateX(-40%) translateY(0%) rotate(180deg); }
+            100% { transform: translateX(-50%) translateY(-20%) rotate(360deg); }
+        }
 
-                <footer className="site-footer">
-                    <p>© 2025 PHANDCO. TODOS OS DIREITOS RESERVADOS.</p>
-                    <div className="footer-links">
-                        <a href="/privacidade">DESENVOLVIDO POR PHANDCO.</a>
-                    </div>
-                </footer>
-            </main>
+        .hero-section {
+            min-height: 100vh;
+            justify-content: center;
+            gap: 20px;
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: #fff;
+            letter-spacing: -2px;
+            text-shadow: 0 0 30px rgba(91, 56, 236, 0.5);
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            max-width: 600px;
+            color: #c0b8e0;
+        }
+        .secure-purchase-text {
+            font-size: 0.8rem;
+            color: #9c92c5;
+            margin-top: 10px;
+        }
 
-            <style jsx>{`
-                .home-main {
-                    min-height: 100vh;
-                    background: #141414;
-                    color: white;
-                    display: flex;
-                    flex-direction: column;
-                    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                    font-weight: 400;
-                }
+        .pain-section {
+            background-color: rgba(255,255,255, 0.03);
+            border-top: 1px solid rgba(255,255,255, 0.1);
+            border-bottom: 1px solid rgba(255,255,255, 0.1);
+        }
+        .pain-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .pain-point {
+            background: rgba(12, 10, 21, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255, 0.1);
+            font-weight: 600;
+        }
+        .pain-solution-text {
+            font-size: 1.1rem;
+            color: #FDD835;
+            font-weight: 600;
+        }
 
-                /* Header (mantido) */
-                .page-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 1.2rem 3rem;
-                    background-color: #000;
-                    position: sticky;
-                    top: 0;
-                    z-index: 1000;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-                }
-                .logo-container {
-                    cursor: pointer;
-                    padding: 0.5rem 0;
-                    border-radius: 4px;
-                }
-                .logo-container :global(.logo-svg text) {
-                    transition: fill 0.2s ease-in-out;
-                }
-                .logo-container:hover :global(.logo-svg text),
-                .logo-container:focus-visible :global(.logo-svg text) {
-                    fill: #ff3352;
-                }
-                .logo-container:focus-visible {
-                    outline: 2px solid #E60023;
-                    outline-offset: 2px;
-                }
+        .solution-section {
+            flex-direction: row;
+            text-align: left;
+            align-items: center;
+            gap: 50px;
+        }
+        .solution-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .solution-image {
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 100%;
+            height: auto;
+        }
+        .solution-text-container {
+            flex: 1.5;
+        }
+        .solution-text-container p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #c0b8e0;
+            margin-bottom: 15px;
+        }
 
-                .progress-widget {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    width: clamp(120px, 20vw, 180px);
-                    font-size: 0.85rem;
-                    color: #aaa;
-                    user-select: none;
-                    gap: 0.4rem;
-                    white-space: nowrap;
-                }
-                .progress-widget-label {
-                    font-weight: 600;
-                    color: #ccc;
-                    text-transform: uppercase;
-                }
-                .progress-bar-container {
-                    width: 100%;
-                    height: 5px;
-                    background-color: #333;
-                    border-radius: 3px;
-                    overflow: hidden;
-                    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
-                }
-                .progress-bar-fill {
-                    width: 0%;
-                    height: 100%;
-                    background-color: #e50914;
-                    border-radius: 3px;
-                    transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-                }
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+        .learning-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+            border: 1px solid rgba(255,255,255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        .learning-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .learning-card h3 {
+            font-size: 1.5rem;
+            color: #FDD835;
+            margin-top: 0;
+        }
+        .learning-card p {
+            color: #c0b8e0;
+            line-height: 1.6;
+        }
 
-                /* Seção Portal */
-                .portal-section {
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 4rem 2rem;
-                    text-align: center;
-                    max-width: 900px;
-                    margin: auto;
-                    gap: 1.8rem;
-                }
-                .portal-title {
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    line-height: 1.2;
-                    color: #fff;
-                    margin-bottom: 0.5rem;
-                    letter-spacing: -0.02em;
-                    text-transform: uppercase;
-                }
-                .highlight-text {
-                    color: #e50914;
-                }
-                .portal-subtitle {
-                    font-size: 1.2rem;
-                    color: #a0a0a0;
-                    line-height: 1.6;
-                    max-width: 700px;
-                    margin-bottom: 3rem;
-                    text-transform: uppercase;
-                }
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+        }
+        .benefits-list li {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255, 0.03);
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
 
-                .links-grid {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1.5rem;
-                    width: 100%;
-                    max-width: 550px;
-                    align-items: center;
-                }
+        .final-cta-section {
+            background: #000;
+        }
+        .offer-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        .price-box {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid #FDD835;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            max-width: 400px;
+            width: 100%;
+        }
+        .price-from {
+            text-decoration: line-through;
+            opacity: 0.7;
+            font-size: 1.2rem;
+        }
+        .price-to {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #FDD835;
+            margin: 10px 0;
+        }
+        .price-info {
+            font-weight: 600;
+        }
 
-                .portal-link-button {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 0.8rem;
-                    padding: 1.2rem 2rem;
-                    border-radius: 50px;
-                    width: 100%;
-                    max-width: 500px;
-                    min-height: 60px; /* Garantir altura mínima para texto de 2 linhas */
+        .cta-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cta-button {
+          position: relative;
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 20px 40px;
+          border-radius: 50px;
+          border: none;
+          background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+          color: white;
+          font-weight: 700;
+          font-size: 1.2rem;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 10px 30px -10px rgba(37, 117, 252, 0.5);
+          overflow: hidden;
+        }
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(37, 117, 252, 0.7);
+        }
+        .cta-button .price-tag {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        .flying-book {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 2rem;
+          opacity: 0;
+          pointer-events: none;
+        }
+        .cta-button.animating .button-text,
+        .cta-button.animating .price-tag {
+          animation: fade-out 0.5s forwards;
+        }
+        .cta-button.animating .flying-book {
+          animation: fly-to-cart 1.5s cubic-bezier(0.5, -0.5, 1, 1) forwards;
+        }
 
-                    font-weight: 400;
-                    font-size: 1rem; /* Tamanho base da fonte */
-                    text-transform: uppercase;
-                    white-space: normal; /* PERMITE QUEBRA DE LINHA */
-                    overflow: hidden;
-                    text-overflow: ellipsis; /* Ainda útil se o texto for *muito* longo */
-                    line-height: 1.3; /* Ajustar line-height para acomodar quebra de linha */
-                    text-align: center;
+        @keyframes fade-out {
+          to { opacity: 0; transform: scale(0.8); }
+        }
 
-                    border: none;
-                    cursor: pointer;
-                    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
-                    user-select: none;
-                }
+        @keyframes fly-to-cart {
+          0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          20% { transform: translate(-50%, -150%) scale(1.2) rotate(-15deg); }
+          100% { opacity: 0; transform: translate(300px, -400px) scale(0) rotate(360deg); }
+        }
 
-                /* Botão Primário (quiz) */
-                .primary-button {
-                    background-color: #e50914;
-                    color: white;
-                    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
-                }
-                .primary-button:hover {
-                    background-color: #ff1a3c;
-                    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.6);
-                    transform: translateY(-2px);
-                }
-                .primary-button:active {
-                    transform: translateY(0px) scale(0.98);
-                    box-shadow: 0 2px 10px rgba(229, 9, 20, 0.3);
-                }
-                .primary-button:focus-visible {
-                    outline: 2px solid #ff7089;
-                    outline-offset: 2px;
-                }
+        .site-footer {
+            background: #000;
+            font-size: 0.8rem;
+            color: #888;
+            padding: 40px 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .section-title, .pain-section h2, .offer-title { font-size: 2.2rem; }
+            .hero-title { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .solution-section { flex-direction: column; text-align: center; }
+            .learning-grid { grid-template-columns: 1fr; }
+            .learning-card { text-align: center; }
+            .benefits-list li { font-size: 1rem; text-align: left; }
+            .price-to { font-size: 2.5rem; }
+            .cta-button { padding: 15px 30px; font-size: 1rem; }
+        }
 
-                /* Botões Secundários (ebooks, blog, etc.) */
-                .secondary-button {
-                    background-color: #333;
-                    color: #fff;
-                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-                }
-                .secondary-button:hover {
-                    background-color: #444;
-                    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
-                    transform: translateY(-2px);
-                }
-                .secondary-button:active {
-                    transform: translateY(0px) scale(0.98);
-                    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-                }
-                .secondary-button:focus-visible {
-                    outline: 2px solid #666;
-                    outline-offset: 2px;
-                }
-
-                /* Estilização dos ícones (emojis) dentro dos botões (mantido) */
-                .portal-link-button span[role="img"] {
-                    font-size: 1.3em;
-                    line-height: 1;
-                }
-
-
-                /* Seção de depoimentos (mantido como está, sem alterações) */
-                .testimonials-section {
-                    background-color: #000;
-                    padding: 3rem 2rem;
-                    max-width: 900px;
-                    margin: 3rem auto;
-                    border-radius: 8px;
-                    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-                    color: white;
-                    text-align: center;
-                }
-                .testimonials-title {
-                    font-size: 2rem;
-                    margin-bottom: 2.5rem;
-                    color: #fff;
-                    font-weight: 700;
-                    letter-spacing: 0.03em;
-                    text-transform: uppercase;
-                }
-                .testimonials-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 1.5rem;
-                }
-                .testimonial-card {
-                    background-color: #1a1a1a;
-                    padding: 1.8rem;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-                    text-align: left;
-                    border: 1px solid #222;
-                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                }
-                .testimonial-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-                }
-                .testimonial-quote {
-                    font-style: italic;
-                    margin-bottom: 1rem;
-                    color: #ccc;
-                    font-size: 1rem;
-                    line-height: 1.7;
-                }
-                .testimonial-quote::before, .testimonial-quote::after {
-                    content: '“';
-                    font-size: 2em;
-                    color: #e50914;
-                    margin-right: 0.05em;
-                    line-height: 0;
-                    vertical-align: middle;
-                    display: inline-block;
-                    transform: translateY(-0.1em);
-                }
-                .testimonial-quote::after {
-                    content: '”';
-                    margin-left: 0.05em;
-                    transform: translateY(0.1em);
-                }
-                .testimonial-author {
-                    font-weight: 600;
-                    color: #e50914;
-                    font-size: 0.95rem;
-                    text-align: right;
-                    margin-top: 1rem;
-                    text-transform: uppercase;
-                }
-
-                /* Rodapé estilo Netflix (mantido) */
-                .site-footer {
-                    background-color: #000;
-                    padding: 2rem 3rem;
-                    text-align: center;
-                    color: #808080;
-                    font-size: 0.9rem;
-                    border-top: 1px solid #222;
-                    text-transform: uppercase;
-                }
-                .site-footer p {
-                    margin-bottom: 1rem;
-                }
-                .footer-links {
-                    display: flex;
-                    justify-content: center;
-                    gap: 1.5rem;
-                    flex-wrap: wrap;
-                }
-                .footer-links a {
-                    color: #808080;
-                    text-decoration: none;
-                    transition: color 0.2s ease;
-                    text-transform: uppercase;
-                }
-                .footer-links a:hover {
-                    color: #e50914;
-                }
-
-                /* Media Queries */
-                @media (max-width: 900px) {
-                    .portal-section {
-                        padding: 3rem 1.5rem;
-                    }
-                    .portal-title {
-                        font-size: 2.2rem;
-                    }
-                    .portal-subtitle {
-                        font-size: 1.1rem;
-                    }
-                    .links-grid {
-                       max-width: 480px;
-                    }
-                    .portal-link-button {
-                        max-width: 450px;
-                        font-size: 0.95rem; /* Ajustado: 0.95rem */
-                    }
-                }
-
-                @media (max-width: 768px) {
-                    .page-header {
-                        padding: 1rem 1.5rem;
-                    }
-                    .logo-container :global(.logo-svg) {
-                        width: 120px;
-                        height: 36px;
-                    }
-                    .progress-widget {
-                        width: clamp(100px, 22vw, 150px);
-                        font-size: 0.75rem;
-                    }
-                    .portal-section {
-                        padding: 2.5rem 1rem;
-                        gap: 1.5rem;
-                    }
-                    .portal-title {
-                        font-size: 2rem;
-                    }
-                    .portal-subtitle {
-                        font-size: 1rem;
-                        margin-bottom: 2rem;
-                    }
-                    .links-grid {
-                        max-width: 400px;
-                    }
-                    .portal-link-button {
-                        padding: 1rem 1.5rem;
-                        font-size: 0.85rem; /* Mais ajustado para mobile */
-                        height: auto; /* Deixa a altura flexível */
-                        min-height: 55px; /* Mantém altura mínima */
-                        max-width: 380px;
-                        line-height: 1.4; /* Permite mais espaço entre linhas */
-                    }
-                    .testimonials-section {
-                        padding: 2rem 1.5rem;
-                        margin: 2rem auto;
-                    }
-                    .testimonials-title {
-                        font-size: 1.8rem;
-                        margin-bottom: 2rem;
-                    }
-                    .testimonials-grid {
-                        grid-template-columns: 1fr;
-                    }
-                    .testimonial-card {
-                        padding: 1.5rem;
-                    }
-                    .testimonial-quote {
-                        font-size: 0.95rem;
-                    }
-                    .site-footer {
-                        padding: 1.5rem 1.5rem;
-                    }
-                    .footer-links {
-                        flex-direction: column;
-                        gap: 0.8rem;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .page-header {
-                        flex-direction: column;
-                        gap: 0.8rem;
-                        padding-bottom: 1rem;
-                    }
-                    .progress-widget {
-                        width: clamp(150px, 50vw, 200px);
-                        align-items: center;
-                    }
-                    .portal-title {
-                        font-size: 1.8rem;
-                    }
-                    .portal-subtitle {
-                        font-size: 0.9rem;
-                    }
-                    .links-grid {
-                        max-width: 320px;
-                    }
-                    .portal-link-button {
-                        font-size: 0.75rem; /* O MENOR TAMANHO PARA CABER TUDO */
-                        padding: 0.8rem 1rem;
-                        min-height: 45px; /* Altura mínima para mobile menor */
-                        max-width: 300px;
-                    }
-                    .testimonials-title {
-                        font-size: 1.5rem;
-                    }
-                }
-            `}</style>
-        </>
-    )
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2.2rem; }
+            .section-title, .pain-section h2, .offer-title { font-size: 1.8rem; }
+        }
+      `}</style>
+    </>
+  )
 }
