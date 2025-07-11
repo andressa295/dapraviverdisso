@@ -1,63 +1,137 @@
-/* Reset e fontes globais */
-body {
+/* app/globals.css */
+
+/* Definição de variáveis de cores */
+:root {
+  --color-dark-bg: #000000; /* PRETO PURO */
+  --color-pure-black: #000000;
+  --color-text-light: #EAEAEA;
+  --color-text-secondary: #C0B8E0;
+  --color-text-tertiary: #9C92C5;
+
+  --color-neon-yellow: #FDD835;
+  --color-neon-yellow-dark: #E9B400;
+  
+  --color-neon-blue: #2575FC;
+  --color-neon-purple: #6A11CB;
+  --color-neon-gradient: linear-gradient(90deg, var(--color-neon-purple) 0%, var(--color-neon-blue) 100%);
+  --color-neon-gradient-alt: linear-gradient(90deg, var(--color-neon-yellow) 0%, var(--color-neon-yellow-dark) 100%);
+
+
+  /* Para efeitos de brilho/sombra */
+  --shadow-subtle-glow: 0 0 10px rgba(var(--color-neon-blue), 0.3);
+  --shadow-cta-button: 0 8px 20px -8px rgba(37, 117, 252, 0.4);
+}
+
+/* Reset Básico */
+html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #000;
-  color: #fff;
-  line-height: 1.5;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, p, button {
-  max-width: 100%;
-  word-wrap: break-word;
+body {
+  background-color: var(--color-dark-bg); /* AGORA PRETO PURO */
+  color: var(--color-text-light);
+  line-height: 1.6;
 }
 
-/* Responsividade geral */
-.container {
-  width: 100%;
-  max-width: 720px;
-  margin: auto;
-  padding: 1rem;
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.8em;
+  font-weight: 700;
+  color: var(--color-text-light);
+  text-transform: uppercase; /* TODOS OS TÍTULOS EM CAIXA ALTA */
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: var(--color-neon-blue);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-neon-yellow);
 }
 
 button {
-  width: fit-content;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  border-radius: 9999px;
-  border: none;
   cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
-/* Quebra para telas menores */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.3rem;
-  }
+/* Estilos para o efeito de destaque */
+.highlight {
+    background: var(--color-neon-gradient-alt);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-  h2 {
-    font-size: 1.1rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-
-  button {
+/* Base para todas as seções */
+.section {
     width: 100%;
-    font-size: 1.05rem;
-    padding: 1rem;
-  }
-
-  header {
+    max-width: 1100px;
+    padding: 80px 25px;
+    margin: 0 auto;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    /* Remover opacidade inicial e transição do fade-in-up para evitar flicker */
+    opacity: 1; /* Garante que a seção comece visível */
+    transform: translateY(0); /* Garante que comece na posição original */
+    transition: none; /* Desativa qualquer transição inicial para evitar flash */
+}
 
-  .hero {
-    padding: 2rem 1rem;
-    gap: 1.2rem;
+/* A CLASSE 'animated' AGORA CONTROLARÁ A ANIMAÇÃO SOMENTE QUANDO ADICIONADA VIA JS */
+.section.animated {
+  opacity: 0; /* Começa invisível APENAS QUANDO A CLASSE ANIMATED É ATIVADA */
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animação para a Aurora */
+@keyframes aurora-pulse {
+  0% { transform: translateX(-50%) translateY(-20%) scale(1) rotate(0deg); opacity: 0.03; }
+  50% { transform: translateX(-48%) translateY(-18%) scale(1.02) rotate(3deg); opacity: 0.05; }
+  100% { transform: translateX(-50%) translateY(-20%) scale(1) rotate(0deg); opacity: 0.03; }
+}
+
+/* Responsividade Básica (ajuste conforme necessário) */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 20px;
+  }
+  .section-title {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 40px 15px;
+  }
+  .section-title {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
   }
 }

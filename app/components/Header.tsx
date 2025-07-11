@@ -1,236 +1,236 @@
 // components/Header.tsx
-'use client'; 
+'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoCloseSharp } from 'react-icons/io5';
 
 const Header = () => {
-  // Data final da promoção (Exemplo: 2 dias a partir de agora).
-  // AJUSTE ESTA DATA para a sua data final REAL no formato 'YYYY-MM-DDTHH:mm:ss'.
-  const promotionEndDate = new Date('2025-07-04T23:59:59').getTime(); 
-
-  const [hasMounted, setHasMounted] = useState(false); 
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
-
-    const calculateAndUpdateTime = () => {
-      const now = new Date().getTime();
-      const difference = promotionEndDate - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        });
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
       } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsScrolled(false);
       }
     };
 
-    calculateAndUpdateTime(); 
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    const timer = setInterval(calculateAndUpdateTime, 1000);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-    return () => clearInterval(timer);
-  }, [promotionEndDate]); 
-
-  const timerComponents: React.ReactNode[] = [];
-
-  if (hasMounted) {
-    if (promotionEndDate > new Date().getTime()) {
-      Object.keys(timeLeft).forEach((interval) => {
-        const value = timeLeft[interval as keyof typeof timeLeft];
-        if (typeof value === 'number' && value >= 0) {
-          timerComponents.push(
-            <span key={interval} className="countdown-item">
-              {String(value).padStart(2, '0')} {interval.charAt(0)}
-            </span>
-          );
-        }
-      });
-    } else {
-      timerComponents.push(
-        <span key="days" className="countdown-item">00d</span>,
-        <span key="hours" className="countdown-item">00h</span>,
-        <span key="minutes" className="countdown-item">00m</span>,
-        <span key="seconds" className="countdown-item">00s</span>
-      );
-    }
-  }
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
-    <header className="main-header">
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-content">
-        <div className="logo-placeholder">PHANDCO</div> 
-        <div className="countdown-container">
-          {hasMounted ? ( 
-            <>
-              <span className="countdown-text">A OFERTA TERMINA EM:</span>
-              {timerComponents.length ? ( 
-                <div className="countdown-timer">
-                  {timerComponents}
-                </div>
-              ) : (
-                <span className="promotion-ended">PROMOÇÃO ENCERRADA!</span>
-              )}
-            </>
-          ) : (
-            <span className="countdown-text placeholder-countdown">
-              Carregando oferta...
-            </span>
-          )}
-        </div>
+        <Link href="/" className="logo" onClick={closeMenu}>
+          <Image 
+            src="/logo.png" 
+            alt="Poder Mental Logo" 
+            width={100}
+            height={90}
+            priority
+            // A logo é branca, e o fundo será preto, então não precisa de filtro.
+            // Se a logo tiver um fundo ou contorno preto, podemos ajustar para uma versão branca aqui.
+            // Se a logo for branca e o fundo for branco, teríamos que filtrar.
+          />
+        </Link>
+
+        {/* Menu Desktop */}
+        <nav className="nav-desktop">
+          <ul className="nav-list">
+            <li><Link href="#inicio" className="nav-item">Início</Link></li>
+            <li><Link href="#comunidade" className="nav-item">Comunidade</Link></li>
+            <li><Link href="#gratuitos" className="nav-item">Conteúdos Gratuitos</Link></li>
+            <li><Link href="#oferta" className="nav-item">E-books</Link></li>
+            <li><Link href="#contato" className="nav-item">Contato</Link></li>
+          </ul>
+        </nav>
+
+        {/* Botão de menu hamburguer para Mobile */}
+        <button className="menu-toggle" onClick={toggleMenu} aria-label="Abrir menu">
+          {isMenuOpen ? <IoCloseSharp size={28} /> : <GiHamburgerMenu size={28} />}
+        </button>
+
+        {/* Menu Mobile */}
+        <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
+          <ul className="nav-list">
+            <li><Link href="#inicio" className="nav-item" onClick={closeMenu}>Início</Link></li>
+            <li><Link href="#comunidade" className="nav-item" onClick={closeMenu}>Comunidade</Link></li>
+            <li><Link href="#gratuitos" className="nav-item" onClick={closeMenu}>Conteúdos Gratuitos</Link></li>
+            <li><Link href="#oferta" className="nav-item" onClick={closeMenu}>E-books</Link></li>
+            <li><Link href="#contato" className="nav-item" onClick={closeMenu}>Contato</Link></li>
+          </ul>
+        </nav>
       </div>
 
+      {/* LINHA SEPARADORA DE DETALHE NEON */}
+      <div className="neon-separator-line"></div>
+
       <style jsx>{`
-        .main-header {
+        .header {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
-          background: rgba(0, 0, 0, 0.9); /* Um pouco menos transparente para melhorar contraste */
-          backdrop-filter: blur(10px); /* Mais desfoque */
+          background: var(--color-pure-black); /* CABEÇALHO PRETO PURO */
+          backdrop-filter: blur(10px);
           z-index: 1000;
-          padding: 12px 25px; /* Aumenta um pouco o padding para maior "presença" */
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra mais visível */
+          padding: 15px 25px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra suave */
           display: flex;
+          flex-direction: column; /* Para a linha ficar abaixo */
           justify-content: center;
           align-items: center;
-          box-sizing: border-box; /* Garante que padding não aumente a largura total */
+          box-sizing: border-box;
+          transition: background 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .header.scrolled {
+          background: var(--color-pure-black);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+        
         .header-content {
           width: 100%;
-          max-width: 1200px; /* Aumenta um pouco o max-width para dar mais espaço */
+          max-width: 1200px;
           display: flex;
-          justify-content: space-between; /* Mantém logo e contagem nas extremidades */
+          justify-content: space-between;
           align-items: center;
-          gap: 20px; /* Adiciona um gap para evitar que se encostem em telas médias */
+          gap: 20px;
         }
-        .logo-placeholder {
-          font-size: 1.6rem; /* Aumenta levemente o logo */
-          font-weight: 900;
-          color: #FDD835;
-          text-transform: uppercase;
-          flex-shrink: 0; /* Evita que o logo encolha demais */
+
+        .logo-image {
+            /* Se sua logo PNG for branca e o fundo agora é preto, não precisa de filtro */
+            /* Se for preta e precisar ficar branca, usaria: filter: brightness(0) invert(1); */
         }
-        .countdown-container {
+        
+        .nav-desktop {
           display: flex;
-          align-items: center;
-          gap: 10px;
-          flex-shrink: 1; /* Permite que a contagem encolha se necessário */
-          flex-wrap: nowrap; /* Tenta manter a contagem na mesma linha */
         }
-        .countdown-text {
-          font-size: 0.85rem; /* Levemente maior */
-          color: #c0b8e0;
+
+        .nav-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          gap: 25px;
+        }
+
+        .nav-item {
+          color: var(--color-text-light); /* LINKS BRANCOS NO CABEÇALHO PRETO */
           font-weight: 600;
-          text-transform: uppercase;
-          white-space: nowrap; /* Evita que o texto quebre */
-        }
-        .placeholder-countdown {
-            color: #9c92c5; 
-        }
-        .countdown-timer {
-          display: flex;
-          gap: 6px; /* Aumenta um pouco o gap entre os números */
-        }
-        .countdown-item {
-          background-color: #333;
-          color: #FDD835;
-          padding: 6px 9px; /* Aumenta um pouco o padding interno */
-          border-radius: 4px;
-          font-size: 1.05rem; /* Levemente maior */
-          font-weight: 700;
-          min-width: 40px; /* Garante largura mínima para 2 dígitos e 'd', 'h', etc. */
-          text-align: center;
-          box-sizing: border-box;
-        }
-        .promotion-ended {
-          color: #ff6347;
-          font-weight: 700;
           font-size: 1rem;
-          white-space: nowrap;
+          position: relative;
+          transition: color 0.3s ease;
         }
 
-        /* Responsividade para o cabeçalho */
+        .nav-item::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -5px;
+          width: 0;
+          height: 2px;
+          background: var(--color-neon-gradient);
+          transition: width 0.3s ease;
+        }
+
+        .nav-item:hover {
+          color: var(--color-neon-yellow);
+        }
+        
+        .nav-item:hover::after {
+          width: 100%;
+        }
+
+        .menu-toggle {
+          background: transparent;
+          color: var(--color-text-light); /* ÍCONE HAMBURGUER BRANCO */
+          font-size: 28px;
+          display: none;
+        }
+
+        .nav-mobile {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.95);
+          backdrop-filter: blur(20px);
+          z-index: 999;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transform: translateY(-100%);
+          transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .nav-mobile.open {
+          display: flex;
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .nav-mobile .nav-list {
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .nav-mobile .nav-item {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--color-text-light);
+          text-shadow: 0 0 10px var(--color-neon-blue), 0 0 20px var(--color-neon-purple);
+        }
+
+        .nav-mobile .nav-item:hover {
+          color: var(--color-neon-yellow);
+          text-shadow: 0 0 15px var(--color-neon-yellow), 0 0 25px var(--color-neon-yellow-dark);
+        }
+
+        /* LINHA SEPARADORA DE DETALHE NEON */
+        .neon-separator-line {
+            width: 100%;
+            height: 3px; /* Altura da linha */
+            background: var(--color-neon-gradient); /* Gradiente neon */
+            box-shadow: 0 0 10px rgba(37, 117, 252, 0.5); /* Brilho suave */
+            animation: neon-line-flow 8s infinite linear; /* Animação sutil de fluxo */
+            margin-top: 15px; /* Espaçamento da linha para o conteúdo do header */
+        }
+
+        @keyframes neon-line-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        /* Adaptação para mobile */
         @media (max-width: 768px) {
-          .main-header {
-            padding: 10px 20px; /* Ajusta padding para mobile */
+          .nav-desktop {
+            display: none;
           }
-          .header-content {
-            flex-direction: row; /* Mantém em linha até onde for possível */
-            justify-content: space-between;
-            gap: 10px; /* Reduz gap para mobile */
+          .menu-toggle {
+            display: block;
           }
-          .logo-placeholder {
-            font-size: 1.3rem; /* Ajusta logo para mobile */
+          .neon-separator-line {
+            height: 2px; /* Linha mais fina no mobile */
+            margin-top: 10px;
           }
-          .countdown-container {
-            flex-wrap: wrap; /* Permite quebrar linha se não couber */
-            justify-content: flex-end; /* Alinha à direita se quebrar */
-            text-align: right;
-          }
-          .countdown-text {
-            font-size: 0.7rem; /* Reduz texto da contagem */
-            white-space: normal; /* Permite quebrar se necessário */
-            width: 100%; /* Ocupa a linha toda se quebrar */
-            text-align: right;
-          }
-          .countdown-timer {
-            justify-content: flex-end; /* Alinha os itens da contagem à direita */
-            width: 100%; /* Ocupa a linha toda se quebrar */
-          }
-          .countdown-item {
-            font-size: 0.85rem; /* Ajusta tamanho do número */
-            padding: 4px 7px;
-            min-width: 32px;
-          }
-          .promotion-ended {
-            font-size: 0.85rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-            .main-header {
-                padding: 8px 15px; /* Reduz padding para telas muito pequenas */
-            }
-            .logo-placeholder {
-                font-size: 1.1rem;
-            }
-            .countdown-text {
-                font-size: 0.65rem;
-            }
-            .countdown-item {
-                font-size: 0.75rem;
-                padding: 3px 5px;
-                min-width: 28px;
-            }
-            .promotion-ended {
-                font-size: 0.75rem;
-            }
-            /* Se ainda ficar muito apertado, pode forçar flex-direction: column no header-content aqui */
-            .header-content {
-                flex-direction: column;
-                justify-content: center;
-                gap: 5px;
-            }
-            .countdown-container {
-                justify-content: center;
-            }
-            .countdown-text {
-                text-align: center;
-            }
-            .countdown-timer {
-                justify-content: center;
-            }
         }
       `}</style>
     </header>
