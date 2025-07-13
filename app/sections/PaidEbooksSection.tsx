@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
@@ -37,11 +37,6 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
   isCtaAnimating,
 }) => {
   const [domRef, isVisible] = useScrollAnimation(0.2);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleDotClick = useCallback((index: number) => {
-    setActiveIndex(index);
-  }, []);
 
   return (
     <section
@@ -58,34 +53,31 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
           Aprofunde seu conhecimento e acelere sua jornada com nossos e-books exclusivos.
         </p>
 
-        {/* MOBILE: carrossel com 1 produto visível */}
-        <div className="products-carousel-mobile">
-          <div className="carousel-inner">
-            <div
-              className="product-card glow-on-hover"
-              key={productsForSale[activeIndex].id}
-            >
+        {/* MOBILE: produtos empilhados (scroll vertical) */}
+        <div className="products-stack-mobile">
+          {productsForSale.map((product) => (
+            <div key={product.id} className="product-card glow-on-hover">
               <div className="offer-image-container">
                 <Image
-                  src={productsForSale[activeIndex].img}
-                  alt={productsForSale[activeIndex].name}
+                  src={product.img}
+                  alt={product.name}
                   fill
                   className="offer-image"
-                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 320px"
+                  sizes="100vw"
                 />
               </div>
-              <h3 className="offer-name">{productsForSale[activeIndex].name}</h3>
-              <p className="offer-desc">{productsForSale[activeIndex].desc}</p>
+              <h3 className="offer-name">{product.name}</h3>
+              <p className="offer-desc">{product.desc}</p>
               <div className="price-box">
                 <p className="price-from">
-                  <span>{productsForSale[activeIndex].priceFrom}</span>
+                  <span>{product.priceFrom}</span>
                 </p>
-                <p className="price-to">{productsForSale[activeIndex].priceTo}</p>
-                <p className="price-info">{productsForSale[activeIndex].installments}</p>
+                <p className="price-to">{product.priceTo}</p>
+                <p className="price-info">{product.installments}</p>
               </div>
               <a
-                href={productsForSale[activeIndex].hotmartLink}
-                onClick={handleCtaClick(productsForSale[activeIndex].hotmartLink)}
+                href={product.hotmartLink}
+                onClick={handleCtaClick(product.hotmartLink)}
                 className={`cta-button ${isCtaAnimating ? 'animating' : ''}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -99,23 +91,10 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
                 Compra 100% segura. Acesso vitalício. 7 dias de garantia incondicional.
               </p>
             </div>
-          </div>
-
-          {/* Pontos de navegação */}
-          <div className="dots-navigation" aria-label="Navegação de produtos">
-            {productsForSale.map((_, i) => (
-              <button
-                key={i}
-                className={`dot ${i === activeIndex ? 'active' : ''}`}
-                onClick={() => handleDotClick(i)}
-                aria-current={i === activeIndex ? 'true' : undefined}
-                aria-label={`Mostrar produto ${i + 1}`}
-              />
-            ))}
-          </div>
+          ))}
         </div>
 
-        {/* DESKTOP: grid com ambos os produtos e detalhes completos */}
+        {/* DESKTOP: grid com ambos os produtos lado a lado */}
         <div className="products-grid-desktop">
           {productsForSale.map((product) => (
             <div key={product.id} className="product-card glow-on-hover">
@@ -186,18 +165,14 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
           color: var(--color-text-secondary);
         }
 
-        /* MOBILE CARROSSEL */
-        .products-carousel-mobile {
-          display: block;
-        }
-        .carousel-inner {
+        .products-stack-mobile {
           display: flex;
-          justify-content: center;
-          margin-bottom: 25px;
+          flex-direction: column;
+          gap: 24px;
         }
 
         .product-card {
-          max-width: 320px;
+          max-width: 350px;
           background: linear-gradient(
             160deg,
             rgba(var(--color-neon-purple), 0.1),
@@ -368,30 +343,6 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
           padding: 0 5px;
         }
 
-        /* Pontos de navegação */
-        .dots-navigation {
-          display: flex;
-          justify-content: center;
-          gap: 12px;
-          margin-top: 30px;
-        }
-
-        .dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background-color: rgba(var(--color-text-light), 0.3);
-          border: none;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-          user-select: none;
-        }
-
-        .dot.active {
-          background-color: var(--color-neon-yellow);
-          box-shadow: 0 0 8px var(--color-neon-yellow);
-        }
-
         /* DESKTOP GRID */
         .products-grid-desktop {
           display: none;
@@ -439,10 +390,11 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
             margin-top: 15px;
           }
 
-          /* Mostrar grid e esconder carrossel no desktop */
-          .products-carousel-mobile {
+          /* Esconder stack no desktop */
+          .products-stack-mobile {
             display: none;
           }
+          /* Mostrar grid no desktop */
           .products-grid-desktop {
             display: flex;
           }
