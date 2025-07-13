@@ -2,38 +2,38 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { CheckIcon } from '../components/Icon'; // Assuming CheckIcon is defined elsewhere
+import { CheckIcon } from '../components/Icon';
 import { FaWhatsapp } from 'react-icons/fa';
 
 // Hook para animação de entrada ao rolar
 const useScrollAnimation = (threshold = 0.1) => {
     const [isVisible, setIsVisible] = useState(false);
     const domRef = useRef<HTMLDivElement>(null);
- 
+  
     useEffect(() => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            observer.unobserve(entry.target);
+            observer.unobserve(entry.target); // Deixa de observar depois que fica visível
           }
         });
       }, { threshold });
- 
+  
       const currentRef = domRef.current;
       if (currentRef) {
         observer.observe(currentRef);
       }
- 
+  
       return () => {
         if (currentRef) {
           observer.unobserve(currentRef);
         }
       };
     }, [threshold]);
- 
+  
     return [domRef, isVisible] as const;
-};
+  };
 
 
 interface CommunityChallengeSectionProps {
@@ -44,56 +44,57 @@ const CommunityChallengeSection: React.FC<CommunityChallengeSectionProps> = () =
     const [domRef, isVisible] = useScrollAnimation(0.2);
 
     return (
-        <section id="comunidade" ref={domRef} className={`community-challenge-section-highlight section ${isVisible ? 'animated' : ''}`}>
-            {/* REMOVIDO: <div className="section-content-container">
-                Os estilos de max-width, margin:auto, padding e flexbox agora estão na classe .section em globals.css */}
-            <h2 className="section-title community-title">
-                sua virada começa aqui: <span className="highlight">desafio poder mental de 21 dias!</span>
-            </h2>
-            <p className="section-subtitle community-subtitle">
-                Criei uma comunidade exclusiva e um desafio gratuito de 21 dias para você reprogramar sua mente, quebrar ciclos e ativar seu verdadeiro potencial. Junte-se a centenas de pessoas que estão transformando suas vidas, um passo por vez.
-            </p>
-            <div className="challenge-benefits-grid">
-                <div className="benefit-item">
-                    <CheckIcon />
-                    <p>Desbloqueie crenças limitantes e descubra seu verdadeiro potencial.</p>
+        <section id="comunidade" ref={domRef} className={`community-challenge-section-highlight ${isVisible ? 'animated' : ''}`}> {/* Aplicando 'animated' */}
+            <div className="section-content-wrapper">
+                <h2 className="section-title community-title">
+                    sua virada começa aqui: <span className="highlight">desafio poder mental de 21 dias!</span>
+                </h2>
+                <p className="section-subtitle community-subtitle">
+                    Criei uma comunidade exclusiva e um desafio gratuito de 21 dias para você reprogramar sua mente, quebrar ciclos e ativar seu verdadeiro potencial. Junte-se a centenas de pessoas que estão transformando suas vidas, um passo por vez.
+                </p>
+                <div className="challenge-benefits-grid">
+                    <div className="benefit-item">
+                        <CheckIcon />
+                        <p>Desbloqueie crenças limitantes e descubra seu verdadeiro potencial.</p>
+                    </div>
+                    <div className="benefit-item">
+                        <CheckIcon />
+                        <p>Assuma o comando da sua mente e do seu dia com foco e clareza.</p>
+                    </div>
+                    <div className="benefit-item">
+                        <CheckIcon />
+                        <p>Crie hábitos poderosos que impulsionarão seu sucesso diariamente.</p>
+                    </div>
+                    <div className="benefit-item">
+                        <CheckIcon />
+                        <p>Receba conteúdo exclusivo e suporte contínuo da comunidade.</p>
+                    </div>
+                    <div className="benefit-item">
+                        <CheckIcon />
+                        <p>Transforme a procrastinação em ação e a ansiedade em paz interior.</p>
+                    </div>
+                    <div className="benefit-item">
+                        <CheckIcon />
+                        <p>Prepare-se para uma vida com mais prosperidade e oportunidades reais.</p>
+                    </div>
                 </div>
-                <div className="benefit-item">
-                    <CheckIcon />
-                    <p>Assuma o comando da sua mente e do seu dia com foco e clareza.</p>
-                </div>
-                <div className="benefit-item">
-                    <CheckIcon />
-                    <p>Crie hábitos poderosos que impulsionarão seu sucesso diariamente.</p>
-                </div>
-                <div className="benefit-item">
-                    <CheckIcon />
-                    <p>Receba conteúdo exclusivo e suporte contínuo da comunidade.</p>
-                </div>
-                <div className="benefit-item">
-                    <CheckIcon />
-                    <p>Transforme a procrastinação em ação e a ansiedade em paz interior.</p>
-                </div>
-                <div className="benefit-item">
-                    <CheckIcon />
-                    <p>Prepare-se para uma vida com mais prosperidade e oportunidades reais.</p>
-                </div>
+                <a 
+                    href="https://chat.whatsapp.com/KN8ws56OUTFKXIvEfprqWr?mode=ac_t" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="whatsapp-cta-button"
+                >
+                    <FaWhatsapp size={24} />
+                    <span className="button-text">quero entrar na comunidade grátis!</span>
+                </a>
             </div>
-            <a 
-                href="https://chat.whatsapp.com/KN8ws56OUTFKXIvEfprqWr?mode=ac_t" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whatsapp-cta-button"
-            >
-                <FaWhatsapp size={24} />
-                <span className="button-text">quero entrar na comunidade grátis!</span>
-            </a>
 
             <style jsx>{`
-                /* A classe .section (em globals.css) agora gerencia o max-width, margin:auto, padding e flexbox. */
                 .community-challenge-section-highlight {
+                    width: 100%;
                     background-color: #FFFFFF;
-                    /* Padding já definido na classe .section em globals.css */
+                    padding: 80px 25px;
+                    box-sizing: border-box;
                     position: relative;
                     text-align: center;
                     overflow: hidden;
@@ -129,17 +130,26 @@ const CommunityChallengeSection: React.FC<CommunityChallengeSectionProps> = () =
                     50% { opacity: 1; transform: scaleX(1); }
                     100% { opacity: 0.7; transform: scaleX(0.9); }
                 }
-                
+
+                .community-challenge-section-highlight .section-content-wrapper {
+                    max-width: 1100px;
+                    margin: 0 auto;
+                    color: var(--color-dark-bg);
+                }
                 .community-challenge-section-highlight .community-title {
                     color: var(--color-dark-bg);
-                    /* font-size e margin-bottom já definidos na classe .section-title em globals.css */
+                    font-size: 2.5rem;
+                    margin-bottom: 30px;
                 }
                 .community-challenge-section-highlight .community-subtitle {
                     color: #444;
-                    /* font-size e margin-bottom já definidos na classe .section-subtitle em globals.css */
+                    font-size: 1.1rem;
+                    margin-bottom: 50px;
                 }
                 .community-challenge-section-highlight .highlight {
-                    /* Estilo de highlight já definido em globals.css */
+                    background: var(--color-neon-gradient);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
                 }
                 
                 .challenge-benefits-grid {
@@ -148,7 +158,6 @@ const CommunityChallengeSection: React.FC<CommunityChallengeSectionProps> = () =
                     gap: 30px;
                     width: 100%;
                     margin-bottom: 50px;
-                    max-width: 900px; /* Limita a largura do grid de benefícios */
                 }
                 .benefit-item {
                     background-color: #F0F0F0;
@@ -176,50 +185,86 @@ const CommunityChallengeSection: React.FC<CommunityChallengeSectionProps> = () =
                 .benefit-item p {
                     margin: 0;
                     color: #333;
-                    line-height: 1.4; /* Ajustado para melhor legibilidade */
                 }
-                /* Botão do WhatsApp CTA (estilos globais em app/page.tsx ou globals.css) */
-                /* .whatsapp-cta-button já tem estilos globais, apenas ajustes específicos aqui */
+                /* Botão do WhatsApp CTA */
+                .whatsapp-cta-button {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    background: #25D366;
+                    color: white;
+                    font-weight: 700;
+                    font-size: 1.05rem;
+                    text-decoration: none;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 8px 20px -8px rgba(37, 211, 102, 0.6);
+                    width: fit-content;
+                    text-transform: uppercase;
+                }
+                .whatsapp-cta-button:hover {
+                    transform: translateY(-3px);
+                    background: #1DA851;
+                    box-shadow: 0 10px 25px -8px rgba(37, 211, 102, 0.8);
+                }
 
                 /* Responsividade */
-                @media (max-width: 1024px) { /* Tablets em paisagem e notebooks menores */
-                    .challenge-benefits-grid {
-                        gap: 25px;
-                        max-width: 700px;
-                    }
-                    .benefit-item {
-                        font-size: 0.95rem;
-                        padding: 20px;
-                    }
-                }
-
                 @media (max-width: 768px) {
-                    /* Padding da seção já gerenciado por .section em globals.css */
-                    /* Títulos e subtítulos já gerenciados por .section-title/.section-subtitle em globals.css */
-
+                    .community-challenge-section-highlight {
+                        padding: 60px 20px;
+                        margin-top: 40px;
+                        margin-bottom: 40px;
+                    }
+                    .community-challenge-section-highlight .community-title {
+                        font-size: 1.8rem;
+                        margin-bottom: 25px;
+                    }
+                    .community-challenge-section-highlight .community-subtitle {
+                        font-size: 1rem;
+                        margin-bottom: 30px;
+                    }
                     .challenge-benefits-grid {
-                        grid-template-columns: 1fr; /* Uma coluna no mobile */
+                        grid-template-columns: 1fr;
                         gap: 20px;
                         margin-bottom: 40px;
-                        max-width: 400px; /* Limita largura do grid no mobile */
                     }
                     .benefit-item {
                         font-size: 0.9rem;
-                        padding: 18px;
+                        padding: 20px;
+                    }
+                    .whatsapp-cta-button {
+                        padding: 12px 25px;
+                        font-size: 1rem;
                     }
                 }
 
                 @media (max-width: 480px) {
-                    /* Padding da seção já gerenciado por .section em globals.css */
-                    /* Títulos e subtítulos já gerenciados por .section-title/.section-subtitle em globals.css */
-
-                    .challenge-benefits-grid {
-                        gap: 15px;
+                    .community-challenge-section-highlight {
+                        padding: 40px 15px;
+                        margin-top: 30px;
                         margin-bottom: 30px;
+                    }
+                    .community-challenge-section-highlight .community-title {
+                        font-size: 1.4rem;
+                        margin-bottom: 20px;
+                    }
+                    .community-challenge-section-highlight .community-subtitle {
+                        font-size: 0.85rem;
+                        margin-bottom: 25px;
+                    }
+                    .challenge-benefits-grid {
+                        gap: 10px;
+                        margin-bottom: 25px;
                     }
                     .benefit-item {
                         padding: 15px;
                         font-size: 0.8rem;
+                    }
+                    .whatsapp-cta-button {
+                        padding: 10px 20px;
+                        font-size: 0.9rem;
                     }
                 }
             `}</style>
