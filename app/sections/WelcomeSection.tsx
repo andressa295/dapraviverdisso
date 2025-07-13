@@ -156,10 +156,11 @@ const WelcomeSection: React.FC = () => {
         }
 
         /* CELULAR MÉDIO E GRANDE */
-        @media (max-width: 768px) and (min-width: 481px) {
-          .welcome-section {
-            padding-top: 80px;
-            padding-bottom: 60px;
+        @media (max-width: 768px) {
+    .welcome-section {
+        padding-top: 150px; /* Use um valor como 150px ou 160px. Teste para ver o melhor ajuste. */
+        padding-bottom: 60px; /* Mantenha seu valor existente */
+    }
           }
           .video-container {
             max-width: 450px;
