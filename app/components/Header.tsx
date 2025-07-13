@@ -1,3 +1,4 @@
+// components/Header.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -17,6 +18,7 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll);
 
+    // Impede rolagem do corpo da página quando o menu mobile está aberto
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -25,7 +27,7 @@ const Header = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'unset'; // Garante reset ao desmontar
     };
   }, [isMenuOpen]);
 
@@ -45,6 +47,7 @@ const Header = () => {
           />
         </Link>
 
+        {/* Menu Desktop */}
         <nav className="nav-desktop">
           <ul className="nav-list">
             <li><Link href="#inicio" className="nav-item">Início</Link></li>
@@ -55,21 +58,24 @@ const Header = () => {
           </ul>
         </nav>
 
+        {/* Botão de menu hamburguer para Mobile - SEMPRE HAMBURGUER */}
         <button
           className="menu-toggle"
           onClick={toggleMenu}
           aria-label="Abrir menu de navegação"
         >
-          <GiHamburgerMenu size={28} />
+          <GiHamburgerMenu size={28} /> {/* Ícone de hambúrguer sempre */}
         </button>
 
+        {/* Menu Mobile (overlay de tela cheia) */}
         <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
+          {/* Botão de Fechar DEDICADO e visível no menu mobile */}
           <button
             className="close-menu-button"
             onClick={closeMenu}
             aria-label="Fechar menu de navegação"
           >
-            <IoCloseSharp size={32} />
+            <IoCloseSharp size={32} /> {/* Ícone 'X' grande para fechar */}
           </button>
 
           <ul className="nav-list">
@@ -82,6 +88,7 @@ const Header = () => {
         </nav>
       </div>
 
+      {/* LINHA SEPARADORA DE DETALHE NEON */}
       <div className="neon-separator-line"></div>
 
       <style jsx>{`
@@ -93,7 +100,7 @@ const Header = () => {
           background: var(--color-pure-black);
           backdrop-filter: blur(10px);
           z-index: 1000;
-          padding: 15px 25px;
+          padding: 15px 25px; /* Altura do header: 15 (top) + 90 (logo) + 15 (bottom) + 3 (linha) + 15 (margem linha) = ~138px */
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
           display: flex;
           flex-direction: column;
@@ -102,6 +109,17 @@ const Header = () => {
           box-sizing: border-box;
           transition: background 0.3s ease, box-shadow 0.3s ease;
         }
+
+        /* Variável CSS para a altura do cabeçalho no mobile.
+           Isso é crucial para o padding-top da Hero Section. */
+        @media (max-width: 768px) {
+            .header {
+                /* Calcule a altura aqui: padding-top + height da logo + padding-bottom + height da linha + margin-top da linha */
+                /* 15px (padding top) + 90px (altura logo) + 15px (padding bottom) = 120px + 2px (linha) + 10px (margin-top linha) = ~132px */
+                /* Podemos arredondar ou ser mais exatos. Vamos usar um valor aproximado e ajustar o padding-top da hero. */
+            }
+        }
+
 
         .header.scrolled {
           background: var(--color-pure-black);
@@ -163,8 +181,8 @@ const Header = () => {
           border: none;
           cursor: pointer;
           font-size: 28px;
-          display: none;
-          z-index: 1001;
+          display: none; /* Escondido por padrão, visível apenas no mobile */
+          z-index: 1001; /* Garante que esteja acima do nav-mobile quando o menu está aberto */
           padding: 0;
         }
 
@@ -179,13 +197,16 @@ const Header = () => {
           backdrop-filter: blur(20px);
           z-index: 999;
           flex-direction: column;
-          justify-content: flex-start; /* para não ficar centralizado */
-          align-items: center;
+          /* Ajustar para alinhar os itens do menu corretamente, abaixo do header */
+          justify-content: flex-start; /* Alinha do topo */
+          align-items: center; /* Centraliza horizontalmente */
           opacity: 0;
           transform: translateY(-100%);
           transition: opacity 0.4s ease-out, transform 0.4s ease-out;
           pointer-events: none;
-          padding-top: 80px; /* espaço para barra fixa + botão fechar */
+          
+          /* Padding-top para descer o conteúdo do menu abaixo do header fixo */
+          padding-top: calc(15px + 90px + 15px + 3px + 10px + 20px); /* Aproximadamente altura do header + margem para o conteúdo do menu */
           box-sizing: border-box;
         }
 
@@ -198,7 +219,7 @@ const Header = () => {
         .nav-mobile .nav-list {
           flex-direction: column;
           gap: 30px;
-          margin-top: 20px;
+          margin-top: 20px; /* Mais espaço do topo da lista para o botão de fechar */
         }
 
         .nav-mobile .nav-item {
@@ -216,21 +237,26 @@ const Header = () => {
         }
 
         .close-menu-button {
-          position: absolute;
-          top: 60px; /* descola do topo pra não bater na barra fixa */
-          right: 25px;
+          position: fixed; /* Fixado na tela, acima do nav-mobile, mas abaixo do header principal */
+          top: 25px; /* Alinhado ao topo do header */
+          right: 25px; /* Alinhado à direita */
           background: transparent;
           color: var(--color-text-light);
           border: none;
           cursor: pointer;
           padding: 10px;
-          z-index: 1100;
+          z-index: 1002; /* Acima do nav-mobile, mas abaixo do header em si (que é 1000) */
           display: none;
         }
-
-        .nav-mobile.open .close-menu-button {
+        
+        /* Quando o menu está aberto, mostre o botão de fechar */
+        .nav-mobile.open + .menu-toggle { /* Se o menu toggle for um irmão do nav-mobile */
+            display: none; /* Esconde o toggle quando o menu está aberto, se ele for um irmão */
+        }
+        .nav-mobile.open .close-menu-button { /* Mostra o close button dentro do overlay */
           display: block;
         }
+
 
         .neon-separator-line {
           width: 100%;
@@ -251,7 +277,7 @@ const Header = () => {
             display: none;
           }
           .menu-toggle {
-            display: block;
+            display: block; /* Mostra o botão hamburguer no mobile */
           }
           .neon-separator-line {
             height: 2px;
