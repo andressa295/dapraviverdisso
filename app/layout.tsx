@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import FoucHandler from './FoucHandler';
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700', '800', '900'],
@@ -56,12 +57,19 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={poppins.className}>
+        <FoucHandler />
         <div className="main-layout-container">
-          {children}
+          <main
+            style={{
+              paddingTop: '138px', // esse valor tem que ser a altura total do seu header fixo + linha neon
+              minHeight: '100vh',
+              boxSizing: 'border-box',
+            }}
+          >
+            {children}
+          </main>
           <div className="aurora-light"></div>
         </div>
-
-        
       </body>
     </html>
   );

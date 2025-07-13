@@ -1,12 +1,10 @@
-// components/Header.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-// Novo ícone de menu, talvez mais "limpo" (ou você pode trocar por outro)
-import { IoMenuSharp, IoCloseSharp } from 'react-icons/io5'; 
-// Se preferir o ícone GiHamburgerMenu, é só mudar IoMenuSharp de volta para GiHamburgerMenu
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoCloseSharp } from 'react-icons/io5';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +17,6 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Impede rolagem do corpo da página quando o menu mobile está aberto
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -28,7 +25,7 @@ const Header = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      document.body.style.overflow = 'unset'; // Garante reset ao desmontar
+      document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
 
@@ -38,7 +35,7 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-content">
-        <Link href="/" className="logo" onClick={closeMenu} aria-label="Voltar para o início">
+        <Link href="/" className="logo" onClick={closeMenu}>
           <Image
             src="/logo.png"
             alt="Poder Mental Logo"
@@ -48,7 +45,6 @@ const Header = () => {
           />
         </Link>
 
-        {/* Menu Desktop */}
         <nav className="nav-desktop">
           <ul className="nav-list">
             <li><Link href="#inicio" className="nav-item">Início</Link></li>
@@ -59,24 +55,21 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Botão de menu hamburguer para Mobile - SEMPRE MOSTRA O ÍCONE DE ABRIR */}
         <button
           className="menu-toggle"
           onClick={toggleMenu}
           aria-label="Abrir menu de navegação"
         >
-          <IoMenuSharp size={28} /> {/* Sugestão de ícone mais bonito. Mude para GiHamburgerMenu se preferir o anterior */}
+          <GiHamburgerMenu size={28} />
         </button>
 
-        {/* Menu Mobile (overlay de tela cheia) */}
         <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
-          {/* Botão de Fechar DEDICADO e CLARO dentro do menu mobile */}
           <button
             className="close-menu-button"
             onClick={closeMenu}
             aria-label="Fechar menu de navegação"
           >
-            <IoCloseSharp size={32} /> {/* Ícone 'X' grande e visível para fechar */}
+            <IoCloseSharp size={32} />
           </button>
 
           <ul className="nav-list">
@@ -89,7 +82,6 @@ const Header = () => {
         </nav>
       </div>
 
-      {/* LINHA SEPARADORA DE DETALHE NEON */}
       <div className="neon-separator-line"></div>
 
       <style jsx>{`
@@ -101,7 +93,7 @@ const Header = () => {
           background: var(--color-pure-black);
           backdrop-filter: blur(10px);
           z-index: 1000;
-          padding: 15px 25px; /* Altura do header: 15 (top) + 90 (logo) + 15 (bottom) + 3 (linha) + 15 (margem linha) = ~138px */
+          padding: 15px 25px;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
           display: flex;
           flex-direction: column;
@@ -110,17 +102,6 @@ const Header = () => {
           box-sizing: border-box;
           transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-
-        /* Variável CSS para a altura do cabeçalho no mobile.
-           Isso é crucial para o padding-top da Hero Section. */
-        @media (max-width: 768px) {
-            .header {
-                /* Calcule a altura aqui: padding-top + height da logo + padding-bottom + height da linha + margin-top da linha */
-                /* 15px (padding top) + 90px (altura logo) + 15px (padding bottom) = 120px + 2px (linha) + 10px (margin-top linha) = ~132px */
-                /* Podemos arredondar ou ser mais exatos. Vamos usar um valor aproximado e ajustar o padding-top da hero. */
-            }
-        }
-
 
         .header.scrolled {
           background: var(--color-pure-black);
@@ -182,8 +163,8 @@ const Header = () => {
           border: none;
           cursor: pointer;
           font-size: 28px;
-          display: none; /* Escondido por padrão, visível apenas no mobile */
-          z-index: 1001; /* Garante que esteja acima do nav-mobile quando o menu está aberto */
+          display: none;
+          z-index: 1001;
           padding: 0;
         }
 
@@ -198,16 +179,13 @@ const Header = () => {
           backdrop-filter: blur(20px);
           z-index: 999;
           flex-direction: column;
-          justify-content: flex-start; /* Alinha do topo */
-          align-items: center; /* Centraliza horizontalmente */
+          justify-content: flex-start;
+          align-items: center;
           opacity: 0;
           transform: translateY(-100%);
           transition: opacity 0.4s ease-out, transform 0.4s ease-out;
           pointer-events: none;
-          
-          /* CRUCIAL: Padding-top para descer o conteúdo do menu abaixo do cabeçalho fixo */
-          /* (altura da logo + 2x padding do header + 2x margem/altura da linha) */
-          padding-top: calc(90px + 2 * 15px + 3px + 10px + 30px); /* Altura da logo + paddings do header + linha + um espaço extra */
+          padding-top: calc(15px + 90px + 15px + 3px + 10px + 20px);
           box-sizing: border-box;
         }
 
@@ -220,7 +198,7 @@ const Header = () => {
         .nav-mobile .nav-list {
           flex-direction: column;
           gap: 30px;
-          margin-top: 20px; /* Espaçamento da lista de links em relação ao topo do overlay */
+          margin-top: 20px;
         }
 
         .nav-mobile .nav-item {
@@ -237,21 +215,22 @@ const Header = () => {
           text-shadow: 0 0 15px var(--color-neon-yellow), 0 0 25px var(--color-neon-yellow-dark);
         }
 
-        /* Botão de Fechar DEDICADO e CLARO no Mobile */
         .close-menu-button {
-          position: fixed; /* Fixado na tela, acima do nav-mobile, mas abaixo do header principal */
-          top: 25px; /* Distância do topo */
-          right: 25px; /* Distância da direita */
+          position: fixed;
+          top: 25px;
+          right: 25px;
           background: transparent;
           color: var(--color-text-light);
           border: none;
           cursor: pointer;
           padding: 10px;
-          z-index: 1002; /* Acima do nav-mobile, mas abaixo do header em si (que é 1000) */
+          z-index: 1002;
           display: none;
         }
-        
-        /* Quando o menu mobile está aberto, o botão de fechar é exibido */
+
+        .nav-mobile.open + .menu-toggle {
+          display: none;
+        }
         .nav-mobile.open .close-menu-button {
           display: block;
         }
@@ -266,20 +245,21 @@ const Header = () => {
         }
 
         @keyframes neon-line-flow {
-          0% { background-position: 0% 50%; }
-          100% { background-position: 100% 50%; }
+          0% {
+            background-position: 0% 50%;
+          }
+          100% {
+            background-position: 100% 50%;
+          }
         }
-        
-        /* Adaptação para mobile (media query) */
+
         @media (max-width: 768px) {
           .nav-desktop {
-            display: none; /* Esconde o menu desktop no mobile */
+            display: none;
           }
           .menu-toggle {
-            display: block; /* Mostra o botão hamburguer no mobile */
+            display: block;
           }
-          /* O botão de fechar é exibido pelo .nav-mobile.open .close-menu-button (acima) */
-          
           .neon-separator-line {
             height: 2px;
             margin-top: 10px;

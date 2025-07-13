@@ -1,4 +1,3 @@
-// sections/FreeContentSection.tsx
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';

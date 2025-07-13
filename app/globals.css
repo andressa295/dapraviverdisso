@@ -21,6 +21,23 @@
   --shadow-cta-button: 0 8px 20px -8px rgba(37, 117, 252, 0.4);
 }
 
+/* --- SOLUÇÃO PARA FLASH OF UNSTYLED CONTENT (FOUC) --- */
+/* Esconde o body inicialmente */
+body {
+  visibility: hidden;
+  opacity: 0;
+  /* Adiciona uma transição suave para quando a opacidade mudar */
+  transition: opacity 0.3s ease-in-out; 
+}
+
+/* Mostra o body quando a classe 'loaded' é adicionada (pelo JS no layout) */
+body.loaded {
+  visibility: visible;
+  opacity: 1;
+}
+/* --- FIM DA SOLUÇÃO FOUC --- */
+
+
 /* Reset Básico */
 html, body {
   margin: 0;
@@ -30,6 +47,12 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Assegura que o HTML, BODY e #__next (root do Next.js) ocupem toda a altura */
+html, body, #__next {
+  height: 100%;
+}
+
 
 body {
   background-color: var(--color-dark-bg); /* AGORA PRETO PURO */
@@ -70,15 +93,15 @@ button {
 
 /* Estilos para o container principal que envolve TODO o site (definido em layout.tsx) */
 .main-layout-container {
-    position: relative; /* Para o aurora-light */
-    overflow: hidden; /* Para conter o aurora-light */
-    width: 100%;
-    max-width: 1440px; /* Largura máxima para todo o conteúdo do site */
-    margin: 0 auto; /* Centraliza o site na tela */
-    /* NENHUM PADDING AQUI, pois as seções terão seu próprio padding */
-    display: flex; /* Para que as seções se empilhem verticalmente */
-    flex-direction: column;
-    align-items: center; /* Centraliza as seções */
+  position: relative; /* Para o aurora-light */
+  overflow: hidden; /* Para conter o aurora-light */
+  width: 100%;
+  max-width: 1440px; /* Largura máxima para todo o conteúdo do site */
+  margin: 0 auto; /* Centraliza o site na tela */
+  /* NENHUM PADDING AQUI, pois as seções terão seu próprio padding */
+  display: flex; /* Para que as seções se empilhem verticalmente */
+  flex-direction: column;
+  align-items: center; /* Centraliza as seções */
 }
 
 /* Estilos para o efeito de Luz Aurora (agora global) */
@@ -89,9 +112,9 @@ button {
   width: 2000px;
   height: 2000px;
   background: radial-gradient(circle, 
-              rgba(91, 56, 236, 0.02),
-              rgba(37, 117, 252, 0.01),
-              rgba(0, 0, 0, 0) 70%);
+                rgba(91, 56, 236, 0.02),
+                rgba(37, 117, 252, 0.01),
+                rgba(0, 0, 0, 0) 70%);
   transform: translateX(-50%) translateY(-20%);
   animation: aurora-pulse 40s infinite ease-in-out alternate;
   z-index: 1; /* Abaixo do conteúdo */
@@ -247,6 +270,8 @@ button {
         max-width: 900px; /* Reduz mais a largura máxima das seções */
         padding: 70px 20px; /* Ajusta padding */
     }
+    /* Note: section-title and section-subtitle classes are not defined here, 
+             but their media queries are present. Assuming they are defined elsewhere or will be. */
     .section-title {
         font-size: 2rem; /* Ajusta tamanho do título global */
     }
@@ -286,14 +311,6 @@ button {
         font-size: 0.9rem;
     }
 }
-[id] {
-  scroll-margin-top: 140px;
-}
-/* from layout.tsx */
-.main-layout-container {
-  padding-top: 130px; /* Ajuste conforme altura do header */
-}
-
 [id] {
   scroll-margin-top: 140px;
 }
