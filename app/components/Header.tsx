@@ -64,13 +64,7 @@ const Header = () => {
         </button>
 
         <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
-          <button
-            className="close-menu-button"
-            onClick={closeMenu}
-            aria-label="Fechar menu de navegação"
-          >
-            <IoCloseSharp size={32} />
-          </button>
+          
 
           <ul className="nav-list">
             <li><Link href="#inicio" className="nav-item" onClick={closeMenu}>Início</Link></li>

@@ -172,7 +172,7 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
         }
 
         .product-card {
-          max-width: 350px;
+          max-width: 300px;
           background: linear-gradient(
             160deg,
             rgba(var(--color-neon-purple), 0.1),
@@ -360,7 +360,7 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
             font-size: 1.2rem;
           }
           .offer-image-container {
-            width: 300px;
+            width: 350px;
             height: 250px;
           }
           .product-card {

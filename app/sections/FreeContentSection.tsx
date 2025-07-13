@@ -122,6 +122,18 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           font-size: 1.8rem;
           margin-bottom: 15px;
           line-height: 1.3;
+          text-align: center;
+        }
+
+        .section-subtitle {
+          font-size: 1rem;
+          margin-bottom: 35px;
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;
+          color: var(--color-text-secondary);
+          line-height: 1.5;
         }
 
         .ebook-grid {
@@ -266,6 +278,9 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           .section-title {
             font-size: 1.75rem;
           }
+          .section-subtitle {
+            font-size: 0.95rem;
+          }
           .ebook-grid {
             max-width: 720px;
             gap: 30px;
@@ -289,7 +304,10 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         @media (max-width: 768px) {
           .section-title {
             font-size: 1.5rem;
-            margin-bottom: 12px;
+          }
+          .section-subtitle {
+            font-size: 0.85rem;
+            margin-bottom: 25px;
           }
           .ebook-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -300,8 +318,8 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
             padding: 20px 15px 25px;
           }
           h3 {
-            font-size: 0.9rem;
-            margin: 15px 0 10px 0;
+            font-size: 0.95rem;
+            margin: 10px 0 8px 0;
           }
           p {
             font-size: 0.75rem;
@@ -314,15 +332,21 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           .image-wrapper {
             width: 140px;
             height: 210px;
-            margin-bottom: 15px;
-            overflow: visible;
+            margin-bottom: 18px;
           }
         }
 
         @media (max-width: 480px) {
           .section-title {
             font-size: 1.3rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+          }
+          .section-subtitle {
+            font-size: 0.75rem;
+            margin-bottom: 20px;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
           }
           .ebook-grid {
             grid-template-columns: 1fr;
@@ -334,7 +358,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           }
           h3 {
             font-size: 0.85rem;
-            margin: 12px 0 8px 0;
+            margin: 10px 0 8px 0;
           }
           p {
             font-size: 0.7rem;
@@ -347,8 +371,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           .image-wrapper {
             width: 120px;
             height: 180px;
-            margin-bottom: 12px;
-            overflow: visible;
+            margin-bottom: 20px;
           }
         }
       `}</style>
