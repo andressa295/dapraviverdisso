@@ -95,7 +95,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
                 height={300}
                 className="ebook-cover"
                 sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 200px"
-                style={{ objectFit: 'contain' }}
+                style={{ objectFit: 'contain' }} // só essa linha pra evitar corte
               />
               <div className="glow-border"></div>
             </div>
@@ -116,24 +116,6 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
       <style jsx>{`
         .free-content-section {
           color: var(--color-text-light);
-        }
-
-        .section-title {
-          font-size: 1.8rem;
-          margin-bottom: 15px;
-          line-height: 1.3;
-          text-align: center;
-        }
-
-        .section-subtitle {
-          font-size: 1rem;
-          margin-bottom: 35px;
-          max-width: 700px;
-          margin-left: auto;
-          margin-right: auto;
-          text-align: center;
-          color: var(--color-text-secondary);
-          line-height: 1.5;
         }
 
         .ebook-grid {
@@ -158,10 +140,10 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
             0 10px 15px rgba(0, 0, 0, 0.8);
           transition: transform 0.4s ease, box-shadow 0.4s ease;
           user-select: none;
-          overflow: visible;
+          overflow: hidden;
           display: flex;
           flex-direction: column;
-          justify-content: flex-start;
+          justify-content: space-between;
           cursor: pointer;
         }
         .ebook-card:hover {
@@ -178,12 +160,12 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           width: 180px;
           height: 270px;
           margin: 0 auto 20px;
+          border-radius: 15px;
+          overflow: hidden;
           box-shadow:
             0 0 10px rgba(var(--color-neon-yellow), 0.7),
             0 0 25px rgba(var(--color-neon-yellow), 0.4);
           transition: box-shadow 0.3s ease;
-          border-radius: 15px;
-          overflow: visible;
         }
         .ebook-card:hover .image-wrapper {
           box-shadow:
@@ -192,10 +174,11 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         }
 
         .ebook-cover {
-          border-radius: 15px;
-          display: block;
+          border-radius: 10px; /* borda arredondada, sem cortar */
           width: 100%;
           height: 100%;
+          display: block;
+          object-fit: contain; /* evita corte, mantém proporção */
         }
 
         .glow-border {
@@ -224,14 +207,13 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         }
 
         h3 {
-          font-size: 1.1rem;
+          font-size: 1.25rem;
           color: var(--color-neon-yellow);
-          margin: 15px 0 12px 0;
+          margin-bottom: 12px;
           text-transform: uppercase;
           letter-spacing: 1.1px;
           font-weight: 800;
           text-shadow: 0 0 6px rgba(var(--color-neon-yellow), 0.8);
-          z-index: 3;
           word-break: break-word;
           hyphens: auto;
         }
@@ -239,10 +221,9 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         p {
           font-size: 0.9rem;
           color: var(--color-text-secondary);
-          line-height: 1.5;
-          margin-bottom: 30px;
           flex-grow: 1;
-          z-index: 3;
+          margin-bottom: 30px;
+          line-height: 1.5;
           white-space: normal;
         }
 
@@ -262,7 +243,6 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           user-select: none;
           display: inline-block;
           cursor: pointer;
-          z-index: 3;
           border: none;
         }
         .download-button:hover {
@@ -274,6 +254,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         }
 
         /* Responsividade */
+
         @media (max-width: 1024px) {
           .ebook-grid {
             max-width: 720px;
@@ -283,7 +264,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
             padding: 25px 20px 30px;
           }
           h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
           }
           p {
             font-size: 0.85rem;
@@ -305,7 +286,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
             padding: 20px 15px 25px;
           }
           h3 {
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-bottom: 12px;
           }
           p {
