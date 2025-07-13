@@ -26,7 +26,7 @@ const productsForSale = [
     desc: 'Desvende as leis universais da influência...',
     img: '/images/48-leis-poder.png',
     priceFrom: 'de R$99,90',
-    priceTo: 'por apenas R$29,90',
+    priceTo: 'por apenas R$29',
     installments: 'ou em até 7x de R$ 9,50',
     hotmartLink: 'https://pay.hotmart.com/ID_HOTMART_48_LEIS_PODER',
   },
