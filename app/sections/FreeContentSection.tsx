@@ -95,7 +95,6 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
                 height={300}
                 className="ebook-cover"
                 sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 200px"
-                style={{ objectFit: 'contain' }} // só essa linha pra evitar corte
               />
               <div className="glow-border"></div>
             </div>
@@ -115,6 +114,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
 
       <style jsx>{`
         .free-content-section {
+          /* padding e max-width já na .section global */
           color: var(--color-text-light);
         }
 
@@ -129,7 +129,11 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         }
 
         .ebook-card {
-          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 15px;
           background: rgba(var(--color-pure-black), 0.65);
           border-radius: 18px;
           padding: 30px 25px 35px;
@@ -140,11 +144,9 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
             0 10px 15px rgba(0, 0, 0, 0.8);
           transition: transform 0.4s ease, box-shadow 0.4s ease;
           user-select: none;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+          overflow: visible;
           cursor: pointer;
+          position: relative;
         }
         .ebook-card:hover {
           transform: translateY(-8px) scale(1.05);
@@ -159,13 +161,16 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           position: relative;
           width: 180px;
           height: 270px;
-          margin: 0 auto 20px;
           border-radius: 15px;
           overflow: hidden;
           box-shadow:
             0 0 10px rgba(var(--color-neon-yellow), 0.7),
             0 0 25px rgba(var(--color-neon-yellow), 0.4);
           transition: box-shadow 0.3s ease;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 0; /* espaçamento gerenciado pelo gap do flex */
         }
         .ebook-card:hover .image-wrapper {
           box-shadow:
@@ -174,11 +179,11 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         }
 
         .ebook-cover {
-          border-radius: 10px; /* borda arredondada, sem cortar */
+          border-radius: 15px;
+          object-fit: cover;
           width: 100%;
           height: 100%;
           display: block;
-          object-fit: contain; /* evita corte, mantém proporção */
         }
 
         .glow-border {
@@ -207,24 +212,25 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         }
 
         h3 {
-          font-size: 1.25rem;
+          font-size: 1.1rem;
           color: var(--color-neon-yellow);
-          margin-bottom: 12px;
+          margin: 0;
           text-transform: uppercase;
           letter-spacing: 1.1px;
           font-weight: 800;
           text-shadow: 0 0 6px rgba(var(--color-neon-yellow), 0.8);
+          z-index: 3;
+          line-height: 1.3;
           word-break: break-word;
-          hyphens: auto;
         }
 
         p {
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           color: var(--color-text-secondary);
+          line-height: 1.4;
+          margin: 0;
           flex-grow: 1;
-          margin-bottom: 30px;
-          line-height: 1.5;
-          white-space: normal;
+          z-index: 3;
         }
 
         .download-button {
@@ -243,6 +249,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           user-select: none;
           display: inline-block;
           cursor: pointer;
+          z-index: 3;
           border: none;
         }
         .download-button:hover {
@@ -254,7 +261,6 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
         }
 
         /* Responsividade */
-
         @media (max-width: 1024px) {
           .ebook-grid {
             max-width: 720px;
@@ -264,10 +270,10 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
             padding: 25px 20px 30px;
           }
           h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
           }
           p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-bottom: 25px;
           }
           .download-button {
@@ -287,7 +293,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           }
           h3 {
             font-size: 1rem;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
           }
           p {
             font-size: 0.75rem;
@@ -300,23 +306,11 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           .image-wrapper {
             width: 140px;
             height: 210px;
-            margin-bottom: 20px;
-            overflow: visible;
+            margin-bottom: 0;
           }
         }
 
         @media (max-width: 480px) {
-          .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-          }
-          .section-subtitle {
-            font-size: 0.75rem;
-            margin-bottom: 20px;
-            max-width: 280px;
-            margin-left: auto;
-            margin-right: auto;
-          }
           .ebook-grid {
             grid-template-columns: 1fr;
             max-width: 320px;
@@ -324,20 +318,14 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           }
           .ebook-card {
             padding: 15px 12px 20px;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            overflow: visible;
           }
           h3 {
             font-size: 0.9rem;
-            margin: 15px 0 10px 0;
-            word-break: break-word;
-            hyphens: auto;
+            margin-bottom: 8px;
           }
           p {
-            font-size: 0.75rem;
-            margin-bottom: 25px;
+            font-size: 0.7rem;
+            margin-bottom: 15px;
           }
           .download-button {
             font-size: 0.8rem;
@@ -346,8 +334,7 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
           .image-wrapper {
             width: 120px;
             height: 180px;
-            margin-bottom: 25px;
-            overflow: visible;
+            margin-bottom: 0;
           }
         }
       `}</style>
