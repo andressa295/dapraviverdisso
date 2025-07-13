@@ -157,8 +157,8 @@ const WelcomeSection: React.FC = () => {
 
         /* CELULAR MÉDIO E GRANDE */
         @media (max-width: 768px) {
-    .welcome-section {
-        padding-top: 150px; /* Use um valor como 150px ou 160px. Teste para ver o melhor ajuste. */
+        .welcome-section {
+        padding-top: 200px; /* Use um valor como 150px ou 160px. Teste para ver o melhor ajuste. */
         padding-bottom: 60px; /* Mantenha seu valor existente */
     }
           }
