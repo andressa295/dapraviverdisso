@@ -36,10 +36,11 @@ const WelcomeSection: React.FC = () => {
 
   return (
     <section
-      id="inicio"
-      ref={domRef}
-      className={`section welcome-section ${isVisible ? 'animated' : ''}`}
-    >
+  id="inicio"
+  ref={domRef}
+  style={{ scrollMarginTop: '140px' }}
+  className={`section welcome-section ${isVisible ? 'animated' : ''}`}
+>
       <div className="section-content-container">
         <h1 className="hero-title">
           sua mente te aguarda. <br />
@@ -156,11 +157,10 @@ const WelcomeSection: React.FC = () => {
         }
 
         /* CELULAR MÉDIO E GRANDE */
-        @media (max-width: 768px) {
-        .welcome-section {
-        padding-top: 200px; /* Use um valor como 150px ou 160px. Teste para ver o melhor ajuste. */
-        padding-bottom: 60px; /* Mantenha seu valor existente */
-    }
+        @media (max-width: 768px) and (min-width: 481px) {
+          .welcome-section {
+            padding-top: 80px;
+            padding-bottom: 60px;
           }
           .video-container {
             max-width: 450px;
