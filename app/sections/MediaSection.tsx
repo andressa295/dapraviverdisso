@@ -56,20 +56,7 @@ const MediaSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="image-gallery">
-          <div className="image-item">
-            <img src="/images/img1.jpg" alt="Reflexão e mentalização" />
-            <p className="image-caption">Reflexão guiada para reprogramação mental</p>
-          </div>
-          <div className="image-item">
-            <img src="/images/img2.jpg" alt="Mentalidade de sucesso" />
-            <p className="image-caption">Visualize o sucesso que você deseja</p>
-          </div>
-          <div className="image-item">
-            <img src="/images/img3.jpg" alt="Jornada de autoconhecimento" />
-            <p className="image-caption">A jornada interior que muda sua vida</p>
-          </div>
-        </div>
+        
       </div>
 
       <style jsx>{`

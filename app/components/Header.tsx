@@ -3,24 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoMenuSharp, IoCloseSharp } from 'react-icons/io5';
+import { IoMenuSharp, IoClose } from 'react-icons/io5';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
 
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -48,13 +41,14 @@ const Header = () => {
           </ul>
         </nav>
 
-        <button className="menu-toggle" onClick={toggleMenu} aria-label="Abrir menu de navegação">
-          <IoMenuSharp size={28} />
+        <button className="menu-toggle" onClick={toggleMenu} aria-label="Abrir menu">
+          <IoMenuSharp size={30} />
         </button>
 
-        <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
-          <button className="close-menu-button" onClick={closeMenu} aria-label="Fechar menu de navegação">
-            <IoCloseSharp size={32} />
+        {/* MENU MOBILE */}
+        <div className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
+          <button className="close-menu-button" onClick={closeMenu} aria-label="Fechar menu">
+            <IoClose size={28} />
           </button>
 
           <ul className="nav-list">
@@ -64,7 +58,7 @@ const Header = () => {
             <li><Link href="#oferta" className="nav-item" onClick={closeMenu}>E-books</Link></li>
             <li><Link href="#contato" className="nav-item" onClick={closeMenu}>Contato</Link></li>
           </ul>
-        </nav>
+        </div>
       </div>
 
       <div className="neon-separator-line"></div>
@@ -82,10 +76,8 @@ const Header = () => {
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
           display: flex;
           flex-direction: column;
-          justify-content: center;
           align-items: center;
-          box-sizing: border-box;
-          transition: background 0.3s ease, box-shadow 0.3s ease;
+          transition: background 0.3s ease;
         }
 
         .header.scrolled {
@@ -106,10 +98,10 @@ const Header = () => {
 
         .nav-list {
           list-style: none;
-          padding: 0;
-          margin: 0;
           display: flex;
           gap: 25px;
+          padding: 0;
+          margin: 0;
         }
 
         .nav-item {
@@ -146,7 +138,7 @@ const Header = () => {
           cursor: pointer;
           font-size: 28px;
           display: none;
-          z-index: 1001;
+          z-index: 1100;
         }
 
         .nav-mobile {
@@ -157,19 +149,18 @@ const Header = () => {
           height: 100vh;
           background: rgba(0, 0, 0, 0.95);
           backdrop-filter: blur(20px);
-          z-index: 999;
+          z-index: 1000;
+          display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: flex-start;
+          justify-content: center;
           opacity: 0;
           transform: translateY(-100%);
           pointer-events: none;
           transition: opacity 0.4s ease, transform 0.4s ease;
-          padding-top: 160px;
         }
 
         .nav-mobile.open {
-          display: flex;
           opacity: 1;
           transform: translateY(0);
           pointer-events: auto;
@@ -177,36 +168,37 @@ const Header = () => {
 
         .nav-mobile .nav-list {
           flex-direction: column;
-          gap: 30px;
+          gap: 35px;
         }
 
         .nav-mobile .nav-item {
-          font-size: 1.8rem;
+          font-size: 2rem;
           font-weight: 700;
           color: var(--color-text-light);
-          text-shadow: 0 0 10px var(--color-neon-blue), 0 0 20px var(--color-neon-purple);
+          text-shadow: 0 0 12px var(--color-neon-blue), 0 0 20px var(--color-neon-purple);
         }
 
         .nav-mobile .nav-item:hover {
           color: var(--color-neon-yellow);
-          text-shadow: 0 0 15px var(--color-neon-yellow), 0 0 25px var(--color-neon-yellow-dark);
+          text-shadow: 0 0 20px var(--color-neon-yellow), 0 0 35px var(--color-neon-yellow-dark);
         }
 
         .close-menu-button {
-          position: absolute;
-          top: 50px;
-          right: 25px;
-          background: transparent;
-          color: var(--color-text-light);
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
           border: none;
+          background: var(--color-neon-gradient);
+          box-shadow: 0 0 15px var(--color-neon-purple);
+          color: #000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
-          padding: 10px;
-          z-index: 1002;
-          display: none;
-        }
-
-        .nav-mobile.open .close-menu-button {
-          display: block;
+          z-index: 1101;
         }
 
         .neon-separator-line {
@@ -226,12 +218,13 @@ const Header = () => {
           .nav-desktop {
             display: none;
           }
+
           .menu-toggle {
             display: block;
           }
-          .neon-separator-line {
-            height: 2px;
-            margin-top: 10px;
+
+          .nav-list {
+            gap: 18px;
           }
         }
       `}</style>

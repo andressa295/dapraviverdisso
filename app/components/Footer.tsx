@@ -16,10 +16,10 @@ const Footer = () => {
         
 
         <div className="social-icons">
-          <a href="URL_INSTAGRAM_AQUI" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <a href="https://www.instagram.com/mentaliidadesalpha/?next=%2F" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <FaInstagram size={24} />
           </a>
-          <a href="URL_DO_WHATSAPP_PESSOAL_OU_SUPORTE" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <a href="https://chat.whatsapp.com/KN8ws56OUTFKXIvEfprqWr?mode=ac_t" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
             <FaWhatsapp size={24} />
           </a>
         </div>
