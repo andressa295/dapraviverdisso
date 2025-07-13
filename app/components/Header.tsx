@@ -1,23 +1,34 @@
+// components/Header.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoMenuSharp, IoClose } from 'react-icons/io5';
+// Novo ícone de menu, talvez mais "limpo" (ou você pode trocar por outro)
+import { IoMenuSharp, IoCloseSharp } from 'react-icons/io5'; 
+// Se preferir o ícone GiHamburgerMenu, é só mudar IoMenuSharp de volta para GiHamburgerMenu
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
     window.addEventListener('scroll', handleScroll);
 
-    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
+    // Impede rolagem do corpo da página quando o menu mobile está aberto
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = 'unset'; // Garante reset ao desmontar
     };
   }, [isMenuOpen]);
 
@@ -28,9 +39,16 @@ const Header = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-content">
         <Link href="/" className="logo" onClick={closeMenu} aria-label="Voltar para o início">
-          <Image src="/logo.png" alt="Poder Mental Logo" width={100} height={90} priority />
+          <Image
+            src="/logo.png"
+            alt="Poder Mental Logo"
+            width={100}
+            height={90}
+            priority
+          />
         </Link>
 
+        {/* Menu Desktop */}
         <nav className="nav-desktop">
           <ul className="nav-list">
             <li><Link href="#inicio" className="nav-item">Início</Link></li>
@@ -41,14 +59,24 @@ const Header = () => {
           </ul>
         </nav>
 
-        <button className="menu-toggle" onClick={toggleMenu} aria-label="Abrir menu">
-          <IoMenuSharp size={30} />
+        {/* Botão de menu hamburguer para Mobile - SEMPRE MOSTRA O ÍCONE DE ABRIR */}
+        <button
+          className="menu-toggle"
+          onClick={toggleMenu}
+          aria-label="Abrir menu de navegação"
+        >
+          <IoMenuSharp size={28} /> {/* Sugestão de ícone mais bonito. Mude para GiHamburgerMenu se preferir o anterior */}
         </button>
 
-        {/* MENU MOBILE */}
-        <div className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
-          <button className="close-menu-button" onClick={closeMenu} aria-label="Fechar menu">
-            <IoClose size={28} />
+        {/* Menu Mobile (overlay de tela cheia) */}
+        <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
+          {/* Botão de Fechar DEDICADO e CLARO dentro do menu mobile */}
+          <button
+            className="close-menu-button"
+            onClick={closeMenu}
+            aria-label="Fechar menu de navegação"
+          >
+            <IoCloseSharp size={32} /> {/* Ícone 'X' grande e visível para fechar */}
           </button>
 
           <ul className="nav-list">
@@ -58,9 +86,10 @@ const Header = () => {
             <li><Link href="#oferta" className="nav-item" onClick={closeMenu}>E-books</Link></li>
             <li><Link href="#contato" className="nav-item" onClick={closeMenu}>Contato</Link></li>
           </ul>
-        </div>
+        </nav>
       </div>
 
+      {/* LINHA SEPARADORA DE DETALHE NEON */}
       <div className="neon-separator-line"></div>
 
       <style jsx>{`
@@ -72,15 +101,29 @@ const Header = () => {
           background: var(--color-pure-black);
           backdrop-filter: blur(10px);
           z-index: 1000;
-          padding: 15px 25px;
+          padding: 15px 25px; /* Altura do header: 15 (top) + 90 (logo) + 15 (bottom) + 3 (linha) + 15 (margem linha) = ~138px */
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
           display: flex;
           flex-direction: column;
+          justify-content: center;
           align-items: center;
-          transition: background 0.3s ease;
+          box-sizing: border-box;
+          transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
+        /* Variável CSS para a altura do cabeçalho no mobile.
+           Isso é crucial para o padding-top da Hero Section. */
+        @media (max-width: 768px) {
+            .header {
+                /* Calcule a altura aqui: padding-top + height da logo + padding-bottom + height da linha + margin-top da linha */
+                /* 15px (padding top) + 90px (altura logo) + 15px (padding bottom) = 120px + 2px (linha) + 10px (margin-top linha) = ~132px */
+                /* Podemos arredondar ou ser mais exatos. Vamos usar um valor aproximado e ajustar o padding-top da hero. */
+            }
+        }
+
+
         .header.scrolled {
+          background: var(--color-pure-black);
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
         }
 
@@ -90,6 +133,7 @@ const Header = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 20px;
         }
 
         .nav-desktop {
@@ -98,10 +142,10 @@ const Header = () => {
 
         .nav-list {
           list-style: none;
-          display: flex;
-          gap: 25px;
           padding: 0;
           margin: 0;
+          display: flex;
+          gap: 25px;
         }
 
         .nav-item {
@@ -109,6 +153,7 @@ const Header = () => {
           font-weight: 600;
           font-size: 1rem;
           position: relative;
+          transition: color 0.3s ease;
           text-decoration: none;
         }
 
@@ -137,11 +182,13 @@ const Header = () => {
           border: none;
           cursor: pointer;
           font-size: 28px;
-          display: none;
-          z-index: 1100;
+          display: none; /* Escondido por padrão, visível apenas no mobile */
+          z-index: 1001; /* Garante que esteja acima do nav-mobile quando o menu está aberto */
+          padding: 0;
         }
 
         .nav-mobile {
+          display: flex;
           position: fixed;
           top: 0;
           left: 0;
@@ -149,15 +196,19 @@ const Header = () => {
           height: 100vh;
           background: rgba(0, 0, 0, 0.95);
           backdrop-filter: blur(20px);
-          z-index: 1000;
-          display: flex;
+          z-index: 999;
           flex-direction: column;
-          align-items: center;
-          justify-content: center;
+          justify-content: flex-start; /* Alinha do topo */
+          align-items: center; /* Centraliza horizontalmente */
           opacity: 0;
           transform: translateY(-100%);
+          transition: opacity 0.4s ease-out, transform 0.4s ease-out;
           pointer-events: none;
-          transition: opacity 0.4s ease, transform 0.4s ease;
+          
+          /* CRUCIAL: Padding-top para descer o conteúdo do menu abaixo do cabeçalho fixo */
+          /* (altura da logo + 2x padding do header + 2x margem/altura da linha) */
+          padding-top: calc(90px + 2 * 15px + 3px + 10px + 30px); /* Altura da logo + paddings do header + linha + um espaço extra */
+          box-sizing: border-box;
         }
 
         .nav-mobile.open {
@@ -168,43 +219,48 @@ const Header = () => {
 
         .nav-mobile .nav-list {
           flex-direction: column;
-          gap: 35px;
+          gap: 30px;
+          margin-top: 20px; /* Espaçamento da lista de links em relação ao topo do overlay */
         }
 
         .nav-mobile .nav-item {
-          font-size: 2rem;
+          font-size: 1.8rem;
           font-weight: 700;
           color: var(--color-text-light);
-          text-shadow: 0 0 12px var(--color-neon-blue), 0 0 20px var(--color-neon-purple);
+          text-shadow: 0 0 10px var(--color-neon-blue), 0 0 20px var(--color-neon-purple);
+          text-decoration: none;
+          transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
         .nav-mobile .nav-item:hover {
           color: var(--color-neon-yellow);
-          text-shadow: 0 0 20px var(--color-neon-yellow), 0 0 35px var(--color-neon-yellow-dark);
+          text-shadow: 0 0 15px var(--color-neon-yellow), 0 0 25px var(--color-neon-yellow-dark);
         }
 
+        /* Botão de Fechar DEDICADO e CLARO no Mobile */
         .close-menu-button {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          width: 45px;
-          height: 45px;
-          border-radius: 50%;
+          position: fixed; /* Fixado na tela, acima do nav-mobile, mas abaixo do header principal */
+          top: 25px; /* Distância do topo */
+          right: 25px; /* Distância da direita */
+          background: transparent;
+          color: var(--color-text-light);
           border: none;
-          background: var(--color-neon-gradient);
-          box-shadow: 0 0 15px var(--color-neon-purple);
-          color: #000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           cursor: pointer;
-          z-index: 1101;
+          padding: 10px;
+          z-index: 1002; /* Acima do nav-mobile, mas abaixo do header em si (que é 1000) */
+          display: none;
+        }
+        
+        /* Quando o menu mobile está aberto, o botão de fechar é exibido */
+        .nav-mobile.open .close-menu-button {
+          display: block;
         }
 
         .neon-separator-line {
           width: 100%;
           height: 3px;
           background: var(--color-neon-gradient);
+          box-shadow: 0 0 10px rgba(37, 117, 252, 0.5);
           animation: neon-line-flow 8s infinite linear;
           margin-top: 15px;
         }
@@ -213,18 +269,20 @@ const Header = () => {
           0% { background-position: 0% 50%; }
           100% { background-position: 100% 50%; }
         }
-
+        
+        /* Adaptação para mobile (media query) */
         @media (max-width: 768px) {
           .nav-desktop {
-            display: none;
+            display: none; /* Esconde o menu desktop no mobile */
           }
-
           .menu-toggle {
-            display: block;
+            display: block; /* Mostra o botão hamburguer no mobile */
           }
-
-          .nav-list {
-            gap: 18px;
+          /* O botão de fechar é exibido pelo .nav-mobile.open .close-menu-button (acima) */
+          
+          .neon-separator-line {
+            height: 2px;
+            margin-top: 10px;
           }
         }
       `}</style>
