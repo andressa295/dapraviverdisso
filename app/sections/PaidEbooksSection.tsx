@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 
 interface PaidEbooksSectionProps {
@@ -33,19 +32,16 @@ const productsForSale = [
   },
 ];
 
-const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, isCtaAnimating }) => {
+const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
+  handleCtaClick,
+  isCtaAnimating,
+}) => {
   const [domRef, isVisible] = useScrollAnimation(0.2);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const next = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % productsForSale.length);
+  const handleDotClick = useCallback((index: number) => {
+    setActiveIndex(index);
   }, []);
-
-  const prev = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + productsForSale.length) % productsForSale.length);
-  }, []);
-
-  const product = productsForSale[currentIndex];
 
   return (
     <section
@@ -55,42 +51,92 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
     >
       <div className="section-content-container">
         <h2 className="section-title">
-          seus guias para uma mente de poder e sucesso <span className="highlight">inevitável</span>
+          seus guias para uma mente de poder e sucesso{' '}
+          <span className="highlight">inevitável</span>
         </h2>
         <p className="section-subtitle">
           Aprofunde seu conhecimento e acelere sua jornada com nossos e-books exclusivos.
         </p>
 
-        <div className="product-carousel-outer-wrapper">
-          <button
-            type="button"
-            className="carousel-arrow left"
-            onClick={prev}
-            aria-label="Produto anterior"
-          >
-            <IoIosArrowBack size={36} />
-          </button>
+        {/* MOBILE: carrossel com 1 produto visível */}
+        <div className="products-carousel-mobile">
+          <div className="carousel-inner">
+            <div
+              className="product-card glow-on-hover"
+              key={productsForSale[activeIndex].id}
+            >
+              <div className="offer-image-container">
+                <Image
+                  src={productsForSale[activeIndex].img}
+                  alt={productsForSale[activeIndex].name}
+                  fill
+                  className="offer-image"
+                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 320px"
+                />
+              </div>
+              <h3 className="offer-name">{productsForSale[activeIndex].name}</h3>
+              <p className="offer-desc">{productsForSale[activeIndex].desc}</p>
+              <div className="price-box">
+                <p className="price-from">
+                  <span>{productsForSale[activeIndex].priceFrom}</span>
+                </p>
+                <p className="price-to">{productsForSale[activeIndex].priceTo}</p>
+                <p className="price-info">{productsForSale[activeIndex].installments}</p>
+              </div>
+              <a
+                href={productsForSale[activeIndex].hotmartLink}
+                onClick={handleCtaClick(productsForSale[activeIndex].hotmartLink)}
+                className={`cta-button ${isCtaAnimating ? 'animating' : ''}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="button-text">comprar agora</span>
+                <span className="flying-book" aria-hidden="true">
+                  🧠
+                </span>
+              </a>
+              <p className="secure-purchase-text">
+                Compra 100% segura. Acesso vitalício. 7 dias de garantia incondicional.
+              </p>
+            </div>
+          </div>
 
-          <div className="product-carousel-inner-content">
-            <div className="product-offer-card glow-on-hover carousel-item">
+          {/* Pontos de navegação */}
+          <div className="dots-navigation" aria-label="Navegação de produtos">
+            {productsForSale.map((_, i) => (
+              <button
+                key={i}
+                className={`dot ${i === activeIndex ? 'active' : ''}`}
+                onClick={() => handleDotClick(i)}
+                aria-current={i === activeIndex ? 'true' : undefined}
+                aria-label={`Mostrar produto ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* DESKTOP: grid com ambos os produtos e detalhes completos */}
+        <div className="products-grid-desktop">
+          {productsForSale.map((product) => (
+            <div key={product.id} className="product-card glow-on-hover">
               <div className="offer-image-container">
                 <Image
                   src={product.img}
                   alt={product.name}
                   fill
                   className="offer-image"
-                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 320px"
+                  sizes="300px"
                 />
               </div>
-
               <h3 className="offer-name">{product.name}</h3>
-
+              <p className="offer-desc">{product.desc}</p>
               <div className="price-box">
-                <p className="price-from"><span>{product.priceFrom}</span></p>
+                <p className="price-from">
+                  <span>{product.priceFrom}</span>
+                </p>
                 <p className="price-to">{product.priceTo}</p>
                 <p className="price-info">{product.installments}</p>
               </div>
-
               <a
                 href={product.hotmartLink}
                 onClick={handleCtaClick(product.hotmartLink)}
@@ -99,23 +145,15 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
                 rel="noopener noreferrer"
               >
                 <span className="button-text">comprar agora</span>
-                <span className="flying-book" aria-hidden="true">🧠</span>
+                <span className="flying-book" aria-hidden="true">
+                  🧠
+                </span>
               </a>
-
               <p className="secure-purchase-text">
                 Compra 100% segura. Acesso vitalício. 7 dias de garantia incondicional.
               </p>
             </div>
-          </div>
-
-          <button
-            type="button"
-            className="carousel-arrow right"
-            onClick={next}
-            aria-label="Próximo produto"
-          >
-            <IoIosArrowForward size={36} />
-          </button>
+          ))}
         </div>
       </div>
 
@@ -124,8 +162,8 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           background-color: var(--color-pure-black);
           border-top: 1px solid rgba(var(--color-text-light), 0.1);
           border-bottom: 1px solid rgba(var(--color-text-light), 0.1);
-          padding-top: 60px;
-          padding-bottom: 60px;
+          padding: 60px 15px;
+          color: var(--color-text-light);
         }
 
         .section-title,
@@ -148,51 +186,18 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           color: var(--color-text-secondary);
         }
 
-        .product-carousel-outer-wrapper {
-          position: relative;
-          width: 100%;
-          max-width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 15px;
-          box-sizing: border-box;
+        /* MOBILE CARROSSEL */
+        .products-carousel-mobile {
+          display: block;
         }
-
-        .product-carousel-inner-content {
-          flex-grow: 1;
+        .carousel-inner {
           display: flex;
           justify-content: center;
-          align-items: center;
+          margin-bottom: 25px;
         }
 
-        .carousel-arrow {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 50%;
-          padding: 8px;
-          color: var(--color-neon-yellow);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background 0.3s ease, color 0.3s ease;
-          z-index: 10;
-          flex-shrink: 0;
-          margin: 0 10px;
-          border: none;
-          cursor: pointer;
-          user-select: none;
-        }
-
-        .carousel-arrow:hover {
-          background: rgba(255, 255, 255, 0.2);
-          color: var(--color-neon-blue);
-        }
-
-        .carousel-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 12px;
+        .product-card {
+          max-width: 320px;
           background: linear-gradient(
             160deg,
             rgba(var(--color-neon-purple), 0.1),
@@ -200,17 +205,17 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           );
           border-radius: 15px;
           padding: 20px;
-          width: 100%;
-          max-width: 320px;
           text-align: center;
-          box-sizing: border-box;
-          flex-shrink: 0;
           border: 1px solid rgba(var(--color-text-light), 0.2);
           box-shadow: 0 0 12px rgba(var(--color-neon-yellow), 0.1);
-          transition: box-shadow 0.3s ease;
+          box-sizing: border-box;
+          user-select: none;
+          margin: 0 auto;
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
-        .carousel-item:hover {
+        .product-card:hover {
           box-shadow: 0 0 20px var(--color-neon-yellow);
+          transform: scale(1.03);
         }
 
         .offer-image-container {
@@ -220,12 +225,13 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           overflow: hidden;
           border-radius: 10px;
           box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-          margin-bottom: 12px;
+          margin: 0 auto 12px;
         }
 
         .offer-image {
           object-fit: cover;
           object-position: center;
+          border-radius: 10px;
         }
 
         .offer-name {
@@ -233,9 +239,15 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           color: var(--color-neon-yellow);
           font-weight: 700;
           margin-bottom: 6px;
-          text-align: center;
           text-transform: uppercase;
           line-height: 1.3;
+        }
+
+        .offer-desc {
+          font-size: 0.85rem;
+          color: var(--color-text-secondary);
+          margin-bottom: 8px;
+          min-height: 42px;
         }
 
         .price-box {
@@ -244,11 +256,10 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           padding: 8px 12px;
           border-radius: 8px;
           margin-bottom: 12px;
-          text-align: center;
-          width: fit-content;
-          align-self: center;
           box-shadow: 0 0 8px rgba(var(--color-neon-yellow), 0.2);
-          font-size: 0.9rem;
+          font-size: 1rem;
+          display: inline-block;
+          text-align: center;
         }
 
         .price-from {
@@ -294,7 +305,6 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           margin-top: 8px;
           width: fit-content;
           line-height: 1;
-          align-self: center;
           border: none;
           user-select: none;
         }
@@ -358,6 +368,39 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           padding: 0 5px;
         }
 
+        /* Pontos de navegação */
+        .dots-navigation {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 30px;
+        }
+
+        .dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: rgba(var(--color-text-light), 0.3);
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          user-select: none;
+        }
+
+        .dot.active {
+          background-color: var(--color-neon-yellow);
+          box-shadow: 0 0 8px var(--color-neon-yellow);
+        }
+
+        /* DESKTOP GRID */
+        .products-grid-desktop {
+          display: none;
+          gap: 30px;
+          justify-content: center;
+          flex-wrap: nowrap;
+          margin-top: 40px;
+        }
+
         @media (min-width: 769px) {
           .section-title {
             font-size: 2.2rem;
@@ -369,31 +412,39 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
             width: 300px;
             height: 250px;
           }
-          .carousel-item {
-            max-width: 400px;
-            padding: 30px;
+          .product-card {
+            max-width: 320px;
+            padding: 25px;
             gap: 15px;
           }
           .price-box {
-            font-size: 1rem;
-            padding: 10px 15px;
+            font-size: 1.2rem;
+            padding: 12px 18px;
           }
           .price-from {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
           }
           .price-to {
-            font-size: 1.8rem;
+            font-size: 2rem;
           }
           .price-info {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
           }
           .cta-button {
-            font-size: 1rem;
-            padding: 10px 30px;
+            font-size: 1.1rem;
+            padding: 12px 36px;
           }
           .secure-purchase-text {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             margin-top: 15px;
+          }
+
+          /* Mostrar grid e esconder carrossel no desktop */
+          .products-carousel-mobile {
+            display: none;
+          }
+          .products-grid-desktop {
+            display: flex;
           }
         }
       `}</style>

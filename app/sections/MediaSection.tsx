@@ -43,7 +43,7 @@ const MediaSection: React.FC = () => {
         <div className="video-content-wrapper">
           <div className="video-item glow-on-hover">
             <iframe
-              src="https://www.youtube.com/embed/4ZhrM8ZUumM?si=K5QjKtjpN5182FE_"
+              src="https://www.youtube.com/embed/3Tq666FaKwU?si=6L9eMJoms8ZvMeYF"
               title="AS 48 LEIS DO PODER | RESUMO COMPLETO"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
