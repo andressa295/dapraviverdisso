@@ -51,8 +51,6 @@ const WelcomeSection: React.FC = () => {
         </p>
         <div className="video-container">
           <iframe
-            width="100%"
-            height="100%"
             src="https://www.youtube.com/embed/elJqW_5S0fo?si=dnbSFeNUpf6EEKp1"
             title="Sua Mensagem Pessoal"
             frameBorder="0"
@@ -70,13 +68,14 @@ const WelcomeSection: React.FC = () => {
         .welcome-section {
           padding-top: 100px;
           padding-bottom: 80px;
+          background-color: var(--color-pure-black);
+          color: var(--color-text-light);
         }
 
         .section-content-container {
           max-width: 1200px;
           margin: 0 auto;
-          padding-left: 20px;
-          padding-right: 20px;
+          padding: 0 20px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -87,25 +86,26 @@ const WelcomeSection: React.FC = () => {
           font-size: 2.8rem;
           font-weight: 900;
           line-height: 1.2;
-          color: var(--color-text-light);
           text-transform: uppercase;
           margin-bottom: 25px;
           max-width: 900px;
           width: 100%;
+          color: var(--color-text-light);
         }
 
         .hero-subtitle {
           margin-bottom: 50px;
           max-width: 800px;
-          line-height: 1.6;
           font-size: 1.1rem;
+          line-height: 1.6;
+          color: var(--color-text-secondary);
         }
 
         .video-container {
           position: relative;
           width: 100%;
           max-width: 1000px;
-          padding-bottom: 56.25%;
+          padding-bottom: 56.25%; /* 16:9 */
           height: 0;
           background-color: #111;
           border-radius: 15px;
@@ -125,93 +125,97 @@ const WelcomeSection: React.FC = () => {
 
         .welcome-text-intro {
           font-size: 1rem;
-          color: var(--color-text-secondary);
           max-width: 700px;
           line-height: 1.6;
           margin-top: 30px;
+          color: var(--color-text-secondary);
         }
 
-        @media (max-width: 1200px) {
+        /* DESKTOP */
+        @media (min-width: 1025px) {
+          .video-container {
+            max-width: 1000px;
+            padding-bottom: 56.25%;
+          }
+        }
+
+        /* TABLET */
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .video-container {
+            max-width: 700px;
+            padding-bottom: 56.25%;
+          }
           .hero-title {
             font-size: 2.3rem;
-            line-height: 1.25;
             max-width: 750px;
           }
-
-          .video-container {
-            max-width: 900px;
-          }
-        }
-
-        @media (max-width: 992px) {
-          .hero-title {
-            font-size: 1.9rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            max-width: 600px;
-          }
-
           .hero-subtitle {
             font-size: 1rem;
             max-width: 650px;
           }
-
-          .video-container {
-            max-width: 800px;
-          }
         }
 
-        @media (max-width: 768px) {
+        /* CELULAR MÉDIO E GRANDE */
+        @media (max-width: 768px) and (min-width: 481px) {
           .welcome-section {
             padding-top: 80px;
             padding-bottom: 60px;
           }
-
+          .video-container {
+            max-width: 450px;
+            padding-bottom: 56.25%;
+            margin-bottom: 25px;
+          }
           .hero-title {
             font-size: 1.6rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
             max-width: 100%;
+            margin-bottom: 20px;
           }
-
           .hero-subtitle {
             font-size: 0.9rem;
             margin-bottom: 40px;
-            line-height: 1.5;
             max-width: 100%;
           }
-
           .welcome-text-intro {
-            margin-top: 20px;
             font-size: 0.85rem;
-            line-height: 1.5;
             max-width: 100%;
+            margin-top: 20px;
           }
         }
 
+        /* CELULAR PEQUENO */
         @media (max-width: 480px) {
           .welcome-section {
             padding-top: 60px;
             padding-bottom: 40px;
           }
-
+          .video-container {
+            max-width: 320px;
+            padding-bottom: 56.25%;
+            margin-bottom: 20px;
+          }
           .hero-title {
             font-size: 1.3rem;
             margin-bottom: 15px;
             line-height: 1.3;
+            max-width: 100%;
           }
-
           .hero-subtitle {
             font-size: 0.75rem;
             margin-bottom: 30px;
-            line-height: 1.4;
+            max-width: 100%;
           }
-
           .welcome-text-intro {
-            margin-top: 15px;
             font-size: 0.75rem;
-            line-height: 1.4;
+            margin-top: 15px;
+            max-width: 100%;
           }
+        }
+
+        /* Destaque do span */
+        .highlight {
+          color: var(--color-neon-yellow);
+          font-weight: 800;
         }
       `}</style>
     </section>
