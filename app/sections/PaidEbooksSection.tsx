@@ -364,7 +364,7 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
             height: 250px;
           }
           .product-card {
-            max-width: 320px;
+            max-width: 390px;
             padding: 25px;
             gap: 15px;
           }
