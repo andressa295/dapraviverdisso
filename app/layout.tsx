@@ -1,18 +1,13 @@
-// import './globals.css'; // Mantenha esta linha para seus estilos globais
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
-
-// **Importe seus estilos globais AQUI**
 import './globals.css';
 
-// Configura a fonte Poppins com os pesos que você já usava
 const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
   display: 'swap',
 });
 
-// Metadados para SEO e o título da aba do navegador
 export const metadata: Metadata = {
   title: 'Poder Mental - Treine Sua Mente para a Prosperidade e Recomeços',
   description: 'Desvende o poder da sua mente para atrair riqueza, saúde e sucesso. Participe da comunidade e acesse conteúdos exclusivos.',
@@ -20,11 +15,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Poder Mental - Treine Sua Mente para a Prosperidade e Recomeços',
     description: 'Desvende o poder da sua mente para atrair riqueza, saúde e sucesso. Participe da comunidade e acesse conteúdos exclusivos.',
-    url: 'https://www.podermnental.com.br', // Substitua pelo seu domínio real
+    url: 'https://www.podermnental.com.br',
     siteName: 'Poder Mental',
     images: [
       {
-        url: 'https://www.podermnental.com.br/images/poder-mental-logo.png', // Substitua pela URL da sua logo ou uma imagem de capa otimizada
+        url: 'https://www.podermnental.com.br/images/poder-mental-logo.png',
         width: 800,
         height: 600,
         alt: 'Poder Mental - Logo',
@@ -37,7 +32,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Poder Mental - Treine Sua Mente para a Prosperidade e Recomeços',
     description: 'Desvende o poder da sua mente para atrair riqueza, saúde e sucesso. Participe da comunidade e acesse conteúdos exclusivos.',
-    images: ['https://www.podermnental.com.br/images/poder-mental-logo.png'], // Substitua pela URL da sua logo
+    images: ['https://www.podermnental.com.br/images/poder-mental-logo.png'],
   },
 };
 
@@ -47,12 +42,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body className={poppins.className}>
-        {/* NOVO CONTAINER PRINCIPAL */}
-        <div className="main-layout-container">
-          {children}
-        </div>
+    <html lang="pt-BR" className={poppins.className}>
+      <body>
+        <div className="main-layout-container">{children}</div>
       </body>
     </html>
   );

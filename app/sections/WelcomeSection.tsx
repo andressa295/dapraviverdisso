@@ -2,19 +2,18 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 
-
-// Hook para animação de entrada ao rolar - CORRIGIDO
+// Hook para animação de entrada ao rolar
 const useScrollAnimation = (threshold = 0.1) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => { // <-- CORREÇÃO AQUI: 'entries' como parâmetro do callback
+      (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            observer.unobserve(entry.target); // Deixa de observar depois que fica visível
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -22,160 +21,201 @@ const useScrollAnimation = (threshold = 0.1) => {
     );
 
     const currentRef = domRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    if (currentRef) observer.observe(currentRef);
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      if (currentRef) observer.unobserve(currentRef);
     };
-  }, [threshold]); // isVisible removido daqui, pois a lógica de unobserve já controla
+  }, [threshold]);
 
   return [domRef, isVisible] as const;
 };
 
+const WelcomeSection: React.FC = () => {
+  const [domRef, isVisible] = useScrollAnimation(0.2);
 
-interface WelcomeSectionProps {
-    // Se precisar de props no futuro
-}
+  return (
+    <section
+      id="inicio"
+      ref={domRef}
+      className={`section welcome-section ${isVisible ? 'animated' : ''}`}
+    >
+      <div className="section-content-container">
+        <h1 className="hero-title">
+          sua mente te aguarda. <br />
+          e você <span className="highlight">não está sozinho(a).</span>
+        </h1>
+        <p className="hero-subtitle">
+          Recomeçar, Transformar, Vencer: Sua Mente É a Chave. Um convite para
+          despertar o poder que já existe em você.
+        </p>
+        <div className="video-container">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/elJqW_5S0fo?si=dnbSFeNUpf6EEKp1"
+            title="Sua Mensagem Pessoal"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <p className="welcome-text-intro">
+          Nesta jornada, vamos juntos desvendar os segredos da sua mente para
+          construir a vida que você merece. Conecte-se comigo.
+        </p>
+      </div>
 
-const WelcomeSection: React.FC<WelcomeSectionProps> = () => {
-    // Esta seção não usa a animação `animated` por padrão para evitar flicker.
-    // Ela aparece imediatamente com opacidade total.
-    const [domRef] = useScrollAnimation(0.2); // useScrollAnimation vai ser só para o `ref`
+      <style jsx>{`
+        .welcome-section {
+          padding-top: 100px;
+          padding-bottom: 80px;
+        }
 
-    return (
-        <section id="inicio" ref={domRef} className={`section welcome-section`}>
-            <h1 className="hero-title">
-                sua mente te aguarda. <br/>e você <span className="highlight">não está sozinho(a).</span>
-            </h1>
-            <p className="hero-subtitle">
-                Recomeçar, Transformar, Vencer: Sua Mente É a Chave. Um convite para despertar o poder que já existe em você.
-            </p>
-            <div className="video-container">
-                <iframe
-                    width="100%"
-                    height="auto"
-                    src="https://www.youtube.com/embed/elJqW_5S0fo?si=HI4sJBkYo7jDuy6d" // SUBSTITUA PELO ID DO SEU VÍDEO
-                    title="Sua Mensagem Pessoal"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                ></iframe>
-                <div className="video-overlay">
-                    <p>Assista ao meu vídeo e descubra como o Poder Mental pode ser o seu próximo passo.</p>
-                </div>
-            </div>
-            <p className="welcome-text-intro">
-                Nesta jornada, vamos juntos desvendar os segredos da sua mente para construir a vida que você merece. Conecte-se comigo.
-            </p>
+        .section-content-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding-left: 20px;
+          padding-right: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
 
-            <style jsx>{`
-                .welcome-section {
-                    padding-top: 100px;
-                    padding-bottom: 80px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                }
-                .hero-title {
-                    font-size: 2.8rem;
-                    font-weight: 900;
-                    line-height: 1.2;
-                    color: var(--color-text-light);
-                    text-transform: uppercase;
-                    margin-bottom: 25px;
-                }
-                .hero-subtitle {
-                    margin-bottom: 50px;
-                }
-                .video-container {
-                    position: relative;
-                    width: 80%;
-                    max-width: 800px;
-                    padding-bottom: 45%; 
-                    height: 0;
-                    background-color: #111;
-                    border-radius: 15px;
-                    overflow: hidden;
-                    box-shadow: 0 0 30px rgba(37, 117, 252, 0.15);
-                    margin-bottom: 30px;
-                }
-                .video-container iframe {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                }
-                .video-overlay {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
-                    padding: 20px 10px 10px;
-                    color: var(--color-text-light);
-                    font-size: 0.9rem;
-                    text-shadow: 0 0 5px rgba(0,0,0,0.5);
-                    pointer-events: none;
-                }
-                .welcome-text-intro {
-                    font-size: 1rem;
-                    color: var(--color-text-secondary);
-                    max-width: 700px;
-                    line-height: 1.5;
-                    margin-top: 30px;
-                }
+        .hero-title {
+          font-size: 2.8rem;
+          font-weight: 900;
+          line-height: 1.2;
+          color: var(--color-text-light);
+          text-transform: uppercase;
+          margin-bottom: 25px;
+          max-width: 900px;
+          width: 100%;
+        }
 
-                @media (max-width: 768px) {
-                    .welcome-section {
-                        padding-top: 80px;
-                        padding-bottom: 60px;
-                    }
-                    .hero-title {
-                        font-size: 2rem;
-                        margin-bottom: 20px;
-                    }
-                    .hero-subtitle {
-                        font-size: 0.9rem;
-                        margin-bottom: 40px;
-                    }
-                    .video-container {
-                        width: 95%;
-                    }
-                    .welcome-text-intro {
-                        margin-top: 20px;
-                    }
-                }
+        .hero-subtitle {
+          margin-bottom: 50px;
+          max-width: 800px;
+          line-height: 1.6;
+          font-size: 1.1rem;
+        }
 
-                @media (max-width: 480px) {
-                    .welcome-section {
-                        padding-top: 60px;
-                        padding-bottom: 40px;
-                    }
-                    .hero-title {
-                        font-size: 1.4rem;
-                        margin-bottom: 15px;
-                    }
-                    .hero-subtitle {
-                        font-size: 0.8rem;
-                        margin-bottom: 30px;
-                    }
-                    .video-container {
-                        width: 100%;
-                    }
-                    .welcome-text-intro {
-                        margin-top: 15px;
-                    }
-                }
-            `}</style>
-        </section>
-    );
+        .video-container {
+          position: relative;
+          width: 100%;
+          max-width: 1000px;
+          padding-bottom: 56.25%;
+          height: 0;
+          background-color: #111;
+          border-radius: 15px;
+          overflow: hidden;
+          box-shadow: 0 0 30px rgba(37, 117, 252, 0.15);
+          margin: 0 auto 30px auto;
+        }
+
+        .video-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
+
+        .welcome-text-intro {
+          font-size: 1rem;
+          color: var(--color-text-secondary);
+          max-width: 700px;
+          line-height: 1.6;
+          margin-top: 30px;
+        }
+
+        @media (max-width: 1200px) {
+          .hero-title {
+            font-size: 2.3rem;
+            line-height: 1.25;
+            max-width: 750px;
+          }
+
+          .video-container {
+            max-width: 900px;
+          }
+        }
+
+        @media (max-width: 992px) {
+          .hero-title {
+            font-size: 1.9rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 600px;
+          }
+
+          .hero-subtitle {
+            font-size: 1rem;
+            max-width: 650px;
+          }
+
+          .video-container {
+            max-width: 800px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .welcome-section {
+            padding-top: 80px;
+            padding-bottom: 60px;
+          }
+
+          .hero-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            max-width: 100%;
+          }
+
+          .hero-subtitle {
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            max-width: 100%;
+          }
+
+          .welcome-text-intro {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            max-width: 100%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .welcome-section {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+
+          .hero-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+          }
+
+          .hero-subtitle {
+            font-size: 0.75rem;
+            margin-bottom: 30px;
+            line-height: 1.4;
+          }
+
+          .welcome-text-intro {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            line-height: 1.4;
+          }
+        }
+      `}</style>
+    </section>
+  );
 };
 
 export default WelcomeSection;
