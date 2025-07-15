@@ -12,7 +12,7 @@ interface PaidEbooksSectionProps {
 const productsForSale = [
   {
     id: 'combo-morte-renascimento',
-    name: 'combo morte e renascimento',
+    name: 'combo: poder mental - morte e renascimento',
     desc: `🔥 O pacote definitivo pra sua transformação:
 
 Inclui os clássicos consagrados:
@@ -138,7 +138,7 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
           position: relative;
           width: 100%;
           max-width: 320px;
-          height: 200px;
+          height: 250px;
           margin: 0 auto 20px;
         }
         .offer-image {
