@@ -79,7 +79,7 @@ const CommunityChallengeSection: React.FC<CommunityChallengeSectionProps> = () =
                     </div>
                 </div>
                 <a 
-                    href="https://chat.whatsapp.com/KN8ws56OUTFKXIvEfprqWr?mode=ac_t" 
+                    href="https://whatsapp.com/channel/0029VbBCoSoG8l5KntZDyS0P/100" 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="whatsapp-cta-button"
