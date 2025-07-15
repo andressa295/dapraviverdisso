@@ -33,7 +33,7 @@ E mais os best-sellers:
     priceFrom: 'de R$197,00',
     priceTo: 'por apenas R$59',
     installments: 'ou em até 8x de R$ 8,58',
-    hotmartLink: 'https://SEU-LINK-HOTMART-AQUI',
+    hotmartLink: 'https://app.hotmart.com/products/manage/5883716/hotlink',
   },
 ];
 
