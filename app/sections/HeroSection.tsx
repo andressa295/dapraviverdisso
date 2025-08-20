@@ -174,7 +174,7 @@ const HeroSection: React.FC = () => {
             gap: 16px;
           }
           .section-title {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
           }
           .section-subtitle {
