@@ -4,15 +4,12 @@ import React, { useState } from 'react';
 import Script from 'next/script';
 
 // Importa os componentes de layout
-import Header from './components/Header';
 import Footer from './components/Footer';
 
 // Importa as seções da nova pasta
-import WelcomeSection from './sections/WelcomeSection';
-import CommunityChallengeSection from './sections/CommunityChallengeSection';
 import FreeContentSection from './sections/FreeContentSection';
 import PaidEbooksSection from './sections/PaidEbooksSection';
-import MediaSection from './sections/MediaSection';
+import HeroSection from './sections/HeroSection';
 
 export default function PoderMentalPage() {
   const [isCtaAnimating, setIsCtaAnimating] = useState(false); // Mantém o estado de animação aqui se o cta-button for global
@@ -39,16 +36,10 @@ export default function PoderMentalPage() {
         strategy="lazyOnload"
       />
 
-      <Header />
-
-      {/* As seções agora são renderizadas diretamente.
-          O main-layout-container está no app/layout.tsx e gerencia o layout global.
-          A classe 'section' em globals.css gerencia o layout de cada seção. */}
-      <WelcomeSection /> 
-      <CommunityChallengeSection />
+     <HeroSection />
       <FreeContentSection />
       <PaidEbooksSection handleCtaClick={handleCtaClick} isCtaAnimating={isCtaAnimating} />
-      <MediaSection />
+      
 
       <Footer />
     </>

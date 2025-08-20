@@ -1,340 +1,338 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
-import Image from 'next/image';
+import React from 'react';
+import { Flame, Sparkles } from 'lucide-react'; // Importando ícones da biblioteca lucide-react
 
-const useScrollAnimation = (threshold = 0.1) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const domRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold }
-    );
-
-    const currentRef = domRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, [threshold]);
-
-  return [domRef, isVisible] as const;
-};
-
-interface FreeContentSectionProps {}
-
-const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
-  const [domRef, isVisible] = useScrollAnimation(0.2);
-
-  const freeEbooks = [
-    {
-      id: 'reconexao',
-      title: 'RECONEXÃO',
-      desc:
-        'A reconexão começa quando você aprende a desligar o mundo pra se ouvir de novo. Silêncio não é ausência de som. É presença de alma.',
-      img: '/images/reconexao.jpg',
-      downloadLink:
-        'https://drive.google.com/file/d/12y7vVXWDNaNlBNJIBrmJknGEOnlstfy9/view?usp=drive_link',
-    },
-    {
-      id: 'desbloqueia-mente',
-      title: 'DESBLOQUEIA, MENTE!',
-      desc:
-        'Um guia prático para destravar o poder do seu subconsciente e treinar sua mente para atrair prosperidade e oportunidades no mundo digital.',
-      img: '/images/desbloqueia-mente.jpg',
-      downloadLink:
-        'https://drive.google.com/file/d/1XejaO1jijgvHiNma24qTPN5oemTk3NYQ/view?usp=drive_link',
-    },
-    {
-      id: 'sonho-realidade',
-      title: 'DO SONHO À REALIDADE: A ARTE DE AGIR',
-      desc:
-        'Transforme suas visões em realidade. Entenda que a ação é a ponte entre o sonhar e o realizar, e descubra como a consistência diária é a chave para a vitória.',
-      img: '/images/do-sonho-a-realidade.jpg',
-      downloadLink:
-        'https://drive.google.com/file/d/1XG2-Eezd4wlJIbDJniRYU_UjxIBru9SJ/view?usp=drive_link',
-    },
-  ];
-
+const EbookSummarySection: React.FC = () => {
   return (
-    <section
-      id="gratuitos"
-      ref={domRef}
-      className={`section free-content-section ${isVisible ? 'animated' : ''}`}
-    >
-      <h2 className="section-title">
-        sua <span className="highlight">biblioteca gratuita:</span> destrave seu poder mental agora!
-      </h2>
-      <p className="section-subtitle">
-        Selecionei livros e e-books essenciais para você iniciar sua jornada de transformação. Faça
-        o download e comece a reprogramar sua realidade hoje!
-      </p>
+    <section id="ebook-resumo" className="section ebook-summary-section">
+      <div className="section-content-container">
+        <h2 className="section-main-title">
+          Destaques da <span className="highlight-gradient">Biblioteca Reset Mental</span>
+        </h2>
 
-      <div className="ebook-grid">
-        {freeEbooks.map((ebook) => (
-          <div key={ebook.id} className="ebook-card glow-on-hover">
-            <div className="image-wrapper">
-              <Image
-                src={ebook.img}
-                alt={`Capa ${ebook.title}`}
-                width={200}
-                height={300}
-                className="ebook-cover"
-                sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 200px"
-              />
-              <div className="glow-border"></div>
+        {/* Seção "Os Mais Conhecidos" */}
+        <div className="category-section">
+          <h3 className="category-title">
+            <Flame className="icon-style" /> Os Mais Conhecidos
+          </h3>
+          <div className="ebook-list">
+            <div className="ebook-item">
+              <h4 className="ebook-title">As 48 Leis do Poder <span className="author">(Robert Greene)</span></h4>
+              <p className="ebook-description">
+                Um guia estratégico atemporal sobre influência, liderança e poder. Revela as leis que moldam relacionamentos, negociações e o jogo da vida.
+              </p>
             </div>
-            <h3>{ebook.title}</h3>
-            <p>{ebook.desc}</p>
-            <a
-              href={ebook.downloadLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="download-button"
-            >
-              Download Grátis
-            </a>
+            <div className="ebook-item">
+              <h4 className="ebook-title">Mais Esperto que o Diabo <span className="author">(Napoleon Hill)</span></h4>
+              <p className="ebook-description"> {/* Corrigido: className duplicado removido */}
+                Uma entrevista imaginária com o “diabo” que expõe as armadilhas da mente humana, revelando como escapar do medo, da dúvida e da procrastinação.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">Manual de Persuasão do FBI <span className="author">(Jack Schafer)</span></h4>
+              <p className="ebook-description">
+                Técnicas práticas de um ex-agente para entender e influenciar pessoas. Um manual direto sobre linguagem corporal, persuasão e leitura emocional.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">O Poder do Subconsciente <span className="author">(Joseph Murphy)</span></h4>
+              <p className="ebook-description">
+                Clássico absoluto do desenvolvimento pessoal. Ensina como reprogramar sua mente subconsciente para prosperidade, saúde e sucesso.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">A Boa Sorte <span className="author">(Álex Rovira & Fernando Trías de Bes)</span></h4>
+              <p className="ebook-description">
+                Uma parábola encantadora que mostra como a sorte verdadeira não é acaso, mas consequência de preparação, atitude e ação consistente.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">O Homem Mais Rico da Babilônia <span className="author">(George S. Clason)</span></h4>
+              <p className="ebook-description">
+                Lições financeiras eternas contadas em parábolas simples. Um manual prático de prosperidade, disciplina e riqueza sustentável.
+              </p>
+            </div>
           </div>
-        ))}
+        </div>
+
+        {/* Seção "Outras Obras Exclusivas do Acervo" */}
+        <div className="category-section">
+          <h3 className="category-title">
+            <Sparkles className="icon-style" /> Outras Obras Exclusivas do Acervo
+          </h3>
+          <div className="ebook-list">
+            <div className="ebook-item">
+              <h4 className="ebook-title">Do Sonho à Realidade – A Arte de Agir</h4>
+              <p className="ebook-description">
+                O poder de transformar ideias em ação. Mostra como o primeiro passo é sempre o divisor entre quem sonha e quem realiza.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">Reconexão – Volte pra Si, Volte pro Seu Poder</h4>
+              <p className="ebook-description">
+                Um mapa para reencontrar sua essência em meio ao caos do mundo moderno. Um convite a silenciar, respirar e voltar para casa — dentro de si.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">Tudo Começa na Mente</h4>
+              <p className="ebook-description">
+                Um guia para entender como seus pensamentos moldam sua realidade. Ensina a trocar crenças limitantes por crenças fortalecedoras.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">A Chave Mestra da Manifestação</h4>
+              <p className="ebook-description">
+                Une mente e ação em uma fórmula poderosa. Mostra como alinhar subconsciente e hábitos para materializar seus desejos.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">O Hábito de Vencer</h4>
+              <p className="ebook-description">
+                Um mapa prático para criar hábitos vencedores e destruir ciclos de autossabotagem. Ensina que sucesso é questão de hábito, não de sorte.
+              </p>
+            </div>
+            <div className="ebook-item">
+              <h4 className="ebook-title">Segredos do Subconsciente</h4>
+              <p className="ebook-description">
+                Um resumo prático da obra de Joseph Murphy. Apresenta técnicas de afirmação, visualização e fé para destravar prosperidade e bem-estar.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <style jsx>{`
-        .free-content-section {
-          /* padding e max-width já na .section global */
-          color: var(--color-text-light);
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
+
+        .ebook-summary-section {
+          background-color: #000000;
+          font-family: 'Poppins', sans-serif;
+          color: #ffffff;
+          /* Padding lateral agora será controlado pelo .section-content-container */
+          padding: 20px 0;
+          text-align: center;
         }
 
-        .ebook-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 40px;
+        .section-content-container {
           max-width: 960px;
+          /* Define a largura para 100% e usa padding para margens internas */
+          width: 100%;
           margin: 0 auto;
-          justify-content: center;
-          align-items: stretch;
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          align-items: center;
+          box-sizing: border-box; /* Inclui padding na largura total */
+          padding: 0 16px; /* Adiciona padding lateral para o conteúdo */
         }
 
-        .ebook-card {
+        .section-main-title {
+          font-size: 2.5rem;
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 40px;
+          text-transform: uppercase;
+        }
+
+        .highlight-gradient {
+          background-image: linear-gradient(to right, #00F0FF, #007BFF);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
+
+        .category-section {
+          width: 100%;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: flex-start;
-          gap: 15px;
-          background: rgba(var(--color-pure-black), 0.65);
-          border-radius: 18px;
-          padding: 30px 25px 35px;
-          text-align: center;
-          box-shadow:
-            0 0 10px rgba(var(--color-neon-purple), 0.3),
-            0 0 20px rgba(var(--color-neon-blue), 0.2),
-            0 10px 15px rgba(0, 0, 0, 0.8);
-          transition: transform 0.4s ease, box-shadow 0.4s ease;
-          user-select: none;
-          overflow: visible;
-          cursor: pointer;
-          position: relative;
-        }
-        .ebook-card:hover {
-          transform: translateY(-8px) scale(1.05);
-          box-shadow:
-            0 0 20px rgba(var(--color-neon-purple), 0.6),
-            0 0 40px rgba(var(--color-neon-blue), 0.5),
-            0 20px 30px rgba(0, 0, 0, 0.9);
-          z-index: 5;
+          gap: 30px;
         }
 
-        .image-wrapper {
-          position: relative;
-          width: 180px;
-          height: 270px;
-          border-radius: 15px;
-          overflow: hidden;
-          box-shadow:
-            0 0 10px rgba(var(--color-neon-yellow), 0.7),
-            0 0 25px rgba(var(--color-neon-yellow), 0.4);
-          transition: box-shadow 0.3s ease;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 0; /* espaçamento gerenciado pelo gap do flex */
-        }
-        .ebook-card:hover .image-wrapper {
-          box-shadow:
-            0 0 30px rgba(var(--color-neon-yellow), 1),
-            0 0 50px rgba(var(--color-neon-yellow), 0.7);
-        }
-
-        .ebook-cover {
-          border-radius: 15px;
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-          display: block;
-        }
-
-        .glow-border {
-          position: absolute;
-          top: -5px;
-          left: -5px;
-          right: -5px;
-          bottom: -5px;
-          border-radius: 20px;
-          pointer-events: none;
-          background: linear-gradient(
-            45deg,
-            rgba(var(--color-neon-purple), 0.6),
-            rgba(var(--color-neon-blue), 0.6),
-            rgba(var(--color-neon-yellow), 0.6)
-          );
-          filter: blur(10px);
-          opacity: 0.5;
-          transition: opacity 0.3s ease;
-          z-index: 1;
-        }
-
-        .ebook-card:hover .glow-border {
-          opacity: 1;
-          filter: blur(20px);
-        }
-
-        h3 {
-          font-size: 1.1rem;
-          color: var(--color-neon-yellow);
-          margin: 0;
-          text-transform: uppercase;
-          letter-spacing: 1.1px;
-          font-weight: 800;
-          text-shadow: 0 0 6px rgba(var(--color-neon-yellow), 0.8);
-          z-index: 3;
-          line-height: 1.3;
-          word-break: break-word;
-        }
-
-        p {
-          font-size: 0.85rem;
-          color: var(--color-text-secondary);
-          line-height: 1.4;
-          margin: 0;
-          flex-grow: 1;
-          z-index: 3;
-        }
-
-        .download-button {
-          background: linear-gradient(135deg, var(--color-neon-yellow), var(--color-neon-purple));
-          color: var(--color-pure-black);
-          padding: 12px 30px;
-          border-radius: 50px;
+        .category-title {
+          font-size: 1.8rem;
           font-weight: 700;
-          font-size: 1rem;
-          text-transform: uppercase;
-          box-shadow:
-            0 4px 8px rgba(var(--color-neon-yellow), 0.7),
-            0 8px 16px rgba(var(--color-neon-purple), 0.6);
-          transition: all 0.3s ease;
-          text-decoration: none;
-          user-select: none;
-          display: inline-block;
-          cursor: pointer;
-          z-index: 3;
-          border: none;
+          color: #67e8f9;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          text-align: center;
         }
-        .download-button:hover {
-          filter: brightness(1.15);
-          box-shadow:
-            0 6px 12px rgba(var(--color-neon-yellow), 0.9),
-            0 12px 24px rgba(var(--color-neon-purple), 0.8);
-          transform: translateY(-3px);
+
+        .icon-style {
+          font-size: 1.5em;
+          stroke-width: 2.5px;
+        }
+
+        .ebook-list {
+          display: grid;
+          /* Por padrão, uma coluna para telas pequenas. Ajustado nas media queries. */
+          grid-template-columns: 1fr;
+          gap: 25px;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        .ebook-item {
+          background-color: rgba(255, 255, 255, 0.05);
+          border-radius: 12px;
+          padding: 25px;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          border: 1px solid rgba(0, 123, 255, 0.2);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          width: 100%; /* Garante que o item ocupe a largura disponível na grid */
+          box-sizing: border-box;
+        }
+
+        .ebook-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .ebook-title {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #00BFFF;
+          margin-bottom: 5px;
+          line-height: 1.4;
+        }
+
+        .ebook-title .author {
+          font-size: 0.9em;
+          font-weight: 400;
+          color: #93c5fd;
+        }
+
+        .ebook-description {
+          font-size: 0.95rem;
+          color: #bfdbfe;
+          line-height: 1.5;
+          flex-grow: 1;
         }
 
         /* Responsividade */
-        @media (max-width: 1024px) {
-          .ebook-grid {
-            max-width: 720px;
-            gap: 30px;
+        /* Desktop e Telas Maiores (>= 1024px) */
+        @media (min-width: 1024px) {
+          .section-main-title {
+            font-size: 2.5rem;
+            padding: 20px 0;
           }
-          .ebook-card {
-            padding: 25px 20px 30px;
+          .category-title {
+            font-size: 1.8rem;
           }
-          h3 {
-            font-size: 1.05rem;
+          .ebook-list {
+            grid-template-columns: repeat(3, 1fr); /* 3 colunas para desktop */
+            gap: 25px;
           }
-          p {
-            font-size: 0.8rem;
-            margin-bottom: 25px;
+          .ebook-item {
+            padding: 25px;
           }
-          .download-button {
-            font-size: 0.9rem;
-            padding: 10px 25px;
+          .ebook-title {
+            font-size: 1.2rem;
+          }
+          .ebook-description {
+            font-size: 0.95rem;
+          }
+          .section-content-container {
+            padding: 0 16px; /* Mantém o padding lateral padrão */
           }
         }
 
-        @media (max-width: 768px) {
-          .ebook-grid {
-            grid-template-columns: repeat(2, 1fr);
-            max-width: 480px;
+        /* Tablets (768px a 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .section-main-title {
+            font-size: 2rem;
+          }
+          .category-title {
+            font-size: 1.6rem;
+            
+          }
+          .ebook-list {
+            grid-template-columns: repeat(2, 1fr); /* 2 colunas para tablets */
             gap: 20px;
           }
-          .ebook-card {
-            padding: 20px 15px 25px;
+          .ebook-item {
+            padding: 20px;
           }
-          h3 {
-            font-size: 1rem;
-            margin-bottom: 10px;
+          .ebook-title {
+            font-size: 1.1rem;
           }
-          p {
-            font-size: 0.75rem;
-            margin-bottom: 20px;
+          .ebook-description {
+            font-size: 0.9rem;
           }
-          .download-button {
-            font-size: 0.85rem;
-            padding: 9px 20px;
-          }
-          .image-wrapper {
-            width: 140px;
-            height: 210px;
-            margin-bottom: 0;
+          .section-content-container {
+            padding: 0 16px; /* Mantém o padding lateral padrão */
           }
         }
 
+        /* Celular (<= 767px) */
+        @media (max-width: 767px) {
+          .ebook-summary-section {
+            padding: 10px 0; /* Padding vertical apenas na seção */
+          }
+          .section-content-container {
+            /* O padding horizontal (16px) já está na base, então o width fica calc(100% - 32px) */
+            width: calc(100% - 32px); /* Garante que o container interno respeite 16px de margem em cada lado */
+            padding: 0 16px; /* Adiciona o padding lateral para o conteúdo */
+            gap: 30px;
+          }
+          .section-main-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            
+          }
+          .category-title {
+            font-size: 1.2rem;
+            gap: 5px;
+          }
+          .ebook-list {
+            grid-template-columns: 1fr; /* Uma coluna para celulares */
+            gap: 15px;
+          }
+          .ebook-item {
+            padding: 15px;
+          }
+          .ebook-title {
+            font-size: 1.05rem;
+          }
+          .ebook-description {
+            font-size: 0.85rem;
+          }
+        }
+
+        /* Celular muito pequeno (<= 480px) */
         @media (max-width: 480px) {
-          .ebook-grid {
-            grid-template-columns: 1fr;
-            max-width: 320px;
-            gap: 18px;
+          .ebook-summary-section {
+            padding: 0px 0; /* Padding vertical apenas na seção */
           }
-          .ebook-card {
-            padding: 15px 12px 20px;
+          .section-content-container {
+            /* O padding horizontal (10px) já está na base, então o width fica calc(100% - 20px) */
+            width: calc(100% - 20px); /* Garante que o container interno respeite 10px de margem em cada lado */
+            padding: 0 10px; /* Garante o padding lateral de 10px para telas muito pequenas */
+            gap: 25px;
           }
-          h3 {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+          .section-main-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
           }
-          p {
-            font-size: 0.7rem;
-            margin-bottom: 15px;
+          .category-title {
+            font-size: 1.2rem;
+            gap: 6px;
           }
-          .download-button {
+          .ebook-item {
+            padding: 15px;
+          }
+          .ebook-title {
+            font-size: 0.95rem;
+          }
+          .ebook-description {
             font-size: 0.8rem;
-            padding: 8px 18px;
-          }
-          .image-wrapper {
-            width: 120px;
-            height: 180px;
-            margin-bottom: 0;
           }
         }
       `}</style>
@@ -342,4 +340,4 @@ const FreeContentSection: React.FC<FreeContentSectionProps> = () => {
   );
 };
 
-export default FreeContentSection;
+export default EbookSummarySection;

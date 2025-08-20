@@ -46,34 +46,11 @@ const Header = () => {
         </Link>
 
         <nav className="nav-desktop">
-          <ul className="nav-list">
-            <li><Link href="#inicio" className="nav-item">Início</Link></li>
-            <li><Link href="#comunidade" className="nav-item">Comunidade</Link></li>
-            <li><Link href="#gratuitos" className="nav-item">Conteúdos Gratuitos</Link></li>
-            <li><Link href="#oferta" className="nav-item">E-books</Link></li>
-            <li><Link href="#contato" className="nav-item">Contato</Link></li>
-          </ul>
-        </nav>
-
-        <button
-          className="menu-toggle"
-          onClick={toggleMenu}
-          aria-label="Abrir menu de navegação"
-        >
-          <GiHamburgerMenu size={28} />
-        </button>
-
-        <nav className={`nav-mobile ${isMenuOpen ? 'open' : ''}`}>
           
-
-          <ul className="nav-list">
-            <li><Link href="#inicio" className="nav-item" onClick={closeMenu}>Início</Link></li>
-            <li><Link href="#comunidade" className="nav-item" onClick={closeMenu}>Comunidade</Link></li>
-            <li><Link href="#gratuitos" className="nav-item" onClick={closeMenu}>Conteúdos Gratuitos</Link></li>
-            <li><Link href="#oferta" className="nav-item" onClick={closeMenu}>E-books</Link></li>
-            <li><Link href="#contato" className="nav-item" onClick={closeMenu}>Contato</Link></li>
-          </ul>
         </nav>
+
+        
+        
       </div>
 
       <div className="neon-separator-line"></div>
@@ -87,7 +64,7 @@ const Header = () => {
           background: var(--color-pure-black);
           backdrop-filter: blur(10px);
           z-index: 1000;
-          padding: 15px 25px;
+          padding: 0px;
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
           display: flex;
           flex-direction: column;
@@ -95,6 +72,7 @@ const Header = () => {
           align-items: center;
           box-sizing: border-box;
           transition: background 0.3s ease, box-shadow 0.3s ease;
+          margin: 0 auto;
         }
 
         .header.scrolled {

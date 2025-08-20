@@ -61,7 +61,7 @@ export default function RootLayout({
         <div className="main-layout-container">
           <main
             style={{
-              paddingTop: '138px', // esse valor tem que ser a altura total do seu header fixo + linha neon
+              paddingTop: '5px', // esse valor tem que ser a altura total do seu header fixo + linha neon
               minHeight: '100vh',
               boxSizing: 'border-box',
             }}
