@@ -56,7 +56,7 @@ const productsForSale = [
     priceFrom: 'de R$197,00', // Preço conforme solicitado
     priceTo: 'por apenas R$59',
     installments: 'ou em até 8x de R$ 8,58',
-    hotmartLink: 'https://pay.hotmart.com/D100837353X?bid=1755660170903',
+    hotmartLink: 'https://app.hotmart.com/products/manage/5883716/hotlink',
   },
 ];
 
@@ -131,13 +131,14 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
 
         .paid-ebooks-section {
           background-color: #000000; /* Fundo preto sólido */
-          padding: 20px 16px; /* Ajusta o padding lateral para margens externas */
+          padding: 60px 16px; /* Ajusta o padding lateral para margens externas */
           color: #fff;
           font-family: 'Poppins', sans-serif;
           display: flex;
           justify-content: center;
           align-items: center; /* Centraliza o conteúdo verticalmente */
           min-height: 80vh; /* Garante que ocupa uma boa parte da altura da viewport */
+          scroll-margin-top: 138px; /* Adicionado para compensar o cabeçalho fixo */
         }
         .section-content-container {
             max-width: 768px; /* Largura máxima padrão para o conteúdo */
@@ -172,8 +173,8 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
           border-radius: 15px;
           padding: 30px;
           text-align: center;
-          /* Borda removida */
-          box-shadow: 0 0 15px rgba(0, 123, 255, 0.1); /* Sombra consistente */
+          /* Ajuste da sombra para ficar mais "aberta" e menos como uma borda estreita */
+          box-shadow: 0px 0px 40px rgba(0, 123, 255, 0.2), 0px 0px 80px rgba(0, 123, 255, 0.1);
           max-width: 450px; /* Limita a largura do cartão em desktop */
           width: 100%;
           box-sizing: border-box; /* Garante que padding e borda sejam incluídos na largura */
@@ -192,7 +193,8 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
           margin: 0 auto 10px;
           border-radius: 10px;
           overflow: hidden;
-          box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 123, 255, 0.3); /* Brilho sutil */
+          /* Ajuste da sombra da imagem para não parecer uma borda */
+          box-shadow: 0 0 10px rgba(0, 240, 255, 0.3), 0 0 20px rgba(0, 123, 255, 0.2); /* Reduzida para ser mais suave */
         }
         .offer-image {
           display: block; /* Garante que a imagem se comporte como bloco */
@@ -218,9 +220,9 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
         }
         .price-box {
           background: rgba(0, 123, 255, 0.1);
-          border: 1px solid #007BFF;
-          padding: 15px;
           border-radius: 10px;
+          padding: 15px;
+          /* Borda removida */
           margin-bottom: 20px;
           width: 80%;
           max-width: 250px;
@@ -257,6 +259,7 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
           justify-content: center;
           text-decoration: none;
           user-select: none;
+          animation: pulse 2s infinite ease-in-out; /* Adicionado efeito de vibração */
         }
         .cta-button:hover {
           background-image: linear-gradient(to right, #1C86EE, #0000CD);
@@ -282,6 +285,22 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({
         .section-content-container {
             opacity: 0;
             transform: translateY(20px);
+        }
+
+        /* Keyframes para o efeito de vibração */
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+          }
+          50% {
+            transform: scale(1.02); /* Levemente maior */
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+          }
+          100% {
+            transform: scale(1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+          }
         }
 
         /* Responsividade */
