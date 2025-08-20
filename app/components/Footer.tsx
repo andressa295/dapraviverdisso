@@ -1,8 +1,6 @@
 // components/Footer.tsx
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -12,18 +10,7 @@ const Footer = () => {
           {/* Logo do Poder Mental no rodapé, branca no fundo preto */}
           
         </div>
-
-        
-
-        <div className="social-icons">
-          <a href="https://www.instagram.com/mentaliidadesalpha/?next=%2F" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <FaInstagram size={24} />
-          </a>
-          <a href="https://chat.whatsapp.com/KN8ws56OUTFKXIvEfprqWr?mode=ac_t" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-            <FaWhatsapp size={24} />
-          </a>
-        </div>
-
+              
         <div className="footer-info">
           <p>© {new Date().getFullYear()} Poder Mental. Todos os direitos reservados.</p>
           <p className="disclaimer">Este produto não garante a obtenção de resultados. Qualquer referência ao desempenho de uma estratégia não deve ser interpretada como uma garantia de resultados.</p>

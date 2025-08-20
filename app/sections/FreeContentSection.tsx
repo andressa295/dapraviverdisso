@@ -59,7 +59,7 @@ const EbookSummarySection: React.FC = () => {
         {/* Seção "Outras Obras Exclusivas do Acervo" */}
         <div className="category-section">
           <h3 className="category-title">
-            <Sparkles className="icon-style" /> Outras Obras Exclusivas do Acervo
+            <Sparkles className="icon-style" /> Obras Exclusivas do Acervo
           </h3>
           <div className="ebook-list">
             <div className="ebook-item">
