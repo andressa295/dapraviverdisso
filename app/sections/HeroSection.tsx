@@ -38,25 +38,25 @@ const HeroSection: React.FC = () => {
         /* Importação da fonte Poppins - você pode adicionar isso no seu CSS global ou no <head> do seu HTML */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
 
-        .hero-section {
-          display: flex;
-          align-items: center; /* centraliza verticalmente */
-          justify-content: center;
-          background-color: #000000;
-          font-family: 'Poppins', sans-serif;
-          padding: 60px 0; /* controla o espaço superior/inferior */
-          text-align: center;
-        }
+       .hero-section {
+  display: flex;
+  align-items: center; /* centraliza verticalmente */
+  justify-content: center;
+  background-color: #000000;
+  font-family: 'Poppins', sans-serif;
+  padding: 60px 0; /* controla o espaço superior/inferior */
+  text-align: center;
+}
 
-        .section-content-container {
-          max-width: 768px;
-          margin: 0 auto;
-          padding: 0 16px;
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          align-items: center;
-        }
+.section-content-container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
         .section-title {
           font-size: 3rem;
           font-weight: 800;
@@ -106,12 +106,6 @@ const HeroSection: React.FC = () => {
           border: none;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          text-decoration: none;
-          user-select: none;
-          animation: pulse 2s infinite ease-in-out; /* Adicionado efeito de vibração */
         }
 
         .cta-button:hover {
@@ -123,22 +117,6 @@ const HeroSection: React.FC = () => {
         .cta-button:focus {
           outline: none;
           box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.75);
-        }
-
-        /* Keyframes para o efeito de vibração */
-        @keyframes pulse {
-          0% {
-            transform: scale(1);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-          }
-          50% {
-            transform: scale(1.02); /* Levemente maior */
-            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
-          }
-          100% {
-            transform: scale(1);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-          }
         }
 
         /* Media Queries para Responsividade */
@@ -174,7 +152,7 @@ const HeroSection: React.FC = () => {
             gap: 16px;
           }
           .section-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 10px;
           }
           .section-subtitle {
