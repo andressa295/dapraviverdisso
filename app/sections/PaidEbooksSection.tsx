@@ -57,7 +57,7 @@ const productsForSale = [
     priceFrom: 'de R$197,00',
     priceTo: 'por apenas R$39,90',
     installments: 'ou em até 6x de R$ 6,65',
-    hotmartLink: 'https://pay.hotmart.com/YOUR_HOTMART_LINK_HERE_1',
+    hotmartLink: 'https://pay.hotmart.com/O100603060L',
   },
   {
     id: 'combo-riqueza-sem-limites',
@@ -71,7 +71,7 @@ const productsForSale = [
     priceFrom: 'de R$197,00',
     priceTo: 'por apenas R$39,90',
     installments: 'ou em até 6x de R$ 6,65',
-    hotmartLink: 'https://pay.hotmart.com/O100603060L',
+    hotmartLink: 'https://pay.hotmart.com/K101699262G',
   },
   {
     id: 'combo-poder-e-influencia',
