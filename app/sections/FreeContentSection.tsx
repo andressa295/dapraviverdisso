@@ -38,11 +38,10 @@ const EbookSummarySection: React.FC = () => {
             <div className="ebook-item">
               <h4 className="ebook-title">O Poder do Subconsciente <span className="author">(Joseph Murphy)</span></h4>
               <p className="ebook-description">
-                Clássico absoluto do desenvolvimento pessoal. Ensina como reprogramar sua mente subconsciente para prosperidade, saúde e sucesso.
-              </p>
+                 Um clássico da educação financeira que mostra a diferença entre “trabalhar pelo dinheiro” e “fazer o dinheiro trabalhar para você”.</p>
             </div>
             <div className="ebook-item">
-              <h4 className="ebook-title">A Boa Sorte <span className="author">(Álex Rovira & Fernando Trías de Bes)</span></h4>
+              <h4 className="ebook-title">Pai Rico, Pai Pobre <span className="author">(Robert Kiyosaki) </span></h4>
               <p className="ebook-description">
                 Uma parábola encantadora que mostra como a sorte verdadeira não é acaso, mas consequência de preparação, atitude e ação consistente.
               </p>
@@ -80,24 +79,9 @@ const EbookSummarySection: React.FC = () => {
                 Um guia para entender como seus pensamentos moldam sua realidade. Ensina a trocar crenças limitantes por crenças fortalecedoras.
               </p>
             </div>
-            <div className="ebook-item">
-              <h4 className="ebook-title">A Chave Mestra da Manifestação</h4>
-              <p className="ebook-description">
-                Une mente e ação em uma fórmula poderosa. Mostra como alinhar subconsciente e hábitos para materializar seus desejos.
-              </p>
-            </div>
-            <div className="ebook-item">
-              <h4 className="ebook-title">O Hábito de Vencer</h4>
-              <p className="ebook-description">
-                Um mapa prático para criar hábitos vencedores e destruir ciclos de autossabotagem. Ensina que sucesso é questão de hábito, não de sorte.
-              </p>
-            </div>
-            <div className="ebook-item">
-              <h4 className="ebook-title">Segredos do Subconsciente</h4>
-              <p className="ebook-description">
-                Um resumo prático da obra de Joseph Murphy. Apresenta técnicas de afirmação, visualização e fé para destravar prosperidade e bem-estar.
-              </p>
-            </div>
+           
+             
+           
           </div>
         </div>
       </div>
