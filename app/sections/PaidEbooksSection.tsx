@@ -50,7 +50,7 @@ const productsForSale = [
     name: 'COMBO: MENTE SEM LIMITES',
     desc: 'O pacote definitivo para expandir sua consciência e dominar sua mente. Inclui 2 e-books principais, 3 de bônus e 1 e-book de atividades.',
     imgs: [
-      '/images/poder.png',
+      '/images/poder.jpg',
       '/images/esperto.jpeg',
       '/images/sonho.jpg',
     ],
