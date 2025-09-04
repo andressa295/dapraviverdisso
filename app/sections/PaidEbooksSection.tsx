@@ -160,7 +160,7 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
           justify-content: center;
           align-items: center;
           min-height: 80vh;
-          scroll-margin-top: 138px;
+          scroll-margin-top: 338px;
         }
         .section-content-container {
           max-width: 1200px;
