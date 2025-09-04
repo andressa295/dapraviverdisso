@@ -1,15 +1,82 @@
 'use client';
 
 import React from 'react';
+const findScrollableParent = (el: HTMLElement | null): HTMLElement | (Document & HTMLElement) => {
+  if (!el) return (document.scrollingElement as HTMLElement) || document.documentElement;
+  let parent: HTMLElement | null = el.parentElement;
+  while (parent) {
+    const style = window.getComputedStyle(parent);
+    const overflowY = style.overflowY;
+    const canScroll =
+      (overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay') &&
+      parent.scrollHeight > parent.clientHeight;
+    if (canScroll) return parent;
+    parent = parent.parentElement;
+  }
+  return (document.scrollingElement as HTMLElement) || document.documentElement;
+};
+
+
+const smoothScrollTo = (el: HTMLElement, offset = 0, duration = 600) => {
+  const scrollParent = findScrollableParent(el) as HTMLElement;
+  const isDoc = (scrollParent === document.scrollingElement || scrollParent === document.documentElement);
+
+  const start = isDoc ? window.scrollY || window.pageYOffset : (scrollParent as HTMLElement).scrollTop;
+  const elRectTop = el.getBoundingClientRect().top;
+  const parentRectTop = isDoc ? 0 : (scrollParent as HTMLElement).getBoundingClientRect().top;
+  const target = Math.round(start + (elRectTop - parentRectTop) - offset);
+
+  // tentativa nativa primeiro
+  try {
+    if (isDoc) window.scrollTo({ top: target, behavior: 'smooth' });
+    else (scrollParent as HTMLElement).scrollTo({ top: target, behavior: 'smooth' });
+  } catch (e) {
+    /* ignorar se browser não suportar a opção behavior */
+  }
+
+  // fallback manual caso o navegador ignore a smooth nativa (ex: Safari mobile às vezes)
+  setTimeout(() => {
+    const current = isDoc ? (window.scrollY || window.pageYOffset) : (scrollParent as HTMLElement).scrollTop;
+    if (Math.abs(current - target) > 5) {
+      // animação manual com easing
+      const initial = current;
+      const distance = target - initial;
+      let startTime: number | null = null;
+
+      const step = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 0.5 - Math.cos(progress * Math.PI) / 2; // easeInOut
+        const pos = Math.round(initial + distance * ease);
+        if (isDoc) window.scrollTo(0, pos);
+        else (scrollParent as HTMLElement).scrollTop = pos;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+  }, 100);
+};
 
 const HeroSection: React.FC = () => {
   const scrollToPaidEbooksSection = () => {
-  const PaidEbooksSection = document.getElementById('PaidEbooksSection');
-  if (PaidEbooksSection) {
-    const y = PaidEbooksSection.getBoundingClientRect().top + window.scrollY - 100; 
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  }
-};
+    const el = document.getElementById('PaidEbooksSection') as HTMLElement | null;
+    if (!el) {
+      console.warn('PaidEbooksSection NÃO encontrado no DOM.');
+      return;
+    }
+
+    // debug rápido no console (apague depois se quiser)
+    console.log('[DEBUG] PaidEbooksSection rect:', el.getBoundingClientRect());
+    console.log('[DEBUG] window.innerHeight:', window.innerHeight, 'document scrollHeight:', (document.scrollingElement || document.documentElement).scrollHeight);
+
+    // ajuste de offset pro header fixo — ajuste o 138 conforme a altura real do seu header
+    const headerOffset = 138;
+    smoothScrollTo(el, headerOffset);
+
+    // garante que o elemento possa receber foco (ajuda em alguns navegadores)
+    try { el.focus({ preventScroll: true } as any); } catch (e) { /* noop */ }
+  };
 
   return (
     <section 
@@ -17,8 +84,6 @@ const HeroSection: React.FC = () => {
       className="section hero-section" 
     >
       <div className="section-content-container">
-        
-        {/* Vídeo com a camuflagem */}
         <div className="video-wrapper">
           <video
             src="reset.mp4"
@@ -31,11 +96,9 @@ const HeroSection: React.FC = () => {
           >
             Seu navegador não suporta a tag de vídeo.
           </video>
-          {/* Overlay para o efeito de camuflagem */}
           <div className="video-overlay"></div>
         </div>
 
-        {/* Texto e botão agora ficam embaixo do vídeo */}
         <p className="section-description">
           Explore um acervo exclusivo com 13 ebooks transformadores, incluindo: <strong className="highlight-text">As 48 Leis do Poder</strong>, <strong className="highlight-text">Mais Esperto que o Diabo</strong>, <strong className="highlight-text">O Poder do Subconsciente</strong>, <strong className="highlight-text">Manual da Persuasão</strong>, <strong className="highlight-text">Como Convencer Alguém em 90 Segundos</strong> e muitos outros.
         </p>
