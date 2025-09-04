@@ -8,7 +8,7 @@ const EbookSummarySection: React.FC = () => {
     <section id="ebook-resumo" className="section ebook-summary-section">
       <div className="section-content-container">
         <h2 className="section-main-title">
-          Destaques da <span className="highlight-gradient">Biblioteca Reset Mental</span>
+          
         </h2>
 
         {/* Seção "Os Mais Conhecidos" */}

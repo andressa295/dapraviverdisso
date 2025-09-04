@@ -128,7 +128,7 @@ const HeroSection: React.FC = () => {
         }
 
         .cta-button {
-          margin-top: 0px;
+          margin-top: 3px;
           padding: 18px 48px;
           background-image: linear-gradient(to right, #00BFFF, #1E90FF);
           color: #ffffff;
