@@ -138,7 +138,7 @@ button {
 .section {
     width: 100%; /* Ocupa 100% da largura do main-layout-container */
     max-width: 1100px; /* Largura máxima para o conteúdo das seções */
-    padding: 80px 25px; /* Padding interno para desktop */
+    padding: 0px; /* Padding interno para desktop */
     margin: 0 auto; /* Centraliza a seção dentro do main-layout-container */
     display: flex;
     flex-direction: column;
@@ -268,7 +268,7 @@ button {
 @media (max-width: 1024px) { /* Tablets em paisagem e notebooks menores */
     .section {
         max-width: 900px; /* Reduz mais a largura máxima das seções */
-        padding: 70px 20px; /* Ajusta padding */
+        padding: 0px; /* Ajusta padding */
     }
     /* Note: section-title and section-subtitle classes are not defined here, 
              but their media queries are present. Assuming they are defined elsewhere or will be. */
@@ -298,7 +298,7 @@ button {
 
 @media (max-width: 480px) { /* Celulares pequenos */
     .section {
-        padding: 40px 10px; /* Mais padding nas laterais para mobile */
+        padding: 0px; /* Mais padding nas laterais para mobile */
     }
     .section-title {
         font-size: 1.5rem; /* Ajusta tamanho do título global */
@@ -307,7 +307,7 @@ button {
         font-size: 0.8rem; /* Ajusta tamanho do subtítulo global */
     }
     .cta-button, .whatsapp-cta-button {
-        padding: 10px 20px;
+        padding: 0px;
         font-size: 0.9rem;
     }
 }

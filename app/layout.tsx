@@ -29,14 +29,7 @@ export const metadata: Metadata = {
       'Desvende o poder da sua mente para atrair riqueza, saúde e sucesso. Participe da comunidade e acesse conteúdos exclusivos.',
     url: 'https://www.podermnental.com.br',
     siteName: 'Poder Mental',
-    images: [
-      {
-        url: 'https://www.podermnental.com.br/images/poder-mental-logo.png',
-        width: 800,
-        height: 600,
-        alt: 'Poder Mental - Logo',
-      },
-    ],
+    
     locale: 'pt_BR',
     type: 'website',
   },
@@ -61,8 +54,8 @@ export default function RootLayout({
         <div className="main-layout-container">
           <main
             style={{
-              paddingTop: '5px', // esse valor tem que ser a altura total do seu header fixo + linha neon
-              minHeight: '100vh',
+              paddingTop: '0px',
+              
               boxSizing: 'border-box',
             }}
           >

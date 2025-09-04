@@ -94,7 +94,7 @@ const EbookSummarySection: React.FC = () => {
           font-family: 'Poppins', sans-serif;
           color: #ffffff;
           /* Padding lateral agora será controlado pelo .section-content-container */
-          padding: 20px 0;
+          padding: 30px 0;
           text-align: center;
         }
 
@@ -112,7 +112,7 @@ const EbookSummarySection: React.FC = () => {
         }
 
         .section-main-title {
-          font-size: 2.5rem;
+          font-size: 2.0rem;
           font-weight: 800;
           line-height: 1.2;
           margin-bottom: 40px;
@@ -204,8 +204,8 @@ const EbookSummarySection: React.FC = () => {
         /* Desktop e Telas Maiores (>= 1024px) */
         @media (min-width: 1024px) {
           .section-main-title {
-            font-size: 2.5rem;
-            padding: 20px 0;
+            font-size: 2.0rem;
+            padding: 20px 10;
           }
           .category-title {
             font-size: 1.8rem;
