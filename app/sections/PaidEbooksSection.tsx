@@ -152,16 +152,16 @@ const PaidEbooksSection: React.FC<PaidEbooksSectionProps> = ({ handleCtaClick, i
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
 
         .paid-ebooks-section {
-          background-color: #000000;
-          padding: 60px 16px;
-          color: #fff;
-          font-family: 'Poppins', sans-serif;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: 80vh;
-          scroll-margin-top: 338px;
-        }
+  background-color: #000000;
+  padding: 60px 16px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80dvh; /* <-- aqui troquei vh por dvh */
+  scroll-margin-top: 138px;
+}
         .section-content-container {
           max-width: 1200px;
           width: 100%;
