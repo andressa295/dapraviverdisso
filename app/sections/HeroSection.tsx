@@ -61,7 +61,6 @@ const HeroSection: React.FC = () => {
           text-align: center;
           position: relative;
           overflow: hidden;
-          min-height: 100vh;
           color: #ffffff;
           margin: 0 auto;
         }
