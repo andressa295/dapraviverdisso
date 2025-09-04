@@ -4,14 +4,12 @@ import React from 'react';
 
 const HeroSection: React.FC = () => {
   const scrollToPaidEbooksSection = () => {
-    const PaidEbooksSection = document.getElementById('PaidEbooksSection');
-    if (PaidEbooksSection) {
-      console.log('Elemento PaidEbooksSection encontrado, a rolar para ele.');
-      PaidEbooksSection.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      console.log('Elemento PaidEbooksSection NÃO encontrado. Verifique se o ID está correto e se o componente está renderizado.');
-    }
-  };
+  const PaidEbooksSection = document.getElementById('PaidEbooksSection');
+  if (PaidEbooksSection) {
+    const y = PaidEbooksSection.getBoundingClientRect().top + window.scrollY - 100; 
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+};
 
   return (
     <section 
